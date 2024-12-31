@@ -325,7 +325,7 @@ body .h1 {
   letter-spacing: 0.01em;
   font-weight: 700;
   font-style: normal;
-  font-size: 2em;
+  font-size: 1.5em;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 }
@@ -339,19 +339,19 @@ body .h2 {
   text-transform: none;
   letter-spacing: normal;
   font-weight: bold;
-  font-size: 1.7rem;
+  font-size: 1.4rem;
 }
 body h3 {
   color: #eee;
   text-decoration: underline;
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 body h4 {
   color: #eee;
   text-decoration: underline;
   font-weight: bold;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 body h5 {
   color: #eee;
