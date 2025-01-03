@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
+    <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="shellcode loadershellcode要想执行需要经历如下几个过程：  申请一块内存； 把shellcode加载到这块内存； 执行这块内存。  这过程中需要注意如下几点：  加载dll，采用动态调用的方式，可以避免IAT的hook； 不要直接申请rwx(读写执行)的内存，可先申请rw内存，后面再改为可执行，杀软对rwx的内存很敏感； 加载到内存的方法非常多，除了常见的copy和move">
 <meta property="og:type" content="article">

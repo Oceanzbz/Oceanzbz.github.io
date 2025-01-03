@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
+    <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="java cc3链cc3用的是动态加载字节码的形式进行的rce可以参考自己记得动态加载字节码的笔记来了解。 该链主要是利用了TemplatesImpl这个类进行字节码加载。通过笔记我们了解到java加载.class的核心代码就是defineclass方法，而通过调试发现TemplatesImpl这个类中定义了一个内部类重写了defineclass方法并且这里没有显式地声明其定义域。Java中默认情">
 <meta property="og:type" content="article">
