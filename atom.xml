@@ -875,9 +875,9 @@
     <category term="Java安全" scheme="https://oceanzbz.github.io/categories/Java%E5%AE%89%E5%85%A8/"/>
     
     
-    <category term="Java表达式" scheme="https://oceanzbz.github.io/tags/Java%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-    
     <category term="注入" scheme="https://oceanzbz.github.io/tags/%E6%B3%A8%E5%85%A5/"/>
+    
+    <category term="Java表达式" scheme="https://oceanzbz.github.io/tags/Java%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
     
   </entry>
   
@@ -901,9 +901,9 @@
     <category term="Java安全" scheme="https://oceanzbz.github.io/categories/Java%E5%AE%89%E5%85%A8/"/>
     
     
-    <category term="注入" scheme="https://oceanzbz.github.io/tags/%E6%B3%A8%E5%85%A5/"/>
-    
     <category term="SSTI" scheme="https://oceanzbz.github.io/tags/SSTI/"/>
+    
+    <category term="注入" scheme="https://oceanzbz.github.io/tags/%E6%B3%A8%E5%85%A5/"/>
     
   </entry>
   
