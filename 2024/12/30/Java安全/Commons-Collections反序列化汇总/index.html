@@ -104,7 +104,7 @@
 <meta property="og:image" content="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1714755545755-24aa5aa4-28c7-4d7a-9249-ed093b81390d.png">
 <meta property="og:image" content="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1714755927376-4f63cbbb-0a50-40fb-8e30-2de226e52b77.png">
 <meta property="article:published_time" content="2024-12-30T06:24:40.000Z">
-<meta property="article:modified_time" content="2024-12-30T06:47:27.901Z">
+<meta property="article:modified_time" content="2025-01-08T05:23:52.461Z">
 <meta property="article:author" content="Oceanzbz">
 <meta property="article:tag" content="反序列化">
 <meta property="article:tag" content="CC链">
@@ -364,6 +364,8 @@
 <p>这次重新跟一遍cc1链。</p>
 <h3 id="3-1环境搭建"><a href="#3-1环境搭建" class="headerlink" title="3.1环境搭建"></a>3.1环境搭建</h3><p>具体搭建可以参考bilibili的白日梦组长。</p>
 <p>就是将下载jdk  8u71以下的版本，然后在下载对应的openjdk将里面的sun包复制过来，然后注意Commons-Collections的版本为3.2.1。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-collections<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-collections<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <h3 id="3-2函数介绍"><a href="#3-2函数介绍" class="headerlink" title="3.2函数介绍"></a>3.2函数介绍</h3><h4 id="3-2-1Transformer"><a href="#3-2-1Transformer" class="headerlink" title="3.2.1Transformer"></a>3.2.1Transformer</h4><p>Transformer是一个接口，只有一个带实现的方法；<br>TransformedMap在转换Map的新元素时，就会调⽤transform⽅法，这个过程就类似在调⽤⼀个“回调<br>函数”，这个回调的参数是原始对象。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Transformer</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">transform</span><span class="params">(Object input)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
