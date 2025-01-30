@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1714755545755-24aa5aa4-28c7-4d7a-9249-ed093b81390d.png">
 <meta property="og:image" content="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1714755927376-4f63cbbb-0a50-40fb-8e30-2de226e52b77.png">
 <meta property="article:published_time" content="2024-12-30T06:45:15.000Z">
-<meta property="article:modified_time" content="2024-12-30T06:45:46.807Z">
+<meta property="article:modified_time" content="2025-01-30T13:45:01.915Z">
 <meta property="article:author" content="Oceanzbz">
 <meta property="article:tag" content="反序列化">
 <meta property="article:tag" content="CC链">
@@ -199,7 +199,7 @@
 
 <h4 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h4><p>从poc中我们可以看到进行了Hashtable两次put而且都是相同的key，为什么要这样做？我们直接看其readObject方法就不倒着调试了。</p>
 <p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1714747290107-e9dba1e1-7eb7-400b-9db5-a354fc864189.png"></p>
-<p>lements代表键值对的个数，我们创建Hashtable时传入了两个键值对，故elements&#x3D;2</p>
+<p>ements代表键值对的个数，我们创建Hashtable时传入了两个键值对，故elements&#x3D;2</p>
 <p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1714749474176-5dc0367a-abcf-4683-b2e0-05dc99129ba2.png"></p>
 <p>可以看到在readObject中的for循环里读出了序列化写进去的key 和 value值 这里可以看到第一次循环获取的是第一次hashtable put的key 和 value值然后跟到reconstitutionPut方法看看<img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1714749848646-ff4fe199-d812-4d22-a3e0-6bdd7b093fdd.png"></p>
 <p>从调试信息以及代码可以看出第一次for循环是没有进去的，是因为这里的tab是空的所以没法进入，而我们发现他在后面又直接将我们传入过来的key（第一个传入的lazymap） 和 value  （值为1）又直接实例化到tab里面了。</p>
