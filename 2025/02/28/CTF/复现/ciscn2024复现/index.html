@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="sanic先看源码 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647from sanic import Sanicfrom sanic.response import text, htmlfrom sanic_session import Sessionimport pydas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ciscn2024复现">
+<meta property="og:url" content="https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/index.html">
+<meta property="og:site_name" content="Oceanzbz&#39;s Blog">
+<meta property="og:description" content="sanic先看源码 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647from sanic import Sanicfrom sanic.response import text, htmlfrom sanic_session import Sessionimport pydas">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228172711690.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228173709994.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228173829761.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228173940256.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228174123917.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228174202765.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228174455369.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228174355761.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228175821707.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228180136279.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228180311949.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228180640161.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228180731036.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228180933887.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228181227467.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228175037662.png">
+<meta property="article:published_time" content="2025-02-28T07:21:00.000Z">
+<meta property="article:modified_time" content="2025-02-28T11:48:32.963Z">
+<meta property="article:author" content="Oceanzbz">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="复现">
+<meta property="article:tag" content="web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228172711690.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>ciscn2024复现</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QWTJSPQL4F');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Oceanzbz&#39;s Blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/02/28/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Titanic/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/02/26/CTF/%E5%88%B7%E9%A2%98/BUUCTF%E5%88%B7%E9%A2%98/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/&text=ciscn2024复现"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/&title=ciscn2024复现"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/&is_video=false&description=ciscn2024复现"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ciscn2024复现&body=Check out this article: https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/&title=ciscn2024复现"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/&title=ciscn2024复现"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/&title=ciscn2024复现"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/&title=ciscn2024复现"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/&name=ciscn2024复现&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/&t=ciscn2024复现"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#sanic"><span class="toc-number">1.</span> <span class="toc-text">sanic</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        ciscn2024复现
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Oceanzbz</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-02-28T07:21:00.000Z" class="dt-published" itemprop="datePublished">2025-02-28</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CTF/"> CTF</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CTF/" rel="tag">CTF</a>, <a class="p-category" href="/tags/web/" rel="tag">web</a>, <a class="p-category" href="/tags/%E5%A4%8D%E7%8E%B0/" rel="tag">复现</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="sanic"><a href="#sanic" class="headerlink" title="sanic"></a>sanic</h2><p>先看源码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sanic <span class="keyword">import</span> Sanic</span><br><span class="line"><span class="keyword">from</span> sanic.response <span class="keyword">import</span> text, html</span><br><span class="line"><span class="keyword">from</span> sanic_session <span class="keyword">import</span> Session</span><br><span class="line"><span class="keyword">import</span> pydash</span><br><span class="line"><span class="comment"># pydash==5.1.2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Pollute</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">app = Sanic(__name__)</span><br><span class="line">app.static(<span class="string">&quot;/static/&quot;</span>, <span class="string">&quot;./static/&quot;</span>)</span><br><span class="line">Session(app)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">index</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="keyword">return</span> html(<span class="built_in">open</span>(<span class="string">&#x27;static/index.html&#x27;</span>).read())</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/login&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">login</span>(<span class="params">request</span>):</span><br><span class="line">    user = request.cookies.get(<span class="string">&quot;user&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> user.lower() == <span class="string">&#x27;adm;n&#x27;</span>:</span><br><span class="line">        request.ctx.session[<span class="string">&#x27;admin&#x27;</span>] = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> text(<span class="string">&quot;login success&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> text(<span class="string">&quot;login fail&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/src&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">src</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="keyword">return</span> text(<span class="built_in">open</span>(__file__).read())</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/admin&quot;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">admin</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="keyword">if</span> request.ctx.session.get(<span class="string">&#x27;admin&#x27;</span>) == <span class="literal">True</span>:</span><br><span class="line">        key = request.json[<span class="string">&#x27;key&#x27;</span>]</span><br><span class="line">        value = request.json[<span class="string">&#x27;value&#x27;</span>]</span><br><span class="line">        <span class="keyword">if</span> key <span class="keyword">and</span> value <span class="keyword">and</span> <span class="built_in">type</span>(key) <span class="keyword">is</span> <span class="built_in">str</span> <span class="keyword">and</span> <span class="string">&#x27;_.&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> key:</span><br><span class="line">            pollute = Pollute()</span><br><span class="line">            pydash.set_(pollute, key, value)</span><br><span class="line">            <span class="keyword">return</span> text(<span class="string">&quot;success&quot;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> text(<span class="string">&quot;forbidden&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> text(<span class="string">&quot;forbidden&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<img src="/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228172711690.png" class="">
+
+<p>可以看到登录是根据cookie的参数进行判断，但是这里有一个;如果我们传入;会截断，所以使用八进制编码绕过即可。</p>
+<img src="/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228173709994.png" class="">
+<p>admin路由可以直接污染，但是存在waf <code>_.</code>使用<code>\\\\</code> 可以绕过。接下来就是污染__file__属性值了<br>因为在src路由里有一个读文件的操作。</p>
+<img src="/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228173829761.png" class="">
+<img src="/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228173940256.png" class="">
+<p>污染成功，所以现在要做的就是要找到flag的文件名，这也就是这题的考点如何利用污染列目录。</p>
+<p>来看static这个函数</p>
+<img src="/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228174123917.png" class="">
+
+<p>这里的directory_view和directory_handler属性需要关注一下因为解释中说的是</p>
+<img src="/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228174202765.png" class="">
+
+<p>大概意思就是directory_view为True时，会开启列目录功能，directory_handler中可以获取指定的目录。跟进directory_handler看看</p>
+<img src="/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228174455369.png" class="">
+
+<p>他调用的是DirectoryHandler这个类</p>
+<img src="/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228174355761.png" class="">
+
+<p>所以如果能够污染 directory为 &#x2F;  directory_view为True就可以列根目录了</p>
+<p>通过查看别的师傅的文章，发现可以通过app.router.name_index[‘xxxxx’]来获取注册的路由，该写下源码调试看看</p>
+<img src="/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228175821707.png" class="">
+<p>可以看到已经有注册的路由，那怎么找到DirectoryHandler他呢。全局搜一下name_index</p>
+<img src="/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228180136279.png" class="">
+<p>找到系统默认的调用点，下断点调试，找到handler</p>
+<img src="/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228180311949.png" class="">
+<p>可以看到需要的两个变量。所以可以污染了</p>
+<p>directory_view</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">&quot;key&quot;</span>:<span class="string">&quot;__class__\\\\.__init__\\\\.__globals__\\\\.app.router.name_index.__mp_main__\\.static.handler.keywords.directory_handler.directory_view&quot;</span>,<span class="string">&quot;value&quot;</span>: <span class="literal">True</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>directory</p>
+<p>这里不能直接污染因为他不是字符串类型</p>
+<img src="/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228180640161.png" class="">
+
+<p>在原来的地方看一下</p>
+<img src="/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228180731036.png" class="">
+
+<p>是一个path对象跟进看看</p>
+<img src="/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228180933887.png" class="">
+
+<p>最后是给了_parts，看一下这个属性</p>
+<img src="/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228181227467.png" class="">
+
+<p>是列表类型，直接污染</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">&quot;key&quot;</span>:<span class="string">&quot;__class__\\\\.__init__\\\\.__globals__\\\\.app.router.name_index.__mp_main__\\.static.handler.keywords.directory_handler.directory._parts&quot;</span>,<span class="string">&quot;value&quot;</span>: [<span class="string">&quot;/&quot;</span>]&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/IMAGE20250228175037662.png" class="">
+<p>最后在污染 <code>__file__</code>  变量就可以了</p>
+<p>汇总</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#开启列目录功能</span></span><br><span class="line">&#123;<span class="string">&quot;key&quot;</span>:<span class="string">&quot;__class__\\\\.__init__\\\\.__globals__\\\\.app.router.name_index.__mp_main__\\.static.handler.keywords.directory_handler.directory_view&quot;</span>,<span class="string">&quot;value&quot;</span>: true&#125;</span><br><span class="line"><span class="comment">#将目录设置在根目录下&#123;&quot;key&quot;:&quot;__class__\\\\.__init__\\\\.__globals__\\\\.app.router.name_index.__mp_main__\\.static.handler.keywords.directory_handler.directory._parts&quot;,&quot;value&quot;: [&quot;/&quot;]&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gxngxngxn/p/18205235">https://www.cnblogs.com/gxngxngxn/p/18205235</a></p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/link/">Friends</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#sanic"><span class="toc-number">1.</span> <span class="toc-text">sanic</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/&text=ciscn2024复现"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/&title=ciscn2024复现"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/&is_video=false&description=ciscn2024复现"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ciscn2024复现&body=Check out this article: https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/&title=ciscn2024复现"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/&title=ciscn2024复现"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/&title=ciscn2024复现"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/&title=ciscn2024复现"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/&name=ciscn2024复现&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/02/28/CTF/%E5%A4%8D%E7%8E%B0/ciscn2024%E5%A4%8D%E7%8E%B0/&t=ciscn2024复现"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Oceanzbz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+      <ul>
+        
+          <!-- 不蒜子统计 -->
+          <span id="busuanzi_container_site_pv">
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          <span class="post-meta-divider">|</span>
+          <span id="busuanzi_container_site_uv" style='display:none'>
+                  本站访客数<span id="busuanzi_value_site_uv"></span>人
+          </span>
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        
+      </ul>
+    </nav>
+  </div>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QWTJSPQL4F');
+</script>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'cactus-1';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+<!-- utterances Comments -->
+
+</body>
+</html>
