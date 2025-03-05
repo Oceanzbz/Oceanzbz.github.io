@@ -14,20 +14,20 @@
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
 <meta property="og:description" content="信息收集这是一台windows机器，并且开头题目给了一个用户名和密码，还是老规矩先简单扫描下端口然后在详细扫描下系统信息 nmap --min-rate 10000 -p- 10.10.11.41   在来看看详细扫描 nmap -sT -sC -sV -O 10.10.11.41    很明显是一个域环境。 使用给的用户名和密码爆破下域内其他用户 crackmapexec smb certifi">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250303222313650.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250303223238540.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250303223914207.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250303224659936.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250304160117843.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250304160359146.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/401ba5c9/IMAGE20250303222313650.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/401ba5c9/IMAGE20250303223238540.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/401ba5c9/IMAGE20250303223914207.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/401ba5c9/IMAGE20250303224659936.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/401ba5c9/IMAGE20250304160117843.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/401ba5c9/IMAGE20250304160359146.png">
 <meta property="article:published_time" content="2025-03-03T14:02:20.000Z">
-<meta property="article:modified_time" content="2025-03-04T13:05:47.444Z">
+<meta property="article:modified_time" content="2025-03-05T07:24:36.809Z">
 <meta property="article:author" content="Oceanzbz">
+<meta property="article:tag" content="windows">
 <meta property="article:tag" content="渗透测试">
 <meta property="article:tag" content="HTB">
-<meta property="article:tag" content="windows">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250303222313650.png">
+<meta name="twitter:image" content="https://oceanzbz.github.io/post/401ba5c9/IMAGE20250303222313650.png">
     
     
       
@@ -193,27 +193,27 @@
   <div class="content e-content" itemprop="articleBody">
     <h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>这是一台windows机器，并且开头题目给了一个用户名和密码，还是老规矩先简单扫描下端口然后在详细扫描下系统信息</p>
 <p><code>nmap --min-rate 10000 -p- 10.10.11.41</code></p>
-<img src="/post/undefined/IMAGE20250303222313650.png" class="">
+<img src="/post/401ba5c9/IMAGE20250303222313650.png" class="">
 
 <p>在来看看详细扫描</p>
 <p><code>nmap -sT -sC -sV -O 10.10.11.41 </code></p>
-<img src="/post/undefined/IMAGE20250303223238540.png" class="">
+<img src="/post/401ba5c9/IMAGE20250303223238540.png" class="">
 
 <p>很明显是一个域环境。</p>
 <p>使用给的用户名和密码爆破下域内其他用户</p>
 <p><code>crackmapexec smb certified.htb -u &quot;judith.mader&quot; -p &quot;judith09&quot; --rid-brute | grep SidTypeUser</code></p>
-<img src="/post/undefined/IMAGE20250303223914207.png" class="">
+<img src="/post/401ba5c9/IMAGE20250303223914207.png" class="">
 
 <p>然后使用bloodhound-python 收集一下域内信息导入bloodhound分析一波</p>
 <p><code>bloodhound-python -u judith.mader -p &#39;judith09&#39; -c All -d certified.htb -ns 10.10.11.41 </code></p>
 <p>搜索下judith.mader用户</p>
-<img src="/post/undefined/IMAGE20250303224659936.png" class="">
+<img src="/post/401ba5c9/IMAGE20250303224659936.png" class="">
 
 <p>该用户对MANAGEMENT组有写的权限</p>
-<img src="/post/undefined/IMAGE20250304160117843.png" class="">
+<img src="/post/401ba5c9/IMAGE20250304160117843.png" class="">
 
 <p>该组对MANAGEMENT_SVC用户拥有GenericWrite权限，可以修改目标安全对象的所有参数，包括对所有属性的修改。</p>
-<img src="/post/undefined/IMAGE20250304160359146.png" class="">
+<img src="/post/401ba5c9/IMAGE20250304160359146.png" class="">
 
 <p>该用户又可以完全控制CA_OPERATOR用户。</p>
 <h2 id="shadow-credentials-attack-（影子凭据攻击）"><a href="#shadow-credentials-attack-（影子凭据攻击）" class="headerlink" title="shadow credentials attack （影子凭据攻击）"></a>shadow credentials attack （影子凭据攻击）</h2><p>这一连串的权限控制符合影子凭据攻击的利用。具体原理参考：</p>
