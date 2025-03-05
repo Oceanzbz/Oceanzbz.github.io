@@ -7,12 +7,12 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="该篇文章主要转自https:&#x2F;&#x2F;www.anquanke.com&#x2F;post&#x2F;id&#x2F;212163 详细请参考原文，本文只是方便自己查资料 ACL的概念安全主体我们先来看看什么是安全主体 Security Principals。安全主体是可以通过系统进行身份验证的任何实体，例如用户帐户、计算机帐户，或在用户或计算机帐户的安全上下文中运行的线程或进程，以及这些帐户的安全组。每个安全主体在创建时都会自动分">
+    <meta name="description" content="该篇文章主要转自 https:&#x2F;&#x2F;www.anquanke.com&#x2F;post&#x2F;id&#x2F;212163 详细请参考原文，本文只是方便自己查资料 ACL的概念 安全主体 我们先来看看什么是安全主体 Security Principals。安全主体是可以通过系统进行身份验证的任何实体，例如用户帐户、计算机帐户，或在用户或计算机帐户的安全上下文中运行的线程或进程，以及这些帐户的安全组。每个安全主体在创建时都会">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ACL攻防">
 <meta property="og:url" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/index.html">
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
-<meta property="og:description" content="该篇文章主要转自https:&#x2F;&#x2F;www.anquanke.com&#x2F;post&#x2F;id&#x2F;212163 详细请参考原文，本文只是方便自己查资料 ACL的概念安全主体我们先来看看什么是安全主体 Security Principals。安全主体是可以通过系统进行身份验证的任何实体，例如用户帐户、计算机帐户，或在用户或计算机帐户的安全上下文中运行的线程或进程，以及这些帐户的安全组。每个安全主体在创建时都会自动分">
+<meta property="og:description" content="该篇文章主要转自 https:&#x2F;&#x2F;www.anquanke.com&#x2F;post&#x2F;id&#x2F;212163 详细请参考原文，本文只是方便自己查资料 ACL的概念 安全主体 我们先来看看什么是安全主体 Security Principals。安全主体是可以通过系统进行身份验证的任何实体，例如用户帐户、计算机帐户，或在用户或计算机帐户的安全上下文中运行的线程或进程，以及这些帐户的安全组。每个安全主体在创建时都会">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303232659848.png">
 <meta property="og:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303233513292.png">
@@ -203,119 +203,127 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <p>该篇文章主要转自<br><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/212163">https://www.anquanke.com/post/id/212163</a> 详细请参考原文，本文只是方便自己查资料</p>
-<h2 id="ACL的概念"><a href="#ACL的概念" class="headerlink" title="ACL的概念"></a>ACL的概念</h2><h3 id="安全主体"><a href="#安全主体" class="headerlink" title="安全主体"></a>安全主体</h3><p>我们先来看看什么是安全主体 Security Principals。安全主体是可以通过系统进行身份验证的任何实体，例如用户帐户、计算机帐户，或在用户或计算机帐户的安全上下文中运行的线程或进程，以及这些帐户的安全组。每个安全主体在创建时都会自动分配一个安全标识符(SID)。安全主体是控制对安全资源的访问的基础。在活动目录域中创建的安全主体是活动目录对象，可用于管理对域资源的访问。</p>
-<h3 id="安全标识符SID"><a href="#安全标识符SID" class="headerlink" title="安全标识符SID"></a>安全标识符SID</h3><p>安全标识符(Security Identifiers，SID)用于唯一标识安全主体或安全组。在帐户的安全上下文中运行的每个帐户、组或进程都有一个唯一的SID，它由当局发布，例如Windows域控制器。它被存储在一个安全数据库中。系统将生成在创建该帐户或组时标识该特定帐户或组的SID。当SID被用作用户或组的唯一标识符时，它再也不能被用于标识其他用户或组。除了分配给特定用户和组唯一创建的、特定于领域的SID外，还有一些众所周知的SID可以识别通用组和通用用户的SID。众所周知的SID在所有操作系统中都保持不变。SID是Windows安全模型的一个基本构建模块，它与Windows服务器操作系统的安全基础设施中的授权和访问控制技术的特定组件一起工作。这有助于保护对网络资源的访问，并提供了一个更安全的计算环境。</p>
+    <p>该篇文章主要转自<br>
+<a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/212163">https://www.anquanke.com/post/id/212163</a> 详细请参考原文，本文只是方便自己查资料</p>
+<h2 id="ACL的概念">ACL的概念</h2>
+<h3 id="安全主体">安全主体</h3>
+<p>我们先来看看什么是安全主体 Security Principals。安全主体是可以通过系统进行身份验证的任何实体，例如用户帐户、计算机帐户，或在用户或计算机帐户的安全上下文中运行的线程或进程，以及这些帐户的安全组。每个安全主体在创建时都会自动分配一个安全标识符(SID)。安全主体是控制对安全资源的访问的基础。在活动目录域中创建的安全主体是活动目录对象，可用于管理对域资源的访问。</p>
+<h3 id="安全标识符SID">安全标识符SID</h3>
+<p>安全标识符(Security Identifiers，SID)用于唯一标识安全主体或安全组。在帐户的安全上下文中运行的每个帐户、组或进程都有一个唯一的SID，它由当局发布，例如Windows域控制器。它被存储在一个安全数据库中。系统将生成在创建该帐户或组时标识该特定帐户或组的SID。当SID被用作用户或组的唯一标识符时，它再也不能被用于标识其他用户或组。除了分配给特定用户和组唯一创建的、特定于领域的SID外，还有一些众所周知的SID可以识别通用组和通用用户的SID。众所周知的SID在所有操作系统中都保持不变。SID是Windows安全模型的一个基本构建模块，它与Windows服务器操作系统的安全基础设施中的授权和访问控制技术的特定组件一起工作。这有助于保护对网络资源的访问，并提供了一个更安全的计算环境。</p>
 <p>一些常见用户的SID</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">administrator：S-1-5--500</span><br><span class="line">Guest：S-1-5--501</span><br><span class="line">KRBTGT：S-1-5--502</span><br></pre></td></tr></table></figure>
-
 <p>一些常见的组SID</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Guests：S-1-5-32-546</span><br><span class="line">Account Operators：S-1-5-32-548</span><br><span class="line">Server Operators：S-1-5-32-549</span><br><span class="line">Print Operators：S-1-5-32-550</span><br><span class="line">Backup Operators：S-1-5-32-551 </span><br><span class="line">Domain Admins：S-1-5--512</span><br><span class="line">Domain Users：S-1-5--513</span><br><span class="line">Domain Guests：S-1-5--514</span><br><span class="line">Domain Computers：S-1-5--515</span><br><span class="line">Domain Controllers：S-1-5--516</span><br><span class="line">Cert Publishers：S-1-5--517</span><br><span class="line">Schema Admins：S-1-5--518</span><br><span class="line">Enterprise Admins：S-1-5--519</span><br><span class="line">Group Policy Creators Owners：S-1-5--520</span><br><span class="line">RAS and IAS Servers：S-1-5--553</span><br><span class="line">Pre–Windows 2000 Compatible Access：S-1-5-32-554</span><br></pre></td></tr></table></figure>
-
-<h3 id="windows访问控制模型"><a href="#windows访问控制模型" class="headerlink" title="windows访问控制模型"></a>windows访问控制模型</h3><p>访问控制(AC，Access Control)是指控制谁(安全主体，Security Principals)可以访问操作系统中的资源(被访问实体)，这里的访问不仅仅是单纯的访问，而是包括增删改查等操作。这里的安全主体可以是用户、进程等，而被访问实体可能是文件、服务、活动目录对象等资源。系统是如何判断安全主体是否对被访问实体具有fcmit.cc权限，并且具有哪些权限呢？这就涉及到 Windows 的访问控制模型(ACM，Access Control Model)了。Windows 的访问控制模型由访问令牌(Access Token)和安全描述符(Security Descriptors)两部分组成。</p>
-<p>用一个比喻来说更好理解引用自大佬的总结<br>就是一个判断你在一个档案馆（在这里可以理解为整个域）里是否有权限打开某个档案抽屉（用户对象、用户组对象、Computer对象），并且是否能在这个档案抽屉中取走、存放、修改档案（读、写、修改）的一个模型。</p>
+<h3 id="windows访问控制模型">windows访问控制模型</h3>
+<p>访问控制(AC，Access Control)是指控制谁(安全主体，Security Principals)可以访问操作系统中的资源(被访问实体)，这里的访问不仅仅是单纯的访问，而是包括增删改查等操作。这里的安全主体可以是用户、进程等，而被访问实体可能是文件、服务、活动目录对象等资源。系统是如何判断安全主体是否对被访问实体具有fcmit.cc权限，并且具有哪些权限呢？这就涉及到 Windows 的访问控制模型(ACM，Access Control Model)了。Windows 的访问控制模型由访问令牌(Access Token)和安全描述符(Security Descriptors)两部分组成。</p>
+<p>用一个比喻来说更好理解引用自大佬的总结<br>
+就是一个判断你在一个档案馆（在这里可以理解为整个域）里是否有权限打开某个档案抽屉（用户对象、用户组对象、Computer对象），并且是否能在这个档案抽屉中取走、存放、修改档案（读、写、修改）的一个模型。</p>
 <img src="/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303232659848.png" class="">
-
-
-<h4 id="访问令牌-Access-Token"><a href="#访问令牌-Access-Token" class="headerlink" title="访问令牌(Access Token)"></a>访问令牌(Access Token)</h4><p>用户登录系统时，系统会对用户的帐户名和密码进行身份验证。如果登录成功，系统将创建访问令牌。 此后，代表此用户执行的每一个进程都有此访问令牌的副本， 访问令牌是描述进程或线程安全上下文的对象。访问令牌包含用户的 SID、用户权限和用户所属的任何组的 SID，还包含用户或用户组拥有的权限列表。 当进程尝试访问安全对象或执行需要特权的系统管理任务时，系统使用此访问令牌来标识关联的用户。</p>
+<h4 id="访问令牌-Access-Token">访问令牌(Access Token)</h4>
+<p>用户登录系统时，系统会对用户的帐户名和密码进行身份验证。如果登录成功，系统将创建访问令牌。 此后，代表此用户执行的每一个进程都有此访问令牌的副本， 访问令牌是描述进程或线程安全上下文的对象。访问令牌包含用户的 SID、用户权限和用户所属的任何组的 SID，还包含用户或用户组拥有的权限列表。 当进程尝试访问安全对象或执行需要特权的系统管理任务时，系统使用此访问令牌来标识关联的用户。</p>
 <p>访问令牌包含以下信息：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">• 用户帐户安全标识符 SID</span><br><span class="line">• 用户所属组的 SID</span><br><span class="line">• 标识当前登录会话的登录 SID</span><br><span class="line">• 用户或 用户组拥有的权限列表</span><br><span class="line">• 所有者 SID</span><br><span class="line">• 主组的 SID</span><br><span class="line">• 用户创建安全对象而不指定安全描述符时系统使用的默认 DACL</span><br><span class="line">• 访问令牌的源</span><br><span class="line">• 令牌是主令牌还是模拟令牌</span><br><span class="line">• 限制 SID 的可选列表</span><br><span class="line">• 当前模拟级别</span><br><span class="line">• 其他统计信息</span><br></pre></td></tr></table></figure>
-
 <p>每个进程都有一个主令牌，用于描述与进程关联的用户帐户的安全上下文。 默认情况下，当进程的线程与安全对象交互时，系统将使用主令牌。 此外，线程可以模拟客户端帐户，模拟允许线程使用客户端的安全上下文与安全对象进行交互，模拟客户端的线程同时具有主令牌和模拟令牌。</p>
-<h4 id="安全描述符"><a href="#安全描述符" class="headerlink" title="安全描述符"></a>安全描述符</h4><p>SID（Security Identifiers）即安全描述符。<br>安全描述符标识对象的所有者，并包含以下访问控制列表：<br>1、Discretionary Access Control List (DACL) 自由访问控制列表<br>2、System Access Control List (SACL) 系统访问控制列表<br>每一种控制列表中都存在若干条ACE（Access Control Entries）</p>
+<h4 id="安全描述符">安全描述符</h4>
+<p>SID（Security Identifiers）即安全描述符。<br>
+安全描述符标识对象的所有者，并包含以下访问控制列表：<br>
+1、Discretionary Access Control List (DACL) 自由访问控制列表<br>
+2、System Access Control List (SACL) 系统访问控制列表<br>
+每一种控制列表中都存在若干条ACE（Access Control Entries）</p>
 <img src="/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303233513292.png" class="">
-
 <p>用一个图来说明下什么是安全描述符</p>
 <img src="/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303233621067.png" class="">
-
-<h5 id="DACL"><a href="#DACL" class="headerlink" title="DACL"></a>DACL</h5><p>高级安全设置中的权限就是DACL的列表</p>
+<h5 id="DACL">DACL</h5>
+<p>高级安全设置中的权限就是DACL的列表</p>
 <img src="/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303233652144.png" class="">
-
-<h5 id="SACL"><a href="#SACL" class="headerlink" title="SACL"></a>SACL</h5><p>高级安全设置中的审核就是SACL的列表</p>
+<h5 id="SACL">SACL</h5>
+<p>高级安全设置中的审核就是SACL的列表</p>
 <img src="/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303233712647.png" class="">
-
 <p>其中红色圈出来的每一条都是一条ACE</p>
-<h5 id="ACE"><a href="#ACE" class="headerlink" title="ACE"></a>ACE</h5><p>ACE是针对特定用户或特定组的单个权限授予（或拒绝权利）的配置结构。ACE有许多不同类型，但是在Active Directory的权限中，只有四种不同的含义，两种分别用于授予和拒绝权限。</p>
-<h6 id="Access-Mask"><a href="#Access-Mask" class="headerlink" title="Access Mask"></a>Access Mask</h6><p>在ACE中有Access Mask这个字段，它代表着此条ACE所对应的权限，比如完全控制（GenericAll）、修改密码（ResetPassword）、写入属性（WriteMembers）等等。</p>
+<h5 id="ACE">ACE</h5>
+<p>ACE是针对特定用户或特定组的单个权限授予（或拒绝权利）的配置结构。ACE有许多不同类型，但是在Active Directory的权限中，只有四种不同的含义，两种分别用于授予和拒绝权限。</p>
+<h6 id="Access-Mask">Access Mask</h6>
+<p>在ACE中有Access Mask这个字段，它代表着此条ACE所对应的权限，比如完全控制（GenericAll）、修改密码（ResetPassword）、写入属性（WriteMembers）等等。</p>
 <img src="/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303234108572.png" class="">
-
-<h6 id="Trustees"><a href="#Trustees" class="headerlink" title="Trustees"></a>Trustees</h6><p>Trustees的意思为受委托人，受托者是一个ACE所应用到的用户账户，组账户或者是登录会话。也就是说，谁是某一个ACE的受托者，那么这条ACE中的Access Mask所对应的权限（可能是拒绝可能是通过）就会赋予受托者。比如下面这一条的受委托人实际上就是zhangs账号。</p>
+<h6 id="Trustees">Trustees</h6>
+<p>Trustees的意思为受委托人，受托者是一个ACE所应用到的用户账户，组账户或者是登录会话。也就是说，谁是某一个ACE的受托者，那么这条ACE中的Access Mask所对应的权限（可能是拒绝可能是通过）就会赋予受托者。比如下面这一条的受委托人实际上就是zhangs账号。</p>
 <img src="/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303234218089.png" class="">
-
-<h2 id="域中常见的ACL滥用"><a href="#域中常见的ACL滥用" class="headerlink" title="域中常见的ACL滥用"></a>域中常见的ACL滥用</h2><p>（1）属性权限</p>
+<h2 id="域中常见的ACL滥用">域中常见的ACL滥用</h2>
+<p>（1）属性权限</p>
 <ul>
 <li>member：拥有该属性的权限，可以将任意用户、组或机器加入到目标安全组中。</li>
-<li>msDS-AllowedToActOnBehalfOfOtherIdentity:拥有该属性的权限，可以修改目标对象基于资源的约束性委派RBCD，进行攻击目标的权限。<br>（2）扩展权限</li>
+<li>msDS-AllowedToActOnBehalfOfOtherIdentity:拥有该属性的权限，可以修改目标对象基于资源的约束性委派RBCD，进行攻击目标的权限。<br>
+（2）扩展权限</li>
 <li>DCSync:拥有扩展权限，可以通过目录复制服务（Directory Replication Service,DRS）的  GetNCChanges接口向域控发起数据同步请求，从而获得域内任意用户的密码 Hash。</li>
-<li>User-Force-Change-Password：拥有的该扩展权限，可以在不知道目标用户密码的情况下强制修改目标用户的密码。<br>（3）基本权限</li>
+<li>User-Force-Change-Password：拥有的该扩展权限，可以在不知道目标用户密码的情况下强制修改目标用户的密码。<br>
+（3）基本权限</li>
 <li>GenericWrite：拥有该权限，可以修改目标安全对象的所有参数，包括对所有属性的修改。</li>
 <li>GenericAll：拥有该权限就等于拥有了对目标安全对象的完整控制权。</li>
 <li>WriteOwner：拥有该权限，可以修改目标安全对象的Owner属性为自身，从而安全控制该安全对象。</li>
 <li>WriteDACL：拥有该权限，可以往目标安全对象写入任何的ACE，从而完全控制该安全对象。</li>
 </ul>
-<h3 id="GenericAll"><a href="#GenericAll" class="headerlink" title="GenericAll"></a>GenericAll</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Add-DomainObjectAcl -TargetIdentity testuser -PrincipalIdentity test2user -Rights All</span><br><span class="line"> -Verbose</span><br></pre></td></tr></table></figure>
-
+<h3 id="GenericAll">GenericAll</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Add-DomainObjectAcl -TargetIdentity testuser -PrincipalIdentity test2user -Rights All</span><br><span class="line"> -Verbose</span><br></pre></td></tr></table></figure>
  <img src="/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115252744.png" class="">
-
 <p>给予了test2user对testuser用户完全控制的权限，在查看testuser的时候可以发现test2user的SID在查询里出现</p>
 <img src="/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115317875.png" class="">
-
 <img src="/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115325857.png" class="">
-
 <p>也可以对一个组进行设置</p>
 <p>powerview将yayi用户添加到domain admins用户添加</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Add-DomainObjectAcl  -TargetIdentity <span class="string">&quot;domain admins&quot;</span> -PrincipalIdentity test2user -Ri</span><br><span class="line">ghts  all -Verbose</span><br></pre></td></tr></table></figure>
-
 <img src="/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115407551.png" class="">
-
 <p>这样的话可以用test2用户控制domain admins用户组</p>
 <img src="/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115423788.png" class="">
-
-<h3 id="GenericWrite"><a href="#GenericWrite" class="headerlink" title="GenericWrite"></a>GenericWrite</h3><p>GenericWrite也是在Access Mask中进行标识，此权限能够更新目标对象的属性值，可以使用PowerView中的Set-DomainObject方法设置目标属性的值。</p>
+<h3 id="GenericWrite">GenericWrite</h3>
+<p>GenericWrite也是在Access Mask中进行标识，此权限能够更新目标对象的属性值，可以使用PowerView中的Set-DomainObject方法设置目标属性的值。</p>
 <img src="/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115452128.png" class="">
-
 <img src="/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115500120.png" class="">
-
-<h3 id="WriteDacl"><a href="#WriteDacl" class="headerlink" title="WriteDacl"></a>WriteDacl</h3><p>WriteDacl允许委托人修改受影响对象的DACL。这意味着攻击者可以添加或删除特定的访问控制项，从而使他们可以授予自己对对象的完全访问权限。因此，WriteDacl是在链中启用其他权利的权利。</p>
+<h3 id="WriteDacl">WriteDacl</h3>
+<p>WriteDacl允许委托人修改受影响对象的DACL。这意味着攻击者可以添加或删除特定的访问控制项，从而使他们可以授予自己对对象的完全访问权限。因此，WriteDacl是在链中启用其他权利的权利。</p>
 <img src="/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115517528.png" class="">
-
-<h3 id="Self-Membership"><a href="#Self-Membership" class="headerlink" title="Self-Membership"></a>Self-Membership</h3><p>WriteProperty直译为写所有权。这个权限利用针对的对象为组对象，能够赋予账户对于某个组的可写权限，在Domain Admins组里设置zhangs账户的WriteProperty权限：</p>
+<h3 id="Self-Membership">Self-Membership</h3>
+<p>WriteProperty直译为写所有权。这个权限利用针对的对象为组对象，能够赋予账户对于某个组的可写权限，在Domain Admins组里设置zhangs账户的WriteProperty权限：</p>
 <img src="/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115736562.png" class="">
-
 <p>然后使用zhangs账户权限可以将xxm账户加入Domain Admins组：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net group <span class="string">&quot;domain admins&quot;</span> xxm /add /domain</span><br></pre></td></tr></table></figure>
-
-<h3 id="WriteOwner"><a href="#WriteOwner" class="headerlink" title="WriteOwner"></a>WriteOwner</h3><p>WriteOwner权限允许委托人修改对象的安全描述符的所有者部分。也就是说，假如用户A对administrator用户有这个权限，那么A能利用这个权限给自己附加其他的权限。</p>
+<h3 id="WriteOwner">WriteOwner</h3>
+<p>WriteOwner权限允许委托人修改对象的安全描述符的所有者部分。也就是说，假如用户A对administrator用户有这个权限，那么A能利用这个权限给自己附加其他的权限。</p>
 <img src="/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304120232418.png" class="">
-<h3 id="WriteProperty-on-Group"><a href="#WriteProperty-on-Group" class="headerlink" title="WriteProperty on Group"></a>WriteProperty on Group</h3><p>WriteProperty还包括了其他的权限：<br>CreateChild, DeleteChild, Self, WriteProperty, ExtendedRight, GenericRead, WriteDacl, WriteOwner<br>设置一个组的写入全部属性<br>（相当于获取了这个组的所有权限）</p>
+<h3 id="WriteProperty-on-Group">WriteProperty on Group</h3>
+<p>WriteProperty还包括了其他的权限：<br>
+CreateChild, DeleteChild, Self, WriteProperty, ExtendedRight, GenericRead, WriteDacl, WriteOwner<br>
+设置一个组的写入全部属性<br>
+（相当于获取了这个组的所有权限）</p>
 <img src="/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304120600128.png" class="">
-
 <p>在Domain Admins组的列表中添加写入全部属性，会生成一条新的ACE</p>
 <img src="/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304120615539.png" class="">
-
-<h3 id="WriteProperty-Self-Membership"><a href="#WriteProperty-Self-Membership" class="headerlink" title="WriteProperty (Self-Membership)"></a>WriteProperty (Self-Membership)</h3><p>WriteProperty直译为写所有权。这个权限利用针对的对象为组对象，能够赋予账户对于某个组的可写权限，在Domain Admins组里设置zhangs账户的WriteProperty权限：</p>
+<h3 id="WriteProperty-Self-Membership">WriteProperty (Self-Membership)</h3>
+<p>WriteProperty直译为写所有权。这个权限利用针对的对象为组对象，能够赋予账户对于某个组的可写权限，在Domain Admins组里设置zhangs账户的WriteProperty权限：</p>
 <img src="/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304120715368.png" class="">
-
 <p>然后使用zhangs账户权限可以将xxm账户加入Domain Admins组：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net group <span class="string">&quot;domain admins&quot;</span> xxm /add /domain</span><br></pre></td></tr></table></figure>
-
-<h2 id="ACL攻击利用方式"><a href="#ACL攻击利用方式" class="headerlink" title="ACL攻击利用方式"></a>ACL攻击利用方式</h2><h3 id="DCSync权限"><a href="#DCSync权限" class="headerlink" title="DCSync权限"></a>DCSync权限</h3><p>使用dcsync获取dump 域hash需要域对象或者是域内的高权限组中有以下三种权限的其中一个：</p>
+<h2 id="ACL攻击利用方式">ACL攻击利用方式</h2>
+<h3 id="DCSync权限">DCSync权限</h3>
+<p>使用dcsync获取dump 域hash需要域对象或者是域内的高权限组中有以下三种权限的其中一个：</p>
 <ol>
 <li>复制目录更改 Replicating Directory Changes (DS-Replication-Get-Changes)</li>
 <li>复制目录更改所有 Replicating Directory Changes All (DS-Replication-Get-Changes-All)（Exchange用的就是这个）</li>
 <li>正在复制筛选集中的目录更改 Replicating Directory Changes In Filtered Set (rare, only required in some environments)</li>
 </ol>
 <img src="/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304140743126.png" class="">
-
-
-<h3 id="Exchange相关"><a href="#Exchange相关" class="headerlink" title="Exchange相关"></a>Exchange相关</h3><p>参考：<a target="_blank" rel="noopener" href="https://forum.butian.net/share/1837">https://forum.butian.net/share/1837</a></p>
-<h3 id="Invoke-ACLPwn"><a href="#Invoke-ACLPwn" class="headerlink" title="Invoke-ACLPwn"></a>Invoke-ACLPwn</h3><p>工具地址：<a target="_blank" rel="noopener" href="https://github.com/fox-it/Invoke-ACLPwn">https://github.com/fox-it/Invoke-ACLPwn</a></p>
+<h3 id="Exchange相关">Exchange相关</h3>
+<p>参考：<a target="_blank" rel="noopener" href="https://forum.butian.net/share/1837">https://forum.butian.net/share/1837</a></p>
+<h3 id="Invoke-ACLPwn">Invoke-ACLPwn</h3>
+<p>工具地址：<a target="_blank" rel="noopener" href="https://github.com/fox-it/Invoke-ACLPwn">https://github.com/fox-it/Invoke-ACLPwn</a></p>
 <p>Invoke-ACLPwn是一个Powershell脚本，设计用于使用集成凭据和指定凭据运行，该工具通过创建域中所有ACL的SharpHound导出以及运行该工具的用户帐户的组成员身份来工作，如果用户还没有域对象的writeDACL权限，该工具将枚举该域的ACL的所有ACE，ACE中的每个身份都有自己的ACL，它被添加到枚举队列中，如果身份是一个组并且该组有成员，则每个组成员也被添加到枚举队列中，正如您可以想象的那样，这需要一些时间来枚举，但最终可能会产生一个链来获取domain对象上的writeDACL权限</p>
 <p>用法示例：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.\Invoke-ACL.ps1 -SharpHoundLocation .\sharphound.exe -NoDCSync</span><br><span class="line">.\Invoke-ACL.ps1 -SharpHoundLocation .\sharphound.exe -mimiKatzLocation .\mimikatz.exe</span><br><span class="line">.\Invoke-ACL.ps1 -SharpHoundLocation .\sharphound.exe -mimiKatzLocation .\mimikatz.exe -userAccountToPwn <span class="string">&#x27;Administrator&#x27;</span></span><br><span class="line">.\Invoke-ACL.ps1 -SharpHoundLocation .\sharphound.exe -mimiKatzLocation .\mimikatz.exe -LogToFile</span><br><span class="line">.\Invoke-ACL.ps1 -SharpHoundLocation .\sharphound.exe -mimiKatzLocation .\mimikatz.exe -NoSecCleanup</span><br><span class="line">.\Invoke-ACL.ps1 -SharpHoundLocation .\sharphound.exe -mimiKatzLocation .\mimikatz.exe -Username <span class="string">&#x27;testuser&#x27;</span> -Domain <span class="string">&#x27;xenoflux.local&#x27;</span> -Password <span class="string">&#x27;Welcome01!&#x27;</span></span><br></pre></td></tr></table></figure>
-
 <p>使用第一条标识了-NoDCSync（不会做DCSync的动作，只判断是否能够存在能够DCSync的权限）</p>
-<p>参考：<br><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2098661">https://cloud.tencent.com/developer/article/2098661</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/nice0e3/p/15879624.html">https://www.cnblogs.com/nice0e3/p/15879624.html</a><br><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/212163">https://www.anquanke.com/post/id/212163</a><br>域渗透攻防指南</p>
+<p>参考：<br>
+<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2098661">https://cloud.tencent.com/developer/article/2098661</a><br>
+<a target="_blank" rel="noopener" href="https://www.cnblogs.com/nice0e3/p/15879624.html">https://www.cnblogs.com/nice0e3/p/15879624.html</a><br>
+<a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/212163">https://www.anquanke.com/post/id/212163</a><br>
+域渗透攻防指南</p>
 
   </div>
 </article>
