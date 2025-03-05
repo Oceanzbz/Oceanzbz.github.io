@@ -14,18 +14,18 @@
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
 <meta property="og:description" content="之前看过好多委派攻击的原理说明还都是很迷糊不明白，最近打了几个靶场慢慢能稍微理解一下。也来记录下网上师傅写的原理 委派先来说一下什么是委派：域委派是指将域内用户的权限委派给服务账号，使得服务账号能以用户权限访问域内的其他服务。 为什么要域委派这里引用别的师傅的表述： 比如现在有web服务器和文件服务器，当用户A访问web服务器去请求某个资源时，web服务器上本身并没有该资源，所以web服务器就会从">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250305213352906.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250305213546567.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250305215301171.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250305224818566.png">
-<meta property="og:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250305233206701.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/95be0397/IMAGE20250305213352906.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/95be0397/IMAGE20250305213546567.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/95be0397/IMAGE20250305215301171.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/95be0397/IMAGE20250305224818566.png">
+<meta property="og:image" content="https://oceanzbz.github.io/post/95be0397/IMAGE20250305233206701.png">
 <meta property="article:published_time" content="2025-03-05T12:32:44.000Z">
-<meta property="article:modified_time" content="2025-03-05T15:34:49.572Z">
+<meta property="article:modified_time" content="2025-03-05T16:08:29.983Z">
 <meta property="article:author" content="Oceanzbz">
 <meta property="article:tag" content="windows">
 <meta property="article:tag" content="域渗透">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://oceanzbz.github.io/post/undefined/IMAGE20250305213352906.png">
+<meta name="twitter:image" content="https://oceanzbz.github.io/post/95be0397/IMAGE20250305213352906.png">
     
     
       
@@ -192,11 +192,11 @@
 <h2 id="为什么要域委派"><a href="#为什么要域委派" class="headerlink" title="为什么要域委派"></a>为什么要域委派</h2><p>这里引用别的师傅的表述：</p>
 <p>比如现在有web服务器和文件服务器，当用户A访问web服务器去请求某个资源时，web服务器上本身并没有该资源，所以web服务器就会从文件服务器上调用这个资源，其中发生的过程若以域委派的形式进行，那么就是：用户A访问web服务器，服务器再以用户A的身份去访问文件服务器。</p>
 <h2 id="可以进行域委派的用户"><a href="#可以进行域委派的用户" class="headerlink" title="可以进行域委派的用户"></a>可以进行域委派的用户</h2><p>一种是主机账户，活动目录中的computers组内的计算机，也被称为机器账号。如下图:</p>
-<img src="/post/undefined/IMAGE20250305213352906.png" class="">
+<img src="/post/95be0397/IMAGE20250305213352906.png" class="">
 
 <p>另一种是用<strong>setspn</strong>手动添加的<strong>服务账户</strong>。简单来说,服务账号，域内用户的一种类型，服务器运行服务时所用的账号，将服务运行起来并加入域。例如MS SQL Server在安装时，会在域内自动注册服务账号SqlServiceAccount，这类账号不能用于交互式登录，也就是说无法通过SqlServiceAccount来通过3389进行rdp登录。</p>
 <p>看一下具体的域委派的流程，参考域渗透攻防指南</p>
-<img src="/post/undefined/IMAGE20250305213546567.png" class="">
+<img src="/post/95be0397/IMAGE20250305213546567.png" class="">
 
 <p>域用户 xie\test 以 Kerberos 身份验证访问 Web 服务器，请求下载文件。但是真正的文件在后台的文件服务器上。于是，Web 服务器的服务账号 websrv 模拟域用户 xie\test，以 Kerberos 协议继续认证到后台文件服务器。后台文件服务器将文件返回给 Web 服务器，Web 服务器再将文件返回给域用户 xie\test 。这样，就完成了一个委派的流程。</p>
 <h2 id="委派的分类"><a href="#委派的分类" class="headerlink" title="委派的分类"></a>委派的分类</h2><ul>
@@ -205,7 +205,7 @@
 <li>基于资源的约束委派(Resource Based Constrained Delegation, RBCD)</li>
 </ul>
 <h2 id="非约束委派"><a href="#非约束委派" class="headerlink" title="非约束委派"></a>非约束委派</h2><p>先来看一下非约束委派的流程</p>
-<img src="/post/undefined/IMAGE20250305215301171.png" class="">
+<img src="/post/95be0397/IMAGE20250305215301171.png" class="">
 <p>具体流程：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">（1）用户通过发送一个 KRB_AS_REQ 消息，向 KDC 密钥分发中心 KDC 的 AS认证服务进行身份验证，请求一个可转发的 TGT1 认购权证。</span><br><span class="line">（2）KDC 在 KRB_AS_REP 消息中返回了一个可转发的 TGT1 认购权证。</span><br><span class="line">（3）用户根据上一步获取到的可转发的 TGT1 认购权证请求另一个可转发的TGT2 认购权证，这一步是通过 KRB_TGS_REQ 消息请求。</span><br><span class="line">（4）KDC 在 KRB_TGS_REP 消息中为用户返回可转发的 TGT2 认购权证。</span><br><span class="line">（5）用户使用步骤 2 中返回的 TGT1 认购权证向 KDC 请求 Service1 的 ST 服务票据。</span><br><span class="line">（6）KDC 的 TGS 服务在 KRB_TGS_REP 消息中返回给用户 Service1 的 ST 服务票据。</span><br><span class="line">（7）用户发送 KRB_AP_REQ 消息请求 Service1，KRB_AP_REQ 消息中包含了TGT1 认购权证和 Service1 的 ST 服务票据、TGT2 认购权证、TGT2 认购权证的SessionKey。</span><br><span class="line">（8）service1 以用户的名义向 KDC 的 TGS 服务发送 KRB_TGS_REQ 请求，请求 Service2 的 ST 服务票据。请求中包含用户发过来的 TGT2 认购权证。</span><br><span class="line">（9）KDC 的 TGS 服务在 KRB_TGS_REP 消息中返回 Service2 的 ST 服务票据给 Service1，以及 service1 可以使用的 sessionkey。ST 服务票据将客户端标识为用户，而不是 Service1。</span><br><span class="line">（10）Service1 以用户的名义向 Service2 发起 KRB_AP_REQ 请求。</span><br><span class="line">（11）Service2 响应 service1 的 KRB_AP_REQ 请求。</span><br><span class="line">（12）有了步骤 11 这个响应，Service1 就可以响应步骤 7 中用户的KRB_AP_REQ 请求。</span><br><span class="line">（13）这里的 TGT 认购权证转发委派机制没有限制 Service1 使用 TGT2 认购权证来申请哪个服务，所以 Service1 可以以用户的名义向 KDC 申请任何其他服务的ST 服务票据。</span><br><span class="line">（14）KDC 返回步骤 13 中请求的 ST 服务票据。</span><br><span class="line">（15）Service1 以用户的名义来请求其它 service N 服务。</span><br><span class="line">（16）Service N 服务将响应用户的请求一样响应 Service1。</span><br><span class="line">在该流程中，TGT1 认购权证请求的 ST 服务票据用于访问 service1 服务，TGT2认购权证请求的 ST 服务票据用于访问 service2 服务</span><br></pre></td></tr></table></figure>
 
@@ -213,7 +213,7 @@
 <p>具体利用方式有三种参考以下文章<br><a target="_blank" rel="noopener" href="https://forum.butian.net/share/1591">https://forum.butian.net/share/1591</a></p>
 <h2 id="约束委派"><a href="#约束委派" class="headerlink" title="约束委派"></a>约束委派</h2><p>为了在 Kerberos 协议层面对约束性委派的支持，微软对 Kerberos 协议扩展了两个子协议 S4u2self(Service for User to Self) 和 S4u2Proxy (Service for User to Proxy )。S4u2self 可以代表任意用户请求针对自身的 ST 服务票据；S4u2Proxy 可以用上一步获得的 ST 服务票据以用户的名义请求针对其它指定服务的 ST 服务票据。</p>
 <p>还是同样的先来看看流程</p>
-<img src="/post/undefined/IMAGE20250305224818566.png" class="">
+<img src="/post/95be0397/IMAGE20250305224818566.png" class="">
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">（1）用户向 Service1 发出请求，用户已通过身份验证，但 Service1 没有用户的授权数据，这通常是由于用户的身份验证是通过 Kerberos 以外(基于表单的 web 认证、NTLM 认证等)的其他方式验证的。</span><br><span class="line">（2）Service1 已经通过 KDC 进行了身份验证，并获得了 TGT 认购权证。它通过S4U2self 协议代表用户向 KDC 请求一张访问自身 Service1 服务的可转发 ST 服务票据。</span><br><span class="line">（3）KDC 返回给 Service1 一张访问 Service1 自身服务的可转发 ST1 服务票据，就像是用户使用自己的 TGT 认购权证请求的一样，该可转发的 ST1 服务票据可能包含用户的授权数据。</span><br><span class="line">（4）Service1 可以使用 ST1 服务票据中的授权数据来满足用户的请求，然后响应用户。</span><br><span class="line">（5）用户向 Service1 发出请求，请求访问 Service2 上的资源。</span><br><span class="line">（6）Service1 利用 S4U4Proxy 协议以用户的名义向 KDC 请求访问 Service2 的ST2 服务票据，该请求中带上了可转发的 ST1 服务票据</span><br><span class="line">（7）如果请求中存在 PAC 特权属性证书，则 KDC 通过检查 PAC 结构的签名数据来验证 PAC。如果 PAC 有效或不存在，KDC 返回 Service2 的可转发 ST2 服务票据，并且存储在 ST2 服务票据中的 cname 和 crealm 字段中的客户端标识是用户，而不是 Service1。</span><br><span class="line">（8）Service1 以用户身份使用可转发 ST2 服务票据向 Service2 发起请求。</span><br><span class="line">（9）Service2 响应步骤 8 的请求。</span><br><span class="line">（10）Service1 响应用户对步骤 5 中的请求。</span><br></pre></td></tr></table></figure>
 
@@ -229,7 +229,7 @@
 <p>3.域控需要是server2012和2012 R2以上的（因为2008及以下没有msDS-AllowedToActOnBehalfOfOtherIdentity属性）</p>
 <p>4.任意用户对该主机的属性具有写权限，那么这个用户就可以对该主机进行攻击，所以可以枚举域内ACL策略，查看哪些对主机有GenericAll权限，GenericWrite、WriteProperty、WriteDacl等等权限，都是可以的</p>
 <p>来一个攻击图</p>
-<img src="/post/undefined/IMAGE20250305233206701.png" class="">
+<img src="/post/95be0397/IMAGE20250305233206701.png" class="">
 
 <p>具体利用方式还是参考第一个链接。</p>
 
