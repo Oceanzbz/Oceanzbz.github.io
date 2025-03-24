@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
+    <meta name="baidu-site-verification" content="codeva-4fIoJmJzzi" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="这次线下打了一次自己最好的成绩。   下面记录下wp pwnpatch，evilpatch工具通防   Misc 取证1要求是去找证书模版名字和序列号   先挂载镜像，然后去翻文件翻到一个   翻到这个hack-CA的ebp文件，然后用主办方给的工具打开这个文件   这边找到三个template的名字然后继续翻  找到几个序列号，直接排列组合交上的 1MyTem-5400000003eedab53">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2025-软件系统安全攻防半决赛Wp">
+<meta property="og:url" content="https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/index.html">
+<meta property="og:site_name" content="Oceanzbz&#39;s Blog">
+<meta property="og:description" content="这次线下打了一次自己最好的成绩。   下面记录下wp pwnpatch，evilpatch工具通防   Misc 取证1要求是去找证书模版名字和序列号   先挂载镜像，然后去翻文件翻到一个   翻到这个hack-CA的ebp文件，然后用主办方给的工具打开这个文件   这边找到三个template的名字然后继续翻  找到几个序列号，直接排列组合交上的 1MyTem-5400000003eedab53">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234053323.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234208707.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234232818.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234247054.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234306258.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234321700.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234429082.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234441528.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234653614.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234700263.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234731684.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234736050.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234746537.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234800507.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234805481.png">
+<meta property="article:published_time" content="2025-03-24T15:38:45.000Z">
+<meta property="article:modified_time" content="2025-03-24T15:49:28.213Z">
+<meta property="article:author" content="Oceanzbz">
+<meta property="article:tag" content="CTFWP">
+<meta property="article:tag" content="取证">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234053323.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>2025-软件系统安全攻防半决赛Wp</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QWTJSPQL4F');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Oceanzbz&#39;s Blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/03/21/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/Mac%E6%90%AD%E5%BB%BAcobaltstrike/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/&text=2025-软件系统安全攻防半决赛Wp"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/&title=2025-软件系统安全攻防半决赛Wp"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/&is_video=false&description=2025-软件系统安全攻防半决赛Wp"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=2025-软件系统安全攻防半决赛Wp&body=Check out this article: https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/&title=2025-软件系统安全攻防半决赛Wp"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/&title=2025-软件系统安全攻防半决赛Wp"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/&title=2025-软件系统安全攻防半决赛Wp"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/&title=2025-软件系统安全攻防半决赛Wp"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/&name=2025-软件系统安全攻防半决赛Wp&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/&t=2025-软件系统安全攻防半决赛Wp"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#pwn"><span class="toc-number">1.</span> <span class="toc-text">pwn</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Misc-%E5%8F%96%E8%AF%811"><span class="toc-number">2.</span> <span class="toc-text">Misc 取证1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Misc-%E5%8F%96%E8%AF%812"><span class="toc-number">3.</span> <span class="toc-text">Misc 取证2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Misc-%E5%8F%96%E8%AF%813"><span class="toc-number">4.</span> <span class="toc-text">Misc 取证3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Misc-%E5%8F%96%E8%AF%814"><span class="toc-number">5.</span> <span class="toc-text">Misc 取证4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Misc-5G%E6%B6%88%E6%81%AF%E2%80%94TLS"><span class="toc-number">6.</span> <span class="toc-text">Misc 5G消息—TLS</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        2025-软件系统安全攻防半决赛Wp
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Oceanzbz</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-03-24T15:38:45.000Z" class="dt-published" itemprop="datePublished">2025-03-24</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CTF/"> CTF</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CTFWP/" rel="tag">CTFWP</a>, <a class="p-category" href="/tags/%E5%8F%96%E8%AF%81/" rel="tag">取证</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>这次线下打了一次自己最好的成绩。</p>
+<img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234053323.png" class="">
+
+<p>下面记录下wp</p>
+<h2 id="pwn"><a href="#pwn" class="headerlink" title="pwn"></a>pwn</h2><p>patch，evilpatch工具通防</p>
+<img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234208707.png" class="">
+
+<h2 id="Misc-取证1"><a href="#Misc-取证1" class="headerlink" title="Misc 取证1"></a>Misc 取证1</h2><p>要求是去找证书模版名字和序列号</p>
+<img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234232818.png" class="">
+
+<p>先挂载镜像，然后去翻文件翻到一个</p>
+<img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234247054.png" class="">
+
+<p>翻到这个hack-CA的ebp文件，然后用主办方给的工具打开这个文件</p>
+<img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234306258.png" class="">
+
+<p>这边找到三个template的名字然后继续翻</p>
+<img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234321700.png" class="">
+<p>找到几个序列号，直接排列组合交上的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyTem-5400000003eedab5344b2e5da5000000000003</span><br></pre></td></tr></table></figure>
+
+<h2 id="Misc-取证2"><a href="#Misc-取证2" class="headerlink" title="Misc 取证2"></a>Misc 取证2</h2><p>要求找到恶意的文件，去找到 system32目录下的winevt日志找到了denfender的日志直接打开看，翻到一个程序，交上就过了</p>
+<img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234429082.png" class="">
+
+<h2 id="Misc-取证3"><a href="#Misc-取证3" class="headerlink" title="Misc 取证3"></a>Misc 取证3</h2><p>没做出来 但是马上 时间原因</p>
+<p>john和administrator的明文密码 在john</p>
+<p>E:\C___NONAME [NTFS][root]\Users\john\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine</p>
+<img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234441528.png" class="">
+
+<p>ip没找对 找了个192.168.17.128 在日志里 好像还有个192.168.17.1</p>
+<h2 id="Misc-取证4"><a href="#Misc-取证4" class="headerlink" title="Misc 取证4"></a>Misc 取证4</h2><p>把sysytem32下的日志拷贝过去</p>
+<p><code>C:\Users\Anonymous\Desktop\Logs\Security.evtx</code> ，放上日志分析工具</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LogParser.exe -i:EVT &quot;SELECT * FROM &#x27;Security.evtx&#x27; WHERE EventID=4624&quot;</span><br></pre></td></tr></table></figure>
+
+<p>查到日志</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Anonymous\Desktop\Logs\Security.evtx 7210 2024-12-04 00:06:11 2024-12-04 00:06:11 4728 8 Success Audit event 13826 The name for category 13826 in Source &quot;Microsoft-Windows-Security-Auditing&quot; cannot be found. The local computer may not have the necessary registry information or message DLL files to display messages from a remote computer Microsoft-Windows-Security-Auditing CN=James,CN=Users,DC=hack,DC=com|S-1-5-21-1507239155-486581747-1996177333-3193|Domain Admins|HACK|S-1-5-21-1507239155-486581747-1996177333-512|S-1-5-21-1507239155-486581747-1996177333-500|Administrator|HACK|0xadb1d4|- DC.hack.com &lt;NULL&gt; The description for Event ID 4728 in Source &quot;Microsoft-Windows-Security-Auditing&quot; cannot be found. The local computer may not have the necessary registry information or message DLL files to display messages from a remote computer &lt;NULL&gt;</span><br></pre></td></tr></table></figure>
+
+<p>发现用户和组maintainer-james,还缺密码，先去找system32目录下找ntds.dit爆出用户hash再去爆破明文密码</p>
+<img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234653614.png" class="">
+
+<img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234700263.png" class="">
+
+<p><code>maintainer-james-3011liverpool!</code></p>
+<h2 id="Misc-5G消息—TLS"><a href="#Misc-5G消息—TLS" class="headerlink" title="Misc 5G消息—TLS"></a>Misc 5G消息—TLS</h2><p>刚开始用科来，但是看不到ipv6的数据包</p>
+<p>用wireshark，看到sip</p>
+<p>里边有一句话 和sslkeylog</p>
+<img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234731684.png" class="">
+
+<img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234736050.png" class="">
+
+<p>有三个sslkeylog 全部复制下来保存</p>
+<p>用sslkeylog解密</p>
+<img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234746537.png" class="">
+
+<p>里边两个HTTP流，一个图片，导出数据流就是图片</p>
+<img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234800507.png" class="">
+
+<img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234805481.png" class="">
+
+<p>web 一个没出，也不会修，赛后问的其他师傅，他们说直接把flag删除就能patch成功。</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/link/">Friends</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#pwn"><span class="toc-number">1.</span> <span class="toc-text">pwn</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Misc-%E5%8F%96%E8%AF%811"><span class="toc-number">2.</span> <span class="toc-text">Misc 取证1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Misc-%E5%8F%96%E8%AF%812"><span class="toc-number">3.</span> <span class="toc-text">Misc 取证2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Misc-%E5%8F%96%E8%AF%813"><span class="toc-number">4.</span> <span class="toc-text">Misc 取证3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Misc-%E5%8F%96%E8%AF%814"><span class="toc-number">5.</span> <span class="toc-text">Misc 取证4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Misc-5G%E6%B6%88%E6%81%AF%E2%80%94TLS"><span class="toc-number">6.</span> <span class="toc-text">Misc 5G消息—TLS</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/&text=2025-软件系统安全攻防半决赛Wp"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/&title=2025-软件系统安全攻防半决赛Wp"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/&is_video=false&description=2025-软件系统安全攻防半决赛Wp"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=2025-软件系统安全攻防半决赛Wp&body=Check out this article: https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/&title=2025-软件系统安全攻防半决赛Wp"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/&title=2025-软件系统安全攻防半决赛Wp"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/&title=2025-软件系统安全攻防半决赛Wp"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/&title=2025-软件系统安全攻防半决赛Wp"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/&name=2025-软件系统安全攻防半决赛Wp&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/&t=2025-软件系统安全攻防半决赛Wp"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Oceanzbz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+      <ul>
+        
+          <!-- 不蒜子统计 -->
+          <span id="busuanzi_container_site_pv">
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          <span class="post-meta-divider">|</span>
+          <span id="busuanzi_container_site_uv" style='display:none'>
+                  本站访客数<span id="busuanzi_value_site_uv"></span>人
+          </span>
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        
+      </ul>
+    </nav>
+  </div>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QWTJSPQL4F');
+</script>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'cactus-1';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+<!-- utterances Comments -->
+
+</body>
+</html>

