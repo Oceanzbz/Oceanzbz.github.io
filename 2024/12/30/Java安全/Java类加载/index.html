@@ -8,12 +8,12 @@
     <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
     <meta name="baidu-site-verification" content="codeva-4fIoJmJzzi" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="Java代码执行流程图 大家通过这个流程图，了解一下我们写好的Java代码是如何执行的，其中要经历类加载器这个流程，我们就来仔细讲讲这里面的知识点。  类加载子系统  类的生命周期 类的生命周期包括：加载、链接、初始化、使用和卸载，其中加载、链接、初始化，属于类加载的过程，我们下面仔细讲解。使用是指我们new对象进行使用，卸载指对象被垃圾回收掉了。 类加载的过程   第一步：Loading加载">
+    <meta name="description" content="Java代码执行流程图大家通过这个流程图，了解一下我们写好的Java代码是如何执行的，其中要经历类加载器这个流程，我们就来仔细讲讲这里面的知识点。  类加载子系统 类的生命周期类的生命周期包括：加载、链接、初始化、使用和卸载，其中加载、链接、初始化，属于类加载的过程，我们下面仔细讲解。使用是指我们new对象进行使用，卸载指对象被垃圾回收掉了。 类加载的过程  第一步：Loading加载  通过类的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java类加载">
 <meta property="og:url" content="https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/index.html">
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
-<meta property="og:description" content="Java代码执行流程图 大家通过这个流程图，了解一下我们写好的Java代码是如何执行的，其中要经历类加载器这个流程，我们就来仔细讲讲这里面的知识点。  类加载子系统  类的生命周期 类的生命周期包括：加载、链接、初始化、使用和卸载，其中加载、链接、初始化，属于类加载的过程，我们下面仔细讲解。使用是指我们new对象进行使用，卸载指对象被垃圾回收掉了。 类加载的过程   第一步：Loading加载">
+<meta property="og:description" content="Java代码执行流程图大家通过这个流程图，了解一下我们写好的Java代码是如何执行的，其中要经历类加载器这个流程，我们就来仔细讲讲这里面的知识点。  类加载子系统 类的生命周期类的生命周期包括：加载、链接、初始化、使用和卸载，其中加载、链接、初始化，属于类加载的过程，我们下面仔细讲解。使用是指我们new对象进行使用，卸载指对象被垃圾回收掉了。 类加载的过程  第一步：Loading加载  通过类的">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713513555137-37dd6ad4-9f9a-4976-8abb-67ddd906c304.png">
 <meta property="og:image" content="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713513564091-30b1ed54-64d2-47fd-a23a-50869fb87c83.png">
@@ -191,15 +191,11 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h2 id="Java代码执行流程图">Java代码执行流程图</h2>
-<p>大家通过这个流程图，了解一下我们写好的Java代码是如何执行的，其中要经历类加载器这个流程，我们就来仔细讲讲这里面的知识点。</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713513555137-37dd6ad4-9f9a-4976-8abb-67ddd906c304.png" alt=""></p>
-<h2 id="类加载子系统">类加载子系统</h2>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713513564091-30b1ed54-64d2-47fd-a23a-50869fb87c83.png" alt=""></p>
-<h3 id="类的生命周期">类的生命周期</h3>
-<p>类的生命周期包括：加载、链接、初始化、使用和卸载，其中加载、链接、初始化，属于类加载的过程，我们下面仔细讲解。使用是指我们new对象进行使用，卸载指对象被垃圾回收掉了。</p>
-<h3 id="类加载的过程">类加载的过程</h3>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713513591106-f2fbfed9-6aa3-4606-8ee8-3b5e183e95ce.png" alt=""></p>
+    <h2 id="Java代码执行流程图"><a href="#Java代码执行流程图" class="headerlink" title="Java代码执行流程图"></a>Java代码执行流程图</h2><p>大家通过这个流程图，了解一下我们写好的Java代码是如何执行的，其中要经历类加载器这个流程，我们就来仔细讲讲这里面的知识点。</p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713513555137-37dd6ad4-9f9a-4976-8abb-67ddd906c304.png"></p>
+<h2 id="类加载子系统"><a href="#类加载子系统" class="headerlink" title="类加载子系统"></a>类加载子系统</h2><p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713513564091-30b1ed54-64d2-47fd-a23a-50869fb87c83.png"></p>
+<h3 id="类的生命周期"><a href="#类的生命周期" class="headerlink" title="类的生命周期"></a>类的生命周期</h3><p>类的生命周期包括：加载、链接、初始化、使用和卸载，其中加载、链接、初始化，属于类加载的过程，我们下面仔细讲解。使用是指我们new对象进行使用，卸载指对象被垃圾回收掉了。</p>
+<h3 id="类加载的过程"><a href="#类加载的过程" class="headerlink" title="类加载的过程"></a>类加载的过程</h3><p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713513591106-f2fbfed9-6aa3-4606-8ee8-3b5e183e95ce.png"></p>
 <ul>
 <li><strong>第一步：Loading加载</strong></li>
 </ul>
@@ -225,13 +221,12 @@
 <p>初始化就是执行类的构造器方法init()的过程。</p>
 <p>这个方法不需要定义，是javac编译器自动收集类中所有类变量的赋值动作和静态代码块中的语句合并来的。</p>
 <p>若该类具有父类，jvm会保证父类的init先执行，然后在执行子类的init。</p>
-<h3 id="类加载器的分类">类加载器的分类</h3>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713513604616-34957f07-891f-4f50-94b4-d210759faa12.png" alt=""></p>
+<h3 id="类加载器的分类"><a href="#类加载器的分类" class="headerlink" title="类加载器的分类"></a>类加载器的分类</h3><p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713513604616-34957f07-891f-4f50-94b4-d210759faa12.png"></p>
 <ul>
-<li><strong>第一个：启动类/引导类：Bootstrap ClassLoader</strong></li>
+<li><strong>第一个：启动类&#x2F;引导类：Bootstrap ClassLoader</strong></li>
 </ul>
-<p>这个类加载器使用C/C++语言实现的，嵌套在JVM内部，java程序无法直接操作这个类。</p>
-<p>它用来加载Java核心类库，如：JAVA_HOME/jre/lib/rt.jar、resources.jar、sun.boot.class.path路径下的包，用于提供jvm运行所需的包。</p>
+<p>这个类加载器使用C&#x2F;C++语言实现的，嵌套在JVM内部，java程序无法直接操作这个类。</p>
+<p>它用来加载Java核心类库，如：JAVA_HOME&#x2F;jre&#x2F;lib&#x2F;rt.jar、resources.jar、sun.boot.class.path路径下的包，用于提供jvm运行所需的包。</p>
 <p>并不是继承自java.lang.ClassLoader，它没有父类加载器</p>
 <p>它加载扩展类加载器和应用程序类加载器，并成为他们的父类加载器</p>
 <p>出于安全考虑，启动类只加载包名为：java、javax、sun开头的类</p>
@@ -240,7 +235,7 @@
 </ul>
 <p>Java语言编写，由sun.misc.Launcher$ExtClassLoader实现，我们可以用Java程序操作这个加载器</p>
 <p>派生继承自java.lang.ClassLoader，父类加载器为启动类加载器</p>
-<p>从系统属性：java.ext.dirs目录中加载类库，或者从JDK安装目录：jre/lib/ext目录下加载类库。我们就可以将我们自己的包放在以上目录下，就会自动加载进来了。</p>
+<p>从系统属性：java.ext.dirs目录中加载类库，或者从JDK安装目录：jre&#x2F;lib&#x2F;ext目录下加载类库。我们就可以将我们自己的包放在以上目录下，就会自动加载进来了。</p>
 <ul>
 <li><strong>第三个：应用程序类加载器：Application Classloader</strong></li>
 </ul>
@@ -259,16 +254,19 @@
 <p>如果没有太复杂的需求，可以直接继承URLClassLoader类，重写loadClass方法，具体可参考AppClassLoader和ExtClassLoader。</p>
 <p>例子：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zbz.javajichu;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyClassLoader</span> <span class="keyword">extends</span> <span class="title class_">ClassLoader</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String pathToClass;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyClassLoader</span><span class="params">(String pathToClass)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.pathToClass = pathToClass;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> Class&lt;?&gt; findClass(String name) <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">byte</span>[] classBytes = loadClassFromFile(name);</span><br><span class="line">            <span class="keyword">return</span> defineClass(name, classBytes, <span class="number">0</span>, classBytes.length);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ClassNotFoundException</span>(<span class="string">&quot;Cannot load class &quot;</span> + name, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">byte</span>[] loadClassFromFile(String fileName) <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">InputStream</span> <span class="variable">inputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(pathToClass + fileName + <span class="string">&quot;.class&quot;</span>);</span><br><span class="line">        <span class="type">byte</span>[] buffer;</span><br><span class="line">        <span class="type">ByteArrayOutputStream</span> <span class="variable">byteStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();</span><br><span class="line">        <span class="type">int</span> <span class="variable">nextValue</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> ((nextValue = inputStream.read()) != -<span class="number">1</span>) &#123;</span><br><span class="line">                byteStream.write(nextValue);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            inputStream.close();</span><br><span class="line">        &#125;</span><br><span class="line">        buffer = byteStream.toByteArray();</span><br><span class="line">        <span class="keyword">return</span> buffer;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>自定义一个类并编译</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">pers</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sayhello</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;gggggg&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>测试</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zbz.javajichu;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">test</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException &#123;</span><br><span class="line">        <span class="type">MyClassLoader</span> <span class="variable">myClassLoader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MyClassLoader</span>(<span class="string">&quot;D:\\spring_study\\spel_spring\\src\\main\\java\\&quot;</span>);</span><br><span class="line">        Class&lt;?&gt; person = myClassLoader.findClass(<span class="string">&quot;pers&quot;</span>);</span><br><span class="line">        System.out.println(person.getClassLoader());</span><br><span class="line">        <span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> person.newInstance();</span><br><span class="line">        <span class="type">Method</span> <span class="variable">sayhello</span> <span class="operator">=</span> person.getDeclaredMethod(<span class="string">&quot;sayhello&quot;</span>);</span><br><span class="line">        sayhello.invoke(o);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">com.zbz.javajichu.MyClassLoader@3feba861</span><br><span class="line">gggggg</span><br></pre></td></tr></table></figure>
+
 <p><strong>获取ClassLoader几种方式</strong></p>
 <p>它是一个抽象类，其后所有的类加载器继承自 ClassLoader（不包括启动类加载器）</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方式一：获取当前类的 ClassLoader</span></span><br><span class="line">clazz.getClassLoader()</span><br><span class="line"><span class="comment">// 方式二：获取当前线程上下文的 ClassLoader</span></span><br><span class="line">Thread.currentThread().getContextClassLoader()</span><br><span class="line"><span class="comment">// 方式三：获取系统的 ClassLoader</span></span><br><span class="line">ClassLoader.getSystemClassLoader()</span><br><span class="line"><span class="comment">// 方式四：获取调用者的 ClassLoader</span></span><br><span class="line">DriverManager.getCallerClassLoader()</span><br></pre></td></tr></table></figure>
-<h3 id="类加载机制—双亲委派机制">类加载机制—双亲委派机制</h3>
-<p>jvm对class文件采用的是按需加载的方式，当需要使用该类时，jvm才会将它的class文件加载到内存中产生class对象。</p>
-<p>在加载类的时候，是采用的双亲委派机制，即把请求交给父类处理的一种任务委派模式。<img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713513634255-a91963be-ae07-4350-8c32-c27dbb3f3b76.png" alt=""></p>
+
+<h3 id="类加载机制—双亲委派机制"><a href="#类加载机制—双亲委派机制" class="headerlink" title="类加载机制—双亲委派机制"></a>类加载机制—双亲委派机制</h3><p>jvm对class文件采用的是按需加载的方式，当需要使用该类时，jvm才会将它的class文件加载到内存中产生class对象。</p>
+<p>在加载类的时候，是采用的双亲委派机制，即把请求交给父类处理的一种任务委派模式。<img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713513634255-a91963be-ae07-4350-8c32-c27dbb3f3b76.png"></p>
 <ul>
 <li><strong>工作原理</strong></li>
 </ul>
@@ -279,7 +277,7 @@
 <li><strong>第三方包加载方式：反向委派机制</strong></li>
 </ul>
 <p>在Java应用中存在着很多服务提供者接口（Service Provider Interface，SPI），这些接口允许第三方为它们提供实现，如常见的 SPI 有 JDBC、JNDI等，这些 SPI 的接口属于 Java 核心库，一般存在rt.jar包中，由Bootstrap类加载器加载。而Bootstrap类加载器无法直接加载SPI的实现类，同时由于双亲委派模式的存在，Bootstrap类加载器也无法反向委托AppClassLoader加载器SPI的实现类。在这种情况下，我们就需要一种特殊的类加载器来加载第三方的类库，而线程上下文类加载器（双亲委派模型的破坏者）就是很好的选择。</p>
-<p>从图可知rt.jar核心包是有Bootstrap类加载器加载的，其内包含SPI核心接口类，由于SPI中的类经常需要调用外部实现类的方法，而jdbc.jar包含外部实现类(jdbc.jar存在于classpath路径)无法通过Bootstrap类加载器加载，因此只能委派线程上下文类加载器把jdbc.jar中的实现类加载到内存以便SPI相关类使用。显然这种线程上下文类加载器的加载方式破坏了“双亲委派模型”，它在执行过程中抛弃双亲委派加载链模式，使程序可以逆向使用类加载器，当然这也使得Java类加载器变得更加灵活。<img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713513649714-a69dcf2d-6590-4e55-9bf4-a706a33c9e46.png" alt=""></p>
+<p>从图可知rt.jar核心包是有Bootstrap类加载器加载的，其内包含SPI核心接口类，由于SPI中的类经常需要调用外部实现类的方法，而jdbc.jar包含外部实现类(jdbc.jar存在于classpath路径)无法通过Bootstrap类加载器加载，因此只能委派线程上下文类加载器把jdbc.jar中的实现类加载到内存以便SPI相关类使用。显然这种线程上下文类加载器的加载方式破坏了“双亲委派模型”，它在执行过程中抛弃双亲委派加载链模式，使程序可以逆向使用类加载器，当然这也使得Java类加载器变得更加灵活。<img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713513649714-a69dcf2d-6590-4e55-9bf4-a706a33c9e46.png"></p>
 <ul>
 <li><strong>沙箱安全机制</strong></li>
 </ul>

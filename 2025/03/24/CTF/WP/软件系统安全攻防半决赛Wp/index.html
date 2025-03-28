@@ -8,12 +8,12 @@
     <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
     <meta name="baidu-site-verification" content="codeva-4fIoJmJzzi" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="这次线下打了一次自己最好的成绩。  下面记录下wp pwn patch，evilpatch工具通防  Misc 取证1 要求是去找证书模版名字和序列号  先挂载镜像，然后去翻文件翻到一个  翻到这个hack-CA的ebp文件，然后用主办方给的工具打开这个文件  这边找到三个template的名字然后继续翻  找到几个序列号，直接排列组合交上的 1MyTem-5400000003eedab5344b">
+    <meta name="description" content="这次线下打了一次自己最好的成绩。   下面记录下wp pwnpatch，evilpatch工具通防   Misc 取证1要求是去找证书模版名字和序列号   先挂载镜像，然后去翻文件翻到一个   翻到这个hack-CA的ebp文件，然后用主办方给的工具打开这个文件   这边找到三个template的名字然后继续翻  找到几个序列号，直接排列组合交上的 1MyTem-5400000003eedab53">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2025-软件系统安全攻防半决赛Wp">
 <meta property="og:url" content="https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/index.html">
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
-<meta property="og:description" content="这次线下打了一次自己最好的成绩。  下面记录下wp pwn patch，evilpatch工具通防  Misc 取证1 要求是去找证书模版名字和序列号  先挂载镜像，然后去翻文件翻到一个  翻到这个hack-CA的ebp文件，然后用主办方给的工具打开这个文件  这边找到三个template的名字然后继续翻  找到几个序列号，直接排列组合交上的 1MyTem-5400000003eedab5344b">
+<meta property="og:description" content="这次线下打了一次自己最好的成绩。   下面记录下wp pwnpatch，evilpatch工具通防   Misc 取证1要求是去找证书模版名字和序列号   先挂载镜像，然后去翻文件翻到一个   翻到这个hack-CA的ebp文件，然后用主办方给的工具打开这个文件   这边找到三个template的名字然后继续翻  找到几个序列号，直接排列组合交上的 1MyTem-5400000003eedab53">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234053323.png">
 <meta property="og:image" content="https://oceanzbz.github.io/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234208707.png">
@@ -202,52 +202,63 @@
   <div class="content e-content" itemprop="articleBody">
     <p>这次线下打了一次自己最好的成绩。</p>
 <img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234053323.png" class="">
+
 <p>下面记录下wp</p>
-<h2 id="pwn">pwn</h2>
-<p>patch，evilpatch工具通防</p>
+<h2 id="pwn"><a href="#pwn" class="headerlink" title="pwn"></a>pwn</h2><p>patch，evilpatch工具通防</p>
 <img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234208707.png" class="">
-<h2 id="Misc-取证1">Misc 取证1</h2>
-<p>要求是去找证书模版名字和序列号</p>
+
+<h2 id="Misc-取证1"><a href="#Misc-取证1" class="headerlink" title="Misc 取证1"></a>Misc 取证1</h2><p>要求是去找证书模版名字和序列号</p>
 <img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234232818.png" class="">
+
 <p>先挂载镜像，然后去翻文件翻到一个</p>
 <img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234247054.png" class="">
+
 <p>翻到这个hack-CA的ebp文件，然后用主办方给的工具打开这个文件</p>
 <img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234306258.png" class="">
+
 <p>这边找到三个template的名字然后继续翻</p>
 <img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234321700.png" class="">
 <p>找到几个序列号，直接排列组合交上的</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyTem-5400000003eedab5344b2e5da5000000000003</span><br></pre></td></tr></table></figure>
-<h2 id="Misc-取证2">Misc 取证2</h2>
-<p>要求找到恶意的文件，去找到 system32目录下的winevt日志找到了denfender的日志直接打开看，翻到一个程序，交上就过了</p>
+
+<h2 id="Misc-取证2"><a href="#Misc-取证2" class="headerlink" title="Misc 取证2"></a>Misc 取证2</h2><p>要求找到恶意的文件，去找到 system32目录下的winevt日志找到了denfender的日志直接打开看，翻到一个程序，交上就过了</p>
 <img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234429082.png" class="">
-<h2 id="Misc-取证3">Misc 取证3</h2>
-<p>没做出来 但是马上 时间原因</p>
+
+<h2 id="Misc-取证3"><a href="#Misc-取证3" class="headerlink" title="Misc 取证3"></a>Misc 取证3</h2><p>没做出来 但是马上 时间原因</p>
 <p>john和administrator的明文密码 在john</p>
 <p>E:\C___NONAME [NTFS][root]\Users\john\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine</p>
 <img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234441528.png" class="">
+
 <p>ip没找对 找了个192.168.17.128 在日志里 好像还有个192.168.17.1</p>
-<h2 id="Misc-取证4">Misc 取证4</h2>
-<p>把sysytem32下的日志拷贝过去</p>
+<h2 id="Misc-取证4"><a href="#Misc-取证4" class="headerlink" title="Misc 取证4"></a>Misc 取证4</h2><p>把sysytem32下的日志拷贝过去</p>
 <p><code>C:\Users\Anonymous\Desktop\Logs\Security.evtx</code> ，放上日志分析工具</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LogParser.exe -i:EVT &quot;SELECT * FROM &#x27;Security.evtx&#x27; WHERE EventID=4624&quot;</span><br></pre></td></tr></table></figure>
+
 <p>查到日志</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Anonymous\Desktop\Logs\Security.evtx 7210 2024-12-04 00:06:11 2024-12-04 00:06:11 4728 8 Success Audit event 13826 The name for category 13826 in Source &quot;Microsoft-Windows-Security-Auditing&quot; cannot be found. The local computer may not have the necessary registry information or message DLL files to display messages from a remote computer Microsoft-Windows-Security-Auditing CN=James,CN=Users,DC=hack,DC=com|S-1-5-21-1507239155-486581747-1996177333-3193|Domain Admins|HACK|S-1-5-21-1507239155-486581747-1996177333-512|S-1-5-21-1507239155-486581747-1996177333-500|Administrator|HACK|0xadb1d4|- DC.hack.com &lt;NULL&gt; The description for Event ID 4728 in Source &quot;Microsoft-Windows-Security-Auditing&quot; cannot be found. The local computer may not have the necessary registry information or message DLL files to display messages from a remote computer &lt;NULL&gt;</span><br></pre></td></tr></table></figure>
+
 <p>发现用户和组maintainer-james,还缺密码，先去找system32目录下找ntds.dit爆出用户hash再去爆破明文密码</p>
 <img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234653614.png" class="">
+
 <img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234700263.png" class="">
+
 <p><code>maintainer-james-3011liverpool!</code></p>
-<h2 id="Misc-5G消息—TLS">Misc 5G消息—TLS</h2>
-<p>刚开始用科来，但是看不到ipv6的数据包</p>
+<h2 id="Misc-5G消息—TLS"><a href="#Misc-5G消息—TLS" class="headerlink" title="Misc 5G消息—TLS"></a>Misc 5G消息—TLS</h2><p>刚开始用科来，但是看不到ipv6的数据包</p>
 <p>用wireshark，看到sip</p>
 <p>里边有一句话 和sslkeylog</p>
 <img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234731684.png" class="">
+
 <img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234736050.png" class="">
+
 <p>有三个sslkeylog 全部复制下来保存</p>
 <p>用sslkeylog解密</p>
 <img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234746537.png" class="">
+
 <p>里边两个HTTP流，一个图片，导出数据流就是图片</p>
 <img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234800507.png" class="">
+
 <img src="/2025/03/24/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%8D%8A%E5%86%B3%E8%B5%9BWp/IMAGE20250324234805481.png" class="">
+
 <p>web 一个没出，也不会修，赛后问的其他师傅，他们说直接把flag删除就能patch成功。</p>
 
   </div>
