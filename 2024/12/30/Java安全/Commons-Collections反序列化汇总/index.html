@@ -105,7 +105,7 @@
 <meta property="og:image" content="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1714755545755-24aa5aa4-28c7-4d7a-9249-ed093b81390d.png">
 <meta property="og:image" content="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1714755927376-4f63cbbb-0a50-40fb-8e30-2de226e52b77.png">
 <meta property="article:published_time" content="2024-12-30T06:24:40.000Z">
-<meta property="article:modified_time" content="2025-03-05T07:24:36.790Z">
+<meta property="article:modified_time" content="2025-06-14T04:07:08.658Z">
 <meta property="article:author" content="Oceanzbz">
 <meta property="article:tag" content="反序列化">
 <meta property="article:tag" content="CC链">
@@ -282,7 +282,7 @@
 <p>首先直接下载压缩包然后将项目拖进idea，之后将pom.xm文件中的依赖jar全部下载。</p>
 <h3 id="第一个问题"><a href="#第一个问题" class="headerlink" title="第一个问题"></a>第一个问题</h3><p>就是依赖包有的加载不出来可能是因为我们配置的阿里云的镜像没有依赖的原因所以我们就手动将jar导入到本地maven仓库。这里参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/Ming_super/article/details/128728472">https://blog.csdn.net/Ming_super&#x2F;article&#x2F;details&#x2F;128728472</a>进行导入</p>
 <p>首先找到maven的官网然后找到自己所需要的依赖</p>
-<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713846520144-c8a0632e-a6d5-4cdd-9bc9-1751ec77ce83.png"></p>
+<p><img src="https://image.baidu.com/search/down?url=https://cdn.nlark.com/yuque/0/2024/png/25729212/1713846520144-c8a0632e-a6d5-4cdd-9bc9-1751ec77ce83.png" alt="|0x0"></p>
 <p>将红箭头所指的jar包下载下来。然后打开windows cmd  将jar包导入到本地仓库。</p>
 <p>输入以下命令例如：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mvn install:install-file</span><br><span class="line">        -Dfile=D:\mybatis-<span class="number">3.5</span><span class="number">.10</span>.jar</span><br><span class="line">        -DgroupId=org.mybatis</span><br><span class="line">        -DartifactId=mybatis </span><br><span class="line">        -Dversion=<span class="number">3.5</span><span class="number">.10</span> </span><br><span class="line">        -Dpackaging=jar</span><br></pre></td></tr></table></figure>

