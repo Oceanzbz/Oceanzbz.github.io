@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
+    <meta name="baidu-site-verification" content="codeva-4fIoJmJzzi" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="前言本文主主要是记录下网上大佬总结的内存马排查的一些方法，因为护网也临近了，相信不少师傅在面试的时候也是会设计到内存马排查的这些问题，因为内存马在攻防中是常见的手段，因此内存马排查也是应急人员需要掌握的技能，之前自己分析过一些内存马的原理，对于排查内存马一直没有什么太好的实战经验，所以就去网上搜刮了几篇文章，自己模拟真实环境进行学习了一波，主要是记录一下为后面的工作节省时间。 工具这里主要介绍几款">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内存马排查">
+<meta property="og:url" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/index.html">
+<meta property="og:site_name" content="Oceanzbz&#39;s Blog">
+<meta property="og:description" content="前言本文主主要是记录下网上大佬总结的内存马排查的一些方法，因为护网也临近了，相信不少师傅在面试的时候也是会设计到内存马排查的这些问题，因为内存马在攻防中是常见的手段，因此内存马排查也是应急人员需要掌握的技能，之前自己分析过一些内存马的原理，对于排查内存马一直没有什么太好的实战经验，所以就去网上搜刮了几篇文章，自己模拟真实环境进行学习了一波，主要是记录一下为后面的工作节省时间。 工具这里主要介绍几款">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624125646276.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624125658789.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624125810749.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624130041090.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624130201474.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624130323715.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624130437309.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624130521515.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624132443505.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624132533755.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624132832212.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624133612325.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624133726611.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624133803421.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624133823288.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624135249109.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624135337657.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624135357746.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624135451927.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624144027416.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624144043030.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624144614867.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624144659462.png">
+<meta property="article:published_time" content="2025-06-24T04:25:55.000Z">
+<meta property="article:modified_time" content="2025-06-24T06:48:16.386Z">
+<meta property="article:author" content="Oceanzbz">
+<meta property="article:tag" content="内存马">
+<meta property="article:tag" content="应急">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624125646276.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>内存马排查</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QWTJSPQL4F');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Oceanzbz&#39;s Blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/06/14/Java%E5%AE%89%E5%85%A8/Ysoserial-JRMP%E6%A8%A1%E5%9D%97/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/&text=内存马排查"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/&title=内存马排查"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/&is_video=false&description=内存马排查"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=内存马排查&body=Check out this article: https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/&title=内存马排查"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/&title=内存马排查"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/&title=内存马排查"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/&title=内存马排查"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/&name=内存马排查&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/&t=内存马排查"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7"><span class="toc-number">2.</span> <span class="toc-text">工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#arthas"><span class="toc-number">2.1.</span> <span class="toc-text">arthas</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#memshell-scanner"><span class="toc-number">2.2.</span> <span class="toc-text">memshell-scanner</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#copagent-%E4%BB%85%E6%8E%92%E6%9F%A5%EF%BC%8C%E5%8F%AA%E9%80%82%E7%94%A8%E4%BA%8E-jdk1-8"><span class="toc-number">2.3.</span> <span class="toc-text">copagent (仅排查，只适用于 jdk1.8)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">3.</span> <span class="toc-text">环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E6%9D%80"><span class="toc-number">4.</span> <span class="toc-text">查杀</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E6%9D%80%E6%80%9D%E8%B7%AF"><span class="toc-number">4.1.</span> <span class="toc-text">查杀思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%A5%E6%96%AF%E6%8B%89%E5%86%85%E5%AD%98%E9%A9%AC"><span class="toc-number">4.2.</span> <span class="toc-text">哥斯拉内存马</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#filter%E5%86%85%E5%AD%98%E9%A9%AC"><span class="toc-number">4.2.1.</span> <span class="toc-text">filter内存马</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#servlet%E5%86%85%E5%AD%98%E9%A9%AC"><span class="toc-number">4.2.2.</span> <span class="toc-text">servlet内存马</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%B0%E8%9D%8E%E5%86%85%E5%AD%98%E9%A9%AC"><span class="toc-number">4.3.</span> <span class="toc-text">冰蝎内存马</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#heapdump%E4%BD%BF%E7%94%A8"><span class="toc-number">4.4.</span> <span class="toc-text">heapdump使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jmap%E4%BD%BF%E7%94%A8"><span class="toc-number">4.5.</span> <span class="toc-text">jmap使用</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        内存马排查
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Oceanzbz</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-06-24T04:25:55.000Z" class="dt-published" itemprop="datePublished">2025-06-24</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E5%86%85%E5%AD%98%E9%A9%AC/" rel="tag">内存马</a>, <a class="p-category" href="/tags/%E5%BA%94%E6%80%A5/" rel="tag">应急</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文主主要是记录下网上大佬总结的内存马排查的一些方法，因为护网也临近了，相信不少师傅在面试的时候也是会设计到内存马排查的这些问题，因为内存马在攻防中是常见的手段，因此内存马排查也是应急人员需要掌握的技能，之前自己分析过一些内存马的原理，对于排查内存马一直没有什么太好的实战经验，所以就去网上搜刮了几篇文章，自己模拟真实环境进行学习了一波，主要是记录一下为后面的工作节省时间。</p>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p>这里主要介绍几款可以用来帮助排查的工具。</p>
+<h3 id="arthas"><a href="#arthas" class="headerlink" title="arthas"></a>arthas</h3><p>Arthas 是一款线上监控诊断产品，通过全局视角实时查看应用 load、内存、gc、线程的状态信息，并能在不修改应用代码的情况下，对业务问题进行诊断，包括查看方法调用的出入参、异常，监测方法执行耗时，类加载信息等，大大提升线上问题排查效率。<br><a target="_blank" rel="noopener" href="https://github.com/alibaba/arthas">https://github.com/alibaba/arthas</a></p>
+<h3 id="memshell-scanner"><a href="#memshell-scanner" class="headerlink" title="memshell-scanner"></a>memshell-scanner</h3><p>这款工具可以应对绝大数传统的内存马的查杀了。<br><a target="_blank" rel="noopener" href="https://github.com/c0ny1/java-memshell-scanner">https://github.com/c0ny1/java-memshell-scanner</a> 原版<br><a target="_blank" rel="noopener" href="https://github.com/ruyueattention/java-memshell-scanner">https://github.com/ruyueattention/java-memshell-scanner</a> 二开版的</p>
+<h3 id="copagent-仅排查，只适用于-jdk1-8"><a href="#copagent-仅排查，只适用于-jdk1-8" class="headerlink" title="copagent (仅排查，只适用于 jdk1.8)"></a>copagent (仅排查，只适用于 jdk1.8)</h3><p>该工具能够在运行时获取 JVM 中加载的所有类信息，结合类的包名、类名、接口实现、注解标记等多维度特征进行静态筛选。针对潜在威胁类，copagent 进一步判断是否具备磁盘资源链接、是否包含特定的恶意关键字（如动态代理、Servlet Hook、命令执行等行为特征），从而识别可能存在的内存马组件。</p>
+<p>对于检测出的可疑类，copagent 提供自动 dump 能力，便于安全分析人员进行反编译和人工复审，实现对内存马、恶意插件或注入类的快速定位与处置。<br><a target="_blank" rel="noopener" href="https://github.com/LandGrey/copagent">https://github.com/LandGrey/copagent</a> </p>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>我搭建是利用的vulhub的CVE-2020-1938漏洞环境进行复现的</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/vulhub/vulhub">https://github.com/vulhub/vulhub</a></p>
+<img src="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624125646276.png" class="">
+
+<p>然后将webshell放进去</p>
+<img src="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624125658789.png" class="">
+
+<h2 id="查杀"><a href="#查杀" class="headerlink" title="查杀"></a>查杀</h2><h3 id="查杀思路"><a href="#查杀思路" class="headerlink" title="查杀思路"></a>查杀思路</h3><p>存马存在的一些可疑的特征。通常情况下更多的是使用以下特征去判断：<br>继承可能实现 Webshell 接口，例如 Servlet，Filter，Listener，Interceptor</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">javax.servlet.http.HttpServlet</span><br><span class="line">org.springframework.web.servlet.handler.AbstractHandlerMapping</span><br><span class="line">javax.servlet.Filter</span><br><span class="line">javax.servlet.Servlet</span><br><span class="line">javax.servlet.ServletRequestListener</span><br></pre></td></tr></table></figure>
+
+<p>高危 classloader 加载：查看 classloader 是不是 Templates 或 bcel 等</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl$TransletClassLoader</span><br><span class="line">com.sun.org.apache.bcel.internal.util.ClassLoader</span><br></pre></td></tr></table></figure>
+
+<p>而由 JSP 加载的内存马对应的 ClassLoader 则为 ClassLoader 为<code>org.apache.jasper.servlet.JasperLoader</code></p>
+<p>对应在arthas上的搜索命令可以使用如下命令搜索</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sc -d javax.servlet.Servlet\*  </span><br><span class="line">​  </span><br><span class="line">sc -d javax.servlet.Filter\*  </span><br><span class="line">​  </span><br><span class="line">sc -d javax.servlet.ServletRequestListener\*  </span><br><span class="line">​sc *jsp*</span><br><span class="line">或者：  </span><br><span class="line">sc -d \* --interfaces javax.servlet.Servlet  </span><br><span class="line">​  </span><br><span class="line">sc -d \* --interfaces javax.servlet.Filter\*  </span><br><span class="line">​  </span><br><span class="line">sc -d \* --interfaces javax.servlet.ServletRequestListener\*\</span><br></pre></td></tr></table></figure>
+<p>这样会有个问题就是搜索结果太多需要加上 <code>-n (可以跟一个较大的数)</code> 参数</p>
+<p> 通过classloader定位,使用如下命令找到被该classloader加载的类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc -d * --classloader &lt;hashcode&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="哥斯拉内存马"><a href="#哥斯拉内存马" class="headerlink" title="哥斯拉内存马"></a>哥斯拉内存马</h3><h4 id="filter内存马"><a href="#filter内存马" class="headerlink" title="filter内存马"></a>filter内存马</h4><p>先来给他加一个filter内存马</p>
+<img src="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624125810749.png" class="">
+
+<p>启动arthas-boot.jar 进行排查,使用<code>sc *.Filter</code>过滤一下</p>
+<img src="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624130041090.png" class="">
+
+<p>可以使用 <code>sc -d org.apache.coyote.deser.std.ThrowableDeserializer</code> 详细看一下这个类的信息</p>
+<img src="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624130201474.png" class="">
+
+<p>可以看到哥斯拉自己的classloader，所以可以判定这个类应该是有问题的，具体看代码使用<br><code>jad org.apache.coyote.deser.std.ThrowableDeserializer</code>反编译看</p>
+<img src="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624130323715.png" class="">
+
+<p>存在大量的反射，并且也是filter内存马的实现逻辑。</p>
+<h4 id="servlet内存马"><a href="#servlet内存马" class="headerlink" title="servlet内存马"></a>servlet内存马</h4><p>同样的道理增加一个</p>
+<img src="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624130437309.png" class="">
+
+<p>然后我们使用 <code>sc *.Servlet</code>相关的,也可以利用<code>mbean | grep &quot;name=/&quot;</code>进行搜索url映射</p>
+<img src="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624130521515.png" class="">
+
+<p>可以看到名字就有问题，这时在重复以上步骤查看信息和反编译即可。</p>
+<h3 id="冰蝎内存马"><a href="#冰蝎内存马" class="headerlink" title="冰蝎内存马"></a>冰蝎内存马</h3><img src="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624132443505.png" class="">
+
+<img src="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624132533755.png" class="">
+
+<p>连接成功，下面是排查过程</p>
+<p>先看看<code>classloader</code></p>
+<img src="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624132832212.png" class="">
+
+<p>可以看到两个恶意的loader，那么就可以里用上面所说的可以利用这个classloader去反向查恶意类</p>
+<img src="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624133612325.png" class="">
+<p>然后反向查</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc -d * --classloader 7aff6602</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624133726611.png" class="">
+
+<p>然后在反编译看下这个类</p>
+<img src="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624133803421.png" class="">
+
+<img src="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624133823288.png" class="">
+
+<p>很明显的恶意类。</p>
+<h3 id="heapdump使用"><a href="#heapdump使用" class="headerlink" title="heapdump使用"></a>heapdump使用</h3><p>有一种比较取巧的方法就是利用heapdump将内存dump出来直接搜索</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strings test.hprof | grep &quot;GET /</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624135249109.png" class="">
+
+<img src="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624135337657.png" class="">
+
+<img src="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624135357746.png" class="">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strings /var/cache/tomcat/temp/heapdump2022-10-19-12-464292342944555007800.hprof | grep -E &quot;/webapps/.*?\!&quot; | sort -u</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624135451927.png" class="">
+
+<h3 id="jmap使用"><a href="#jmap使用" class="headerlink" title="jmap使用"></a>jmap使用</h3><p>这种方法主要是对前面三种的补充，我们会发现第二种和第三种其实都依靠agent attach到jvm里面，但是有些攻击者会使用对抗分析排查的手段，阻挠我们去attach，比如：冰蝎的反检测分析的手段，会干掉jvm线程之间的通信管道的建立要用到<code>.java_pid\&lt;pid&gt;</code>这个文件,阻止JVM进程通信，从而禁止了Agent的加载。Agent无法注入，上文提到的方法2、3就使用不了了，从而实现了反查杀</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jps  </span><br><span class="line">jmap -dump:format=b,file=&lt;filename&gt; &lt;pid&gt;</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624144027416.png" class="">
+
+<p>思路：内存马，不就是存在内存里面的吗，那我们直接把内存dump下来，然后在里面分析不就成了；这里我们需要思考，内存马在内存中可能的存在形式，jvm能够直接处理的应该是字节码文件class，所以我们可以尝试在内存中寻找字节码文件，字节码文件头的16进制特征：<code>cafebabe</code>；也可以直接搜恶意类可能出现的敏感词，shell 、memshell、eval、inject之类的；也可以查内存中遗留的访问记录，查看是否存在相关访问是内存马利用和链接的；</p>
+<img src="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624144043030.png" class="">
+
+
+<p>在知道被利用的接口是一个任意字节码加载接口的时候，我们可以直接对症下药，查看内存中是否遗留相关恶意字节码的base64编码（接口做了编码解码）<br>类字节码的base64头形式一般是:<code>yv66vg</code>（cafebabe00转化而来）；</p>
+<img src="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624144614867.png" class="">
+
+<p>dump下来，还原class字节码文件，反编译，如下通过这番操作，我们拿到了注入内存马逻辑的class字节码实现：</p>
+<img src="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/20250624144659462.png" class="">
+
+
+<p>参考： <a target="_blank" rel="noopener" href="https://forum.butian.net/share/3774">https://forum.butian.net/share/3774</a><br><a target="_blank" rel="noopener" href="https://ruyueattention.github.io/2023/07/02/Java%E5%86%85%E5%AD%98%E9%A9%AC3-%E5%86%85%E5%AD%98%E9%A9%AC%E6%9F%A5%E6%9D%80/">https://ruyueattention.github.io/2023/07/02/Java%E5%86%85%E5%AD%98%E9%A9%AC3-%E5%86%85%E5%AD%98%E9%A9%AC%E6%9F%A5%E6%9D%80/</a><br><a target="_blank" rel="noopener" href="https://zgao.top/%E5%86%B0%E8%9D%8E%E3%80%81%E5%93%A5%E6%96%AF%E6%8B%89-%E5%86%85%E5%AD%98%E9%A9%AC%E5%BA%94%E6%80%A5%E6%8E%92%E6%9F%A5/">https://zgao.top/%E5%86%B0%E8%9D%8E%E3%80%81%E5%93%A5%E6%96%AF%E6%8B%89-%E5%86%85%E5%AD%98%E9%A9%AC%E5%BA%94%E6%80%A5%E6%8E%92%E6%9F%A5/</a></p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/link/">Friends</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7"><span class="toc-number">2.</span> <span class="toc-text">工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#arthas"><span class="toc-number">2.1.</span> <span class="toc-text">arthas</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#memshell-scanner"><span class="toc-number">2.2.</span> <span class="toc-text">memshell-scanner</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#copagent-%E4%BB%85%E6%8E%92%E6%9F%A5%EF%BC%8C%E5%8F%AA%E9%80%82%E7%94%A8%E4%BA%8E-jdk1-8"><span class="toc-number">2.3.</span> <span class="toc-text">copagent (仅排查，只适用于 jdk1.8)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">3.</span> <span class="toc-text">环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E6%9D%80"><span class="toc-number">4.</span> <span class="toc-text">查杀</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E6%9D%80%E6%80%9D%E8%B7%AF"><span class="toc-number">4.1.</span> <span class="toc-text">查杀思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%A5%E6%96%AF%E6%8B%89%E5%86%85%E5%AD%98%E9%A9%AC"><span class="toc-number">4.2.</span> <span class="toc-text">哥斯拉内存马</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#filter%E5%86%85%E5%AD%98%E9%A9%AC"><span class="toc-number">4.2.1.</span> <span class="toc-text">filter内存马</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#servlet%E5%86%85%E5%AD%98%E9%A9%AC"><span class="toc-number">4.2.2.</span> <span class="toc-text">servlet内存马</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%B0%E8%9D%8E%E5%86%85%E5%AD%98%E9%A9%AC"><span class="toc-number">4.3.</span> <span class="toc-text">冰蝎内存马</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#heapdump%E4%BD%BF%E7%94%A8"><span class="toc-number">4.4.</span> <span class="toc-text">heapdump使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jmap%E4%BD%BF%E7%94%A8"><span class="toc-number">4.5.</span> <span class="toc-text">jmap使用</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/&text=内存马排查"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/&title=内存马排查"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/&is_video=false&description=内存马排查"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=内存马排查&body=Check out this article: https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/&title=内存马排查"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/&title=内存马排查"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/&title=内存马排查"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/&title=内存马排查"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/&name=内存马排查&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/&t=内存马排查"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Oceanzbz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+      <ul>
+        
+          <!-- 不蒜子统计 -->
+          <span id="busuanzi_container_site_pv">
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          <span class="post-meta-divider">|</span>
+          <span id="busuanzi_container_site_uv" style='display:none'>
+                  本站访客数<span id="busuanzi_value_site_uv"></span>人
+          </span>
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        
+      </ul>
+    </nav>
+  </div>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QWTJSPQL4F');
+</script>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'cactus-1';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+<!-- utterances Comments -->
+
+</body>
+</html>
