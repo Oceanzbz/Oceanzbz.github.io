@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
+    <meta name="baidu-site-verification" content="codeva-4fIoJmJzzi" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="前言由于在攻防渗透中webshell使用的比较频繁，其中最为广泛使用的就是冰蝎、蚁剑、哥斯拉这三个webshell连接工具，因此各大厂商对其流量特征监控的也是极为严格，所以对其流量特征进行修改是非常有必要的。 环境搭建使用在线反编译网站https:&#x2F;&#x2F;www.decompiler.com&#x2F; 直接把jar包拖进去就可以了或者可以用idea的插件进行反编译 1java -cp java-decompi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="哥斯拉二开">
+<meta property="og:url" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/index.html">
+<meta property="og:site_name" content="Oceanzbz&#39;s Blog">
+<meta property="og:description" content="前言由于在攻防渗透中webshell使用的比较频繁，其中最为广泛使用的就是冰蝎、蚁剑、哥斯拉这三个webshell连接工具，因此各大厂商对其流量特征监控的也是极为严格，所以对其流量特征进行修改是非常有必要的。 环境搭建使用在线反编译网站https:&#x2F;&#x2F;www.decompiler.com&#x2F; 直接把jar包拖进去就可以了或者可以用idea的插件进行反编译 1java -cp java-decompi">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717034202757.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717034319761.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717034414706.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717034428145.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717034444475.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717052523011.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717060620813.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717060811341.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717060838081.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717061020903.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717061037080.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717061230657.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717061302484.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717061330807.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717061359844.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717061751736.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717061859586.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717061928037.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717062047013.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717034847037.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717035100586.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717035254633.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717035406296.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717035804767.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717040538780.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717040853526.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717041445133.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717041606014.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717041702829.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717041913224.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717042054115.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717042250248.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717045530568.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717045628264.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717045757187.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717050249419.png">
+<meta property="article:published_time" content="2025-07-16T19:35:11.000Z">
+<meta property="article:modified_time" content="2025-07-16T22:21:54.100Z">
+<meta property="article:author" content="Oceanzbz">
+<meta property="article:tag" content="哥斯拉">
+<meta property="article:tag" content="二开">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717034202757.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>哥斯拉二开</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QWTJSPQL4F');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Oceanzbz&#39;s Blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/06/24/Java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/&text=哥斯拉二开"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/&title=哥斯拉二开"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/&is_video=false&description=哥斯拉二开"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=哥斯拉二开&body=Check out this article: https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/&title=哥斯拉二开"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/&title=哥斯拉二开"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/&title=哥斯拉二开"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/&title=哥斯拉二开"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/&name=哥斯拉二开&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/&t=哥斯拉二开"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">2.</span> <span class="toc-text">环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E4%BF%A1%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">通信流程分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%BC%80"><span class="toc-number">4.</span> <span class="toc-text">二开</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E6%A0%87%E9%A2%98"><span class="toc-number">4.1.</span> <span class="toc-text">改标题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E8%AF%B7%E6%B1%82%E5%A4%B4%E7%9A%84%E7%89%B9%E5%BE%81"><span class="toc-number">4.2.</span> <span class="toc-text">改请求头的特征</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8C%85%E4%BF%AE%E6%94%B9"><span class="toc-number">4.3.</span> <span class="toc-text">请求包修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E5%8C%85%E4%BF%AE%E6%94%B9"><span class="toc-number">4.4.</span> <span class="toc-text">响应包修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E4%BF%AE%E6%94%B9"><span class="toc-number">4.5.</span> <span class="toc-text">加密解密修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%8D%E6%9D%80%E6%A8%A1%E7%89%88"><span class="toc-number">4.6.</span> <span class="toc-text">免杀模版</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%B6%E4%BC%B8"><span class="toc-number">5.</span> <span class="toc-text">延伸</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        哥斯拉二开
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Oceanzbz</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-07-16T19:35:11.000Z" class="dt-published" itemprop="datePublished">2025-07-17</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/">攻防渗透</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E4%BA%8C%E5%BC%80/" rel="tag">二开</a>, <a class="p-category" href="/tags/%E5%93%A5%E6%96%AF%E6%8B%89/" rel="tag">哥斯拉</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>由于在攻防渗透中webshell使用的比较频繁，其中最为广泛使用的就是冰蝎、蚁剑、哥斯拉这三个webshell连接工具，因此各大厂商对其流量特征监控的也是极为严格，所以对其流量特征进行修改是非常有必要的。</p>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>使用在线反编译网站<br><a target="_blank" rel="noopener" href="https://www.decompiler.com/">https://www.decompiler.com/</a> 直接把jar包拖进去就可以了或者可以用idea的插件进行反编译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -cp java-decompiler.jar org.jetbrains.java.decompiler.main.decompiler.ConsoleDecompiler -dgs=true godzilla.jar godzillaDeCompiler</span><br></pre></td></tr></table></figure>
+
+<p>新建一个空的java项目</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717034202757.png" class="">
+
+<p>在该项目新建一个lib文件夹将jar包拖进去，然后将反编译好的源码直接拖进去</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717034319761.png" class="">
+
+<p>之后配置lib下的jar包</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717034414706.png" class="">
+
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717034428145.png" class="">
+
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717034444475.png" class="">
+
+<p>这里可能不会显示core.ui.MainActivity这个类，需要将反编译源码中的META-INF&#x2F;MAINFEST.MF放入src&#x2F;META-INF&#x2F;MAINFEST.MF中然后将core&#x2F;ui&#x2F;MainActivity复制到src下就可以了，到这二开的环境基本就配置好了。</p>
+<h2 id="通信流程分析"><a href="#通信流程分析" class="headerlink" title="通信流程分析"></a>通信流程分析</h2><p>首先在core.ui.MainActivity类中的interactMenuItemClick方法中下断点，因为这里是点击进入时会触发的监听</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717052523011.png" class="">
+
+<p>这里首先是在数据库中获取这个shell的id，然后从数据库中获取这个shell的信息，传入ShellManage方法中跟进去看看</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717060620813.png" class="">
+
+<p>跟到initShellOpertion方法中去</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717060811341.png" class="">
+
+<p>继续跟到init方法中去</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717060838081.png" class="">
+
+<p>这里会跟到shells.cryptions.phpXor包下的PhpXor类的init方法，因为我们选择是这个loader，这里看到会发送http请求然后获取响应信息继续跟一下</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717061020903.png" class="">
+
+<p>继续走，最终会走到最后一个sendHttpResponse方法中</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717061037080.png" class="">
+
+<p>然后会跟到SendHttpConn方法中开始真正的网路请求</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717061230657.png" class="">
+
+<p>继续走到HttpResponse方法中获取返回信息</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717061302484.png" class="">
+
+<p>分到ReadAllData方法中</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717061330807.png" class="">
+
+<p>这里会走到对应解密起的decode方法中</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717061359844.png" class="">
+
+<p>这里有数据传入时会走进findstr方法</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717061751736.png" class="">
+
+<p>跟到subMiddleStr方法，这里注意下findStrLeft，findStrRinght是初始化时定义好的固定值</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717061859586.png" class="">
+
+<p>然后进入subMiddleStr方法</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717061928037.png" class="">
+
+<p>可以看到就是获取返回包中findStrLeft，findStrRinght之间加密的值传入解密方法</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717062047013.png" class="">
+
+<p>这里我没有去分析加密数据的生成流程只时简单分析了解密流程加密的流程稍微debug下就可以定位到了</p>
+<h2 id="二开"><a href="#二开" class="headerlink" title="二开"></a>二开</h2><h3 id="改标题"><a href="#改标题" class="headerlink" title="改标题"></a>改标题</h3><p>可以改成自己的标志，在MainActivity中的initVariable方法中随意更改</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717034847037.png" class="">
+
+<p>然后buildproject在build Artifacts就可以更改完成了，这里要说明下你想要更改哪个就要把反编译对应的源码复制到src下包也要对齐。</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717035100586.png" class="">
+
+<p>第一次build的时候会报错hash校验错误，因为作者进行了限制，当然我们只需要给他注释掉这段代码就可以绕过了在core包的ApplicationConfig.java文件下</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717035254633.png" class="">
+
+<p>此时就是自己的id了哈哈哈</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717035406296.png" class="">
+
+<h3 id="改请求头的特征"><a href="#改请求头的特征" class="headerlink" title="改请求头的特征"></a>改请求头的特征</h3><p>哥斯拉有一个强特征就是cookie带；，这里只需要找到util&#x2F;http包下的HttpResponse类中修改就可以</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717035804767.png" class="">
+
+<p>删掉就可以了，此时在抓包就能发现没有这个特征了稍后在抓包，把ua头这些也改改，在core.ui.component.frame包下的ShellSetting类中</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717040538780.png" class="">
+
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717040853526.png" class="">
+
+<p>可以看到已经修改完</p>
+<h3 id="请求包修改"><a href="#请求包修改" class="headerlink" title="请求包修改"></a>请求包修改</h3><p>先来看一下原版的请求流量</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717041445133.png" class="">
+
+<p>可以看到这里就是一个参数传入后面跟的是经过加密之后数据特征还算是明显的，这里哥斯拉原版给了增加左右请求参数的功能</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717041606014.png" class="">
+
+<p>但是我们并不想每次请求都要修改，所以可以自己给固定下，在core.ui.component.frame包下的ShellSetting类中</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717041702829.png" class="">
+
+<p>这里修改下就可以了</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717041913224.png" class="">
+
+<p>这样看着就像是个正常的请求了</p>
+<h3 id="响应包修改"><a href="#响应包修改" class="headerlink" title="响应包修改"></a>响应包修改</h3><p>还是同样的先来看看原版的响应包</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717042054115.png" class="">
+
+<p>可以看到是前面16位md5值+加密数据+后16位md5值组成的，这里直接看下生成的模版就可以知道响应包为什么是这样的了</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717042250248.png" class="">
+
+<p>如何修改呢，这里的一个思路就是给他输入html页面加点css样式js代码伪装成正常的页面</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717045530568.png" class="">
+
+<p>改成类似于这样的形式，其中那两串base64编码就是html页面，不仅改这里同时要改java的代码</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717045628264.png" class="">
+
+<p>这样是为了能够找到加密数据从而进行相应的解密，建议大家去debug下这个流程就能明白了。</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717045757187.png" class="">
+
+<p>可以看到其实就比较像正常的流量了。</p>
+<h3 id="加密解密修改"><a href="#加密解密修改" class="headerlink" title="加密解密修改"></a>加密解密修改</h3><p>这里我没有实现比较懒，可以用gpt帮自己重写加解密函数,主要的逻辑就在<br>shells.cryptions包下各自加密的类稍微跟一下就可以</p>
+<img src="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/20250717050249419.png" class="">
+
+<h3 id="免杀模版"><a href="#免杀模版" class="headerlink" title="免杀模版"></a>免杀模版</h3><p>这里我没有仔细研究过先留个坑以后再说主要还是自己不会</p>
+<h2 id="延伸"><a href="#延伸" class="headerlink" title="延伸"></a>延伸</h2><p>这里其实还有其他修改特征方式可以参考如下的文章</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">https://mp.weixin.qq.com/s/mRlMhi7Zy2fvCdvuQmJh2g </span><br><span class="line">https://mp.weixin.qq.com/s/ktXCzQrzthcde0PrKIA_vA</span><br><span class="line">https://bohemian.top/2024/02/28/antsword-bypasswaf/antsword-bypasswaf/</span><br><span class="line">https://xz.aliyun.com/news/15952 源码解析</span><br></pre></td></tr></table></figure>
+
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/link/">Friends</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">2.</span> <span class="toc-text">环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E4%BF%A1%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">通信流程分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%BC%80"><span class="toc-number">4.</span> <span class="toc-text">二开</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E6%A0%87%E9%A2%98"><span class="toc-number">4.1.</span> <span class="toc-text">改标题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E8%AF%B7%E6%B1%82%E5%A4%B4%E7%9A%84%E7%89%B9%E5%BE%81"><span class="toc-number">4.2.</span> <span class="toc-text">改请求头的特征</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8C%85%E4%BF%AE%E6%94%B9"><span class="toc-number">4.3.</span> <span class="toc-text">请求包修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E5%8C%85%E4%BF%AE%E6%94%B9"><span class="toc-number">4.4.</span> <span class="toc-text">响应包修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E4%BF%AE%E6%94%B9"><span class="toc-number">4.5.</span> <span class="toc-text">加密解密修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%8D%E6%9D%80%E6%A8%A1%E7%89%88"><span class="toc-number">4.6.</span> <span class="toc-text">免杀模版</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%B6%E4%BC%B8"><span class="toc-number">5.</span> <span class="toc-text">延伸</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/&text=哥斯拉二开"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/&title=哥斯拉二开"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/&is_video=false&description=哥斯拉二开"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=哥斯拉二开&body=Check out this article: https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/&title=哥斯拉二开"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/&title=哥斯拉二开"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/&title=哥斯拉二开"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/&title=哥斯拉二开"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/&name=哥斯拉二开&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/&t=哥斯拉二开"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Oceanzbz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+      <ul>
+        
+          <!-- 不蒜子统计 -->
+          <span id="busuanzi_container_site_pv">
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          <span class="post-meta-divider">|</span>
+          <span id="busuanzi_container_site_uv" style='display:none'>
+                  本站访客数<span id="busuanzi_value_site_uv"></span>人
+          </span>
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        
+      </ul>
+    </nav>
+  </div>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QWTJSPQL4F');
+</script>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'cactus-1';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+<!-- utterances Comments -->
+
+</body>
+</html>

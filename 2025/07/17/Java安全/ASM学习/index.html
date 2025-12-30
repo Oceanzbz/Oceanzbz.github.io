@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="google-site-verification" content="FVeTimbT1kTEtyy7CZnjl87tv6Zu3gYnjspaqbsrZ6M" />
+    <meta name="baidu-site-verification" content="codeva-4fIoJmJzzi" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="简介ASM 是一个通用的 Java 字节码操作和分析框架。它可直接以二进制形式用于修改现有类或动态生成类。应用场景有代码转换、优化、代码生成、动态字节码增强等。可以概括为generation、transformation 和 analysis 在学习之前先去看一下这三篇文章做一个前置知识 JAVA安全|字节码篇：字节码文件结构与解读JAVA安全|字节码篇：常见字节码指令（JVM指令）JAVA安全|">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ASM学习">
+<meta property="og:url" content="https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Oceanzbz&#39;s Blog">
+<meta property="og:description" content="简介ASM 是一个通用的 Java 字节码操作和分析框架。它可直接以二进制形式用于修改现有类或动态生成类。应用场景有代码转换、优化、代码生成、动态字节码增强等。可以概括为generation、transformation 和 analysis 在学习之前先去看一下这三篇文章做一个前置知识 JAVA安全|字节码篇：字节码文件结构与解读JAVA安全|字节码篇：常见字节码指令（JVM指令）JAVA安全|">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/20250717225423681.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/20250717232541855.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/20250718001752920.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/20250718003736192.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/20250718011849376.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/20250718012842203.png">
+<meta property="article:published_time" content="2025-07-17T14:30:35.000Z">
+<meta property="article:modified_time" content="2025-07-17T17:28:44.360Z">
+<meta property="article:author" content="Oceanzbz">
+<meta property="article:tag" content="Java基础">
+<meta property="article:tag" content="ASM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/20250717225423681.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>ASM学习</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QWTJSPQL4F');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Oceanzbz&#39;s Blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/07/18/Java%E5%AE%89%E5%85%A8/Rasp%E5%85%A5%E9%97%A8/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/07/17/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/%E5%93%A5%E6%96%AF%E6%8B%89%E4%BA%8C%E5%BC%80/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/&text=ASM学习"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/&title=ASM学习"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/&is_video=false&description=ASM学习"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ASM学习&body=Check out this article: https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/&title=ASM学习"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/&title=ASM学习"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/&title=ASM学习"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/&title=ASM学习"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/&name=ASM学习&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/&t=ASM学习"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-number">2.</span> <span class="toc-text">环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ASM%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">ASM使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ClassVisitor%E7%B1%BB"><span class="toc-number">3.1.</span> <span class="toc-text">ClassVisitor类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E9%A1%BA%E5%BA%8F"><span class="toc-number">3.1.1.</span> <span class="toc-text">访问顺序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E8%A7%A3%E6%9E%90"><span class="toc-number">3.1.2.</span> <span class="toc-text">方法解析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ClassReader%E7%B1%BB"><span class="toc-number">3.2.</span> <span class="toc-text">ClassReader类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ClassWriter%E7%B1%BB"><span class="toc-number">3.3.</span> <span class="toc-text">ClassWriter类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MethodVisitor%E7%B1%BB"><span class="toc-number">3.4.</span> <span class="toc-text">MethodVisitor类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E9%A1%BA%E5%BA%8F-1"><span class="toc-number">3.4.1.</span> <span class="toc-text">访问顺序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E8%A7%A3%E6%9E%90-1"><span class="toc-number">3.4.2.</span> <span class="toc-text">方法解析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96%E5%AD%97%E8%8A%82%E7%A0%81"><span class="toc-number">3.5.</span> <span class="toc-text">读取字节码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90%E5%AD%97%E8%8A%82%E7%A0%81"><span class="toc-number">3.6.</span> <span class="toc-text">解析字节码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%AD%97%E8%8A%82%E7%A0%81"><span class="toc-number">3.7.</span> <span class="toc-text">修改字节码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E6%AE%B5%E4%BF%AE%E6%94%B9"><span class="toc-number">3.7.1.</span> <span class="toc-text">字段修改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BF%AE%E6%94%B9"><span class="toc-number">3.7.2.</span> <span class="toc-text">方法修改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E7%9A%84%E5%A2%9E%E5%8A%A0%E5%92%8C%E5%88%A0%E9%99%A4"><span class="toc-number">3.7.3.</span> <span class="toc-text">方法的增加和删除</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        ASM学习
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Oceanzbz</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-07-17T14:30:35.000Z" class="dt-published" itemprop="datePublished">2025-07-17</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Java%E5%AE%89%E5%85%A8/">Java安全</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/ASM/" rel="tag">ASM</a>, <a class="p-category" href="/tags/Java%E5%9F%BA%E7%A1%80/" rel="tag">Java基础</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>ASM 是一个通用的 Java 字节码操作和分析框架。它可直接以二进制形式用于修改现有类或动态生成类。应用场景有代码转换、优化、代码生成、动态字节码增强等。可以概括为<strong>generation、transformation 和 analysis</strong></p>
+<p>在学习之前先去看一下这三篇文章做一个前置知识</p>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzkzMjIxNjExNg==&mid=2247484957&idx=1&sn=86fdd2ce00ddd8cdfe612ce5d72758ac&chksm=c25e6a46f529e350c33059e495d5fe68e27526114567799128d4006b3f6d82ab5d479de739cb&scene=21#wechat_redirect">JAVA安全|字节码篇：字节码文件结构与解读</a><br><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzkzMjIxNjExNg==&mid=2247484965&idx=1&sn=e7975c6cd591b14110233b63278abf72&chksm=c25e6a7ef529e3681c0bfd501d7557acd78abc4dcd7d4cc2ffa203a06d7beadcebe31f93886f&scene=21#wechat_redirect">JAVA安全|字节码篇：常见字节码指令（JVM指令）</a><br><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzkzMjIxNjExNg==&mid=2247484977&idx=1&sn=c7ce97694a9f585af50b4a0a64c2439a&chksm=c25e6a6af529e37ce24b9ae56d707d016219eef1b2f769256c849aaa53979b16d4674a1ca4f9&scene=21#wechat_redirect">JAVA安全|字节码篇：字节码操作框架—ASM（原理）</a></p>
+<p>在来个y4taker博客中的图总结</p>
+<img src="/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/20250717225423681.png" class="">
+
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">asm.version</span>&gt;</span>9.3<span class="tag">&lt;/<span class="name">asm.version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.ow2.asm<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>asm<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;asm.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.ow2.asm<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>asm-commons<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;asm.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.ow2.asm<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>asm-util<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;asm.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.ow2.asm<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>asm-tree<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;asm.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.ow2.asm<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>asm-analysis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;asm.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ASM使用"><a href="#ASM使用" class="headerlink" title="ASM使用"></a>ASM使用</h2><p>在asm当中有三个最重要的类，关系如下图</p>
+<img src="/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/20250717232541855.png" class="">
+
+<ul>
+<li><code>ClassReader</code>类，负责读取<code>.class</code>文件里的内容，然后拆分成各个不同的部分。</li>
+<li><code>ClassVisitor</code>类，负责对<code>.class</code>文件中某一部分里的信息进行修改。</li>
+<li><code>ClassWriter</code>类，负责将各个不同的部分重新组合成一个完整的<code>.class</code>文件。</li>
+</ul>
+<h3 id="ClassVisitor类"><a href="#ClassVisitor类" class="headerlink" title="ClassVisitor类"></a>ClassVisitor类</h3><p>用于生成和转换已编译类的 ASM API 是基于 ClassVisitor 抽象类的，将它收到的所有方法调用都委托给另一个 ClassVisitor 类，会调用该类的visitXXX方法，<strong>这个类可以看作一个事件筛选器</strong></p>
+<h4 id="访问顺序"><a href="#访问顺序" class="headerlink" title="访问顺序"></a>访问顺序</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">visit visitSource? visitOuterClass? ( visitAnnotation | visitAttribute )*</span><br><span class="line">( visitInnerClass | visitField | visitMethod )*</span><br><span class="line">visitEnd</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="方法解析"><a href="#方法解析" class="headerlink" title="方法解析"></a>方法解析</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">ClassVisitor</span> &#123;</span><br><span class="line">    <span class="comment">// 构造方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ClassVisitor</span><span class="params">(<span class="type">int</span> api)</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ClassVisitor</span><span class="params">(<span class="type">int</span> api, ClassVisitor cv)</span>;</span><br><span class="line">    <span class="comment">// 访问类的基本信息。version参数表示类的版本号，access参数表示类的访问标志，name参数表示类的内部名称，signature参数表示类的泛型签名（如果适用），superName参数表示父类的内部名称，interfaces参数表示类实现的接口的内部名称数组</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">visit</span><span class="params">(<span class="type">int</span> version, <span class="type">int</span> access, String name, String signature, String superName, String[] interfaces)</span>;</span><br><span class="line">    <span class="comment">// 访问源文件和调试信息。source参数表示源文件的名称，debug参数表示调试信息</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">visitSource</span><span class="params">(String source, String debug)</span>;</span><br><span class="line">    <span class="comment">// 访问外部类信息。owner参数表示外部类的内部名称，name参数表示外部类的名称，desc参数表示外部类的描述符</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">visitOuterClass</span><span class="params">(String owner, String name, String desc)</span>;</span><br><span class="line">    <span class="comment">// 访问类的注解，返回一个AnnotationVisitor实例，用于访问注解的内容。desc参数表示注解的描述符，visible参数表示注解是否在运行时可见</span></span><br><span class="line">    AnnotationVisitor <span class="title function_">visitAnnotation</span><span class="params">(String desc, <span class="type">boolean</span> visible)</span>;</span><br><span class="line">    <span class="comment">// 访问类的属性（Attribute），例如SourceFile属性。attr参数表示要访问的属性</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">visitAttribute</span><span class="params">(Attribute attr)</span>;</span><br><span class="line">    <span class="comment">// 访问内部类信息。name参数表示内部类的内部名称，outerName参数表示内部类的外部类的内部名称，innerName参数表示内部类的名称，access参数表示内部类的访问标志</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">visitInnerClass</span><span class="params">(String name, String outerName, String innerName, <span class="type">int</span> access)</span>;</span><br><span class="line">    <span class="comment">// 访问类的字段。access参数表示字段的访问标志，name参数表示字段的名称，desc参数表示字段的描述符，signature参数表示字段的泛型签名（如果适用），value参数表示字段的初始值</span></span><br><span class="line">    <span class="keyword">public</span> FieldVisitor <span class="title function_">visitField</span><span class="params">(<span class="type">int</span> access, String name, String desc, String signature, Object value)</span>;</span><br><span class="line">    <span class="comment">// 访问类的方法。access参数表示方法的访问标志，name参数表示方法的名称，desc参数表示方法的描述符，signature参数表示方法的泛型签名（如果适用），exceptions参数表示方法声明的异常类型的内部名称数组</span></span><br><span class="line">    <span class="keyword">public</span> MethodVisitor <span class="title function_">visitMethod</span><span class="params">(<span class="type">int</span> access, String name, String desc, String signature, String[] exceptions)</span>;</span><br><span class="line">    <span class="comment">// 访问类的结束，表示不再访问该类的任何内容</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">visitEnd</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="ClassReader类"><a href="#ClassReader类" class="headerlink" title="ClassReader类"></a>ClassReader类</h3><p>该类解析 ClassFile 内容，并针对遇到的每个字段、方法和字节码指令调用给定 ClassVisitor 的相应访问方法。<strong>这个类可以看作一个事件生产者</strong></p>
+<h3 id="ClassWriter类"><a href="#ClassWriter类" class="headerlink" title="ClassWriter类"></a>ClassWriter类</h3><p>ClassWriter 类是 ClassVisitor 抽象类的一个子类，它直接以二进制形式生成编译后的类。它会生成一个字节数组形式的输出，其中包含了已编译类，可以用 toByteArray 方法来提取。<strong>这个类可以看作一个事件消费者</strong></p>
+<h3 id="MethodVisitor类"><a href="#MethodVisitor类" class="headerlink" title="MethodVisitor类"></a>MethodVisitor类</h3><p>访问Java方法的访问者类，用于生成和转换已编译方法的 ASM API 是基于 MethodVisitor 抽象类的，它由 ClassVisitor 的 visitMethod 方法返回。</p>
+<h4 id="访问顺序-1"><a href="#访问顺序-1" class="headerlink" title="访问顺序"></a>访问顺序</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">visitAnnotationDefault?</span><br><span class="line">( visitAnnotation | visitParameterAnnotation | visitAttribute )*</span><br><span class="line">( visitCode</span><br><span class="line">( visitTryCatchBlock | visitLabel | visitFrame | visitXxxInsn | visitLocalVariable | visitLineNumber )*</span><br><span class="line">visitMaxs )?</span><br><span class="line">visitEnd</span><br></pre></td></tr></table></figure>
+
+<p>对非抽象方法，如果存在注解和属性，必须先访问；其次是按顺序访问字节代码，这些访问在visitCode与visitMaxs之间</p>
+<h4 id="方法解析-1"><a href="#方法解析-1" class="headerlink" title="方法解析"></a>方法解析</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">MethodVisitor</span> &#123; <span class="comment">// public accessors ommited</span></span><br><span class="line">   <span class="comment">// 构造方法</span></span><br><span class="line">   MethodVisitor(<span class="type">int</span> api);</span><br><span class="line">   MethodVisitor(<span class="type">int</span> api, MethodVisitor mv);</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 访问方法的注解默认值</span></span><br><span class="line">   AnnotationVisitor <span class="title function_">visitAnnotationDefault</span><span class="params">()</span>;</span><br><span class="line">   <span class="comment">// 访问方法的注解</span></span><br><span class="line">   AnnotationVisitor <span class="title function_">visitAnnotation</span><span class="params">(String desc, <span class="type">boolean</span> visible)</span>;</span><br><span class="line">   <span class="comment">// 访问方法参数的注解</span></span><br><span class="line">   AnnotationVisitor <span class="title function_">visitParameterAnnotation</span><span class="params">(<span class="type">int</span> parameter,</span></span><br><span class="line"><span class="params">   String desc, <span class="type">boolean</span> visible)</span>;</span><br><span class="line">   <span class="comment">// 访问方法的属性</span></span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">visitAttribute</span><span class="params">(Attribute attr)</span>;</span><br><span class="line">   <span class="comment">// 访问方法的字节码指令部分</span></span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">visitCode</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 访问方法的帧（Frame）。type参数表示帧的类型，nLocal参数表示局部变量的数量，local参数表示局部变量数组，nStack参数表示操作数栈的数量，stack参数表示操作数栈数组</span></span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">visitFrame</span><span class="params">(<span class="type">int</span> type, <span class="type">int</span> nLocal, Object[] local, <span class="type">int</span> nStack,</span></span><br><span class="line"><span class="params">   Object[] stack)</span>;</span><br><span class="line">   <span class="comment">// 访问方法的一条指令，指令没有操作数</span></span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">visitInsn</span><span class="params">(<span class="type">int</span> opcode)</span>;</span><br><span class="line">   <span class="comment">// 访问方法的一条指令，指令操作数为单个整数</span></span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">visitIntInsn</span><span class="params">(<span class="type">int</span> opcode, <span class="type">int</span> operand)</span>;</span><br><span class="line">   <span class="comment">// 访问方法的一条指令，指令操作数为局部变量索引</span></span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">visitVarInsn</span><span class="params">(<span class="type">int</span> opcode, <span class="type">int</span> <span class="keyword">var</span>)</span>;</span><br><span class="line">   <span class="comment">// 访问方法的一条指令，指令操作数为类型描述符</span></span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">visitTypeInsn</span><span class="params">(<span class="type">int</span> opcode, String desc)</span>;</span><br><span class="line">   <span class="comment">// 访问方法的一条指令，指令操作数为字段的信息。opc参数表示指令的操作码，owner参数表示字段所属的类名，name参数表示字段的名称，desc参数表示字段的描述符</span></span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">visitFieldInsn</span><span class="params">(<span class="type">int</span> opc, String owner, String name, String desc)</span>;</span><br><span class="line">   <span class="comment">// 访问方法的一条指令，指令操作数为方法的信息。opc参数表示指令的操作码，owner参数表示方法所属的类名，name参数表示方法的名称，desc参数表示方法的描述符</span></span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">visitMethodInsn</span><span class="params">(<span class="type">int</span> opc, String owner, String name, String desc)</span>;</span><br><span class="line">   <span class="comment">// 访问方法的一条动态方法调用指令。name参数表示方法的名称，desc参数表示方法的描述符，bsm参数表示引导方法（bootstrap method）的句柄，bsmArgs参数表示引导方法的参数。</span></span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">visitInvokeDynamicInsn</span><span class="params">(String name, String desc, Handle bsm, Object... bsmArgs)</span>;</span><br><span class="line">   <span class="comment">// 访问方法的一条跳转指令</span></span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">visitJumpInsn</span><span class="params">(<span class="type">int</span> opcode, Label label)</span>;</span><br><span class="line">   <span class="comment">// 访问方法的标签（Label），用于标记代码的位置</span></span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">visitLabel</span><span class="params">(Label label)</span>;</span><br><span class="line">   <span class="comment">// 访问方法的一条指令，将常量加载到操作数栈上</span></span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">visitLdcInsn</span><span class="params">(Object cst)</span>;</span><br><span class="line">   <span class="comment">// 访问方法的一条指令，对局部变量进行增量操作</span></span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">visitIincInsn</span><span class="params">(<span class="type">int</span> <span class="keyword">var</span>, <span class="type">int</span> increment)</span>;</span><br><span class="line">   <span class="comment">// 访问方法的一条表格跳转指令。min参数表示最小的键值，max参数表示最大的键值，dflt参数表示默认跳转目标的标签，labels参数表示每个键值对应的跳转目标的标签数组</span></span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">visitTableSwitchInsn</span><span class="params">(<span class="type">int</span> min, <span class="type">int</span> max, Label dflt, Label[] labels)</span>;</span><br><span class="line">   <span class="comment">// 访问方法的一条查找跳转指令。dflt参数表示默认跳转目标的标签，keys参数表示键值数组，labels参数表示每个键值对应的跳转目标的标签数组</span></span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">visitLookupSwitchInsn</span><span class="params">(Label dflt, <span class="type">int</span>[] keys, Label[] labels)</span>;</span><br><span class="line">   <span class="comment">// 访问方法的一条多维数组创建指令。desc参数表示数组的元素类型的描述符，dims参数表示数组的维度</span></span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">visitMultiANewArrayInsn</span><span class="params">(String desc, <span class="type">int</span> dims)</span>;</span><br><span class="line">   <span class="comment">// 访问方法的一个try-catch块。start参数表示try块的起始标签，end参数表示try块的结束标签，handler参数表示catch块的处理程序标签，type参数表示捕获的异常类型的描述符</span></span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">visitTryCatchBlock</span><span class="params">(Label start, Label end, Label handler, String type)</span>;</span><br><span class="line">   <span class="comment">// 访问方法的局部变量。name参数表示局部变量的名称，desc参数表示局部变量的描述符，signature参数表示局部变量的泛型签名（如果适用），start参数表示变量的作用域的起始标签，end参数表示变量的作用域的结束标签，index参数表示局部变量的索引</span></span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">visitLocalVariable</span><span class="params">(String name, String desc, String signature, Label start, Label end, <span class="type">int</span> index)</span>;</span><br><span class="line">   <span class="comment">// 访问方法的行号信息。line参数表示行号，start参数表示行号对应的代码位置的标签</span></span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">visitLineNumber</span><span class="params">(<span class="type">int</span> line, Label start)</span>;</span><br><span class="line">   <span class="comment">// 访问方法的最大栈大小和最大局部变量数量。maxStack参数表示最大栈大小，maxLocals参数表示最大局部变量数量</span></span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">visitMaxs</span><span class="params">(<span class="type">int</span> maxStack, <span class="type">int</span> maxLocals)</span>;</span><br><span class="line">   <span class="comment">// 访问方法的结束，表示不再访问该方法的任何内容</span></span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">visitEnd</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>来一个例子学习一下</p>
+<h3 id="读取字节码"><a href="#读取字节码" class="headerlink" title="读取字节码"></a>读取字节码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从文件系统中加载字节码</span></span><br><span class="line"><span class="type">byte</span>[] bytecode = Files.readAllBytes(Paths.get(<span class="string">&quot;path/to/MyClass.class&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者从类加载器中加载字节码</span></span><br><span class="line"><span class="type">InputStream</span> <span class="variable">is</span> <span class="operator">=</span> getClass().getClassLoader().getResourceAsStream(<span class="string">&quot;com/example/MyClass.class&quot;</span>);</span><br><span class="line"><span class="type">byte</span>[] bytecode = is.readAllBytes();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建 ClassReader 实例</span></span><br><span class="line"><span class="type">ClassReader</span> <span class="variable">classReader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassReader</span>(bytecode);</span><br></pre></td></tr></table></figure>
+
+<h3 id="解析字节码"><a href="#解析字节码" class="headerlink" title="解析字节码"></a>解析字节码</h3><p>要解析字节码，我们需要创建一个自定义的 ClassVisitor 实现。以下是一个简单的示例，用于打印类名和方法名：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> ocean.zbz;  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> org.objectweb.asm.ClassVisitor;  </span><br><span class="line"><span class="keyword">import</span> org.objectweb.asm.MethodVisitor;  </span><br><span class="line"><span class="keyword">import</span> org.objectweb.asm.Opcodes;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AsmStu</span> <span class="keyword">extends</span> <span class="title class_">ClassVisitor</span> &#123;  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// 使用 ASM5 作为 Opcodes 版本，并调用父类构造函数  </span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">AsmStu</span><span class="params">()</span> &#123;  </span><br><span class="line">        <span class="built_in">super</span>(Opcodes.ASM5);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// 重写 visit 方法，用于在访问类时输出类名  </span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">visit</span><span class="params">(<span class="type">int</span> version, <span class="type">int</span> access, String name, String signature, String superName, String[] interfaces)</span> &#123;  </span><br><span class="line">        <span class="comment">// 打印类名  </span></span><br><span class="line">        System.out.println(<span class="string">&quot;Class: &quot;</span> + name);  </span><br><span class="line">        <span class="comment">// 调用父类 visit 方法，以便继续处理类信息  </span></span><br><span class="line">        <span class="built_in">super</span>.visit(version, access, name, signature, superName, interfaces);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// 重写 visitMethod 方法，用于在访问类中的方法时输出方法名  </span></span><br><span class="line">  </span><br><span class="line">    <span class="keyword">public</span> MethodVisitor <span class="title function_">visitMethod</span><span class="params">(<span class="type">int</span> access, String name, String descriptor, String signature, String[] exceptions)</span> &#123;  </span><br><span class="line">        <span class="comment">// 打印方法名  </span></span><br><span class="line">        System.out.println(<span class="string">&quot;Method: &quot;</span> + name);  </span><br><span class="line">        <span class="comment">// 调用父类 visitMethod 方法，以便继续处理方法信息  </span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.visitMethod(access, name, descriptor, signature, exceptions);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>visit()</code>方法参数说明：</strong></p>
+<ol>
+<li>version：类文件的版本号，表示类文件的 JDK 版本。例如，JDK1.8 对应的版本号为 52（0x34），JDK 11 对应的版本号为 55（0x37）</li>
+<li>access：类访问标志，表示类的访问权限和属性。例如，ACC_PUBLIC（0x0001）表示类是公共的，ACC_FINAL（0x0010）表示类是 final 的。可以通过位运算组合多个访问标志</li>
+<li>name：类的内部名称，用斜线代替点分隔包名和类名。例如<code>com/example/MyClass</code></li>
+<li>signature：类的泛型签名，如果类没有泛型信息，此参数为 null</li>
+<li>superName：父类的内部名称。对于除<code>java.lang.Object</code>之外的所有类，此参数都不为 null</li>
+<li>interfaces：类实现的接口的内部名称数组。如果类没有实现任何接口，此参数为空数组</li>
+</ol>
+<p><strong><code>visitMethod()</code>方法参数说明：</strong></p>
+<ol>
+<li>access：方法访问标志，表示方法的访问权限和属性。例如，ACC_PUBLIC（0x0001）表示方法是公共的，ACC_STATIC（0x0008）表示方法是静态的。可以通过位运算组合多个访问标志</li>
+<li>name：方法的名称。例如，<code>doSomething</code>或<code>&lt;init&gt;</code>（构造方法）</li>
+<li>descriptor：方法的描述符，表示方法的参数类型和返回值类型。例如，对于方法<code>void doSomething(int)</code>，描述符为<code>(I)V</code></li>
+<li>signature：方法的泛型签名，如果方法没有泛型信息，此参数为 null</li>
+<li>exceptions：方法抛出的异常的内部名称数组。如果方法没有声明抛出任何异常，此参数为空</li>
+</ol>
+<p>实验类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Foo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">execute</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;test changed method name&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">changeMethodContent</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;test changed method&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;  </span><br><span class="line">    <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> <span class="string">&quot;/Users/ocean/Cybersecurity/Java_project/AsmStu/src/main/java/Foo.class&quot;</span>;  </span><br><span class="line">  </span><br><span class="line">    <span class="type">ClassVisitor</span> <span class="variable">asmStu</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AsmStu</span>();  </span><br><span class="line">    <span class="type">ClassReader</span> <span class="variable">classReader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassReader</span>(Files.readAllBytes(Paths.get(path)));  </span><br><span class="line">    classReader.accept(asmStu,<span class="number">0</span>);  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/20250718001752920.png" class="">
+
+<h3 id="修改字节码"><a href="#修改字节码" class="headerlink" title="修改字节码"></a>修改字节码</h3><h4 id="字段修改"><a href="#字段修改" class="headerlink" title="字段修改"></a>字段修改</h4><p>要添加、修改或删除字段，我们需要扩展 ClassVisitor 类并重写 visitField 方法，下面是一个示例，用于在类中添加一个名为<code>newField</code>的字段，并删除名为<code>toBeRemovedField</code>的字段，测试类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Foo</span> &#123;</span><br><span class="line">    String toBeRemovedField;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">execute</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;test changed method name&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">changeMethodContent</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;test changed method&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> ocean.zbz;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> org.objectweb.asm.ClassVisitor;  </span><br><span class="line"><span class="keyword">import</span> org.objectweb.asm.FieldVisitor;  </span><br><span class="line"><span class="keyword">import</span> org.objectweb.asm.Opcodes;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UpdaateFieldClassVisitor</span> <span class="keyword">extends</span> <span class="title class_">ClassVisitor</span> &#123;  </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">UpdaateFieldClassVisitor</span><span class="params">(ClassVisitor classVisitor)</span> &#123;  </span><br><span class="line">        <span class="built_in">super</span>(Opcodes.ASM5, classVisitor);  </span><br><span class="line">    &#125;  </span><br><span class="line">      </span><br><span class="line">    <span class="keyword">public</span> FieldVisitor <span class="title function_">visitField</span><span class="params">(<span class="type">int</span> access, String name, String descriptor, String signature, Object value)</span> &#123;  </span><br><span class="line">        <span class="comment">// 删除名为 toBeRemovedField 的字段  </span></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;toBeRemovedField&quot;</span>.equals(name)) &#123;  </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.visitField(access, name, descriptor, signature, value);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">visitEnd</span><span class="params">()</span> &#123;  </span><br><span class="line">        <span class="comment">// 添加名为 newField 的字段  </span></span><br><span class="line">        <span class="type">FieldVisitor</span> <span class="variable">newFieldVisitor</span> <span class="operator">=</span> <span class="built_in">super</span>.visitField(Opcodes.ACC_PRIVATE, <span class="string">&quot;newField&quot;</span>, <span class="string">&quot;Ljava/lang/String;&quot;</span>, <span class="literal">null</span>, <span class="literal">null</span>);  </span><br><span class="line">        <span class="keyword">if</span> (newFieldVisitor != <span class="literal">null</span>) &#123;  </span><br><span class="line">            newFieldVisitor.visitEnd();  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="built_in">super</span>.visitEnd();  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>visitField()</code>的方法参数说明：</p>
+<ol>
+<li>access：字段访问标志，表示字段的访问权限和属性。例如，ACC_PUBLIC（0x0001）表示字段是公共的，ACC_STATIC（0x0008）表示字段是静态的。可以通过位运算组合多个访问标志</li>
+<li>name：字段的名称。例如<code>myField</code></li>
+<li>descriptor：字段的描述符，表示字段的类型。例如，对于类型为 int 的字段，描述符为<code>I</code></li>
+<li>signature：字段的泛型签名，如果字段没有泛型信息，此参数为 null</li>
+<li>value：字段的常量值，如果字段没有常量值，此参数为 null。需要注意的是，只有静态且已赋值的字段才会有常量值</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;  </span><br><span class="line">    <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> <span class="string">&quot;/Users/ocean/Cybersecurity/Java_project/AsmStu/src/main/java/Foo.class&quot;</span>;  </span><br><span class="line">  </span><br><span class="line">    <span class="type">ClassVisitor</span> <span class="variable">asmStu</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AsmStu</span>();  </span><br><span class="line">    <span class="type">ClassReader</span> <span class="variable">classReader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassReader</span>(Files.readAllBytes(Paths.get(path)));  </span><br><span class="line">    <span class="type">UpdaateFieldClassVisitor</span> <span class="variable">updaateFieldClassVisitor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UpdaateFieldClassVisitor</span>(asmStu);  </span><br><span class="line">    classReader.accept(updaateFieldClassVisitor,<span class="number">0</span>);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/20250718003736192.png" class="">
+<h4 id="方法修改"><a href="#方法修改" class="headerlink" title="方法修改"></a>方法修改</h4><p>要添加、修改或删除方法，我们需要扩展 ClassVisitor 类并重写 visitMethod 方法。下面是一个示例，用于在类中添加一个名为<code>newMethod</code>的方法，并删除名为<code>toBeRemovedMethod</code>的方法，测试代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Foo</span> &#123;</span><br><span class="line">    String toBeRemovedField;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">execute</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;test changed method name&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">changeMethodContent</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;test changed method&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">toBeRemovedMethod</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;toBeRemovedMethod&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>要修改方法内的指令，我们需要扩展 MethodVisitor 类并重写相应的 visit 方法。以下是一个示例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.objectweb.asm.MethodVisitor;</span><br><span class="line"><span class="keyword">import</span> org.objectweb.asm.Opcodes;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyMethodAdapter</span> <span class="keyword">extends</span> <span class="title class_">MethodVisitor</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyMethodAdapter</span><span class="params">(MethodVisitor methodVisitor)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(Opcodes.ASM5, methodVisitor);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">visitMethodInsn</span><span class="params">(<span class="type">int</span> opcode, String owner, String name, String descriptor, <span class="type">boolean</span> isInterface)</span> &#123;</span><br><span class="line">        <span class="comment">// 在方法调用前添加 System.out.println</span></span><br><span class="line">        mv.visitFieldInsn(Opcodes.GETSTATIC, <span class="string">&quot;java/lang/System&quot;</span>, <span class="string">&quot;out&quot;</span>, <span class="string">&quot;Ljava/io/PrintStream;&quot;</span>);</span><br><span class="line">        mv.visitLdcInsn(<span class="string">&quot;Entering method: &quot;</span> + name);</span><br><span class="line">        mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, <span class="string">&quot;java/io/PrintStream&quot;</span>, <span class="string">&quot;println&quot;</span>, <span class="string">&quot;(Ljava/lang/String;)V&quot;</span>, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 原始方法调用</span></span><br><span class="line">        <span class="built_in">super</span>.visitMethodInsn(opcode, owner, name, descriptor, isInterface);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;  </span><br><span class="line">    <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> <span class="string">&quot;/Users/ocean/Cybersecurity/Java_project/AsmStu/src/main/java/Foo.class&quot;</span>;  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">    <span class="type">ClassWriter</span> <span class="variable">classWriter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassWriter</span>(<span class="number">0</span>);  </span><br><span class="line">    <span class="type">ClassVisitor</span> <span class="variable">updateMethodAdaptorClassVisitor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UpdateMethodAdaptorClassVisitor</span>(classWriter);  </span><br><span class="line">    <span class="type">ClassReader</span> <span class="variable">classReader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassReader</span>(Files.readAllBytes(Paths.get(path)));  </span><br><span class="line">    classReader.accept(updateMethodAdaptorClassVisitor,<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        classReader.accept(myMethodClassVisitor, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以发现已经能修改了原来class</p>
+<img src="/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/20250718011849376.png" class="">
+
+<h4 id="方法的增加和删除"><a href="#方法的增加和删除" class="headerlink" title="方法的增加和删除"></a>方法的增加和删除</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> ocean.zbz;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> org.objectweb.asm.ClassVisitor;  </span><br><span class="line"><span class="keyword">import</span> org.objectweb.asm.MethodVisitor;  </span><br><span class="line"><span class="keyword">import</span> org.objectweb.asm.Opcodes;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UpdateMethodClassVisitor</span> <span class="keyword">extends</span> <span class="title class_">ClassVisitor</span> &#123;  </span><br><span class="line">    <span class="keyword">private</span> String deleteMethodName;  </span><br><span class="line">    <span class="keyword">private</span> String deleteMethodDesc;  </span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> addMethodAcc;  </span><br><span class="line">    <span class="keyword">private</span> String addMethodName;  </span><br><span class="line">    <span class="keyword">private</span> String addMethodDesc;  </span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> <span class="variable">flag</span> <span class="operator">=</span> <span class="literal">false</span>;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">protected</span> <span class="title function_">UpdateMethodClassVisitor</span><span class="params">(ClassVisitor cv, String deleteMethodName, String deleteMethodDesc, <span class="type">int</span> addMethodAcc,  </span></span><br><span class="line"><span class="params">                                       String addMethodName, String addMethodDesc)</span> &#123;  </span><br><span class="line">        <span class="built_in">super</span>(Opcodes.ASM5, cv);  </span><br><span class="line">        <span class="built_in">this</span>.deleteMethodName = deleteMethodName;  </span><br><span class="line">        <span class="built_in">this</span>.deleteMethodDesc = deleteMethodDesc;  </span><br><span class="line">        <span class="built_in">this</span>.addMethodAcc = addMethodAcc;  </span><br><span class="line">        <span class="built_in">this</span>.addMethodName = addMethodName;  </span><br><span class="line">        <span class="built_in">this</span>.addMethodDesc = addMethodDesc;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="keyword">public</span> MethodVisitor <span class="title function_">visitMethod</span><span class="params">(<span class="type">int</span> access, String name, String descriptor, String signature, String[] exceptions)</span> &#123;  </span><br><span class="line">        <span class="comment">// 删除名为deleteMethodName且描述为deleteMethodDesc的方法  </span></span><br><span class="line">        <span class="comment">// 因为有的方法可能name一致，但是参数不同  </span></span><br><span class="line">        <span class="keyword">if</span> (name.equals(deleteMethodName) &amp;&amp; descriptor.equals(deleteMethodDesc)) &#123;  </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">if</span> (name.equals(addMethodName) &amp;&amp; descriptor.equals(addMethodDesc)) flag = <span class="literal">true</span>;  </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.visitMethod(access, name, descriptor, signature, exceptions);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">visitEnd</span><span class="params">()</span> &#123;  </span><br><span class="line">        <span class="comment">// 添加名为addMethodName且描述为addMethodDesc的方法  </span></span><br><span class="line">        <span class="keyword">if</span> (!flag) &#123;  </span><br><span class="line">            <span class="type">MethodVisitor</span> <span class="variable">methodVisitor</span> <span class="operator">=</span> <span class="built_in">super</span>.visitMethod(addMethodAcc, addMethodName, addMethodDesc, <span class="literal">null</span>, <span class="literal">null</span>);  </span><br><span class="line">            <span class="keyword">if</span> (methodVisitor != <span class="literal">null</span>) &#123;  </span><br><span class="line">                <span class="comment">// 访问方法的字节码  </span></span><br><span class="line">                methodVisitor.visitCode();  </span><br><span class="line">                <span class="comment">// 添加return指令  </span></span><br><span class="line">                methodVisitor.visitInsn(Opcodes.RETURN);  </span><br><span class="line">                <span class="comment">// 设置方法的最大操作数栈深度和最大局部变量表大小，空方法设置00即可  </span></span><br><span class="line">                methodVisitor.visitMaxs(<span class="number">0</span>, <span class="number">0</span>);  </span><br><span class="line">                <span class="comment">// 结束访问  </span></span><br><span class="line">                methodVisitor.visitEnd();  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="built_in">super</span>.visitEnd();  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception&#123;  </span><br><span class="line">    <span class="comment">// -------------------添加与删除Method-------------------  </span></span><br><span class="line">    <span class="type">FileInputStream</span> <span class="variable">stream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;/Users/ocean/Cybersecurity/Java_project/AsmStu/src/main/java/Foo.class&quot;</span>);  </span><br><span class="line">    <span class="comment">// 加载字节码  </span></span><br><span class="line">    <span class="type">ClassReader</span> <span class="variable">reader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassReader</span>(stream);  </span><br><span class="line">    <span class="type">ClassWriter</span> <span class="variable">writer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassWriter</span>(reader, ClassWriter.COMPUTE_FRAMES);  </span><br><span class="line">    <span class="comment">// 实例化修改Method Visitor  </span></span><br><span class="line">    <span class="type">UpdateMethodClassVisitor</span> <span class="variable">updateMethodClassVisitor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UpdateMethodClassVisitor</span>(writer, <span class="string">&quot;toBeRemovedMethod&quot;</span>, <span class="string">&quot;()V&quot;</span>, Opcodes.ACC_PUBLIC, <span class="string">&quot;newMethod&quot;</span>, <span class="string">&quot;()V&quot;</span>);  </span><br><span class="line">    reader.accept(updateMethodClassVisitor, ClassReader.EXPAND_FRAMES);  </span><br><span class="line">    <span class="comment">// 写入新class中  </span></span><br><span class="line">    <span class="type">FileOutputStream</span> <span class="variable">fileOutputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;temp.class&quot;</span>);  </span><br><span class="line">    <span class="type">byte</span>[] updateByte = writer.toByteArray();  </span><br><span class="line">    fileOutputStream.write(updateByte);  </span><br><span class="line">    fileOutputStream.close();  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到已经修改成功</p>
+<img src="/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/20250718012842203.png" class="">
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/link/">Friends</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-number">2.</span> <span class="toc-text">环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ASM%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">ASM使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ClassVisitor%E7%B1%BB"><span class="toc-number">3.1.</span> <span class="toc-text">ClassVisitor类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E9%A1%BA%E5%BA%8F"><span class="toc-number">3.1.1.</span> <span class="toc-text">访问顺序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E8%A7%A3%E6%9E%90"><span class="toc-number">3.1.2.</span> <span class="toc-text">方法解析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ClassReader%E7%B1%BB"><span class="toc-number">3.2.</span> <span class="toc-text">ClassReader类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ClassWriter%E7%B1%BB"><span class="toc-number">3.3.</span> <span class="toc-text">ClassWriter类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MethodVisitor%E7%B1%BB"><span class="toc-number">3.4.</span> <span class="toc-text">MethodVisitor类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E9%A1%BA%E5%BA%8F-1"><span class="toc-number">3.4.1.</span> <span class="toc-text">访问顺序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E8%A7%A3%E6%9E%90-1"><span class="toc-number">3.4.2.</span> <span class="toc-text">方法解析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96%E5%AD%97%E8%8A%82%E7%A0%81"><span class="toc-number">3.5.</span> <span class="toc-text">读取字节码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90%E5%AD%97%E8%8A%82%E7%A0%81"><span class="toc-number">3.6.</span> <span class="toc-text">解析字节码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%AD%97%E8%8A%82%E7%A0%81"><span class="toc-number">3.7.</span> <span class="toc-text">修改字节码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E6%AE%B5%E4%BF%AE%E6%94%B9"><span class="toc-number">3.7.1.</span> <span class="toc-text">字段修改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BF%AE%E6%94%B9"><span class="toc-number">3.7.2.</span> <span class="toc-text">方法修改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E7%9A%84%E5%A2%9E%E5%8A%A0%E5%92%8C%E5%88%A0%E9%99%A4"><span class="toc-number">3.7.3.</span> <span class="toc-text">方法的增加和删除</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/&text=ASM学习"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/&title=ASM学习"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/&is_video=false&description=ASM学习"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ASM学习&body=Check out this article: https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/&title=ASM学习"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/&title=ASM学习"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/&title=ASM学习"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/&title=ASM学习"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/&name=ASM学习&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/07/17/Java%E5%AE%89%E5%85%A8/ASM%E5%AD%A6%E4%B9%A0/&t=ASM学习"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Oceanzbz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/link/">Friends</a></li><!--
+     -->
+      </ul>
+      <ul>
+        
+          <!-- 不蒜子统计 -->
+          <span id="busuanzi_container_site_pv">
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          <span class="post-meta-divider">|</span>
+          <span id="busuanzi_container_site_uv" style='display:none'>
+                  本站访客数<span id="busuanzi_value_site_uv"></span>人
+          </span>
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        
+      </ul>
+    </nav>
+  </div>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWTJSPQL4F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QWTJSPQL4F');
+</script>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'cactus-1';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+<!-- utterances Comments -->
+
+</body>
+</html>
