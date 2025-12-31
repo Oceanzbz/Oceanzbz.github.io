@@ -11,7 +11,7 @@
     <meta name="description" content="信息收集123nmap -sC -sV -O 10.10.11.32  扫描结果如下  可以看到开放了ftp端口和80端口还有一个域名,先把域名添加到hosts里  尝试ftp匿名登录发现失败了，所以来看看网站。  查看页面源码发现了一个子域名，也给加入到hosts里，然后访问一下这个子域名  这里会显示sqlpad的版本号 漏洞利用去网上找一下看看sqlpad的漏洞 https:&#x2F;&#x2F;github">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Sightless">
-<meta property="og:url" content="https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/index.html">
+<meta property="og:url" content="https://oceanzbz.cn/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/index.html">
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
 <meta property="og:description" content="信息收集123nmap -sC -sV -O 10.10.11.32  扫描结果如下  可以看到开放了ftp端口和80端口还有一个域名,先把域名添加到hosts里  尝试ftp匿名登录发现失败了，所以来看看网站。  查看页面源码发现了一个子域名，也给加入到hosts里，然后访问一下这个子域名  这里会显示sqlpad的版本号 漏洞利用去网上找一下看看sqlpad的漏洞 https:&#x2F;&#x2F;github">
 <meta property="og:locale" content="en_US">
@@ -137,17 +137,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&text=Sightless"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&title=Sightless"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&is_video=false&description=Sightless"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Sightless&body=Check out this article: https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&title=Sightless"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&title=Sightless"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&title=Sightless"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&title=Sightless"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&name=Sightless&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&t=Sightless"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.cn/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.cn/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&text=Sightless"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.cn/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&title=Sightless"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.cn/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&is_video=false&description=Sightless"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Sightless&body=Check out this article: https://oceanzbz.cn/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.cn/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&title=Sightless"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.cn/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&title=Sightless"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.cn/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&title=Sightless"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.cn/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&title=Sightless"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.cn/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&name=Sightless&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.cn/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&t=Sightless"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -308,17 +308,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&text=Sightless"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&title=Sightless"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&is_video=false&description=Sightless"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Sightless&body=Check out this article: https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&title=Sightless"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&title=Sightless"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&title=Sightless"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&title=Sightless"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&name=Sightless&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&t=Sightless"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.cn/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.cn/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&text=Sightless"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.cn/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&title=Sightless"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.cn/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&is_video=false&description=Sightless"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Sightless&body=Check out this article: https://oceanzbz.cn/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.cn/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&title=Sightless"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.cn/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&title=Sightless"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.cn/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&title=Sightless"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.cn/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&title=Sightless"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.cn/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&name=Sightless&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.cn/2024/12/30/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/HTB/Sightless/&t=Sightless"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

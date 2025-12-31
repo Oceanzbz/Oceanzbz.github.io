@@ -11,58 +11,58 @@
     <meta name="description" content="介绍WebLogic_是美国Oracle公司出品的一个application server,确切的说是一个基于JAVAEE架构的中间件。 主要用于开发、集成、部署和管理大型分布式Web应用、网络应用和数据库应用的Java应用服务器。在weblogic中反序列化漏洞主要分为两种，一种是基于T3协议的反序列化漏洞，还一种是基于XML的反序列化漏洞。 基于T3协议漏洞： CVE-2015-4582、CV">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Weblogic反序列化">
-<meta property="og:url" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/index.html">
+<meta property="og:url" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/index.html">
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
 <meta property="og:description" content="介绍WebLogic_是美国Oracle公司出品的一个application server,确切的说是一个基于JAVAEE架构的中间件。 主要用于开发、集成、部署和管理大型分布式Web应用、网络应用和数据库应用的Java应用服务器。在weblogic中反序列化漏洞主要分为两种，一种是基于T3协议的反序列化漏洞，还一种是基于XML的反序列化漏洞。 基于T3协议漏洞： CVE-2015-4582、CV">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612013253256.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612013359668.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612013638609.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612154921485.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612155112022.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612155117798.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612182848988.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612221920469.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612222605856.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612223130271.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612174402108.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612175912065.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612180620926.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612181748512.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612182104387.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612182554838.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612182645330.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612182744934.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612231146585.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612231514572.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612231609745.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612233027545.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612233039309.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612233342687.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612235455088.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612235645502.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612235728160.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612235829729.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612235856790.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613000031882.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613000117671.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613000310454.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613000346065.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613123924444.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224117201.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224231012.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224251628.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224825538.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224847241.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224901040.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250615212849082.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612013253256.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612013359668.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612013638609.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612154921485.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612155112022.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612155117798.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612182848988.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612221920469.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612222605856.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612223130271.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612174402108.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612175912065.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612180620926.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612181748512.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612182104387.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612182554838.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612182645330.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612182744934.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612231146585.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612231514572.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612231609745.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612233027545.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612233039309.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612233342687.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612235455088.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612235645502.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612235728160.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612235829729.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612235856790.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613000031882.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613000117671.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613000310454.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613000346065.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613123924444.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224117201.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224231012.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224251628.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224825538.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224847241.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250613224901040.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250615212849082.png">
 <meta property="article:published_time" content="2025-06-11T11:41:45.000Z">
 <meta property="article:modified_time" content="2025-06-23T03:06:20.645Z">
 <meta property="article:author" content="Oceanzbz">
 <meta property="article:tag" content="反序列化">
 <meta property="article:tag" content="Weblogic">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612013253256.png">
+<meta name="twitter:image" content="https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/20250612013253256.png">
     
     
       
@@ -159,17 +159,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&text=Weblogic反序列化"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&is_video=false&description=Weblogic反序列化"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Weblogic反序列化&body=Check out this article: https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&name=Weblogic反序列化&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&t=Weblogic反序列化"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&text=Weblogic反序列化"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&is_video=false&description=Weblogic反序列化"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Weblogic反序列化&body=Check out this article: https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&name=Weblogic反序列化&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&t=Weblogic反序列化"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -482,17 +482,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&text=Weblogic反序列化"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&is_video=false&description=Weblogic反序列化"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Weblogic反序列化&body=Check out this article: https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&name=Weblogic反序列化&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&t=Weblogic反序列化"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&text=Weblogic反序列化"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&is_video=false&description=Weblogic反序列化"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Weblogic反序列化&body=Check out this article: https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=Weblogic反序列化"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&name=Weblogic反序列化&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.cn/2025/06/11/Java%E5%AE%89%E5%85%A8/Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&t=Weblogic反序列化"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

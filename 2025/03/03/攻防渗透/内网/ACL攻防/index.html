@@ -11,38 +11,38 @@
     <meta name="description" content="该篇文章主要转自https:&#x2F;&#x2F;www.anquanke.com&#x2F;post&#x2F;id&#x2F;212163 详细请参考原文，本文只是方便自己查资料 ACL的概念安全主体我们先来看看什么是安全主体 Security Principals。安全主体是可以通过系统进行身份验证的任何实体，例如用户帐户、计算机帐户，或在用户或计算机帐户的安全上下文中运行的线程或进程，以及这些帐户的安全组。每个安全主体在创建时都会自动分">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ACL攻防">
-<meta property="og:url" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/index.html">
+<meta property="og:url" content="https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/index.html">
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
 <meta property="og:description" content="该篇文章主要转自https:&#x2F;&#x2F;www.anquanke.com&#x2F;post&#x2F;id&#x2F;212163 详细请参考原文，本文只是方便自己查资料 ACL的概念安全主体我们先来看看什么是安全主体 Security Principals。安全主体是可以通过系统进行身份验证的任何实体，例如用户帐户、计算机帐户，或在用户或计算机帐户的安全上下文中运行的线程或进程，以及这些帐户的安全组。每个安全主体在创建时都会自动分">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303232659848.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303233513292.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303233621067.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303233652144.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303233712647.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303234108572.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303234218089.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115252744.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115317875.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115325857.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115407551.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115423788.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115452128.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115500120.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115517528.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115736562.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304120232418.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304120600128.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304120615539.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304120715368.png">
-<meta property="og:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304140743126.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303232659848.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303233513292.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303233621067.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303233652144.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303233712647.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303234108572.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303234218089.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115252744.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115317875.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115325857.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115407551.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115423788.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115452128.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115500120.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115517528.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304115736562.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304120232418.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304120600128.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304120615539.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304120715368.png">
+<meta property="og:image" content="https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250304140743126.png">
 <meta property="article:published_time" content="2025-03-03T15:14:03.000Z">
 <meta property="article:modified_time" content="2025-03-05T07:24:36.813Z">
 <meta property="article:author" content="Oceanzbz">
 <meta property="article:tag" content="windows">
 <meta property="article:tag" content="内网渗透">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303232659848.png">
+<meta name="twitter:image" content="https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/IMAGE20250303232659848.png">
     
     
       
@@ -139,17 +139,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&text=ACL攻防"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&title=ACL攻防"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&is_video=false&description=ACL攻防"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=ACL攻防&body=Check out this article: https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&title=ACL攻防"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&title=ACL攻防"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&title=ACL攻防"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&title=ACL攻防"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&name=ACL攻防&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&t=ACL攻防"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&text=ACL攻防"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&title=ACL攻防"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&is_video=false&description=ACL攻防"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ACL攻防&body=Check out this article: https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&title=ACL攻防"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&title=ACL攻防"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&title=ACL攻防"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&title=ACL攻防"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&name=ACL攻防&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&t=ACL攻防"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -364,17 +364,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&text=ACL攻防"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&title=ACL攻防"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&is_video=false&description=ACL攻防"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=ACL攻防&body=Check out this article: https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&title=ACL攻防"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&title=ACL攻防"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&title=ACL攻防"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&title=ACL攻防"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&name=ACL攻防&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&t=ACL攻防"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&text=ACL攻防"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&title=ACL攻防"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&is_video=false&description=ACL攻防"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ACL攻防&body=Check out this article: https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&title=ACL攻防"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&title=ACL攻防"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&title=ACL攻防"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&title=ACL攻防"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&name=ACL攻防&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.cn/2025/03/03/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91/ACL%E6%94%BB%E9%98%B2/&t=ACL攻防"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

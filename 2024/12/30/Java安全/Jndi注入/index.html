@@ -11,7 +11,7 @@
     <meta name="description" content="简介JNDI(Java Naming and Directory Interface)是一个应用程序设计的 API，一种标准的 Java 命名系统接口。JNDI 提供统一的客户端 API，通过不同的访问提供者接口JNDI服务供应接口(SPI)的实现，由管理者将 JNDI API 映射为特定的命名服务和目录系统，使得 Java 应用程序可以和这些命名服务和目录服务之间进行交互。上面较官方说法，通俗的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Jndi注入">
-<meta property="og:url" content="https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/index.html">
+<meta property="og:url" content="https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/index.html">
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
 <meta property="og:description" content="简介JNDI(Java Naming and Directory Interface)是一个应用程序设计的 API，一种标准的 Java 命名系统接口。JNDI 提供统一的客户端 API，通过不同的访问提供者接口JNDI服务供应接口(SPI)的实现，由管理者将 JNDI API 映射为特定的命名服务和目录系统，使得 Java 应用程序可以和这些命名服务和目录服务之间进行交互。上面较官方说法，通俗的">
 <meta property="og:locale" content="en_US">
@@ -162,17 +162,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&text=Jndi注入"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&title=Jndi注入"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&is_video=false&description=Jndi注入"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Jndi注入&body=Check out this article: https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&title=Jndi注入"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&title=Jndi注入"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&title=Jndi注入"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&title=Jndi注入"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&name=Jndi注入&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&t=Jndi注入"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&text=Jndi注入"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&title=Jndi注入"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&is_video=false&description=Jndi注入"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Jndi注入&body=Check out this article: https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&title=Jndi注入"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&title=Jndi注入"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&title=Jndi注入"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&title=Jndi注入"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&name=Jndi注入&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&t=Jndi注入"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -449,17 +449,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&text=Jndi注入"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&title=Jndi注入"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&is_video=false&description=Jndi注入"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Jndi注入&body=Check out this article: https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&title=Jndi注入"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&title=Jndi注入"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&title=Jndi注入"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&title=Jndi注入"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&name=Jndi注入&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&t=Jndi注入"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&text=Jndi注入"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&title=Jndi注入"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&is_video=false&description=Jndi注入"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Jndi注入&body=Check out this article: https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&title=Jndi注入"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&title=Jndi注入"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&title=Jndi注入"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&title=Jndi注入"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&name=Jndi注入&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Jndi%E6%B3%A8%E5%85%A5/&t=Jndi注入"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
