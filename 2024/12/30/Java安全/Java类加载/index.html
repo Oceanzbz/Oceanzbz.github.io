@@ -11,7 +11,7 @@
     <meta name="description" content="Java代码执行流程图大家通过这个流程图，了解一下我们写好的Java代码是如何执行的，其中要经历类加载器这个流程，我们就来仔细讲讲这里面的知识点。  类加载子系统 类的生命周期类的生命周期包括：加载、链接、初始化、使用和卸载，其中加载、链接、初始化，属于类加载的过程，我们下面仔细讲解。使用是指我们new对象进行使用，卸载指对象被垃圾回收掉了。 类加载的过程  第一步：Loading加载  通过类的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java类加载">
-<meta property="og:url" content="https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/index.html">
+<meta property="og:url" content="https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/index.html">
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
 <meta property="og:description" content="Java代码执行流程图大家通过这个流程图，了解一下我们写好的Java代码是如何执行的，其中要经历类加载器这个流程，我们就来仔细讲讲这里面的知识点。  类加载子系统 类的生命周期类的生命周期包括：加载、链接、初始化、使用和卸载，其中加载、链接、初始化，属于类加载的过程，我们下面仔细讲解。使用是指我们new对象进行使用，卸载指对象被垃圾回收掉了。 类加载的过程  第一步：Loading加载  通过类的">
 <meta property="og:locale" content="en_US">
@@ -124,17 +124,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&text=Java类加载"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&title=Java类加载"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&is_video=false&description=Java类加载"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Java类加载&body=Check out this article: https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&title=Java类加载"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&title=Java类加载"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&title=Java类加载"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&title=Java类加载"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&name=Java类加载&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&t=Java类加载"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&text=Java类加载"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&title=Java类加载"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&is_video=false&description=Java类加载"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Java类加载&body=Check out this article: https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&title=Java类加载"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&title=Java类加载"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&title=Java类加载"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&title=Java类加载"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&name=Java类加载&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&t=Java类加载"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -329,17 +329,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&text=Java类加载"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&title=Java类加载"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&is_video=false&description=Java类加载"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Java类加载&body=Check out this article: https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&title=Java类加载"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&title=Java类加载"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&title=Java类加载"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&title=Java类加载"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&name=Java类加载&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.cn/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&t=Java类加载"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&text=Java类加载"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&title=Java类加载"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&is_video=false&description=Java类加载"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Java类加载&body=Check out this article: https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&title=Java类加载"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&title=Java类加载"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&title=Java类加载"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&title=Java类加载"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&name=Java类加载&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2024/12/30/Java%E5%AE%89%E5%85%A8/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD/&t=Java类加载"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

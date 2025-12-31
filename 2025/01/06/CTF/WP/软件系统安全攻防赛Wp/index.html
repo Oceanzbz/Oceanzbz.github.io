@@ -11,38 +11,38 @@
     <meta name="description" content="钓鱼邮件这题是签到题，给了一个邮件，我是用的飞书打开的   这里面有一个附件打开需要密码可以看到提示和邮件日期时间推测为生日密码。打开之后是一个木马样本丢到微步没分析出来外联ip和端口于是就放自己本地虚拟机跑了下看网络通信，能找到ip直接md5加密提交即可    donntyousee首先去除花枝令，是把一个函数拆分成了两段，把图中一段nop掉再U+P，需要对俩个函数去花，第一个是start中40">
 <meta property="og:type" content="article">
 <meta property="og:title" content="软件系统安全攻防赛Wp">
-<meta property="og:url" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/index.html">
+<meta property="og:url" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/index.html">
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
 <meta property="og:description" content="钓鱼邮件这题是签到题，给了一个邮件，我是用的飞书打开的   这里面有一个附件打开需要密码可以看到提示和邮件日期时间推测为生日密码。打开之后是一个木马样本丢到微步没分析出来外联ip和端口于是就放自己本地虚拟机跑了下看网络通信，能找到ip直接md5加密提交即可    donntyousee首先去除花枝令，是把一个函数拆分成了两段，把图中一段nop掉再U+P，需要对俩个函数去花，第一个是start中40">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106121545994.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106121727731.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106121816891.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106121831656.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106122446596.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106122525393.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106122635128.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106122659874.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106122734510.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106122819523.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106122809730.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250221202559154.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250221202740610.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250221203102746.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250221212153424.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250221212218298.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250221213224950.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250221213242950.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250221214715766.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250221214745645.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250221214839470.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250221215035253.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106121545994.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106121727731.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106121816891.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106121831656.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106122446596.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106122525393.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106122635128.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106122659874.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106122734510.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106122819523.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106122809730.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250221202559154.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250221202740610.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250221203102746.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250221212153424.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250221212218298.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250221213224950.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250221213242950.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250221214715766.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250221214745645.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250221214839470.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250221215035253.png">
 <meta property="article:published_time" content="2025-01-06T04:13:54.000Z">
 <meta property="article:modified_time" content="2025-03-05T07:24:36.805Z">
 <meta property="article:author" content="Oceanzbz">
 <meta property="article:tag" content="CTFWP">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106121545994.png">
+<meta name="twitter:image" content="https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/IMAGE20250106121545994.png">
     
     
       
@@ -139,17 +139,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&text=软件系统安全攻防赛Wp"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&title=软件系统安全攻防赛Wp"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&is_video=false&description=软件系统安全攻防赛Wp"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=软件系统安全攻防赛Wp&body=Check out this article: https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&title=软件系统安全攻防赛Wp"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&title=软件系统安全攻防赛Wp"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&title=软件系统安全攻防赛Wp"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&title=软件系统安全攻防赛Wp"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&name=软件系统安全攻防赛Wp&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&t=软件系统安全攻防赛Wp"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&text=软件系统安全攻防赛Wp"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&title=软件系统安全攻防赛Wp"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&is_video=false&description=软件系统安全攻防赛Wp"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=软件系统安全攻防赛Wp&body=Check out this article: https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&title=软件系统安全攻防赛Wp"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&title=软件系统安全攻防赛Wp"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&title=软件系统安全攻防赛Wp"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&title=软件系统安全攻防赛Wp"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&name=软件系统安全攻防赛Wp&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&t=软件系统安全攻防赛Wp"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -355,17 +355,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&text=软件系统安全攻防赛Wp"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&title=软件系统安全攻防赛Wp"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&is_video=false&description=软件系统安全攻防赛Wp"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=软件系统安全攻防赛Wp&body=Check out this article: https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&title=软件系统安全攻防赛Wp"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&title=软件系统安全攻防赛Wp"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&title=软件系统安全攻防赛Wp"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&title=软件系统安全攻防赛Wp"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&name=软件系统安全攻防赛Wp&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.cn/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&t=软件系统安全攻防赛Wp"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&text=软件系统安全攻防赛Wp"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&title=软件系统安全攻防赛Wp"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&is_video=false&description=软件系统安全攻防赛Wp"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=软件系统安全攻防赛Wp&body=Check out this article: https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&title=软件系统安全攻防赛Wp"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&title=软件系统安全攻防赛Wp"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&title=软件系统安全攻防赛Wp"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&title=软件系统安全攻防赛Wp"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&name=软件系统安全攻防赛Wp&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/01/06/CTF/WP/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9BWp/&t=软件系统安全攻防赛Wp"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

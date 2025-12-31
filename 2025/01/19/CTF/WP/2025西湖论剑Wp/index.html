@@ -11,24 +11,24 @@
     <meta name="description" content="WebRank-l这题一开始看没什么思路，后来通过看响应包发现是python服务器所以想到可能是ssti所以就去试了试，发现在login路由输入payload会在cpass路由中渲染。看看源码 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950from flask i">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2025西湖论剑Wp">
-<meta property="og:url" content="https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/index.html">
+<meta property="og:url" content="https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/index.html">
 <meta property="og:site_name" content="Oceanzbz&#39;s Blog">
 <meta property="og:description" content="WebRank-l这题一开始看没什么思路，后来通过看响应包发现是python服务器所以想到可能是ssti所以就去试了试，发现在login路由输入payload会在cpass路由中渲染。看看源码 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950from flask i">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119125214353.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119131022981.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119131358031.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119131614809.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119131903502.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119131739135.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119132349042.png">
-<meta property="og:image" content="https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119133056348.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119125214353.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119131022981.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119131358031.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119131614809.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119131903502.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119131739135.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119132349042.png">
+<meta property="og:image" content="https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119133056348.png">
 <meta property="article:published_time" content="2025-01-19T04:29:52.000Z">
 <meta property="article:modified_time" content="2025-03-05T07:24:36.804Z">
 <meta property="article:author" content="Oceanzbz">
 <meta property="article:tag" content="CTFWP">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119125214353.png">
+<meta name="twitter:image" content="https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/IMAGE20250119125214353.png">
     
     
       
@@ -125,17 +125,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&text=2025西湖论剑Wp"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&is_video=false&description=2025西湖论剑Wp"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=2025西湖论剑Wp&body=Check out this article: https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&name=2025西湖论剑Wp&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&t=2025西湖论剑Wp"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&text=2025西湖论剑Wp"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&is_video=false&description=2025西湖论剑Wp"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=2025西湖论剑Wp&body=Check out this article: https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&name=2025西湖论剑Wp&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&t=2025西湖论剑Wp"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -279,17 +279,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&text=2025西湖论剑Wp"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&is_video=false&description=2025西湖论剑Wp"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=2025西湖论剑Wp&body=Check out this article: https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&name=2025西湖论剑Wp&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.cn/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&t=2025西湖论剑Wp"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&text=2025西湖论剑Wp"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&is_video=false&description=2025西湖论剑Wp"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=2025西湖论剑Wp&body=Check out this article: https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&title=2025西湖论剑Wp"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&name=2025西湖论剑Wp&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://oceanzbz.github.io/2025/01/19/CTF/WP/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91Wp/&t=2025西湖论剑Wp"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
